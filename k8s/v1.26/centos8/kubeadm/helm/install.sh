@@ -36,3 +36,7 @@ rm -rf ./linux-amd64 helm-${HELMVERSION}-linux-amd64.tar.gz
 
 echo "----------- helm 版本 ----------"
 helm version
+
+helm repo remove stable
+helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+helm repo update
