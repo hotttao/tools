@@ -1,0 +1,300 @@
+@startuml
+namespace viper {
+    class ConfigFileAlreadyExistsError << (S,Aquamarine) >> {
+        + Error() string
+
+    }
+    class ConfigFileNotFoundError << (S,Aquamarine) >> {
+        - name string
+
+        + Error() string
+
+    }
+    class ConfigMarshalError << (S,Aquamarine) >> {
+        - err error
+
+        + Error() string
+
+    }
+    class ConfigParseError << (S,Aquamarine) >> {
+        - err error
+
+        + Error() string
+
+    }
+    interface FlagValue  {
+        + HasChanged() bool
+        + Name() string
+        + ValueString() string
+        + ValueType() string
+
+    }
+    interface FlagValueSet  {
+        + VisitAll(fn <font color=blue>func</font>(FlagValue) ) 
+
+    }
+    interface Logger  {
+        + Trace(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Debug(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Info(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Warn(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Error(msg string, keyvals ...<font color=blue>interface</font>{}) 
+
+    }
+    interface Option  {
+        - apply(v *Viper) 
+
+    }
+    class RemoteConfigError << (S,Aquamarine) >> {
+        + Error() string
+
+    }
+    interface RemoteProvider  {
+        + Provider() string
+        + Endpoint() string
+        + Path() string
+        + SecretKeyring() string
+
+    }
+    class RemoteResponse << (S,Aquamarine) >> {
+        + Value []byte
+        + Error error
+
+    }
+    interface StringReplacer  {
+        + Replace(s string) string
+
+    }
+    class UnsupportedConfigError << (S,Aquamarine) >> {
+        + Error() string
+
+    }
+    class UnsupportedRemoteProviderError << (S,Aquamarine) >> {
+        + Error() string
+
+    }
+    class Viper << (S,Aquamarine) >> {
+        - keyDelim string
+        - configPaths []string
+        - fs afero.Fs
+        - remoteProviders []*defaultRemoteProvider
+        - configName string
+        - configFile string
+        - configType string
+        - configPermissions os.FileMode
+        - envPrefix string
+        - iniLoadOptions ini.LoadOptions
+        - automaticEnvApplied bool
+        - envKeyReplacer StringReplacer
+        - allowEmptyEnv bool
+        - parents []string
+        - config <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - override <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - defaults <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - kvstore <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - pflags <font color=blue>map</font>[string]FlagValue
+        - env <font color=blue>map</font>[string][]string
+        - aliases <font color=blue>map</font>[string]string
+        - typeByDefValue bool
+        - onConfigChange <font color=blue>func</font>(fsnotify.Event) 
+        - logger Logger
+        - encoderRegistry *encoding.EncoderRegistry
+        - decoderRegistry *encoding.DecoderRegistry
+
+        - resetEncoding() 
+        - mergeWithEnvPrefix(in string) string
+        - getEnv(key string) (string, bool)
+        - providerPathExists(p *defaultRemoteProvider) bool
+        - searchMap(source <font color=blue>map</font>[string]<font color=blue>interface</font>{}, path []string) <font color=blue>interface</font>{}
+        - searchIndexableWithPathPrefixes(source <font color=blue>interface</font>{}, path []string) <font color=blue>interface</font>{}
+        - searchSliceWithPathPrefixes(sourceSlice []<font color=blue>interface</font>{}, prefixKey string, pathIndex int, path []string) <font color=blue>interface</font>{}
+        - searchMapWithPathPrefixes(sourceMap <font color=blue>map</font>[string]<font color=blue>interface</font>{}, prefixKey string, pathIndex int, path []string) <font color=blue>interface</font>{}
+        - isPathShadowedInDeepMap(path []string, m <font color=blue>map</font>[string]<font color=blue>interface</font>{}) string
+        - isPathShadowedInFlatMap(path []string, mi <font color=blue>interface</font>{}) string
+        - isPathShadowedInAutoEnv(path []string) string
+        - find(lcaseKey string, flagDefault bool) <font color=blue>interface</font>{}
+        - registerAlias(alias string, key string) 
+        - realKey(key string) string
+        - writeConfig(filename string, force bool) error
+        - unmarshalReader(in io.Reader, c <font color=blue>map</font>[string]<font color=blue>interface</font>{}) error
+        - marshalWriter(f afero.File, configType string) error
+        - getKeyValueConfig() error
+        - getRemoteConfig(provider RemoteProvider) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+        - watchKeyValueConfigOnChannel() error
+        - watchKeyValueConfig() error
+        - watchRemoteConfig(provider RemoteProvider) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+        - flattenAndMergeMap(shadow <font color=blue>map</font>[string]bool, m <font color=blue>map</font>[string]<font color=blue>interface</font>{}, prefix string) <font color=blue>map</font>[string]bool
+        - mergeFlatMap(shadow <font color=blue>map</font>[string]bool, m <font color=blue>map</font>[string]<font color=blue>interface</font>{}) <font color=blue>map</font>[string]bool
+        - getConfigType() string
+        - getConfigFile() (string, error)
+        - findConfigFile() (string, error)
+        - searchInPath(in string) string
+        - findConfigFile() (string, error)
+
+        + OnConfigChange(run <font color=blue>func</font>(fsnotify.Event) ) 
+        + WatchConfig() 
+        + SetConfigFile(in string) 
+        + SetEnvPrefix(in string) 
+        + AllowEmptyEnv(allowEmptyEnv bool) 
+        + ConfigFileUsed() string
+        + AddConfigPath(in string) 
+        + AddRemoteProvider(provider string, endpoint string, path string) error
+        + AddSecureRemoteProvider(provider string, endpoint string, path string, secretkeyring string) error
+        + SetTypeByDefaultValue(enable bool) 
+        + Get(key string) <font color=blue>interface</font>{}
+        + Sub(key string) *Viper
+        + GetString(key string) string
+        + GetBool(key string) bool
+        + GetInt(key string) int
+        + GetInt32(key string) int32
+        + GetInt64(key string) int64
+        + GetUint(key string) uint
+        + GetUint16(key string) uint16
+        + GetUint32(key string) uint32
+        + GetUint64(key string) uint64
+        + GetFloat64(key string) float64
+        + GetTime(key string) time.Time
+        + GetDuration(key string) time.Duration
+        + GetIntSlice(key string) []int
+        + GetStringSlice(key string) []string
+        + GetStringMap(key string) <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + GetStringMapString(key string) <font color=blue>map</font>[string]string
+        + GetStringMapStringSlice(key string) <font color=blue>map</font>[string][]string
+        + GetSizeInBytes(key string) uint
+        + UnmarshalKey(key string, rawVal <font color=blue>interface</font>{}, opts ...DecoderConfigOption) error
+        + Unmarshal(rawVal <font color=blue>interface</font>{}, opts ...DecoderConfigOption) error
+        + UnmarshalExact(rawVal <font color=blue>interface</font>{}, opts ...DecoderConfigOption) error
+        + BindPFlags(flags *pflag.FlagSet) error
+        + BindPFlag(key string, flag *pflag.Flag) error
+        + BindFlagValues(flags FlagValueSet) error
+        + BindFlagValue(key string, flag FlagValue) error
+        + BindEnv(input ...string) error
+        + MustBindEnv(input ...string) 
+        + IsSet(key string) bool
+        + AutomaticEnv() 
+        + SetEnvKeyReplacer(r *strings.Replacer) 
+        + RegisterAlias(alias string, key string) 
+        + InConfig(key string) bool
+        + SetDefault(key string, value <font color=blue>interface</font>{}) 
+        + Set(key string, value <font color=blue>interface</font>{}) 
+        + ReadInConfig() error
+        + MergeInConfig() error
+        + ReadConfig(in io.Reader) error
+        + MergeConfig(in io.Reader) error
+        + MergeConfigMap(cfg <font color=blue>map</font>[string]<font color=blue>interface</font>{}) error
+        + WriteConfig() error
+        + SafeWriteConfig() error
+        + WriteConfigAs(filename string) error
+        + SafeWriteConfigAs(filename string) error
+        + ReadRemoteConfig() error
+        + WatchRemoteConfig() error
+        + WatchRemoteConfigOnChannel() error
+        + AllKeys() []string
+        + AllSettings() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + SetFs(fs afero.Fs) 
+        + SetConfigName(in string) 
+        + SetConfigType(in string) 
+        + SetConfigPermissions(perm os.FileMode) 
+        + Debug() 
+        + DebugTo(w io.Writer) 
+
+    }
+    class defaultRemoteProvider << (S,Aquamarine) >> {
+        - provider string
+        - endpoint string
+        - path string
+        - secretKeyring string
+
+        + Provider() string
+        + Endpoint() string
+        + Path() string
+        + SecretKeyring() string
+
+    }
+    class finder << (S,Aquamarine) >> {
+        - paths []string
+        - fileNames []string
+        - extensions []string
+        - withoutExtension bool
+
+        + Find(fsys fs.FS) (string, error)
+
+    }
+    class jwwLogger << (S,Aquamarine) >> {
+        + Trace(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Debug(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Info(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Warn(msg string, keyvals ...<font color=blue>interface</font>{}) 
+        + Error(msg string, keyvals ...<font color=blue>interface</font>{}) 
+
+    }
+    class optionFunc << (S,Aquamarine) >> {
+        - apply(v *Viper) 
+
+    }
+    class pflagValue << (S,Aquamarine) >> {
+        - flag *pflag.Flag
+
+        + HasChanged() bool
+        + Name() string
+        + ValueString() string
+        + ValueType() string
+
+    }
+    class pflagValueSet << (S,Aquamarine) >> {
+        - flags *pflag.FlagSet
+
+        + VisitAll(fn <font color=blue>func</font>(FlagValue) ) 
+
+    }
+    interface remoteConfigFactory  {
+        + Get(rp RemoteProvider) (io.Reader, error)
+        + Watch(rp RemoteProvider) (io.Reader, error)
+        + WatchChannel(rp RemoteProvider) (<font color=blue>chan</font> *RemoteResponse, <font color=blue>chan</font> bool)
+
+    }
+    class viper.ConfigFileAlreadyExistsError << (T, #FF7700) >>  {
+    }
+    class viper.DecoderConfigOption << (T, #FF7700) >>  {
+    }
+    class viper.RemoteConfigError << (T, #FF7700) >>  {
+    }
+    class viper.UnsupportedConfigError << (T, #FF7700) >>  {
+    }
+    class viper.UnsupportedRemoteProviderError << (T, #FF7700) >>  {
+    }
+    class viper.optionFunc << (T, #FF7700) >>  {
+    }
+    class viper.watcher << (T, #FF7700) >>  {
+    }
+    class watcher << (S,Aquamarine) >> {
+        + Events <font color=blue>chan</font> fsnotify.Event
+        + Errors <font color=blue>chan</font> error
+
+        + Close() error
+        + Add(name string) error
+        + Remove(name string) error
+
+    }
+    class "<font color=blue>func</font>(*mapstructure.DecoderConfig) " as fontcolorbluefuncfontmapstructureDecoderConfig {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "fsnotify.Watcher" as fsnotifyWatcher {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"viper.RemoteProvider" <|-- "viper.defaultRemoteProvider"
+"viper.Logger" <|-- "viper.jwwLogger"
+"viper.Option" <|-- "viper.optionFunc"
+"viper.FlagValue" <|-- "viper.pflagValue"
+"viper.FlagValueSet" <|-- "viper.pflagValueSet"
+
+"__builtin__.string" #.. "viper.ConfigFileAlreadyExistsError"
+"__builtin__.string" #.. "viper.RemoteConfigError"
+"__builtin__.string" #.. "viper.UnsupportedConfigError"
+"__builtin__.string" #.. "viper.UnsupportedRemoteProviderError"
+"viper.<font color=blue>func</font>(*Viper) " #.. "viper.optionFunc"
+"viper.fontcolorbluefuncfontmapstructureDecoderConfig" #.. "viper.DecoderConfigOption"
+"viper.fsnotifyWatcher" #.. "viper.watcher"
+@enduml

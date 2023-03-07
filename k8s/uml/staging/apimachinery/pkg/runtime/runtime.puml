@@ -1,0 +1,567 @@
+@startuml
+namespace runtime {
+    class Allocator << (S,Aquamarine) >> {
+        - buf []byte
+
+        + Allocate(n uint64) []byte
+
+    }
+    interface CacheableObject  {
+        + CacheEncode(id Identifier, encode <font color=blue>func</font>(Object, io.Writer) error, w io.Writer) error
+        + GetObject() Object
+
+    }
+    interface ClientNegotiator  {
+        + Encoder(contentType string, params <font color=blue>map</font>[string]string) (Encoder, error)
+        + Decoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, error)
+        + StreamDecoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, Serializer, Framer, error)
+
+    }
+    interface Decoder  {
+        + Decode(data []byte, defaults *schema.GroupVersionKind, into Object) (Object, *schema.GroupVersionKind, error)
+
+    }
+    interface Encoder  {
+        + Encode(obj Object, w io.Writer) error
+        + Identifier() Identifier
+
+    }
+    interface EncoderWithAllocator  {
+        + EncodeWithAllocator(obj Object, w io.Writer, memAlloc MemoryAllocator) error
+
+    }
+    interface EquivalentResourceMapper  {
+        + EquivalentResourcesFor(resource schema.GroupVersionResource, subresource string) []schema.GroupVersionResource
+        + KindFor(resource schema.GroupVersionResource, subresource string) schema.GroupVersionKind
+
+    }
+    interface EquivalentResourceRegistry  {
+        + RegisterKindFor(resource schema.GroupVersionResource, subresource string, kind schema.GroupVersionKind) 
+
+    }
+    interface Framer  {
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+        + NewFrameWriter(w io.Writer) io.Writer
+
+    }
+    interface GroupVersioner  {
+        + KindForGroupVersionKinds(kinds []schema.GroupVersionKind) (schema.GroupVersionKind, bool)
+        + Identifier() string
+
+    }
+    interface MemoryAllocator  {
+        + Allocate(n uint64) []byte
+
+    }
+    class MultiObjectTyper << (S,Aquamarine) >> {
+        + ObjectKinds(obj Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+    interface Namer  {
+        + Name(obj Object) (string, error)
+        + Namespace(obj Object) (string, error)
+
+    }
+    class NegotiateError << (S,Aquamarine) >> {
+        + ContentType string
+        + Stream bool
+
+        + Error() string
+
+    }
+    interface NegotiatedSerializer  {
+        + SupportedMediaTypes() []SerializerInfo
+        + EncoderForVersion(serializer Encoder, gv GroupVersioner) Encoder
+        + DecoderToVersion(serializer Decoder, gv GroupVersioner) Decoder
+
+    }
+    interface NestedObjectDecoder  {
+        + DecodeNestedObjects(d Decoder) error
+
+    }
+    interface NestedObjectEncoder  {
+        + EncodeNestedObjects(e Encoder) error
+
+    }
+    class NoopDecoder << (S,Aquamarine) >> {
+        + Decode(data []byte, gvk *schema.GroupVersionKind, into Object) (Object, *schema.GroupVersionKind, error)
+
+    }
+    class NoopEncoder << (S,Aquamarine) >> {
+        + Encode(obj Object, w io.Writer) error
+        + Identifier() Identifier
+
+    }
+    interface Object  {
+        + GetObjectKind() schema.ObjectKind
+        + DeepCopyObject() Object
+
+    }
+    interface ObjectConvertor  {
+        + Convert(in <font color=blue>interface</font>{}, out <font color=blue>interface</font>{}, context <font color=blue>interface</font>{}) error
+        + ConvertToVersion(in Object, gv GroupVersioner) (Object, error)
+        + ConvertFieldLabel(gvk schema.GroupVersionKind, label string, value string) (string, string, error)
+
+    }
+    interface ObjectCreater  {
+        + New(kind schema.GroupVersionKind) (Object, error)
+
+    }
+    interface ObjectDefaulter  {
+        + Default(in Object) 
+
+    }
+    interface ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+    interface ObjectVersioner  {
+        + ConvertToVersion(in Object, gv GroupVersioner) (Object, error)
+
+    }
+    class Pair << (S,Aquamarine) >> {
+        + Name string
+
+    }
+    interface ParameterCodec  {
+        + DecodeParameters(parameters url.Values, from schema.GroupVersion, into Object) error
+        + EncodeParameters(obj Object, to schema.GroupVersion) (url.Values, error)
+
+    }
+    interface ProtobufMarshaller  {
+        + MarshalTo(data []byte) (int, error)
+
+    }
+    interface ProtobufReverseMarshaller  {
+        + MarshalToSizedBuffer(data []byte) (int, error)
+
+    }
+    class RawExtension << (S,Aquamarine) >> {
+        + Raw []byte
+        + Object Object
+
+        + UnmarshalJSON(in []byte) error
+        + MarshalJSON() ([]byte, error)
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + DeepCopyInto(out *RawExtension) 
+        + DeepCopy() *RawExtension
+
+    }
+    interface ResourceVersioner  {
+        + SetResourceVersion(obj Object, version string) error
+        + ResourceVersion(obj Object) (string, error)
+
+    }
+    class Scheme << (S,Aquamarine) >> {
+        - gvkToType <font color=blue>map</font>[schema.GroupVersionKind]reflect.Type
+        - typeToGVK <font color=blue>map</font>[reflect.Type][]schema.GroupVersionKind
+        - unversionedTypes <font color=blue>map</font>[reflect.Type]schema.GroupVersionKind
+        - unversionedKinds <font color=blue>map</font>[string]reflect.Type
+        - fieldLabelConversionFuncs <font color=blue>map</font>[schema.GroupVersionKind]FieldLabelConversionFunc
+        - defaulterFuncs <font color=blue>map</font>[reflect.Type]<font color=blue>func</font>(<font color=blue>interface</font>{}) 
+        - converter *conversion.Converter
+        - versionPriority <font color=blue>map</font>[string][]string
+        - observedVersions []schema.GroupVersion
+        - schemeName string
+
+        - convertToVersion(copy bool, in Object, target GroupVersioner) (Object, error)
+        - unstructuredToTyped(in Unstructured) (Object, error)
+        - generateConvertMeta(in <font color=blue>interface</font>{}) *conversion.Meta
+        - addObservedVersion(version schema.GroupVersion) 
+
+        + Converter() *conversion.Converter
+        + AddUnversionedTypes(version schema.GroupVersion, types ...Object) 
+        + AddKnownTypes(gv schema.GroupVersion, types ...Object) 
+        + AddKnownTypeWithName(gvk schema.GroupVersionKind, obj Object) 
+        + KnownTypes(gv schema.GroupVersion) <font color=blue>map</font>[string]reflect.Type
+        + VersionsForGroupKind(gk schema.GroupKind) []schema.GroupVersion
+        + AllKnownTypes() <font color=blue>map</font>[schema.GroupVersionKind]reflect.Type
+        + ObjectKinds(obj Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+        + IsUnversioned(obj Object) (bool, bool)
+        + New(kind schema.GroupVersionKind) (Object, error)
+        + AddIgnoredConversionType(from <font color=blue>interface</font>{}, to <font color=blue>interface</font>{}) error
+        + AddConversionFunc(a <font color=blue>interface</font>{}, b <font color=blue>interface</font>{}, fn conversion.ConversionFunc) error
+        + AddGeneratedConversionFunc(a <font color=blue>interface</font>{}, b <font color=blue>interface</font>{}, fn conversion.ConversionFunc) error
+        + AddFieldLabelConversionFunc(gvk schema.GroupVersionKind, conversionFunc FieldLabelConversionFunc) error
+        + AddTypeDefaultingFunc(srcType Object, fn <font color=blue>func</font>(<font color=blue>interface</font>{}) ) 
+        + Default(src Object) 
+        + Convert(in <font color=blue>interface</font>{}, out <font color=blue>interface</font>{}, context <font color=blue>interface</font>{}) error
+        + ConvertFieldLabel(gvk schema.GroupVersionKind, label string, value string) (string, string, error)
+        + ConvertToVersion(in Object, target GroupVersioner) (Object, error)
+        + UnsafeConvertToVersion(in Object, target GroupVersioner) (Object, error)
+        + SetVersionPriority(versions ...schema.GroupVersion) error
+        + PrioritizedVersionsForGroup(group string) []schema.GroupVersion
+        + PrioritizedVersionsAllGroups() []schema.GroupVersion
+        + PreferredVersionAllGroups() []schema.GroupVersion
+        + IsGroupRegistered(group string) bool
+        + IsVersionRegistered(version schema.GroupVersion) bool
+        + Name() string
+
+    }
+    class SchemeBuilder << (S,Aquamarine) >> {
+        + AddToScheme(s *Scheme) error
+        + Register(funcs ...<font color=blue>func</font>(*Scheme) error) 
+
+    }
+    interface Serializer  {
+    }
+    class SerializerInfo << (S,Aquamarine) >> {
+        + MediaType string
+        + MediaTypeType string
+        + MediaTypeSubType string
+        + EncodesAsText bool
+        + Serializer Serializer
+        + PrettySerializer Serializer
+        + StrictSerializer Serializer
+        + StreamSerializer *StreamSerializerInfo
+
+    }
+    class SimpleAllocator << (S,Aquamarine) >> {
+        + Allocate(n uint64) []byte
+
+    }
+    interface StorageSerializer  {
+        + SupportedMediaTypes() []SerializerInfo
+        + UniversalDeserializer() Decoder
+        + EncoderForVersion(serializer Encoder, gv GroupVersioner) Encoder
+        + DecoderToVersion(serializer Decoder, gv GroupVersioner) Decoder
+
+    }
+    class StreamSerializerInfo << (S,Aquamarine) >> {
+        + EncodesAsText bool
+
+    }
+    class TypeMeta << (S,Aquamarine) >> {
+        + APIVersion string
+        + Kind string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SetGroupVersionKind(gvk schema.GroupVersionKind) 
+        + GroupVersionKind() schema.GroupVersionKind
+        + GetObjectKind() schema.ObjectKind
+
+    }
+    class Unknown << (S,Aquamarine) >> {
+        + Raw []byte
+        + ContentEncoding string
+        + ContentType string
+
+        + UnmarshalJSON(in []byte) error
+        + MarshalJSON() ([]byte, error)
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + NestedMarshalTo(data []byte, b ProtobufMarshaller, size uint64) (int, error)
+        + DeepCopyInto(out *Unknown) 
+        + DeepCopy() *Unknown
+        + DeepCopyObject() Object
+
+    }
+    interface Unstructured  {
+        + NewEmptyInstance() Unstructured
+        + UnstructuredContent() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + SetUnstructuredContent( <font color=blue>map</font>[string]<font color=blue>interface</font>{}) 
+        + IsList() bool
+        + EachListItem( <font color=blue>func</font>(Object) error) error
+
+    }
+    interface UnstructuredConverter  {
+        + ToUnstructured(obj <font color=blue>interface</font>{}) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+        + FromUnstructured(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}) error
+
+    }
+    class WithVersionEncoder << (S,Aquamarine) >> {
+        + Version GroupVersioner
+
+        + Encode(obj Object, stream io.Writer) error
+
+    }
+    class WithoutVersionDecoder << (S,Aquamarine) >> {
+        + Decode(data []byte, defaults *schema.GroupVersionKind, into Object) (Object, *schema.GroupVersionKind, error)
+
+    }
+    class base64Serializer << (S,Aquamarine) >> {
+        - identifier Identifier
+
+        - doEncode(obj Object, stream io.Writer) error
+
+        + Encode(obj Object, stream io.Writer) error
+        + Identifier() Identifier
+        + Decode(data []byte, defaults *schema.GroupVersionKind, into Object) (Object, *schema.GroupVersionKind, error)
+
+    }
+    class buffer << (S,Aquamarine) >> {
+        - lines []bufferedLine
+
+        - addLine(line string, indent int) 
+        - flushLines(w io.Writer) error
+
+    }
+    class bufferedLine << (S,Aquamarine) >> {
+        - line string
+        - indentation int
+
+    }
+    class clientNegotiator << (S,Aquamarine) >> {
+        - serializer NegotiatedSerializer
+        - encode GroupVersioner
+
+        + Encoder(contentType string, params <font color=blue>map</font>[string]string) (Encoder, error)
+        + Decoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, error)
+        + StreamDecoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, Serializer, Framer, error)
+
+    }
+    class codec << (S,Aquamarine) >> {
+    }
+    class defaultFramer << (S,Aquamarine) >> {
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+        + NewFrameWriter(w io.Writer) io.Writer
+
+    }
+    class disabledGroupVersioner << (S,Aquamarine) >> {
+        + KindForGroupVersionKinds(kinds []schema.GroupVersionKind) (schema.GroupVersionKind, bool)
+        + Identifier() string
+
+    }
+    class encodable << (S,Aquamarine) >> {
+        - obj Object
+        - versions []schema.GroupVersion
+
+        + E Encoder
+
+        + GetObjectKind() schema.ObjectKind
+        + DeepCopyObject() Object
+        + UnmarshalJSON(in []byte) error
+        + MarshalJSON() ([]byte, error)
+
+    }
+    class equivalentResourceRegistry << (S,Aquamarine) >> {
+        - keyFunc <font color=blue>func</font>(schema.GroupResource) string
+        - resources <font color=blue>map</font>[string]<font color=blue>map</font>[string][]schema.GroupVersionResource
+        - kinds <font color=blue>map</font>[schema.GroupVersionResource]<font color=blue>map</font>[string]schema.GroupVersionKind
+        - keys <font color=blue>map</font>[schema.GroupResource]string
+        - mutex sync.RWMutex
+
+        + EquivalentResourcesFor(resource schema.GroupVersionResource, subresource string) []schema.GroupVersionResource
+        + KindFor(resource schema.GroupVersionResource, subresource string) schema.GroupVersionKind
+        + RegisterKindFor(resource schema.GroupVersionResource, subresource string, kind schema.GroupVersionKind) 
+
+    }
+    class fieldInfo << (S,Aquamarine) >> {
+        - name string
+        - nameValue reflect.Value
+        - omitempty bool
+
+    }
+    class fieldsCache << (S,Aquamarine) >> {
+        - value atomic.Value
+
+    }
+    class fromUnstructuredContext << (S,Aquamarine) >> {
+        - isInlined bool
+        - matchedKeys []<font color=blue>map</font>[string]<font color=blue>struct</font>{}
+        - parentPath []string
+        - returnUnknownFields bool
+        - unknownFieldErrors []error
+
+        - pushMatchedKeyTracker() 
+        - recordMatchedKey(key string) 
+        - popAndVerifyMatchedKeys(mapValue reflect.Value) 
+        - recordUnknownField(field string) 
+        - pushIndex(index int) 
+        - pushKey(key string) 
+
+    }
+    class internalGroupVersioner << (S,Aquamarine) >> {
+        + KindForGroupVersionKinds(kinds []schema.GroupVersionKind) (schema.GroupVersionKind, bool)
+        + Identifier() string
+
+    }
+    class missingKindErr << (S,Aquamarine) >> {
+        - data string
+
+        + Error() string
+
+    }
+    class missingVersionErr << (S,Aquamarine) >> {
+        - data string
+
+        + Error() string
+
+    }
+    class multiGroupVersioner << (S,Aquamarine) >> {
+        - target schema.GroupVersion
+        - acceptedGroupKinds []schema.GroupKind
+        - coerce bool
+
+        + KindForGroupVersionKinds(kinds []schema.GroupVersionKind) (schema.GroupVersionKind, bool)
+        + Identifier() string
+
+    }
+    class notRegisteredErr << (S,Aquamarine) >> {
+        - schemeName string
+        - gvk schema.GroupVersionKind
+        - target GroupVersioner
+        - t reflect.Type
+
+        + Error() string
+
+    }
+    class parameterCodec << (S,Aquamarine) >> {
+        - typer ObjectTyper
+        - convertor ObjectConvertor
+        - creator ObjectCreater
+        - defaulter ObjectDefaulter
+
+        + DecodeParameters(parameters url.Values, from schema.GroupVersion, into Object) error
+        + EncodeParameters(obj Object, to schema.GroupVersion) (url.Values, error)
+
+    }
+    class runtime.Codec << (T, #FF7700) >>  {
+    }
+    class runtime.FieldLabelConversionFunc << (T, #FF7700) >>  {
+    }
+    class runtime.Identifier << (T, #FF7700) >>  {
+    }
+    class runtime.KubeTypes << (T, #FF7700) >>  {
+    }
+    class runtime.MultiObjectTyper << (T, #FF7700) >>  {
+    }
+    class runtime.SchemeBuilder << (T, #FF7700) >>  {
+    }
+    class runtime.fieldsCacheMap << (T, #FF7700) >>  {
+    }
+    class simpleNegotiatedSerializer << (S,Aquamarine) >> {
+        - info SerializerInfo
+
+        + SupportedMediaTypes() []SerializerInfo
+        + EncoderForVersion(e Encoder, _ GroupVersioner) Encoder
+        + DecoderToVersion(d Decoder, _gv GroupVersioner) Decoder
+
+    }
+    class strictDecodingError << (S,Aquamarine) >> {
+        - errors []error
+
+        + Error() string
+        + Errors() []error
+
+    }
+    class structField << (S,Aquamarine) >> {
+        - structType reflect.Type
+        - field int
+
+    }
+    class unsafeObjectConvertor << (S,Aquamarine) >> {
+        + ConvertToVersion(in Object, outVersion GroupVersioner) (Object, error)
+
+    }
+    class unstructuredConverter << (S,Aquamarine) >> {
+        - mismatchDetection bool
+        - comparison conversion.Equalities
+
+        + FromUnstructuredWithValidation(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}, returnUnknownFields bool) error
+        + FromUnstructured(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}) error
+        + ToUnstructured(obj <font color=blue>interface</font>{}) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+
+    }
+}
+"runtime.Encoder" *-- "runtime.EncoderWithAllocator"
+"runtime.EquivalentResourceMapper" *-- "runtime.EquivalentResourceRegistry"
+"runtime.Encoder" *-- "runtime.NoopDecoder"
+"runtime.Decoder" *-- "runtime.NoopEncoder"
+"runtime.Decoder" *-- "runtime.Serializer"
+"runtime.Encoder" *-- "runtime.Serializer"
+"runtime.Framer" *-- "runtime.StreamSerializerInfo"
+"runtime.Serializer" *-- "runtime.StreamSerializerInfo"
+"runtime.TypeMeta" *-- "runtime.Unknown"
+"runtime.Object" *-- "runtime.Unstructured"
+"runtime.Encoder" *-- "runtime.WithVersionEncoder"
+"runtime.ObjectTyper" *-- "runtime.WithVersionEncoder"
+"runtime.Decoder" *-- "runtime.WithoutVersionDecoder"
+"runtime.Decoder" *-- "runtime.base64Serializer"
+"runtime.Encoder" *-- "runtime.base64Serializer"
+"runtime.Decoder" *-- "runtime.codec"
+"runtime.Encoder" *-- "runtime.codec"
+"sync.Mutex" *-- "runtime.fieldsCache"
+"runtime.Scheme" *-- "runtime.unsafeObjectConvertor"
+
+"runtime.MemoryAllocator" <|-- "runtime.Allocator"
+"runtime.ObjectTyper" <|-- "runtime.MultiObjectTyper"
+"runtime.Decoder" <|-- "runtime.NoopDecoder"
+"runtime.Encoder" <|-- "runtime.NoopEncoder"
+"runtime.ProtobufMarshaller" <|-- "runtime.RawExtension"
+"runtime.ProtobufReverseMarshaller" <|-- "runtime.RawExtension"
+"runtime.ObjectConvertor" <|-- "runtime.Scheme"
+"runtime.ObjectCreater" <|-- "runtime.Scheme"
+"runtime.ObjectDefaulter" <|-- "runtime.Scheme"
+"runtime.ObjectTyper" <|-- "runtime.Scheme"
+"runtime.ObjectVersioner" <|-- "runtime.Scheme"
+"runtime.MemoryAllocator" <|-- "runtime.SimpleAllocator"
+"runtime.ProtobufMarshaller" <|-- "runtime.TypeMeta"
+"runtime.ProtobufReverseMarshaller" <|-- "runtime.TypeMeta"
+"runtime.ProtobufMarshaller" <|-- "runtime.Unknown"
+"runtime.ProtobufReverseMarshaller" <|-- "runtime.Unknown"
+"runtime.Decoder" <|-- "runtime.WithoutVersionDecoder"
+"runtime.Decoder" <|-- "runtime.base64Serializer"
+"runtime.Encoder" <|-- "runtime.base64Serializer"
+"runtime.ClientNegotiator" <|-- "runtime.clientNegotiator"
+"runtime.Framer" <|-- "runtime.defaultFramer"
+"runtime.GroupVersioner" <|-- "runtime.disabledGroupVersioner"
+"runtime.Object" <|-- "runtime.encodable"
+"runtime.EquivalentResourceMapper" <|-- "runtime.equivalentResourceRegistry"
+"runtime.EquivalentResourceRegistry" <|-- "runtime.equivalentResourceRegistry"
+"runtime.GroupVersioner" <|-- "runtime.internalGroupVersioner"
+"runtime.GroupVersioner" <|-- "runtime.multiGroupVersioner"
+"runtime.ParameterCodec" <|-- "runtime.parameterCodec"
+"runtime.NegotiatedSerializer" <|-- "runtime.simpleNegotiatedSerializer"
+"runtime.ObjectVersioner" <|-- "runtime.unsafeObjectConvertor"
+"runtime.UnstructuredConverter" <|-- "runtime.unstructuredConverter"
+
+"__builtin__.string" #.. "runtime.Identifier"
+"runtime.<font color=blue>func</font>(string, string) (string, string, error)" #.. "runtime.FieldLabelConversionFunc"
+"runtime.<font color=blue>map</font>[structField]*{packageName}fieldInfo" #.. "runtime.fieldsCacheMap"
+"runtime.Serializer" #.. "runtime.Codec"
+"runtime.[]<font color=blue>func</font>(*Scheme) error" #.. "runtime.SchemeBuilder"
+"runtime.[]ObjectTyper" #.. "runtime.MultiObjectTyper"
+"runtime.[]Pair" #.. "runtime.KubeTypes"
+@enduml

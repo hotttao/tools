@@ -1,0 +1,218 @@
+@startuml
+namespace storage {
+    class CSIDriver << (S,Aquamarine) >> {
+        + Spec CSIDriverSpec
+
+        + DeepCopyInto(out *CSIDriver) 
+        + DeepCopy() *CSIDriver
+        + DeepCopyObject() runtime.Object
+
+    }
+    class CSIDriverList << (S,Aquamarine) >> {
+        + Items []CSIDriver
+
+        + DeepCopyInto(out *CSIDriverList) 
+        + DeepCopy() *CSIDriverList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class CSIDriverSpec << (S,Aquamarine) >> {
+        + AttachRequired *bool
+        + FSGroupPolicy *FSGroupPolicy
+        + PodInfoOnMount *bool
+        + VolumeLifecycleModes []VolumeLifecycleMode
+        + StorageCapacity *bool
+        + TokenRequests []TokenRequest
+        + RequiresRepublish *bool
+        + SELinuxMount *bool
+
+        + DeepCopyInto(out *CSIDriverSpec) 
+        + DeepCopy() *CSIDriverSpec
+
+    }
+    class CSINode << (S,Aquamarine) >> {
+        + Spec CSINodeSpec
+
+        + DeepCopyInto(out *CSINode) 
+        + DeepCopy() *CSINode
+        + DeepCopyObject() runtime.Object
+
+    }
+    class CSINodeDriver << (S,Aquamarine) >> {
+        + Name string
+        + NodeID string
+        + TopologyKeys []string
+        + Allocatable *VolumeNodeResources
+
+        + DeepCopyInto(out *CSINodeDriver) 
+        + DeepCopy() *CSINodeDriver
+
+    }
+    class CSINodeList << (S,Aquamarine) >> {
+        + Items []CSINode
+
+        + DeepCopyInto(out *CSINodeList) 
+        + DeepCopy() *CSINodeList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class CSINodeSpec << (S,Aquamarine) >> {
+        + Drivers []CSINodeDriver
+
+        + DeepCopyInto(out *CSINodeSpec) 
+        + DeepCopy() *CSINodeSpec
+
+    }
+    class CSIStorageCapacity << (S,Aquamarine) >> {
+        + NodeTopology *v1.LabelSelector
+        + StorageClassName string
+        + Capacity *resource.Quantity
+        + MaximumVolumeSize *resource.Quantity
+
+        + DeepCopyInto(out *CSIStorageCapacity) 
+        + DeepCopy() *CSIStorageCapacity
+        + DeepCopyObject() runtime.Object
+
+    }
+    class CSIStorageCapacityList << (S,Aquamarine) >> {
+        + Items []CSIStorageCapacity
+
+        + DeepCopyInto(out *CSIStorageCapacityList) 
+        + DeepCopy() *CSIStorageCapacityList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class StorageClass << (S,Aquamarine) >> {
+        + Provisioner string
+        + Parameters <font color=blue>map</font>[string]string
+        + ReclaimPolicy *core.PersistentVolumeReclaimPolicy
+        + MountOptions []string
+        + AllowVolumeExpansion *bool
+        + VolumeBindingMode *VolumeBindingMode
+        + AllowedTopologies []core.TopologySelectorTerm
+
+        + DeepCopyInto(out *StorageClass) 
+        + DeepCopy() *StorageClass
+        + DeepCopyObject() runtime.Object
+
+    }
+    class StorageClassList << (S,Aquamarine) >> {
+        + Items []StorageClass
+
+        + DeepCopyInto(out *StorageClassList) 
+        + DeepCopy() *StorageClassList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class TokenRequest << (S,Aquamarine) >> {
+        + Audience string
+        + ExpirationSeconds *int64
+
+        + DeepCopyInto(out *TokenRequest) 
+        + DeepCopy() *TokenRequest
+
+    }
+    class VolumeAttachment << (S,Aquamarine) >> {
+        + Spec VolumeAttachmentSpec
+        + Status VolumeAttachmentStatus
+
+        + DeepCopyInto(out *VolumeAttachment) 
+        + DeepCopy() *VolumeAttachment
+        + DeepCopyObject() runtime.Object
+
+    }
+    class VolumeAttachmentList << (S,Aquamarine) >> {
+        + Items []VolumeAttachment
+
+        + DeepCopyInto(out *VolumeAttachmentList) 
+        + DeepCopy() *VolumeAttachmentList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class VolumeAttachmentSource << (S,Aquamarine) >> {
+        + PersistentVolumeName *string
+        + InlineVolumeSpec *core.PersistentVolumeSpec
+
+        + DeepCopyInto(out *VolumeAttachmentSource) 
+        + DeepCopy() *VolumeAttachmentSource
+
+    }
+    class VolumeAttachmentSpec << (S,Aquamarine) >> {
+        + Attacher string
+        + Source VolumeAttachmentSource
+        + NodeName string
+
+        + DeepCopyInto(out *VolumeAttachmentSpec) 
+        + DeepCopy() *VolumeAttachmentSpec
+
+    }
+    class VolumeAttachmentStatus << (S,Aquamarine) >> {
+        + Attached bool
+        + AttachmentMetadata <font color=blue>map</font>[string]string
+        + AttachError *VolumeError
+        + DetachError *VolumeError
+
+        + DeepCopyInto(out *VolumeAttachmentStatus) 
+        + DeepCopy() *VolumeAttachmentStatus
+
+    }
+    class VolumeError << (S,Aquamarine) >> {
+        + Time v1.Time
+        + Message string
+
+        + DeepCopyInto(out *VolumeError) 
+        + DeepCopy() *VolumeError
+
+    }
+    class VolumeNodeResources << (S,Aquamarine) >> {
+        + Count *int32
+
+        + DeepCopyInto(out *VolumeNodeResources) 
+        + DeepCopy() *VolumeNodeResources
+
+    }
+    class storage.FSGroupPolicy << (T, #FF7700) >>  {
+    }
+    class storage.VolumeBindingMode << (T, #FF7700) >>  {
+    }
+    class storage.VolumeLifecycleMode << (T, #FF7700) >>  {
+    }
+}
+"v1.ObjectMeta" *-- "storage.CSIDriver"
+"v1.TypeMeta" *-- "storage.CSIDriver"
+"v1.ListMeta" *-- "storage.CSIDriverList"
+"v1.TypeMeta" *-- "storage.CSIDriverList"
+"v1.ObjectMeta" *-- "storage.CSINode"
+"v1.TypeMeta" *-- "storage.CSINode"
+"v1.ListMeta" *-- "storage.CSINodeList"
+"v1.TypeMeta" *-- "storage.CSINodeList"
+"v1.ObjectMeta" *-- "storage.CSIStorageCapacity"
+"v1.TypeMeta" *-- "storage.CSIStorageCapacity"
+"v1.ListMeta" *-- "storage.CSIStorageCapacityList"
+"v1.TypeMeta" *-- "storage.CSIStorageCapacityList"
+"v1.ObjectMeta" *-- "storage.StorageClass"
+"v1.TypeMeta" *-- "storage.StorageClass"
+"v1.ListMeta" *-- "storage.StorageClassList"
+"v1.TypeMeta" *-- "storage.StorageClassList"
+"v1.ObjectMeta" *-- "storage.VolumeAttachment"
+"v1.TypeMeta" *-- "storage.VolumeAttachment"
+"v1.ListMeta" *-- "storage.VolumeAttachmentList"
+"v1.TypeMeta" *-- "storage.VolumeAttachmentList"
+
+
+namespace validation {
+    class CSINodeValidationOptions << (S,Aquamarine) >> {
+        + AllowLongNodeID bool
+
+    }
+    class CSIStorageCapacityValidateOptions << (S,Aquamarine) >> {
+        + AllowInvalidLabelValueInSelector bool
+
+    }
+}
+
+
+"__builtin__.string" #.. "storage.FSGroupPolicy"
+"__builtin__.string" #.. "storage.VolumeBindingMode"
+"__builtin__.string" #.. "storage.VolumeLifecycleMode"
+@enduml

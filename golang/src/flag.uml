@@ -1,0 +1,196 @@
+@startuml
+namespace flag {
+    class Flag << (S,Aquamarine) >> {
+        + Name string
+        + Usage string
+        + Value Value
+        + DefValue string
+
+    }
+    class FlagSet << (S,Aquamarine) >> {
+        - name string
+        - parsed bool
+        - actual <font color=blue>map</font>[string]*Flag
+        - formal <font color=blue>map</font>[string]*Flag
+        - args []string
+        - errorHandling ErrorHandling
+        - output io.Writer
+
+        + Usage <font color=blue>func</font>() 
+
+        - defaultUsage() 
+        - sprintf(format string, a ...any) string
+        - failf(format string, a ...any) error
+        - usage() 
+        - parseOne() (bool, error)
+
+        + Output() io.Writer
+        + Name() string
+        + ErrorHandling() ErrorHandling
+        + SetOutput(output io.Writer) 
+        + VisitAll(fn <font color=blue>func</font>(*Flag) ) 
+        + Visit(fn <font color=blue>func</font>(*Flag) ) 
+        + Lookup(name string) *Flag
+        + Set(name string, value string) error
+        + PrintDefaults() 
+        + NFlag() int
+        + Arg(i int) string
+        + NArg() int
+        + Args() []string
+        + BoolVar(p *bool, name string, value bool, usage string) 
+        + Bool(name string, value bool, usage string) *bool
+        + IntVar(p *int, name string, value int, usage string) 
+        + Int(name string, value int, usage string) *int
+        + Int64Var(p *int64, name string, value int64, usage string) 
+        + Int64(name string, value int64, usage string) *int64
+        + UintVar(p *uint, name string, value uint, usage string) 
+        + Uint(name string, value uint, usage string) *uint
+        + Uint64Var(p *uint64, name string, value uint64, usage string) 
+        + Uint64(name string, value uint64, usage string) *uint64
+        + StringVar(p *string, name string, value string, usage string) 
+        + String(name string, value string, usage string) *string
+        + Float64Var(p *float64, name string, value float64, usage string) 
+        + Float64(name string, value float64, usage string) *float64
+        + DurationVar(p *time.Duration, name string, value time.Duration, usage string) 
+        + Duration(name string, value time.Duration, usage string) *time.Duration
+        + TextVar(p encoding.TextUnmarshaler, name string, value encoding.TextMarshaler, usage string) 
+        + Func(name string, usage string, fn <font color=blue>func</font>(string) error) 
+        + Var(value Value, name string, usage string) 
+        + Parse(arguments []string) error
+        + Parsed() bool
+        + Init(name string, errorHandling ErrorHandling) 
+
+    }
+    interface Getter  {
+        + Get() any
+
+    }
+    interface Value  {
+        + String() string
+        + Set( string) error
+
+    }
+    interface boolFlag  {
+        + IsBoolFlag() bool
+
+    }
+    class boolValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+        + IsBoolFlag() bool
+
+    }
+    class durationValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class flag.ErrorHandling << (T, #FF7700) >>  {
+    }
+    class flag.boolValue << (T, #FF7700) >>  {
+    }
+    class flag.durationValue << (T, #FF7700) >>  {
+    }
+    class flag.float64Value << (T, #FF7700) >>  {
+    }
+    class flag.funcValue << (T, #FF7700) >>  {
+    }
+    class flag.int64Value << (T, #FF7700) >>  {
+    }
+    class flag.intValue << (T, #FF7700) >>  {
+    }
+    class flag.stringValue << (T, #FF7700) >>  {
+    }
+    class flag.uint64Value << (T, #FF7700) >>  {
+    }
+    class flag.uintValue << (T, #FF7700) >>  {
+    }
+    class float64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class funcValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + String() string
+
+    }
+    class int64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class intValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class stringValue << (S,Aquamarine) >> {
+        + Set(val string) error
+        + Get() any
+        + String() string
+
+    }
+    class textValue << (S,Aquamarine) >> {
+        - p encoding.TextUnmarshaler
+
+        + Set(s string) error
+        + Get() <font color=blue>interface</font>{}
+        + String() string
+
+    }
+    class uint64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class uintValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Get() any
+        + String() string
+
+    }
+    class "time.Duration" as timeDuration {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"flag.Value" *-- "flag.Getter"
+"flag.Value" *-- "flag.boolFlag"
+
+"flag.Getter" <|-- "flag.boolValue"
+"flag.Value" <|-- "flag.boolValue"
+"flag.boolFlag" <|-- "flag.boolValue"
+"flag.Getter" <|-- "flag.durationValue"
+"flag.Value" <|-- "flag.durationValue"
+"flag.Getter" <|-- "flag.float64Value"
+"flag.Value" <|-- "flag.float64Value"
+"flag.Value" <|-- "flag.funcValue"
+"flag.Getter" <|-- "flag.int64Value"
+"flag.Value" <|-- "flag.int64Value"
+"flag.Getter" <|-- "flag.intValue"
+"flag.Value" <|-- "flag.intValue"
+"flag.Getter" <|-- "flag.stringValue"
+"flag.Value" <|-- "flag.stringValue"
+"flag.Value" <|-- "flag.textValue"
+"flag.Getter" <|-- "flag.uint64Value"
+"flag.Value" <|-- "flag.uint64Value"
+"flag.Getter" <|-- "flag.uintValue"
+"flag.Value" <|-- "flag.uintValue"
+
+"__builtin__.bool" #.. "flag.boolValue"
+"__builtin__.float64" #.. "flag.float64Value"
+"__builtin__.int" #.. "flag.ErrorHandling"
+"__builtin__.int" #.. "flag.intValue"
+"__builtin__.int64" #.. "flag.int64Value"
+"__builtin__.string" #.. "flag.stringValue"
+"__builtin__.uint" #.. "flag.uintValue"
+"__builtin__.uint64" #.. "flag.uint64Value"
+"flag.<font color=blue>func</font>(string) error" #.. "flag.funcValue"
+"flag.timeDuration" #.. "flag.durationValue"
+@enduml
