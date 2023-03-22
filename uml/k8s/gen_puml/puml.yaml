@@ -1,0 +1,13 @@
+staging:
+    apimachinery:
+        pkg:
+            runtime:
+                filter: ['serializer', 'testing']
+                serializer:
+                    filter: []
+            apis:
+                meta:
+                    v1:
+                        filter: []
+combine:
+    runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']

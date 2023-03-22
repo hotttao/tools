@@ -1,0 +1,269 @@
+@startuml
+namespace json {
+    interface MetaFactory  {
+        + Interpret(data []byte) (*schema.GroupVersionKind, error)
+
+    }
+    class Serializer << (S,Aquamarine) >> {
+        - meta MetaFactory
+        - options SerializerOptions
+        - creater runtime.ObjectCreater
+        - typer runtime.ObjectTyper
+        - identifier runtime.Identifier
+
+        - doEncode(obj runtime.Object, w io.Writer) error
+        - unmarshal(into runtime.Object, data []byte, originalData []byte) ([]error, error)
+
+        + Decode(originalData []byte, gvk *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + Encode(obj runtime.Object, w io.Writer) error
+        + IsStrict() bool
+        + Identifier() runtime.Identifier
+        + RecognizesData(data []byte) (bool, bool, error)
+
+    }
+    class SerializerOptions << (S,Aquamarine) >> {
+        + Yaml bool
+        + Pretty bool
+        + Strict bool
+
+    }
+    class SimpleMetaFactory << (S,Aquamarine) >> {
+        + Interpret(data []byte) (*schema.GroupVersionKind, error)
+
+    }
+    class jsonFramer << (S,Aquamarine) >> {
+        + NewFrameWriter(w io.Writer) io.Writer
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+
+    }
+    class yamlFrameWriter << (S,Aquamarine) >> {
+        - w io.Writer
+
+        + Write(data []byte) (int, error)
+
+    }
+    class yamlFramer << (S,Aquamarine) >> {
+        + NewFrameWriter(w io.Writer) io.Writer
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+
+    }
+}
+
+"recognizer.RecognizingDecoder" <|-- "json.Serializer"
+"json.MetaFactory" <|-- "json.SimpleMetaFactory"
+
+namespace protobuf {
+    class RawSerializer << (S,Aquamarine) >> {
+        - creater runtime.ObjectCreater
+        - typer runtime.ObjectTyper
+
+        - encode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        - doEncode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+
+        + Decode(originalData []byte, gvk *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + Encode(obj runtime.Object, w io.Writer) error
+        + EncodeWithAllocator(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        + Identifier() runtime.Identifier
+
+    }
+    class Serializer << (S,Aquamarine) >> {
+        - prefix []byte
+        - creater runtime.ObjectCreater
+        - typer runtime.ObjectTyper
+
+        - encode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        - doEncode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+
+        + Decode(originalData []byte, gvk *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + EncodeWithAllocator(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        + Encode(obj runtime.Object, w io.Writer) error
+        + Identifier() runtime.Identifier
+        + RecognizesData(data []byte) (bool, bool, error)
+
+    }
+    interface bufferedMarshaller  {
+    }
+    interface bufferedReverseMarshaller  {
+    }
+    class errNotMarshalable << (S,Aquamarine) >> {
+        - t reflect.Type
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    class lengthDelimitedFramer << (S,Aquamarine) >> {
+        + NewFrameWriter(w io.Writer) io.Writer
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+
+    }
+}
+
+"recognizer.RecognizingDecoder" <|-- "protobuf.Serializer"
+
+namespace recognizer {
+    interface RecognizingDecoder  {
+        + RecognizesData(peek []byte) (bool, bool, error)
+
+    }
+    class decoder << (S,Aquamarine) >> {
+        - decoders []runtime.Decoder
+
+        + RecognizesData(data []byte) (bool, bool, error)
+        + Decode(data []byte, gvk *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+
+    }
+}
+
+"recognizer.RecognizingDecoder" <|-- "recognizer.decoder"
+
+namespace serializer {
+    class CodecFactory << (S,Aquamarine) >> {
+        - scheme *runtime.Scheme
+        - universal runtime.Decoder
+        - accepts []runtime.SerializerInfo
+        - legacySerializer runtime.Serializer
+
+        + WithoutConversion() runtime.NegotiatedSerializer
+        + SupportedMediaTypes() []runtime.SerializerInfo
+        + LegacyCodec(version ...schema.GroupVersion) runtime.Codec
+        + UniversalDeserializer() runtime.Decoder
+        + UniversalDecoder(versions ...schema.GroupVersion) runtime.Decoder
+        + CodecForVersions(encoder runtime.Encoder, decoder runtime.Decoder, encode runtime.GroupVersioner, decode runtime.GroupVersioner) runtime.Codec
+        + DecoderToVersion(decoder runtime.Decoder, gv runtime.GroupVersioner) runtime.Decoder
+        + EncoderForVersion(encoder runtime.Encoder, gv runtime.GroupVersioner) runtime.Encoder
+
+    }
+    class CodecFactoryOptions << (S,Aquamarine) >> {
+        + Strict bool
+        + Pretty bool
+
+    }
+    class WithoutConversionCodecFactory << (S,Aquamarine) >> {
+        + EncoderForVersion(serializer runtime.Encoder, version runtime.GroupVersioner) runtime.Encoder
+        + DecoderToVersion(serializer runtime.Decoder, _ runtime.GroupVersioner) runtime.Decoder
+
+    }
+    class negotiatedSerializerWrapper << (S,Aquamarine) >> {
+        - info runtime.SerializerInfo
+
+        + SupportedMediaTypes() []runtime.SerializerInfo
+        + EncoderForVersion(e runtime.Encoder, _ runtime.GroupVersioner) runtime.Encoder
+        + DecoderToVersion(d runtime.Decoder, _gv runtime.GroupVersioner) runtime.Decoder
+
+    }
+    class serializer.CodecFactoryOptionsMutator << (T, #FF7700) >>  {
+    }
+    class serializerType << (S,Aquamarine) >> {
+        + AcceptContentTypes []string
+        + ContentType string
+        + FileExtensions []string
+        + EncodesAsText bool
+        + Serializer runtime.Serializer
+        + PrettySerializer runtime.Serializer
+        + StrictSerializer runtime.Serializer
+        + AcceptStreamContentTypes []string
+        + StreamContentType string
+        + Framer runtime.Framer
+        + StreamSerializer runtime.Serializer
+
+    }
+}
+"serializer.CodecFactory" *-- "serializer.WithoutConversionCodecFactory"
+
+
+namespace streaming {
+    interface Decoder  {
+        + Decode(defaults *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + Close() error
+
+    }
+    interface Encoder  {
+        + Encode(obj runtime.Object) error
+
+    }
+    interface Serializer  {
+        + NewEncoder(w io.Writer) Encoder
+        + NewDecoder(r io.ReadCloser) Decoder
+
+    }
+    class decoder << (S,Aquamarine) >> {
+        - reader io.ReadCloser
+        - decoder runtime.Decoder
+        - buf []byte
+        - maxBytes int
+        - resetRead bool
+
+        + Decode(defaults *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + Close() error
+
+    }
+    class encoder << (S,Aquamarine) >> {
+        - writer io.Writer
+        - encoder runtime.Encoder
+        - buf *bytes.Buffer
+
+        + Encode(obj runtime.Object) error
+
+    }
+    class encoderWithAllocator << (S,Aquamarine) >> {
+        - writer io.Writer
+        - encoder runtime.EncoderWithAllocator
+        - memAllocator runtime.MemoryAllocator
+
+        + Encode(obj runtime.Object) error
+
+    }
+}
+
+"streaming.Decoder" <|-- "streaming.decoder"
+"streaming.Encoder" <|-- "streaming.encoder"
+"streaming.Encoder" <|-- "streaming.encoderWithAllocator"
+
+namespace versioning {
+    class codec << (S,Aquamarine) >> {
+        - encoder runtime.Encoder
+        - decoder runtime.Decoder
+        - convertor runtime.ObjectConvertor
+        - creater runtime.ObjectCreater
+        - typer runtime.ObjectTyper
+        - defaulter runtime.ObjectDefaulter
+        - encodeVersion runtime.GroupVersioner
+        - decodeVersion runtime.GroupVersioner
+        - identifier runtime.Identifier
+        - originalSchemeName string
+
+        - encode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        - doEncode(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+
+        + Decode(data []byte, defaultGVK *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + EncodeWithAllocator(obj runtime.Object, w io.Writer, memAlloc runtime.MemoryAllocator) error
+        + Encode(obj runtime.Object, w io.Writer) error
+        + Identifier() runtime.Identifier
+
+    }
+    class codecIdentifier << (S,Aquamarine) >> {
+        + EncodeGV string
+        + Encoder string
+        + Name string
+
+    }
+}
+
+
+namespace yaml {
+    class SimpleMetaFactory << (S,Aquamarine) >> {
+        + Interpret(data []byte) (*schema.GroupVersionKind, error)
+
+    }
+    class yamlSerializer << (S,Aquamarine) >> {
+        + Decode(data []byte, gvk *schema.GroupVersionKind, into runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+
+    }
+}
+"runtime.Serializer" *-- "yaml.yamlSerializer"
+
+"json.MetaFactory" <|-- "yaml.SimpleMetaFactory"
+
+hide methods
+@enduml

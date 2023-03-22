@@ -1,0 +1,760 @@
+@startuml
+namespace pflag {
+    class Flag << (S,Aquamarine) >> {
+        + Name string
+        + Shorthand string
+        + Usage string
+        + Value Value
+        + DefValue string
+        + Changed bool
+        + NoOptDefVal string
+        + Deprecated string
+        + Hidden bool
+        + ShorthandDeprecated string
+        + Annotations <font color=blue>map</font>[string][]string
+
+        - defaultIsZeroValue() bool
+
+    }
+    class FlagSet << (S,Aquamarine) >> {
+        - name string
+        - parsed bool
+        - actual <font color=blue>map</font>[NormalizedName]*Flag
+        - orderedActual []*Flag
+        - sortedActual []*Flag
+        - formal <font color=blue>map</font>[NormalizedName]*Flag
+        - orderedFormal []*Flag
+        - sortedFormal []*Flag
+        - shorthands <font color=blue>map</font>[byte]*Flag
+        - args []string
+        - argsLenAtDash int
+        - errorHandling ErrorHandling
+        - output io.Writer
+        - interspersed bool
+        - normalizeNameFunc <font color=blue>func</font>(*FlagSet, string) NormalizedName
+        - addedGoFlagSets []*flag.FlagSet
+
+        + Usage <font color=blue>func</font>() 
+        + SortFlags bool
+        + ParseErrorsWhitelist ParseErrorsWhitelist
+
+        - normalizeFlagName(name string) NormalizedName
+        - lookup(name NormalizedName) *Flag
+        - getFlagType(name string, ftype string, convFunc <font color=blue>func</font>(string) (<font color=blue>interface</font>{}, error)) (<font color=blue>interface</font>{}, error)
+        - failf(format string, a ...<font color=blue>interface</font>{}) error
+        - usage() 
+        - parseLongArg(s string, args []string, fn parseFunc) ([]string, error)
+        - parseSingleShortArg(shorthands string, args []string, fn parseFunc) (string, []string, error)
+        - parseShortArg(s string, args []string, fn parseFunc) ([]string, error)
+        - parseArgs(args []string, fn parseFunc) error
+
+        + GetBool(name string) (bool, error)
+        + BoolVar(p *bool, name string, value bool, usage string) 
+        + BoolVarP(p *bool, name string, shorthand string, value bool, usage string) 
+        + Bool(name string, value bool, usage string) *bool
+        + BoolP(name string, shorthand string, value bool, usage string) *bool
+        + GetBoolSlice(name string) ([]bool, error)
+        + BoolSliceVar(p *[]bool, name string, value []bool, usage string) 
+        + BoolSliceVarP(p *[]bool, name string, shorthand string, value []bool, usage string) 
+        + BoolSlice(name string, value []bool, usage string) *[]bool
+        + BoolSliceP(name string, shorthand string, value []bool, usage string) *[]bool
+        + GetBytesHex(name string) ([]byte, error)
+        + BytesHexVar(p *[]byte, name string, value []byte, usage string) 
+        + BytesHexVarP(p *[]byte, name string, shorthand string, value []byte, usage string) 
+        + BytesHex(name string, value []byte, usage string) *[]byte
+        + BytesHexP(name string, shorthand string, value []byte, usage string) *[]byte
+        + GetBytesBase64(name string) ([]byte, error)
+        + BytesBase64Var(p *[]byte, name string, value []byte, usage string) 
+        + BytesBase64VarP(p *[]byte, name string, shorthand string, value []byte, usage string) 
+        + BytesBase64(name string, value []byte, usage string) *[]byte
+        + BytesBase64P(name string, shorthand string, value []byte, usage string) *[]byte
+        + GetCount(name string) (int, error)
+        + CountVar(p *int, name string, usage string) 
+        + CountVarP(p *int, name string, shorthand string, usage string) 
+        + Count(name string, usage string) *int
+        + CountP(name string, shorthand string, usage string) *int
+        + GetDuration(name string) (time.Duration, error)
+        + DurationVar(p *time.Duration, name string, value time.Duration, usage string) 
+        + DurationVarP(p *time.Duration, name string, shorthand string, value time.Duration, usage string) 
+        + Duration(name string, value time.Duration, usage string) *time.Duration
+        + DurationP(name string, shorthand string, value time.Duration, usage string) *time.Duration
+        + GetDurationSlice(name string) ([]time.Duration, error)
+        + DurationSliceVar(p *[]time.Duration, name string, value []time.Duration, usage string) 
+        + DurationSliceVarP(p *[]time.Duration, name string, shorthand string, value []time.Duration, usage string) 
+        + DurationSlice(name string, value []time.Duration, usage string) *[]time.Duration
+        + DurationSliceP(name string, shorthand string, value []time.Duration, usage string) *[]time.Duration
+        + SetNormalizeFunc(n <font color=blue>func</font>(*FlagSet, string) NormalizedName) 
+        + GetNormalizeFunc() <font color=blue>func</font>(*FlagSet, string) NormalizedName
+        + Output() io.Writer
+        + Name() string
+        + SetOutput(output io.Writer) 
+        + VisitAll(fn <font color=blue>func</font>(*Flag) ) 
+        + HasFlags() bool
+        + HasAvailableFlags() bool
+        + Visit(fn <font color=blue>func</font>(*Flag) ) 
+        + Lookup(name string) *Flag
+        + ShorthandLookup(name string) *Flag
+        + ArgsLenAtDash() int
+        + MarkDeprecated(name string, usageMessage string) error
+        + MarkShorthandDeprecated(name string, usageMessage string) error
+        + MarkHidden(name string) error
+        + Set(name string, value string) error
+        + SetAnnotation(name string, key string, values []string) error
+        + Changed(name string) bool
+        + PrintDefaults() 
+        + FlagUsagesWrapped(cols int) string
+        + FlagUsages() string
+        + NFlag() int
+        + Arg(i int) string
+        + NArg() int
+        + Args() []string
+        + Var(value Value, name string, usage string) 
+        + VarPF(value Value, name string, shorthand string, usage string) *Flag
+        + VarP(value Value, name string, shorthand string, usage string) 
+        + AddFlag(flag *Flag) 
+        + AddFlagSet(newSet *FlagSet) 
+        + Parse(arguments []string) error
+        + ParseAll(arguments []string, fn <font color=blue>func</font>(*Flag, string) error) error
+        + Parsed() bool
+        + SetInterspersed(interspersed bool) 
+        + Init(name string, errorHandling ErrorHandling) 
+        + GetFloat32(name string) (float32, error)
+        + Float32Var(p *float32, name string, value float32, usage string) 
+        + Float32VarP(p *float32, name string, shorthand string, value float32, usage string) 
+        + Float32(name string, value float32, usage string) *float32
+        + Float32P(name string, shorthand string, value float32, usage string) *float32
+        + GetFloat32Slice(name string) ([]float32, error)
+        + Float32SliceVar(p *[]float32, name string, value []float32, usage string) 
+        + Float32SliceVarP(p *[]float32, name string, shorthand string, value []float32, usage string) 
+        + Float32Slice(name string, value []float32, usage string) *[]float32
+        + Float32SliceP(name string, shorthand string, value []float32, usage string) *[]float32
+        + GetFloat64(name string) (float64, error)
+        + Float64Var(p *float64, name string, value float64, usage string) 
+        + Float64VarP(p *float64, name string, shorthand string, value float64, usage string) 
+        + Float64(name string, value float64, usage string) *float64
+        + Float64P(name string, shorthand string, value float64, usage string) *float64
+        + GetFloat64Slice(name string) ([]float64, error)
+        + Float64SliceVar(p *[]float64, name string, value []float64, usage string) 
+        + Float64SliceVarP(p *[]float64, name string, shorthand string, value []float64, usage string) 
+        + Float64Slice(name string, value []float64, usage string) *[]float64
+        + Float64SliceP(name string, shorthand string, value []float64, usage string) *[]float64
+        + AddGoFlag(goflag *flag.Flag) 
+        + AddGoFlagSet(newSet *flag.FlagSet) 
+        + GetInt(name string) (int, error)
+        + IntVar(p *int, name string, value int, usage string) 
+        + IntVarP(p *int, name string, shorthand string, value int, usage string) 
+        + Int(name string, value int, usage string) *int
+        + IntP(name string, shorthand string, value int, usage string) *int
+        + GetInt16(name string) (int16, error)
+        + Int16Var(p *int16, name string, value int16, usage string) 
+        + Int16VarP(p *int16, name string, shorthand string, value int16, usage string) 
+        + Int16(name string, value int16, usage string) *int16
+        + Int16P(name string, shorthand string, value int16, usage string) *int16
+        + GetInt32(name string) (int32, error)
+        + Int32Var(p *int32, name string, value int32, usage string) 
+        + Int32VarP(p *int32, name string, shorthand string, value int32, usage string) 
+        + Int32(name string, value int32, usage string) *int32
+        + Int32P(name string, shorthand string, value int32, usage string) *int32
+        + GetInt32Slice(name string) ([]int32, error)
+        + Int32SliceVar(p *[]int32, name string, value []int32, usage string) 
+        + Int32SliceVarP(p *[]int32, name string, shorthand string, value []int32, usage string) 
+        + Int32Slice(name string, value []int32, usage string) *[]int32
+        + Int32SliceP(name string, shorthand string, value []int32, usage string) *[]int32
+        + GetInt64(name string) (int64, error)
+        + Int64Var(p *int64, name string, value int64, usage string) 
+        + Int64VarP(p *int64, name string, shorthand string, value int64, usage string) 
+        + Int64(name string, value int64, usage string) *int64
+        + Int64P(name string, shorthand string, value int64, usage string) *int64
+        + GetInt64Slice(name string) ([]int64, error)
+        + Int64SliceVar(p *[]int64, name string, value []int64, usage string) 
+        + Int64SliceVarP(p *[]int64, name string, shorthand string, value []int64, usage string) 
+        + Int64Slice(name string, value []int64, usage string) *[]int64
+        + Int64SliceP(name string, shorthand string, value []int64, usage string) *[]int64
+        + GetInt8(name string) (int8, error)
+        + Int8Var(p *int8, name string, value int8, usage string) 
+        + Int8VarP(p *int8, name string, shorthand string, value int8, usage string) 
+        + Int8(name string, value int8, usage string) *int8
+        + Int8P(name string, shorthand string, value int8, usage string) *int8
+        + GetIntSlice(name string) ([]int, error)
+        + IntSliceVar(p *[]int, name string, value []int, usage string) 
+        + IntSliceVarP(p *[]int, name string, shorthand string, value []int, usage string) 
+        + IntSlice(name string, value []int, usage string) *[]int
+        + IntSliceP(name string, shorthand string, value []int, usage string) *[]int
+        + GetIP(name string) (net.IP, error)
+        + IPVar(p *net.IP, name string, value net.IP, usage string) 
+        + IPVarP(p *net.IP, name string, shorthand string, value net.IP, usage string) 
+        + IP(name string, value net.IP, usage string) *net.IP
+        + IPP(name string, shorthand string, value net.IP, usage string) *net.IP
+        + GetIPSlice(name string) ([]net.IP, error)
+        + IPSliceVar(p *[]net.IP, name string, value []net.IP, usage string) 
+        + IPSliceVarP(p *[]net.IP, name string, shorthand string, value []net.IP, usage string) 
+        + IPSlice(name string, value []net.IP, usage string) *[]net.IP
+        + IPSliceP(name string, shorthand string, value []net.IP, usage string) *[]net.IP
+        + GetIPv4Mask(name string) (net.IPMask, error)
+        + IPMaskVar(p *net.IPMask, name string, value net.IPMask, usage string) 
+        + IPMaskVarP(p *net.IPMask, name string, shorthand string, value net.IPMask, usage string) 
+        + IPMask(name string, value net.IPMask, usage string) *net.IPMask
+        + IPMaskP(name string, shorthand string, value net.IPMask, usage string) *net.IPMask
+        + GetIPNet(name string) (net.IPNet, error)
+        + IPNetVar(p *net.IPNet, name string, value net.IPNet, usage string) 
+        + IPNetVarP(p *net.IPNet, name string, shorthand string, value net.IPNet, usage string) 
+        + IPNet(name string, value net.IPNet, usage string) *net.IPNet
+        + IPNetP(name string, shorthand string, value net.IPNet, usage string) *net.IPNet
+        + GetIPNetSlice(name string) ([]net.IPNet, error)
+        + IPNetSliceVar(p *[]net.IPNet, name string, value []net.IPNet, usage string) 
+        + IPNetSliceVarP(p *[]net.IPNet, name string, shorthand string, value []net.IPNet, usage string) 
+        + IPNetSlice(name string, value []net.IPNet, usage string) *[]net.IPNet
+        + IPNetSliceP(name string, shorthand string, value []net.IPNet, usage string) *[]net.IPNet
+        + GetString(name string) (string, error)
+        + StringVar(p *string, name string, value string, usage string) 
+        + StringVarP(p *string, name string, shorthand string, value string, usage string) 
+        + String(name string, value string, usage string) *string
+        + StringP(name string, shorthand string, value string, usage string) *string
+        + GetStringArray(name string) ([]string, error)
+        + StringArrayVar(p *[]string, name string, value []string, usage string) 
+        + StringArrayVarP(p *[]string, name string, shorthand string, value []string, usage string) 
+        + StringArray(name string, value []string, usage string) *[]string
+        + StringArrayP(name string, shorthand string, value []string, usage string) *[]string
+        + GetStringSlice(name string) ([]string, error)
+        + StringSliceVar(p *[]string, name string, value []string, usage string) 
+        + StringSliceVarP(p *[]string, name string, shorthand string, value []string, usage string) 
+        + StringSlice(name string, value []string, usage string) *[]string
+        + StringSliceP(name string, shorthand string, value []string, usage string) *[]string
+        + GetStringToInt(name string) (<font color=blue>map</font>[string]int, error)
+        + StringToIntVar(p *<font color=blue>map</font>[string]int, name string, value <font color=blue>map</font>[string]int, usage string) 
+        + StringToIntVarP(p *<font color=blue>map</font>[string]int, name string, shorthand string, value <font color=blue>map</font>[string]int, usage string) 
+        + StringToInt(name string, value <font color=blue>map</font>[string]int, usage string) *<font color=blue>map</font>[string]int
+        + StringToIntP(name string, shorthand string, value <font color=blue>map</font>[string]int, usage string) *<font color=blue>map</font>[string]int
+        + GetStringToInt64(name string) (<font color=blue>map</font>[string]int64, error)
+        + StringToInt64Var(p *<font color=blue>map</font>[string]int64, name string, value <font color=blue>map</font>[string]int64, usage string) 
+        + StringToInt64VarP(p *<font color=blue>map</font>[string]int64, name string, shorthand string, value <font color=blue>map</font>[string]int64, usage string) 
+        + StringToInt64(name string, value <font color=blue>map</font>[string]int64, usage string) *<font color=blue>map</font>[string]int64
+        + StringToInt64P(name string, shorthand string, value <font color=blue>map</font>[string]int64, usage string) *<font color=blue>map</font>[string]int64
+        + GetStringToString(name string) (<font color=blue>map</font>[string]string, error)
+        + StringToStringVar(p *<font color=blue>map</font>[string]string, name string, value <font color=blue>map</font>[string]string, usage string) 
+        + StringToStringVarP(p *<font color=blue>map</font>[string]string, name string, shorthand string, value <font color=blue>map</font>[string]string, usage string) 
+        + StringToString(name string, value <font color=blue>map</font>[string]string, usage string) *<font color=blue>map</font>[string]string
+        + StringToStringP(name string, shorthand string, value <font color=blue>map</font>[string]string, usage string) *<font color=blue>map</font>[string]string
+        + GetUint(name string) (uint, error)
+        + UintVar(p *uint, name string, value uint, usage string) 
+        + UintVarP(p *uint, name string, shorthand string, value uint, usage string) 
+        + Uint(name string, value uint, usage string) *uint
+        + UintP(name string, shorthand string, value uint, usage string) *uint
+        + GetUint16(name string) (uint16, error)
+        + Uint16Var(p *uint16, name string, value uint16, usage string) 
+        + Uint16VarP(p *uint16, name string, shorthand string, value uint16, usage string) 
+        + Uint16(name string, value uint16, usage string) *uint16
+        + Uint16P(name string, shorthand string, value uint16, usage string) *uint16
+        + GetUint32(name string) (uint32, error)
+        + Uint32Var(p *uint32, name string, value uint32, usage string) 
+        + Uint32VarP(p *uint32, name string, shorthand string, value uint32, usage string) 
+        + Uint32(name string, value uint32, usage string) *uint32
+        + Uint32P(name string, shorthand string, value uint32, usage string) *uint32
+        + GetUint64(name string) (uint64, error)
+        + Uint64Var(p *uint64, name string, value uint64, usage string) 
+        + Uint64VarP(p *uint64, name string, shorthand string, value uint64, usage string) 
+        + Uint64(name string, value uint64, usage string) *uint64
+        + Uint64P(name string, shorthand string, value uint64, usage string) *uint64
+        + GetUint8(name string) (uint8, error)
+        + Uint8Var(p *uint8, name string, value uint8, usage string) 
+        + Uint8VarP(p *uint8, name string, shorthand string, value uint8, usage string) 
+        + Uint8(name string, value uint8, usage string) *uint8
+        + Uint8P(name string, shorthand string, value uint8, usage string) *uint8
+        + GetUintSlice(name string) ([]uint, error)
+        + UintSliceVar(p *[]uint, name string, value []uint, usage string) 
+        + UintSliceVarP(p *[]uint, name string, shorthand string, value []uint, usage string) 
+        + UintSlice(name string, value []uint, usage string) *[]uint
+        + UintSliceP(name string, shorthand string, value []uint, usage string) *[]uint
+
+    }
+    class ParseErrorsWhitelist << (S,Aquamarine) >> {
+        + UnknownFlags bool
+
+    }
+    interface SliceValue  {
+        + Append( string) error
+        + Replace( []string) error
+        + GetSlice() []string
+
+    }
+    interface Value  {
+        + String() string
+        + Set( string) error
+        + Type() string
+
+    }
+    interface boolFlag  {
+        + IsBoolFlag() bool
+
+    }
+    class boolSliceValue << (S,Aquamarine) >> {
+        - value *[]bool
+        - changed bool
+
+        - fromString(val string) (bool, error)
+        - toString(val bool) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class boolValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+        + IsBoolFlag() bool
+
+    }
+    class bytesBase64Value << (S,Aquamarine) >> {
+        + String() string
+        + Set(value string) error
+        + Type() string
+
+    }
+    class bytesHexValue << (S,Aquamarine) >> {
+        + String() string
+        + Set(value string) error
+        + Type() string
+
+    }
+    class countValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class durationSliceValue << (S,Aquamarine) >> {
+        - value *[]time.Duration
+        - changed bool
+
+        - fromString(val string) (time.Duration, error)
+        - toString(val time.Duration) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class durationValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class flagValueWrapper << (S,Aquamarine) >> {
+        - inner flag.Value
+        - flagType string
+
+        + String() string
+        + Set(s string) error
+        + Type() string
+
+    }
+    class float32SliceValue << (S,Aquamarine) >> {
+        - value *[]float32
+        - changed bool
+
+        - fromString(val string) (float32, error)
+        - toString(val float32) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class float32Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class float64SliceValue << (S,Aquamarine) >> {
+        - value *[]float64
+        - changed bool
+
+        - fromString(val string) (float64, error)
+        - toString(val float64) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class float64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    interface goBoolFlag  {
+        + IsBoolFlag() bool
+
+    }
+    class int16Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class int32SliceValue << (S,Aquamarine) >> {
+        - value *[]int32
+        - changed bool
+
+        - fromString(val string) (int32, error)
+        - toString(val int32) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class int32Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class int64SliceValue << (S,Aquamarine) >> {
+        - value *[]int64
+        - changed bool
+
+        - fromString(val string) (int64, error)
+        - toString(val int64) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class int64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class int8Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class intSliceValue << (S,Aquamarine) >> {
+        - value *[]int
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class intValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class ipMaskValue << (S,Aquamarine) >> {
+        + String() string
+        + Set(s string) error
+        + Type() string
+
+    }
+    class ipNetSliceValue << (S,Aquamarine) >> {
+        - value *[]net.IPNet
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+
+    }
+    class ipNetValue << (S,Aquamarine) >> {
+        + String() string
+        + Set(value string) error
+        + Type() string
+
+    }
+    class ipSliceValue << (S,Aquamarine) >> {
+        - value *[]net.IP
+        - changed bool
+
+        - fromString(val string) (net.IP, error)
+        - toString(val net.IP) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class ipValue << (S,Aquamarine) >> {
+        + String() string
+        + Set(s string) error
+        + Type() string
+
+    }
+    class pflag.ErrorHandling << (T, #FF7700) >>  {
+    }
+    class pflag.NormalizedName << (T, #FF7700) >>  {
+    }
+    class pflag.boolValue << (T, #FF7700) >>  {
+    }
+    class pflag.bytesBase64Value << (T, #FF7700) >>  {
+    }
+    class pflag.bytesHexValue << (T, #FF7700) >>  {
+    }
+    class pflag.countValue << (T, #FF7700) >>  {
+    }
+    class pflag.durationValue << (T, #FF7700) >>  {
+    }
+    class pflag.float32Value << (T, #FF7700) >>  {
+    }
+    class pflag.float64Value << (T, #FF7700) >>  {
+    }
+    class pflag.int16Value << (T, #FF7700) >>  {
+    }
+    class pflag.int32Value << (T, #FF7700) >>  {
+    }
+    class pflag.int64Value << (T, #FF7700) >>  {
+    }
+    class pflag.int8Value << (T, #FF7700) >>  {
+    }
+    class pflag.intValue << (T, #FF7700) >>  {
+    }
+    class pflag.ipMaskValue << (T, #FF7700) >>  {
+    }
+    class pflag.ipNetValue << (T, #FF7700) >>  {
+    }
+    class pflag.ipValue << (T, #FF7700) >>  {
+    }
+    class pflag.parseFunc << (T, #FF7700) >>  {
+    }
+    class pflag.stringValue << (T, #FF7700) >>  {
+    }
+    class pflag.uint16Value << (T, #FF7700) >>  {
+    }
+    class pflag.uint32Value << (T, #FF7700) >>  {
+    }
+    class pflag.uint64Value << (T, #FF7700) >>  {
+    }
+    class pflag.uint8Value << (T, #FF7700) >>  {
+    }
+    class pflag.uintValue << (T, #FF7700) >>  {
+    }
+    class stringArrayValue << (S,Aquamarine) >> {
+        - value *[]string
+        - changed bool
+
+        + Set(val string) error
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+        + Type() string
+        + String() string
+
+    }
+    class stringSliceValue << (S,Aquamarine) >> {
+        - value *[]string
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class stringToInt64Value << (S,Aquamarine) >> {
+        - value *<font color=blue>map</font>[string]int64
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+
+    }
+    class stringToIntValue << (S,Aquamarine) >> {
+        - value *<font color=blue>map</font>[string]int
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+
+    }
+    class stringToStringValue << (S,Aquamarine) >> {
+        - value *<font color=blue>map</font>[string]string
+        - changed bool
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+
+    }
+    class stringValue << (S,Aquamarine) >> {
+        + Set(val string) error
+        + Type() string
+        + String() string
+
+    }
+    class uint16Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class uint32Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class uint64Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class uint8Value << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class uintSliceValue << (S,Aquamarine) >> {
+        - value *[]uint
+        - changed bool
+
+        - fromString(val string) (uint, error)
+        - toString(val uint) string
+
+        + Set(val string) error
+        + Type() string
+        + String() string
+        + Append(val string) error
+        + Replace(val []string) error
+        + GetSlice() []string
+
+    }
+    class uintValue << (S,Aquamarine) >> {
+        + Set(s string) error
+        + Type() string
+        + String() string
+
+    }
+    class "net.IP" as netIP {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "net.IPMask" as netIPMask {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "net.IPNet" as netIPNet {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "time.Duration" as timeDuration {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"pflag.Value" *-- "pflag.boolFlag"
+
+"pflag.SliceValue" <|-- "pflag.boolSliceValue"
+"pflag.Value" <|-- "pflag.boolSliceValue"
+"pflag.Value" <|-- "pflag.boolValue"
+"pflag.boolFlag" <|-- "pflag.boolValue"
+"pflag.goBoolFlag" <|-- "pflag.boolValue"
+"pflag.Value" <|-- "pflag.bytesBase64Value"
+"pflag.Value" <|-- "pflag.bytesHexValue"
+"pflag.Value" <|-- "pflag.countValue"
+"pflag.SliceValue" <|-- "pflag.durationSliceValue"
+"pflag.Value" <|-- "pflag.durationSliceValue"
+"pflag.Value" <|-- "pflag.durationValue"
+"pflag.Value" <|-- "pflag.flagValueWrapper"
+"pflag.SliceValue" <|-- "pflag.float32SliceValue"
+"pflag.Value" <|-- "pflag.float32SliceValue"
+"pflag.Value" <|-- "pflag.float32Value"
+"pflag.SliceValue" <|-- "pflag.float64SliceValue"
+"pflag.Value" <|-- "pflag.float64SliceValue"
+"pflag.Value" <|-- "pflag.float64Value"
+"pflag.Value" <|-- "pflag.int16Value"
+"pflag.SliceValue" <|-- "pflag.int32SliceValue"
+"pflag.Value" <|-- "pflag.int32SliceValue"
+"pflag.Value" <|-- "pflag.int32Value"
+"pflag.SliceValue" <|-- "pflag.int64SliceValue"
+"pflag.Value" <|-- "pflag.int64SliceValue"
+"pflag.Value" <|-- "pflag.int64Value"
+"pflag.Value" <|-- "pflag.int8Value"
+"pflag.SliceValue" <|-- "pflag.intSliceValue"
+"pflag.Value" <|-- "pflag.intSliceValue"
+"pflag.Value" <|-- "pflag.intValue"
+"pflag.Value" <|-- "pflag.ipMaskValue"
+"pflag.Value" <|-- "pflag.ipNetSliceValue"
+"pflag.Value" <|-- "pflag.ipNetValue"
+"pflag.SliceValue" <|-- "pflag.ipSliceValue"
+"pflag.Value" <|-- "pflag.ipSliceValue"
+"pflag.Value" <|-- "pflag.ipValue"
+"pflag.SliceValue" <|-- "pflag.stringArrayValue"
+"pflag.Value" <|-- "pflag.stringArrayValue"
+"pflag.SliceValue" <|-- "pflag.stringSliceValue"
+"pflag.Value" <|-- "pflag.stringSliceValue"
+"pflag.Value" <|-- "pflag.stringToInt64Value"
+"pflag.Value" <|-- "pflag.stringToIntValue"
+"pflag.Value" <|-- "pflag.stringToStringValue"
+"pflag.Value" <|-- "pflag.stringValue"
+"pflag.Value" <|-- "pflag.uint16Value"
+"pflag.Value" <|-- "pflag.uint32Value"
+"pflag.Value" <|-- "pflag.uint64Value"
+"pflag.Value" <|-- "pflag.uint8Value"
+"pflag.SliceValue" <|-- "pflag.uintSliceValue"
+"pflag.Value" <|-- "pflag.uintSliceValue"
+"pflag.Value" <|-- "pflag.uintValue"
+
+"__builtin__.[]byte" #.. "pflag.bytesBase64Value"
+"__builtin__.[]byte" #.. "pflag.bytesHexValue"
+"__builtin__.bool" #.. "pflag.boolValue"
+"__builtin__.float32" #.. "pflag.float32Value"
+"__builtin__.float64" #.. "pflag.float64Value"
+"__builtin__.int" #.. "pflag.ErrorHandling"
+"__builtin__.int" #.. "pflag.countValue"
+"__builtin__.int" #.. "pflag.intValue"
+"__builtin__.int16" #.. "pflag.int16Value"
+"__builtin__.int32" #.. "pflag.int32Value"
+"__builtin__.int64" #.. "pflag.int64Value"
+"__builtin__.int8" #.. "pflag.int8Value"
+"__builtin__.string" #.. "pflag.NormalizedName"
+"__builtin__.string" #.. "pflag.stringValue"
+"__builtin__.uint" #.. "pflag.uintValue"
+"__builtin__.uint16" #.. "pflag.uint16Value"
+"__builtin__.uint32" #.. "pflag.uint32Value"
+"__builtin__.uint64" #.. "pflag.uint64Value"
+"__builtin__.uint8" #.. "pflag.uint8Value"
+"pflag.<font color=blue>func</font>(*Flag, string) error" #.. "pflag.parseFunc"
+"pflag.netIP" #.. "pflag.ipValue"
+"pflag.netIPMask" #.. "pflag.ipMaskValue"
+"pflag.netIPNet" #.. "pflag.ipNetValue"
+"pflag.timeDuration" #.. "pflag.durationValue"
+@enduml

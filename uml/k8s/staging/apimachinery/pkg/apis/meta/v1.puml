@@ -1,0 +1,1478 @@
+@startuml
+namespace unstructured {
+    class Unstructured << (S,Aquamarine) >> {
+        + Object <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+
+        - setNestedField(value <font color=blue>interface</font>{}, fields ...string) 
+        - setNestedStringSlice(value []string, fields ...string) 
+        - setNestedSlice(value []<font color=blue>interface</font>{}, fields ...string) 
+        - setNestedMap(value <font color=blue>map</font>[string]string, fields ...string) 
+
+        + GetObjectKind() schema.ObjectKind
+        + IsList() bool
+        + ToList() (*UnstructuredList, error)
+        + EachListItem(fn <font color=blue>func</font>(runtime.Object) error) error
+        + UnstructuredContent() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + SetUnstructuredContent(content <font color=blue>map</font>[string]<font color=blue>interface</font>{}) 
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + NewEmptyInstance() runtime.Unstructured
+        + DeepCopy() *Unstructured
+        + GetOwnerReferences() []v1.OwnerReference
+        + SetOwnerReferences(references []v1.OwnerReference) 
+        + GetAPIVersion() string
+        + SetAPIVersion(version string) 
+        + GetKind() string
+        + SetKind(kind string) 
+        + GetNamespace() string
+        + SetNamespace(namespace string) 
+        + GetName() string
+        + SetName(name string) 
+        + GetGenerateName() string
+        + SetGenerateName(generateName string) 
+        + GetUID() types.UID
+        + SetUID(uid types.UID) 
+        + GetResourceVersion() string
+        + SetResourceVersion(resourceVersion string) 
+        + GetGeneration() int64
+        + SetGeneration(generation int64) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetContinue() string
+        + SetContinue(c string) 
+        + GetRemainingItemCount() *int64
+        + SetRemainingItemCount(c *int64) 
+        + GetCreationTimestamp() v1.Time
+        + SetCreationTimestamp(timestamp v1.Time) 
+        + GetDeletionTimestamp() *v1.Time
+        + SetDeletionTimestamp(timestamp *v1.Time) 
+        + GetDeletionGracePeriodSeconds() *int64
+        + SetDeletionGracePeriodSeconds(deletionGracePeriodSeconds *int64) 
+        + GetLabels() <font color=blue>map</font>[string]string
+        + SetLabels(labels <font color=blue>map</font>[string]string) 
+        + GetAnnotations() <font color=blue>map</font>[string]string
+        + SetAnnotations(annotations <font color=blue>map</font>[string]string) 
+        + SetGroupVersionKind(gvk schema.GroupVersionKind) 
+        + GroupVersionKind() schema.GroupVersionKind
+        + GetFinalizers() []string
+        + SetFinalizers(finalizers []string) 
+        + GetManagedFields() []v1.ManagedFieldsEntry
+        + SetManagedFields(managedFields []v1.ManagedFieldsEntry) 
+        + DeepCopyInto(out *Unstructured) 
+        + DeepCopyObject() runtime.Object
+
+    }
+    class UnstructuredList << (S,Aquamarine) >> {
+        + Object <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + Items []Unstructured
+
+        - setNestedField(value <font color=blue>interface</font>{}, fields ...string) 
+
+        + GetObjectKind() schema.ObjectKind
+        + IsList() bool
+        + EachListItem(fn <font color=blue>func</font>(runtime.Object) error) error
+        + NewEmptyInstance() runtime.Unstructured
+        + UnstructuredContent() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + SetUnstructuredContent(content <font color=blue>map</font>[string]<font color=blue>interface</font>{}) 
+        + DeepCopy() *UnstructuredList
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + GetAPIVersion() string
+        + SetAPIVersion(version string) 
+        + GetKind() string
+        + SetKind(kind string) 
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetContinue() string
+        + SetContinue(c string) 
+        + GetRemainingItemCount() *int64
+        + SetRemainingItemCount(c *int64) 
+        + SetGroupVersionKind(gvk schema.GroupVersionKind) 
+        + GroupVersionKind() schema.GroupVersionKind
+        + DeepCopyInto(out *UnstructuredList) 
+        + DeepCopyObject() runtime.Object
+
+    }
+    class jsonFallbackEncoder << (S,Aquamarine) >> {
+        - encoder runtime.Encoder
+        - identifier runtime.Identifier
+
+        + Encode(obj runtime.Object, w io.Writer) error
+        + Identifier() runtime.Identifier
+
+    }
+    class unstructuredJSONScheme << (S,Aquamarine) >> {
+        - doEncode(obj runtime.Object, w io.Writer) error
+        - decode(data []byte) (runtime.Object, error)
+        - decodeInto(data []byte, obj runtime.Object) error
+        - decodeToUnstructured(data []byte, unstruct *Unstructured) error
+        - decodeToList(data []byte, list *UnstructuredList) error
+
+        + Decode(data []byte, _ *schema.GroupVersionKind, obj runtime.Object) (runtime.Object, *schema.GroupVersionKind, error)
+        + Encode(obj runtime.Object, w io.Writer) error
+        + Identifier() runtime.Identifier
+
+    }
+}
+
+"v1.Common" <|-- "unstructured.Unstructured"
+"v1.ListInterface" <|-- "unstructured.Unstructured"
+"v1.Object" <|-- "unstructured.Unstructured"
+"v1.Type" <|-- "unstructured.Unstructured"
+"v1.Common" <|-- "unstructured.UnstructuredList"
+"v1.ListInterface" <|-- "unstructured.UnstructuredList"
+"v1.Type" <|-- "unstructured.UnstructuredList"
+
+namespace unstructuredscheme {
+    class unstructuredCreator << (S,Aquamarine) >> {
+        + New(kind schema.GroupVersionKind) (runtime.Object, error)
+
+    }
+    class unstructuredDefaulter << (S,Aquamarine) >> {
+        + Default(in runtime.Object) 
+
+    }
+    class unstructuredNegotiatedSerializer << (S,Aquamarine) >> {
+        - scheme *runtime.Scheme
+        - typer runtime.ObjectTyper
+        - creator runtime.ObjectCreater
+
+        + SupportedMediaTypes() []runtime.SerializerInfo
+        + EncoderForVersion(encoder runtime.Encoder, gv runtime.GroupVersioner) runtime.Encoder
+        + DecoderToVersion(decoder runtime.Decoder, gv runtime.GroupVersioner) runtime.Decoder
+
+    }
+    class unstructuredObjectTyper << (S,Aquamarine) >> {
+        + ObjectKinds(obj runtime.Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+}
+
+
+namespace v1 {
+    class APIGroup << (S,Aquamarine) >> {
+        + Name string
+        + Versions []GroupVersionForDiscovery
+        + PreferredVersion GroupVersionForDiscovery
+        + ServerAddressByClientCIDRs []ServerAddressByClientCIDR
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *APIGroup) 
+        + DeepCopy() *APIGroup
+        + DeepCopyObject() runtime.Object
+
+    }
+    class APIGroupList << (S,Aquamarine) >> {
+        + Groups []APIGroup
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *APIGroupList) 
+        + DeepCopy() *APIGroupList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class APIResource << (S,Aquamarine) >> {
+        + Name string
+        + SingularName string
+        + Namespaced bool
+        + Group string
+        + Version string
+        + Kind string
+        + Verbs Verbs
+        + ShortNames []string
+        + Categories []string
+        + StorageVersionHash string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *APIResource) 
+        + DeepCopy() *APIResource
+
+    }
+    class APIResourceList << (S,Aquamarine) >> {
+        + GroupVersion string
+        + APIResources []APIResource
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *APIResourceList) 
+        + DeepCopy() *APIResourceList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class APIVersions << (S,Aquamarine) >> {
+        + Versions []string
+        + ServerAddressByClientCIDRs []ServerAddressByClientCIDR
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + GoString() string
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *APIVersions) 
+        + DeepCopy() *APIVersions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class ApplyOptions << (S,Aquamarine) >> {
+        + DryRun []string
+        + Force bool
+        + FieldManager string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + ToPatchOptions() PatchOptions
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ApplyOptions) 
+        + DeepCopy() *ApplyOptions
+
+    }
+    interface Common  {
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+
+    }
+    class Condition << (S,Aquamarine) >> {
+        + Type string
+        + Status ConditionStatus
+        + ObservedGeneration int64
+        + LastTransitionTime Time
+        + Reason string
+        + Message string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *Condition) 
+        + DeepCopy() *Condition
+
+    }
+    class CreateOptions << (S,Aquamarine) >> {
+        + DryRun []string
+        + FieldManager string
+        + FieldValidation string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *CreateOptions) 
+        + DeepCopy() *CreateOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class DeleteOptions << (S,Aquamarine) >> {
+        + GracePeriodSeconds *int64
+        + Preconditions *Preconditions
+        + OrphanDependents *bool
+        + PropagationPolicy *DeletionPropagation
+        + DryRun []string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *DeleteOptions) 
+        + DeepCopy() *DeleteOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class Duration << (S,Aquamarine) >> {
+        + UnmarshalJSON(b []byte) error
+        + MarshalJSON() ([]byte, error)
+        + ToUnstructured() <font color=blue>interface</font>{}
+        + OpenAPISchemaType() []string
+        + OpenAPISchemaFormat() string
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + DeepCopyInto(out *Duration) 
+        + DeepCopy() *Duration
+
+    }
+    class FieldsV1 << (S,Aquamarine) >> {
+        + Raw []byte
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(b []byte) error
+        + String() string
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *FieldsV1) 
+        + DeepCopy() *FieldsV1
+
+    }
+    class GetOptions << (S,Aquamarine) >> {
+        + ResourceVersion string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *GetOptions) 
+        + DeepCopy() *GetOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class GroupKind << (S,Aquamarine) >> {
+        + Group string
+        + Kind string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + DeepCopyInto(out *GroupKind) 
+        + DeepCopy() *GroupKind
+
+    }
+    class GroupResource << (S,Aquamarine) >> {
+        + Group string
+        + Resource string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + DeepCopyInto(out *GroupResource) 
+        + DeepCopy() *GroupResource
+
+    }
+    class GroupVersion << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+
+        - unmarshal(value []byte) error
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + Empty() bool
+        + String() string
+        + MarshalJSON() ([]byte, error)
+        + UnmarshalJSON(value []byte) error
+        + UnmarshalText(value []byte) error
+        + DeepCopyInto(out *GroupVersion) 
+        + DeepCopy() *GroupVersion
+
+    }
+    class GroupVersionForDiscovery << (S,Aquamarine) >> {
+        + GroupVersion string
+        + Version string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *GroupVersionForDiscovery) 
+        + DeepCopy() *GroupVersionForDiscovery
+
+    }
+    class GroupVersionKind << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+        + Kind string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + DeepCopyInto(out *GroupVersionKind) 
+        + DeepCopy() *GroupVersionKind
+
+    }
+    class GroupVersionResource << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+        + Resource string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + DeepCopyInto(out *GroupVersionResource) 
+        + DeepCopy() *GroupVersionResource
+
+    }
+    class InternalEvent << (S,Aquamarine) >> {
+        + GetObjectKind() schema.ObjectKind
+        + DeepCopyObject() runtime.Object
+        + DeepCopyInto(out *InternalEvent) 
+        + DeepCopy() *InternalEvent
+
+    }
+    class LabelSelector << (S,Aquamarine) >> {
+        + MatchLabels <font color=blue>map</font>[string]string
+        + MatchExpressions []LabelSelectorRequirement
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *LabelSelector) 
+        + DeepCopy() *LabelSelector
+
+    }
+    class LabelSelectorRequirement << (S,Aquamarine) >> {
+        + Key string
+        + Operator LabelSelectorOperator
+        + Values []string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *LabelSelectorRequirement) 
+        + DeepCopy() *LabelSelectorRequirement
+
+    }
+    class List << (S,Aquamarine) >> {
+        + Items []runtime.RawExtension
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *List) 
+        + DeepCopy() *List
+        + DeepCopyObject() runtime.Object
+
+    }
+    interface ListInterface  {
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetContinue() string
+        + SetContinue(c string) 
+        + GetRemainingItemCount() *int64
+        + SetRemainingItemCount(c *int64) 
+
+    }
+    class ListMeta << (S,Aquamarine) >> {
+        + SelfLink string
+        + ResourceVersion string
+        + Continue string
+        + RemainingItemCount *int64
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetContinue() string
+        + SetContinue(c string) 
+        + GetRemainingItemCount() *int64
+        + SetRemainingItemCount(c *int64) 
+        + GetListMeta() ListInterface
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ListMeta) 
+        + DeepCopy() *ListMeta
+
+    }
+    interface ListMetaAccessor  {
+        + GetListMeta() ListInterface
+
+    }
+    class ListOptions << (S,Aquamarine) >> {
+        + LabelSelector string
+        + FieldSelector string
+        + Watch bool
+        + AllowWatchBookmarks bool
+        + ResourceVersion string
+        + ResourceVersionMatch ResourceVersionMatch
+        + TimeoutSeconds *int64
+        + Limit int64
+        + Continue string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ListOptions) 
+        + DeepCopy() *ListOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class ManagedFieldsEntry << (S,Aquamarine) >> {
+        + Manager string
+        + Operation ManagedFieldsOperationType
+        + APIVersion string
+        + Time *Time
+        + FieldsType string
+        + FieldsV1 *FieldsV1
+        + Subresource string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ManagedFieldsEntry) 
+        + DeepCopy() *ManagedFieldsEntry
+
+    }
+    class MicroTime << (S,Aquamarine) >> {
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + DeepCopyInto(out *MicroTime) 
+        + IsZero() bool
+        + Before(u *MicroTime) bool
+        + Equal(u *MicroTime) bool
+        + BeforeTime(u *Time) bool
+        + EqualTime(u *Time) bool
+        + UnmarshalJSON(b []byte) error
+        + UnmarshalQueryParameter(str string) error
+        + MarshalJSON() ([]byte, error)
+        + OpenAPISchemaType() []string
+        + OpenAPISchemaFormat() string
+        + MarshalQueryParameter() (string, error)
+        + Fuzz(c gofuzz.Continue) 
+        + ProtoMicroTime() *Timestamp
+        + Size() int
+        + Unmarshal(data []byte) error
+        + Marshal() ([]byte, error)
+        + MarshalTo(data []byte) (int, error)
+        + MarshalToSizedBuffer(data []byte) (int, error)
+        + DeepCopy() *MicroTime
+
+    }
+    interface Object  {
+        + GetNamespace() string
+        + SetNamespace(namespace string) 
+        + GetName() string
+        + SetName(name string) 
+        + GetGenerateName() string
+        + SetGenerateName(name string) 
+        + GetUID() types.UID
+        + SetUID(uid types.UID) 
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetGeneration() int64
+        + SetGeneration(generation int64) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetCreationTimestamp() Time
+        + SetCreationTimestamp(timestamp Time) 
+        + GetDeletionTimestamp() *Time
+        + SetDeletionTimestamp(timestamp *Time) 
+        + GetDeletionGracePeriodSeconds() *int64
+        + SetDeletionGracePeriodSeconds( *int64) 
+        + GetLabels() <font color=blue>map</font>[string]string
+        + SetLabels(labels <font color=blue>map</font>[string]string) 
+        + GetAnnotations() <font color=blue>map</font>[string]string
+        + SetAnnotations(annotations <font color=blue>map</font>[string]string) 
+        + GetFinalizers() []string
+        + SetFinalizers(finalizers []string) 
+        + GetOwnerReferences() []OwnerReference
+        + SetOwnerReferences( []OwnerReference) 
+        + GetManagedFields() []ManagedFieldsEntry
+        + SetManagedFields(managedFields []ManagedFieldsEntry) 
+
+    }
+    class ObjectMeta << (S,Aquamarine) >> {
+        + Name string
+        + GenerateName string
+        + Namespace string
+        + SelfLink string
+        + UID types.UID
+        + ResourceVersion string
+        + Generation int64
+        + CreationTimestamp Time
+        + DeletionTimestamp *Time
+        + DeletionGracePeriodSeconds *int64
+        + Labels <font color=blue>map</font>[string]string
+        + Annotations <font color=blue>map</font>[string]string
+        + OwnerReferences []OwnerReference
+        + Finalizers []string
+        + ManagedFields []ManagedFieldsEntry
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + GetObjectMeta() Object
+        + GetNamespace() string
+        + SetNamespace(namespace string) 
+        + GetName() string
+        + SetName(name string) 
+        + GetGenerateName() string
+        + SetGenerateName(generateName string) 
+        + GetUID() types.UID
+        + SetUID(uid types.UID) 
+        + GetResourceVersion() string
+        + SetResourceVersion(version string) 
+        + GetGeneration() int64
+        + SetGeneration(generation int64) 
+        + GetSelfLink() string
+        + SetSelfLink(selfLink string) 
+        + GetCreationTimestamp() Time
+        + SetCreationTimestamp(creationTimestamp Time) 
+        + GetDeletionTimestamp() *Time
+        + SetDeletionTimestamp(deletionTimestamp *Time) 
+        + GetDeletionGracePeriodSeconds() *int64
+        + SetDeletionGracePeriodSeconds(deletionGracePeriodSeconds *int64) 
+        + GetLabels() <font color=blue>map</font>[string]string
+        + SetLabels(labels <font color=blue>map</font>[string]string) 
+        + GetAnnotations() <font color=blue>map</font>[string]string
+        + SetAnnotations(annotations <font color=blue>map</font>[string]string) 
+        + GetFinalizers() []string
+        + SetFinalizers(finalizers []string) 
+        + GetOwnerReferences() []OwnerReference
+        + SetOwnerReferences(references []OwnerReference) 
+        + GetManagedFields() []ManagedFieldsEntry
+        + SetManagedFields(managedFields []ManagedFieldsEntry) 
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ObjectMeta) 
+        + DeepCopy() *ObjectMeta
+
+    }
+    interface ObjectMetaAccessor  {
+        + GetObjectMeta() Object
+
+    }
+    class OwnerReference << (S,Aquamarine) >> {
+        + APIVersion string
+        + Kind string
+        + Name string
+        + UID types.UID
+        + Controller *bool
+        + BlockOwnerDeletion *bool
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *OwnerReference) 
+        + DeepCopy() *OwnerReference
+
+    }
+    class PartialObjectMetadata << (S,Aquamarine) >> {
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *PartialObjectMetadata) 
+        + DeepCopy() *PartialObjectMetadata
+        + DeepCopyObject() runtime.Object
+
+    }
+    class PartialObjectMetadataList << (S,Aquamarine) >> {
+        + Items []PartialObjectMetadata
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *PartialObjectMetadataList) 
+        + DeepCopy() *PartialObjectMetadataList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class Patch << (S,Aquamarine) >> {
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *Patch) 
+        + DeepCopy() *Patch
+
+    }
+    class PatchOptions << (S,Aquamarine) >> {
+        + DryRun []string
+        + Force *bool
+        + FieldManager string
+        + FieldValidation string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *PatchOptions) 
+        + DeepCopy() *PatchOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class Preconditions << (S,Aquamarine) >> {
+        + UID *types.UID
+        + ResourceVersion *string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *Preconditions) 
+        + DeepCopy() *Preconditions
+
+    }
+    class RootPaths << (S,Aquamarine) >> {
+        + Paths []string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *RootPaths) 
+        + DeepCopy() *RootPaths
+
+    }
+    class ServerAddressByClientCIDR << (S,Aquamarine) >> {
+        + ClientCIDR string
+        + ServerAddress string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *ServerAddressByClientCIDR) 
+        + DeepCopy() *ServerAddressByClientCIDR
+
+    }
+    class Status << (S,Aquamarine) >> {
+        + Status string
+        + Message string
+        + Reason StatusReason
+        + Details *StatusDetails
+        + Code int32
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *Status) 
+        + DeepCopy() *Status
+        + DeepCopyObject() runtime.Object
+
+    }
+    class StatusCause << (S,Aquamarine) >> {
+        + Type CauseType
+        + Message string
+        + Field string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *StatusCause) 
+        + DeepCopy() *StatusCause
+
+    }
+    class StatusDetails << (S,Aquamarine) >> {
+        + Name string
+        + Group string
+        + Kind string
+        + UID types.UID
+        + Causes []StatusCause
+        + RetryAfterSeconds int32
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *StatusDetails) 
+        + DeepCopy() *StatusDetails
+
+    }
+    class Table << (S,Aquamarine) >> {
+        + ColumnDefinitions []TableColumnDefinition
+        + Rows []TableRow
+
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *Table) 
+        + DeepCopy() *Table
+        + DeepCopyObject() runtime.Object
+
+    }
+    class TableColumnDefinition << (S,Aquamarine) >> {
+        + Name string
+        + Type string
+        + Format string
+        + Description string
+        + Priority int32
+
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *TableColumnDefinition) 
+        + DeepCopy() *TableColumnDefinition
+
+    }
+    class TableOptions << (S,Aquamarine) >> {
+        + NoHeaders bool
+        + IncludeObject IncludeObjectPolicy
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *TableOptions) 
+        + DeepCopy() *TableOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class TableRow << (S,Aquamarine) >> {
+        + Cells []<font color=blue>interface</font>{}
+        + Conditions []TableRowCondition
+        + Object runtime.RawExtension
+
+        + DeepCopy() *TableRow
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *TableRow) 
+
+    }
+    class TableRowCondition << (S,Aquamarine) >> {
+        + Type RowConditionType
+        + Status ConditionStatus
+        + Reason string
+        + Message string
+
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *TableRowCondition) 
+        + DeepCopy() *TableRowCondition
+
+    }
+    class Time << (S,Aquamarine) >> {
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + DeepCopyInto(out *Time) 
+        + IsZero() bool
+        + Before(u *Time) bool
+        + Equal(u *Time) bool
+        + Rfc3339Copy() Time
+        + UnmarshalJSON(b []byte) error
+        + UnmarshalQueryParameter(str string) error
+        + MarshalJSON() ([]byte, error)
+        + ToUnstructured() <font color=blue>interface</font>{}
+        + OpenAPISchemaType() []string
+        + OpenAPISchemaFormat() string
+        + MarshalQueryParameter() (string, error)
+        + Fuzz(c gofuzz.Continue) 
+        + ProtoTime() *Timestamp
+        + Size() int
+        + Unmarshal(data []byte) error
+        + Marshal() ([]byte, error)
+        + MarshalTo(data []byte) (int, error)
+        + MarshalToSizedBuffer(data []byte) (int, error)
+        + DeepCopy() *Time
+
+    }
+    class Timestamp << (S,Aquamarine) >> {
+        + Seconds int64
+        + Nanos int32
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + DeepCopyInto(out *Timestamp) 
+        + DeepCopy() *Timestamp
+
+    }
+    interface Type  {
+        + GetAPIVersion() string
+        + SetAPIVersion(version string) 
+        + GetKind() string
+        + SetKind(kind string) 
+
+    }
+    class TypeMeta << (S,Aquamarine) >> {
+        + Kind string
+        + APIVersion string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + GetObjectKind() schema.ObjectKind
+        + SetGroupVersionKind(gvk schema.GroupVersionKind) 
+        + GroupVersionKind() schema.GroupVersionKind
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+
+    }
+    class UpdateOptions << (S,Aquamarine) >> {
+        + DryRun []string
+        + FieldManager string
+        + FieldValidation string
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *UpdateOptions) 
+        + DeepCopy() *UpdateOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class Verbs << (S,Aquamarine) >> {
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + Unmarshal(dAtA []byte) error
+        + String() string
+        + DeepCopyInto(out *Verbs) 
+        + DeepCopy() Verbs
+
+    }
+    class WatchEvent << (S,Aquamarine) >> {
+        + Type string
+        + Object runtime.RawExtension
+
+        + Reset() 
+        + ProtoMessage() 
+        + Descriptor() ([]byte, []int)
+        + XXX_Unmarshal(b []byte) error
+        + XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
+        + XXX_Merge(src proto.Message) 
+        + XXX_Size() int
+        + XXX_DiscardUnknown() 
+        + Marshal() ([]byte, error)
+        + MarshalTo(dAtA []byte) (int, error)
+        + MarshalToSizedBuffer(dAtA []byte) (int, error)
+        + Size() int
+        + String() string
+        + Unmarshal(dAtA []byte) error
+        + GetObjectKind() schema.ObjectKind
+        + DeepCopyInto(out *WatchEvent) 
+        + DeepCopy() *WatchEvent
+        + DeepCopyObject() runtime.Object
+
+    }
+    class v1.CauseType << (T, #FF7700) >>  {
+    }
+    class v1.ConditionStatus << (T, #FF7700) >>  {
+    }
+    class v1.DeletionPropagation << (T, #FF7700) >>  {
+    }
+    class v1.IncludeObjectPolicy << (T, #FF7700) >>  {
+    }
+    class v1.InternalEvent << (T, #FF7700) >>  {
+    }
+    class v1.LabelSelectorOperator << (T, #FF7700) >>  {
+    }
+    class v1.ManagedFieldsOperationType << (T, #FF7700) >>  {
+    }
+    class v1.ResourceVersionMatch << (T, #FF7700) >>  {
+    }
+    class v1.RowConditionType << (T, #FF7700) >>  {
+    }
+    class v1.StatusReason << (T, #FF7700) >>  {
+    }
+    class v1.Verbs << (T, #FF7700) >>  {
+    }
+    class "watch.Event" as watchEvent {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"v1.TypeMeta" *-- "v1.APIGroup"
+"v1.TypeMeta" *-- "v1.APIGroupList"
+"v1.TypeMeta" *-- "v1.APIResourceList"
+"v1.TypeMeta" *-- "v1.APIVersions"
+"v1.TypeMeta" *-- "v1.ApplyOptions"
+"v1.TypeMeta" *-- "v1.CreateOptions"
+"v1.TypeMeta" *-- "v1.DeleteOptions"
+"time.Duration" *-- "v1.Duration"
+"v1.TypeMeta" *-- "v1.GetOptions"
+"v1.ListMeta" *-- "v1.List"
+"v1.TypeMeta" *-- "v1.List"
+"v1.TypeMeta" *-- "v1.ListOptions"
+"time.Time" *-- "v1.MicroTime"
+"v1.ObjectMeta" *-- "v1.PartialObjectMetadata"
+"v1.TypeMeta" *-- "v1.PartialObjectMetadata"
+"v1.ListMeta" *-- "v1.PartialObjectMetadataList"
+"v1.TypeMeta" *-- "v1.PartialObjectMetadataList"
+"v1.TypeMeta" *-- "v1.PatchOptions"
+"v1.ListMeta" *-- "v1.Status"
+"v1.TypeMeta" *-- "v1.Status"
+"v1.ListMeta" *-- "v1.Table"
+"v1.TypeMeta" *-- "v1.Table"
+"v1.TypeMeta" *-- "v1.TableOptions"
+"time.Time" *-- "v1.Time"
+"v1.TypeMeta" *-- "v1.UpdateOptions"
+
+"v1.Common" <|-- "v1.ListMeta"
+"v1.ListInterface" <|-- "v1.ListMeta"
+"v1.ListMetaAccessor" <|-- "v1.ListMeta"
+"v1.Common" <|-- "v1.ObjectMeta"
+"v1.Object" <|-- "v1.ObjectMeta"
+"v1.ObjectMetaAccessor" <|-- "v1.ObjectMeta"
+
+namespace validation {
+    class LabelSelectorValidationOptions << (S,Aquamarine) >> {
+        + AllowInvalidLabelValueInSelector bool
+
+    }
+}
+
+
+hide methods
+@enduml

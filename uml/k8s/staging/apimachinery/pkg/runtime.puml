@@ -539,6 +539,7 @@ namespace runtime {
 "runtime.MemoryAllocator" <|-- "runtime.SimpleAllocator"
 "runtime.ProtobufMarshaller" <|-- "runtime.TypeMeta"
 "runtime.ProtobufReverseMarshaller" <|-- "runtime.TypeMeta"
+"schema.ObjectKind" <|-- "runtime.TypeMeta"
 "runtime.ProtobufMarshaller" <|-- "runtime.Unknown"
 "runtime.ProtobufReverseMarshaller" <|-- "runtime.Unknown"
 "runtime.Decoder" <|-- "runtime.WithoutVersionDecoder"
@@ -557,11 +558,82 @@ namespace runtime {
 "runtime.ObjectVersioner" <|-- "runtime.unsafeObjectConvertor"
 "runtime.UnstructuredConverter" <|-- "runtime.unstructuredConverter"
 
-"__builtin__.string" #.. "runtime.Identifier"
-"runtime.<font color=blue>func</font>(string, string) (string, string, error)" #.. "runtime.FieldLabelConversionFunc"
-"runtime.<font color=blue>map</font>[structField]*{packageName}fieldInfo" #.. "runtime.fieldsCacheMap"
-"runtime.Serializer" #.. "runtime.Codec"
-"runtime.[]<font color=blue>func</font>(*Scheme) error" #.. "runtime.SchemeBuilder"
-"runtime.[]ObjectTyper" #.. "runtime.MultiObjectTyper"
-"runtime.[]Pair" #.. "runtime.KubeTypes"
+namespace schema {
+    class GroupKind << (S,Aquamarine) >> {
+        + Group string
+        + Kind string
+
+        + Empty() bool
+        + WithVersion(version string) GroupVersionKind
+        + String() string
+
+    }
+    class GroupResource << (S,Aquamarine) >> {
+        + Group string
+        + Resource string
+
+        + WithVersion(version string) GroupVersionResource
+        + Empty() bool
+        + String() string
+
+    }
+    class GroupVersion << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+
+        + Empty() bool
+        + String() string
+        + Identifier() string
+        + KindForGroupVersionKinds(kinds []GroupVersionKind) (GroupVersionKind, bool)
+        + WithKind(kind string) GroupVersionKind
+        + WithResource(resource string) GroupVersionResource
+
+    }
+    class GroupVersionKind << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+        + Kind string
+
+        + Empty() bool
+        + GroupKind() GroupKind
+        + GroupVersion() GroupVersion
+        + String() string
+        + ToAPIVersionAndKind() (string, string)
+
+    }
+    class GroupVersionResource << (S,Aquamarine) >> {
+        + Group string
+        + Version string
+        + Resource string
+
+        + Empty() bool
+        + GroupResource() GroupResource
+        + GroupVersion() GroupVersion
+        + String() string
+
+    }
+    class GroupVersions << (S,Aquamarine) >> {
+        + Identifier() string
+        + KindForGroupVersionKinds(kinds []GroupVersionKind) (GroupVersionKind, bool)
+
+    }
+    interface ObjectKind  {
+        + SetGroupVersionKind(kind GroupVersionKind) 
+        + GroupVersionKind() GroupVersionKind
+
+    }
+    class emptyObjectKind << (S,Aquamarine) >> {
+        + SetGroupVersionKind(gvk GroupVersionKind) 
+        + GroupVersionKind() GroupVersionKind
+
+    }
+    class schema.GroupVersions << (T, #FF7700) >>  {
+    }
+}
+
+"runtime.GroupVersioner" <|-- "schema.GroupVersion"
+"runtime.GroupVersioner" <|-- "schema.GroupVersions"
+"schema.ObjectKind" <|-- "schema.emptyObjectKind"
+
+hide methods
 @enduml
