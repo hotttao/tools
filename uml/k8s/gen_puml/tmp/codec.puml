@@ -1,5 +1,5 @@
 @startuml
-namespace runtime {
+namespace codec {
     interface CacheableObject  {
         + CacheEncode(id Identifier, encode <font color=blue>func</font>(Object, io.Writer) error, w io.Writer) error
         + GetObject() Object
@@ -136,35 +136,35 @@ namespace runtime {
         + EachListItem( <font color=blue>func</font>(Object) error) error
 
     }
-    class runtime.Codec << (T, #FF7700) >>  {
+    class codec.Codec << (T, #FF7700) >>  {
     }
-    class runtime.Identifier << (T, #FF7700) >>  {
+    class codec.Identifier << (T, #FF7700) >>  {
     }
 }
-"runtime.Encoder" *-- "runtime.EncoderWithAllocator"
-"runtime.EquivalentResourceMapper" *-- "runtime.EquivalentResourceRegistry"
-"runtime.Decoder" *-- "runtime.Serializer"
-"runtime.Encoder" *-- "runtime.Serializer"
-"runtime.Framer" *-- "runtime.StreamSerializerInfo"
-"runtime.Serializer" *-- "runtime.StreamSerializerInfo"
-"runtime.Object" *-- "runtime.Unstructured"
+"codec.Encoder" *-- "codec.EncoderWithAllocator"
+"codec.EquivalentResourceMapper" *-- "codec.EquivalentResourceRegistry"
+"codec.Decoder" *-- "codec.Serializer"
+"codec.Encoder" *-- "codec.Serializer"
+"codec.Framer" *-- "codec.StreamSerializerInfo"
+"codec.Serializer" *-- "codec.StreamSerializerInfo"
+"codec.Object" *-- "codec.Unstructured"
 
 
-namespace serializer {
+namespace codec {
     class CodecFactory << (S,Aquamarine) >> {
-        - scheme *runtime.Scheme
-        - universal runtime.Decoder
-        - accepts []runtime.SerializerInfo
-        - legacySerializer runtime.Serializer
+        - scheme *codec.Scheme
+        - universal codec.Decoder
+        - accepts []codec.SerializerInfo
+        - legacySerializer codec.Serializer
 
-        + WithoutConversion() runtime.NegotiatedSerializer
-        + SupportedMediaTypes() []runtime.SerializerInfo
-        + LegacyCodec(version ...schema.GroupVersion) runtime.Codec
-        + UniversalDeserializer() runtime.Decoder
-        + UniversalDecoder(versions ...schema.GroupVersion) runtime.Decoder
-        + CodecForVersions(encoder runtime.Encoder, decoder runtime.Decoder, encode runtime.GroupVersioner, decode runtime.GroupVersioner) runtime.Codec
-        + DecoderToVersion(decoder runtime.Decoder, gv runtime.GroupVersioner) runtime.Decoder
-        + EncoderForVersion(encoder runtime.Encoder, gv runtime.GroupVersioner) runtime.Encoder
+        + WithoutConversion() codec.NegotiatedSerializer
+        + SupportedMediaTypes() []codec.SerializerInfo
+        + LegacyCodec(version ...schema.GroupVersion) codec.Codec
+        + UniversalDeserializer() codec.Decoder
+        + UniversalDecoder(versions ...schema.GroupVersion) codec.Decoder
+        + CodecForVersions(encoder codec.Encoder, decoder codec.Decoder, encode codec.GroupVersioner, decode codec.GroupVersioner) codec.Codec
+        + DecoderToVersion(decoder codec.Decoder, gv codec.GroupVersioner) codec.Decoder
+        + EncoderForVersion(encoder codec.Encoder, gv codec.GroupVersioner) codec.Encoder
 
     }
     class CodecFactoryOptions << (S,Aquamarine) >> {
@@ -173,30 +173,67 @@ namespace serializer {
 
     }
     class WithoutConversionCodecFactory << (S,Aquamarine) >> {
-        + EncoderForVersion(serializer runtime.Encoder, version runtime.GroupVersioner) runtime.Encoder
-        + DecoderToVersion(serializer runtime.Decoder, _ runtime.GroupVersioner) runtime.Decoder
+        + EncoderForVersion(serializer codec.Encoder, version codec.GroupVersioner) codec.Encoder
+        + DecoderToVersion(serializer codec.Decoder, _ codec.GroupVersioner) codec.Decoder
 
     }
-    class serializer.CodecFactoryOptionsMutator << (T, #FF7700) >>  {
+    class codec.CodecFactoryOptionsMutator << (T, #FF7700) >>  {
     }
     class serializerType << (S,Aquamarine) >> {
         + AcceptContentTypes []string
         + ContentType string
         + FileExtensions []string
         + EncodesAsText bool
-        + Serializer runtime.Serializer
-        + PrettySerializer runtime.Serializer
-        + StrictSerializer runtime.Serializer
+        + Serializer codec.Serializer
+        + PrettySerializer codec.Serializer
+        + StrictSerializer codec.Serializer
         + AcceptStreamContentTypes []string
         + StreamContentType string
-        + Framer runtime.Framer
-        + StreamSerializer runtime.Serializer
+        + Framer codec.Framer
+        + StreamSerializer codec.Serializer
 
     }
 }
-"serializer.CodecFactory" *-- "serializer.WithoutConversionCodecFactory"
+"codec.CodecFactory" *-- "codec.WithoutConversionCodecFactory"
 
-"runtime.NegotiatedSerializer" <|-- "serializer.CodecFactory"
-"runtime.StorageSerializer" <|-- "serializer.CodecFactory"
+"codec.NegotiatedSerializer" <|-- "codec.CodecFactory"
+"codec.StorageSerializer" <|-- "codec.CodecFactory"
 
+namespace codec {
+    class codec << (S,Aquamarine) >> {
+        - encoder codec.Encoder
+        - decoder codec.Decoder
+        - convertor codec.ObjectConvertor
+        - creater codec.ObjectCreater
+        - typer codec.ObjectTyper
+        - defaulter codec.ObjectDefaulter
+        - encodeVersion codec.GroupVersioner
+        - decodeVersion codec.GroupVersioner
+        - identifier codec.Identifier
+        - originalSchemeName string
+
+        - encode(obj codec.Object, w io.Writer, memAlloc codec.MemoryAllocator) error
+        - doEncode(obj codec.Object, w io.Writer, memAlloc codec.MemoryAllocator) error
+
+        + Decode(data []byte, defaultGVK *schema.GroupVersionKind, into codec.Object) (codec.Object, *schema.GroupVersionKind, error)
+        + EncodeWithAllocator(obj codec.Object, w io.Writer, memAlloc codec.MemoryAllocator) error
+        + Encode(obj codec.Object, w io.Writer) error
+        + Identifier() codec.Identifier
+
+    }
+    class codecIdentifier << (S,Aquamarine) >> {
+        + EncodeGV string
+        + Encoder string
+        + Name string
+
+    }
+}
+
+"codec.Decoder" <|-- "codec.codec"
+"codec.Encoder" <|-- "codec.codec"
+"codec.EncoderWithAllocator" <|-- "codec.codec"
+
+"__builtin__.string" #.. "codec.Identifier"
+"codec.Serializer" #.. "codec.Codec"
+"codec.<font color=blue>func</font>(*CodecFactoryOptions) " #.. "codec.CodecFactoryOptionsMutator"
 @enduml
