@@ -3,6 +3,7 @@ staging:
         pkg:
             runtime:
                 filter: ['serializer', 'testing']
+                options: ['-hide-methods']
                 serializer:
                     filter: []
             apis:

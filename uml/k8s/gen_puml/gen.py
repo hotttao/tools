@@ -4,7 +4,7 @@ from distutils import dir_util
 
 PWD = os.path.abspath(os.path.dirname(__file__))
 PUML_COMMAND = ('goplantuml -recursive -hide-connections -show-implementations -show-compositions '
-                '-hide-methods -ignore "{filter}" {module} > {path}')
+                '{options}  -ignore "{filter}" {module} > {path}')
 PUML_COMBINE_COMMAND = ('goplantuml -hide-connections -show-implementations '
                         '-hide-methods -ignore "{filter}" {module} > {path}')
 
@@ -24,8 +24,13 @@ class GenPuml:
         def _iter_conf(root, sub_conf):
             for m, c in sub_conf.items():
                 sub_path = os.path.join(root, m)
-                if 'filter' == m:
-                    conf_map[root] = [os.path.join(root, i) for i in c]
+                if m in ['filter', 'options']:
+                    if root not in conf_map:
+                        conf_map[root] = {}
+                    if m == 'filter':
+                        conf_map[root][m] = [os.path.join(root, i) for i in c]
+                    if m == 'options':
+                        conf_map[root][m] = c
                 else:
                     _iter_conf(sub_path, c)
 
@@ -36,7 +41,8 @@ class GenPuml:
         return conf_map
 
     def get_module_param(self, module):
-        f = self.conf_staging[module]
+        f = self.conf_staging[module].get('filter', [])
+        o = self.conf_staging[module].get('options', '')
         puml_filter = ','.join(
             [os.path.join(self.staging_code_path, i) for i in f])
         puml_module = os.path.join(self.staging_code_path, module)
@@ -45,7 +51,7 @@ class GenPuml:
         if not os.path.exists(puml_dir):
             dir_util.mkpath(puml_dir)
         param = dict(filter=puml_filter, module=puml_module,
-                     path=f'{puml_path}.puml')
+                     path=f'{puml_path}.puml', options=' '.join(o))
         return param
 
     def gen_puml_command(self):
