@@ -12,3 +12,9 @@ staging:
                         filter: []
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
+
+define:
+    codec: 
+        - 'apimachinery/pkg/runtime/serializer/versioning/versioning.go'
+        - 'apimachinery/pkg/runtime/interfaces.go'
+        - 'apimachinery/pkg/runtime/serializer/codec_factory.go'

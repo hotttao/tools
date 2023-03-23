@@ -1,8 +1,9 @@
 import os
 import omegaconf
-from distutils import dir_util
+from distutils import dir_util, file_util
 
 PWD = os.path.abspath(os.path.dirname(__file__))
+TEMP_MODULE = os.path.join(PWD, 'tmp')
 PUML_COMMAND = ('goplantuml -recursive -hide-connections -show-implementations -show-compositions '
                 '{options}  -ignore "{filter}" {module} > {path}')
 PUML_COMBINE_COMMAND = ('goplantuml -hide-connections -show-implementations '
@@ -63,6 +64,31 @@ class GenPuml:
             collect.append(c)
         return collect
 
+    def gen_define_command(self):
+        collect = []
+        define = self.puml_config['define']
+        collect = []
+        for i, ms in define.items():
+            temp_module = os.path.join(TEMP_MODULE, i)
+            if os.path.exists(temp_module):
+                dir_util.remove_tree(temp_module)
+            if not os.path.exists(temp_module):
+                dir_util.mkpath(temp_module)
+            for f in ms:
+                t = os.path.join(self.staging_code_path, f)
+                d = os.path.join(temp_module, os.path.basename(t))
+                file_util.copy_file(src=t, dst=d)
+            path = os.path.join(TEMP_MODULE, f'{i}.puml')
+            p = {
+                'filter': '',
+                'module': ' '.join([temp_module]),
+                'path': path,
+                'options': ''
+            }
+            c = PUML_COMMAND.format(**p)
+            collect.append(c)
+        return collect
+
     def gen_combine_command(self):
         combine = self.puml_config['combine']
         collect = []
@@ -82,8 +108,9 @@ class GenPuml:
         path_shell = os.path.join(PWD, 'gen1.sh')
         commands = self.gen_puml_command()
         combine = self.gen_combine_command()
+        define = self.gen_define_command()
         with open(path_shell, 'w') as bf:
-            for i in commands + combine:
+            for i in commands + combine + define:
                 bf.write(i)
                 bf.write('\n')
 
