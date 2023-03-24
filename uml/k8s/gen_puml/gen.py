@@ -125,7 +125,7 @@ class GenPuml:
         conf_map = {}
         staging_config = self.puml_config['staging']
         _iter_conf('', staging_config)
-        print(conf_map)
+        # print(conf_map)
         return conf_map
 
     def get_module_param(self, module):
@@ -173,7 +173,7 @@ class GenPuml:
                 dir_util.remove_tree(temp_module)
             if not os.path.exists(temp_module):
                 dir_util.mkpath(temp_module)
-            for f in ms:
+            for f in ms['includes']:
                 t = os.path.join(self.staging_code_path, f)
                 d = os.path.join(temp_module, os.path.basename(t))
                 file_util.copy_file(src=t, dst=d)
@@ -184,7 +184,7 @@ class GenPuml:
                 'filter': '',
                 'module': ' '.join([temp_module]),
                 'path': path,
-                'options': ''
+                'options': ' '.join(ms.get('options', []))
             }
             c = DEFINE_COMMAND.format(**p)
             self.puml_handler_info[i] = {
@@ -230,13 +230,17 @@ class GenPuml:
         self.gen_pkg_command()
         self.gen_combine_command()
         self.gen_define_command()
+        path_shell = os.path.join(PWD, 'gen1.sh')
+        f = open(path_shell, 'w')
         for name, puml_info in self.puml_handler_info.items():
             command = puml_info['command']
+            f.write(f'{command}\n')
             return_code = run_command(command)
             if return_code != 0:
                 raise ValueError(command)
             self.puml_handler.handler_puml(
                 puml_info['path'], puml_info['packages'], name)
+        f.close()
 
 
 def main():

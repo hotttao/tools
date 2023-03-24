@@ -1,0 +1,410 @@
+@startuml
+namespace storage {
+    interface GenericStore  {
+        + GetCreateStrategy() storage.RESTCreateStrategy
+        + GetUpdateStrategy() storage.RESTUpdateStrategy
+        + GetDeleteStrategy() storage.RESTDeleteStrategy
+
+    }
+    class Store << (S,Aquamarine) >> {
+        + NewFunc <font color=blue>func</font>() runtime.Object
+        + NewListFunc <font color=blue>func</font>() runtime.Object
+        + DefaultQualifiedResource schema.GroupResource
+        + SingularQualifiedResource schema.GroupResource
+        + KeyRootFunc <font color=blue>func</font>(context.Context) string
+        + KeyFunc <font color=blue>func</font>(context.Context, string) (string, error)
+        + ObjectNameFunc <font color=blue>func</font>(runtime.Object) (string, error)
+        + TTLFunc <font color=blue>func</font>(runtime.Object, uint64, bool) (uint64, error)
+        + PredicateFunc <font color=blue>func</font>(labels.Selector, fields.Selector) storage.SelectionPredicate
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + Decorator <font color=blue>func</font>(runtime.Object) 
+        + CreateStrategy storage.RESTCreateStrategy
+        + BeginCreate BeginCreateFunc
+        + AfterCreate AfterCreateFunc
+        + UpdateStrategy storage.RESTUpdateStrategy
+        + BeginUpdate BeginUpdateFunc
+        + AfterUpdate AfterUpdateFunc
+        + DeleteStrategy storage.RESTDeleteStrategy
+        + AfterDelete AfterDeleteFunc
+        + ReturnDeletedObject bool
+        + ShouldDeleteDuringUpdate <font color=blue>func</font>(context.Context, string, runtime.Object, runtime.Object) bool
+        + TableConvertor storage.TableConvertor
+        + ResetFieldsStrategy storage.ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+        - deleteWithoutFinalizers(ctx context.Context, name string, key string, obj runtime.Object, preconditions *storage.Preconditions, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        - qualifiedResourceFromContext(ctx context.Context) schema.GroupResource
+        - updateForGracefulDeletionAndFinalizers(ctx context.Context, name string, key string, options *v1.DeleteOptions, preconditions storage.Preconditions, deleteValidation storage.ValidateObjectFunc, in runtime.Object) (error, bool, bool, runtime.Object, runtime.Object)
+        - finalizeDelete(ctx context.Context, obj runtime.Object, runHooks bool, options *v1.DeleteOptions) (runtime.Object, error)
+        - calculateTTL(obj runtime.Object, defaultTTL int64, update bool) (uint64, error)
+        - startObservingCount(period time.Duration, objectCountTracker request.StorageObjectCountTracker) <font color=blue>func</font>() 
+
+        + New() runtime.Object
+        + Destroy() 
+        + NewList() runtime.Object
+        + NamespaceScoped() bool
+        + GetCreateStrategy() storage.RESTCreateStrategy
+        + GetUpdateStrategy() storage.RESTUpdateStrategy
+        + GetDeleteStrategy() storage.RESTDeleteStrategy
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+        + ListPredicate(ctx context.Context, p storage.SelectionPredicate, options *internalversion.ListOptions) (runtime.Object, error)
+        + Create(ctx context.Context, obj runtime.Object, createValidation storage.ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+        + Update(ctx context.Context, name string, objInfo storage.UpdatedObjectInfo, createValidation storage.ValidateObjectFunc, updateValidation storage.ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+        + Delete(ctx context.Context, name string, deleteValidation storage.ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        + DeleteReturnsDeletedObject() bool
+        + DeleteCollection(ctx context.Context, deleteValidation storage.ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+        + WatchPredicate(ctx context.Context, p storage.SelectionPredicate, resourceVersion string) (watch.Interface, error)
+        + CompleteWithOptions(options *generic.StoreOptions) error
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+        + StorageVersion() runtime.GroupVersioner
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + GetSingularName() string
+
+    }
+    class storage.AfterCreateFunc << (T, #FF7700) >>  {
+    }
+    class storage.AfterDeleteFunc << (T, #FF7700) >>  {
+    }
+    class storage.AfterUpdateFunc << (T, #FF7700) >>  {
+    }
+    class storage.BeginCreateFunc << (T, #FF7700) >>  {
+    }
+    class storage.BeginUpdateFunc << (T, #FF7700) >>  {
+    }
+    class storage.FinishFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, bool) " as fontcolorbluefuncfontcontextContextbool {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object, *v1.UpdateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, *v1.CreateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.CreateOptions) " as fontcolorbluefuncfontruntimeObjectv1CreateOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.DeleteOptions) " as fontcolorbluefuncfontruntimeObjectv1DeleteOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.UpdateOptions) " as fontcolorbluefuncfontruntimeObjectv1UpdateOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"storage.GenericStore" <|-- "storage.Store"
+"storage.CollectionDeleter" <|-- "storage.Store"
+"storage.Creater" <|-- "storage.Store"
+"storage.CreaterUpdater" <|-- "storage.Store"
+"storage.Getter" <|-- "storage.Store"
+"storage.GracefulDeleter" <|-- "storage.Store"
+"storage.Lister" <|-- "storage.Store"
+"storage.MayReturnFullObjectDeleter" <|-- "storage.Store"
+"storage.ResetFieldsStrategy" <|-- "storage.Store"
+"storage.Scoper" <|-- "storage.Store"
+"storage.SingularNameProvider" <|-- "storage.Store"
+"storage.StandardStorage" <|-- "storage.Store"
+"storage.Storage" <|-- "storage.Store"
+"storage.StorageVersionProvider" <|-- "storage.Store"
+"storage.TableConvertor" <|-- "storage.Store"
+"storage.Updater" <|-- "storage.Store"
+"storage.Watcher" <|-- "storage.Store"
+
+namespace storage {
+    interface CategoriesProvider  {
+        + Categories() []string
+
+    }
+    interface CollectionDeleter  {
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface Connecter  {
+        + Connect(ctx context.Context, id string, options runtime.Object, r Responder) (http.Handler, error)
+        + NewConnectOptions() (runtime.Object, bool, string)
+        + ConnectMethods() []string
+
+    }
+    interface CreateUpdateResetFieldsStrategy  {
+    }
+    interface Creater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface CreaterUpdater  {
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface GarbageCollectionDeleteStrategy  {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) GarbageCollectionPolicy
+
+    }
+    interface Getter  {
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+
+    }
+    interface GetterWithOptions  {
+        + Get(ctx context.Context, name string, options runtime.Object) (runtime.Object, error)
+        + NewGetOptions() (runtime.Object, bool, string)
+
+    }
+    interface GracefulDeleter  {
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+
+    }
+    interface GroupVersionAcceptor  {
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+
+    }
+    interface GroupVersionKindProvider  {
+        + GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
+
+    }
+    interface KindProvider  {
+        + Kind() string
+
+    }
+    interface Lister  {
+        + NewList() runtime.Object
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface MayReturnFullObjectDeleter  {
+        + DeleteReturnsDeletedObject() bool
+
+    }
+    interface NamedCreater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface Patcher  {
+    }
+    interface RESTDeleteStrategy  {
+    }
+    interface RESTGracefulDeleteStrategy  {
+        + CheckGracefulDelete(ctx context.Context, obj runtime.Object, options *v1.DeleteOptions) bool
+
+    }
+    interface RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface Redirector  {
+        + ResourceLocation(ctx context.Context, id string) (*url.URL, http.RoundTripper, error)
+
+    }
+    interface ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+    interface ResourceStreamer  {
+        + InputStream(ctx context.Context, apiVersion string, acceptHeader string) (io.ReadCloser, bool, string, error)
+
+    }
+    interface Responder  {
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    interface Scoper  {
+        + NamespaceScoped() bool
+
+    }
+    interface ShortNamesProvider  {
+        + ShortNames() []string
+
+    }
+    interface SingularNameProvider  {
+        + GetSingularName() string
+
+    }
+    interface StandardStorage  {
+        + Destroy() 
+
+    }
+    interface Storage  {
+        + New() runtime.Object
+        + Destroy() 
+
+    }
+    interface StorageMetadata  {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface StorageVersionProvider  {
+        + StorageVersion() runtime.GroupVersioner
+
+    }
+    interface TableConvertor  {
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    interface UpdateResetFieldsStrategy  {
+    }
+    interface UpdatedObjectInfo  {
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    interface Updater  {
+        + New() runtime.Object
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface Watcher  {
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+
+    }
+    class defaultUpdatedObjectInfo << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class storage.GarbageCollectionPolicy << (T, #FF7700) >>  {
+    }
+    class storage.TransformFunc << (T, #FF7700) >>  {
+    }
+    class storage.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class storage.ValidateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class wrappedUpdatedObjectInfo << (S,Aquamarine) >> {
+        - objInfo UpdatedObjectInfo
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"storage.RESTCreateUpdateStrategy" *-- "storage.CreateUpdateResetFieldsStrategy"
+"storage.ResetFieldsStrategy" *-- "storage.CreateUpdateResetFieldsStrategy"
+"storage.Creater" *-- "storage.CreaterUpdater"
+"storage.TableConvertor" *-- "storage.Lister"
+"storage.Getter" *-- "storage.Patcher"
+"storage.Updater" *-- "storage.Patcher"
+"storage.CollectionDeleter" *-- "storage.StandardStorage"
+"storage.CreaterUpdater" *-- "storage.StandardStorage"
+"storage.Getter" *-- "storage.StandardStorage"
+"storage.GracefulDeleter" *-- "storage.StandardStorage"
+"storage.Lister" *-- "storage.StandardStorage"
+"storage.Watcher" *-- "storage.StandardStorage"
+"storage.RESTUpdateStrategy" *-- "storage.UpdateResetFieldsStrategy"
+"storage.ResetFieldsStrategy" *-- "storage.UpdateResetFieldsStrategy"
+
+"storage.UpdatedObjectInfo" <|-- "storage.defaultUpdatedObjectInfo"
+"storage.UpdatedObjectInfo" <|-- "storage.wrappedUpdatedObjectInfo"
+
+namespace storage {
+    class GetOptions << (S,Aquamarine) >> {
+        + IgnoreNotFound bool
+        + ResourceVersion string
+
+    }
+    interface Interface  {
+        + Versioner() Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *Preconditions, validateDeletion ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts ListOptions, listObj runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *Preconditions, tryUpdate UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+    class ListOptions << (S,Aquamarine) >> {
+        + ResourceVersion string
+        + ResourceVersionMatch v1.ResourceVersionMatch
+        + Predicate SelectionPredicate
+        + Recursive bool
+        + ProgressNotify bool
+
+    }
+    class MatchValue << (S,Aquamarine) >> {
+        + IndexName string
+        + Value string
+
+    }
+    class Preconditions << (S,Aquamarine) >> {
+        + UID *types.UID
+        + ResourceVersion *string
+
+        + Check(key string, obj runtime.Object) error
+
+    }
+    class ResponseMeta << (S,Aquamarine) >> {
+        + TTL int64
+        + ResourceVersion uint64
+
+    }
+    interface Versioner  {
+        + UpdateObject(obj runtime.Object, resourceVersion uint64) error
+        + UpdateList(obj runtime.Object, resourceVersion uint64, continueValue string, remainingItemCount *int64) error
+        + PrepareObjectForStorage(obj runtime.Object) error
+        + ObjectResourceVersion(obj runtime.Object) (uint64, error)
+        + ParseResourceVersion(resourceVersion string) (uint64, error)
+
+    }
+    class storage.IndexerFunc << (T, #FF7700) >>  {
+    }
+    class storage.IndexerFuncs << (T, #FF7700) >>  {
+    }
+    class storage.UpdateFunc << (T, #FF7700) >>  {
+    }
+    class storage.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, ResponseMeta) (runtime.Object, *uint64, error)" as fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object) string" as fontcolorbluefuncfontruntimeObjectstring {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+
+"__builtin__.string" #.. "storage.GarbageCollectionPolicy"
+"storage.fontcolorbluefuncfontcontextContextbool" #.. "storage.FinishFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror" #.. "storage.BeginCreateFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror" #.. "storage.BeginUpdateFunc"
+"storage.fontcolorbluefuncfontruntimeObjectv1CreateOptions" #.. "storage.AfterCreateFunc"
+"storage.fontcolorbluefuncfontruntimeObjectv1DeleteOptions" #.. "storage.AfterDeleteFunc"
+"storage.fontcolorbluefuncfontruntimeObjectv1UpdateOptions" #.. "storage.AfterUpdateFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "storage.ValidateObjectFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror" #.. "storage.TransformFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror" #.. "storage.ValidateObjectUpdateFunc"
+"storage.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "storage.ValidateObjectFunc"
+"storage.fontcolorbluefuncfontruntimeObjectstring" #.. "storage.IndexerFunc"
+"storage.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error" #.. "storage.UpdateFunc"
+"storage.<font color=blue>map</font>[string]IndexerFunc" #.. "storage.IndexerFuncs"
+hide methods
+@enduml

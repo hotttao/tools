@@ -10,11 +10,37 @@ staging:
                 meta:
                     v1:
                         filter: []
+    apiserver:
+        pkg:
+            registry:
+                rest:
+                    filter: ['resttest']
+                    options: ['-hide-methods']
+
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
 
 define:
     codec: 
+        includes:
         - 'apimachinery/pkg/runtime/serializer/versioning/versioning.go'
         - 'apimachinery/pkg/runtime/interfaces.go'
         - 'apimachinery/pkg/runtime/serializer/codec_factory.go'
+    schema:
+        includes:
+        - 'apimachinery/pkg/runtime/scheme.go'
+        - 'apimachinery/pkg/runtime/interfaces.go'
+        - 'apimachinery/pkg/runtime/converter.go'
+        - 'apimachinery/pkg/runtime/scheme_builder.go'
+    storage:
+        options:
+        - -hide-methods
+        includes:
+        - 'apiserver/pkg/storage/interfaces.go'
+        - 'apiserver/pkg/storage/etcd3/store.go'
+        # - 'apiserver/pkg/registry/generic/registry/dryrun.go'
+        - 'apiserver/pkg/registry/generic/registry/store.go'
+        - 'apiserver/pkg/registry/rest/rest.go'
+        - 'apiserver/pkg/registry/rest/update.go'
+        - 'apiserver/pkg/registry/rest/update.go'
+        - 'apiserver/pkg/registry/rest/delete.go'

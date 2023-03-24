@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="553px" preserveAspectRatio="none" style="width:3800px;height:553px;background:#FFFFFF;" version="1.1" viewBox="0 0 3800 553" width="3800px" zoomAndPan="magnify"><defs/><g><!--MD5=[27b2592fe63cc74a34ffa7065ff7e061]
+cluster rest--><g id="cluster_rest"><path d="M8.5,6.532 L36.5,6.532 A3.75,3.75 0 0 1 39,9.032 L46,32.8039 L3790.5,32.8039 A2.5,2.5 0 0 1 3793,35.3039 L3793,544.032 A2.5,2.5 0 0 1 3790.5,546.532 L8.5,546.532 A2.5,2.5 0 0 1 6,544.032 L6,9.032 A2.5,2.5 0 0 1 8.5,6.532 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="46" y1="32.8039" y2="32.8039"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="27" x="10" y="24.7719">rest</text></g><!--MD5=[8b83ffcffe0ab5b8cc611ccd841eb1a9]
+class rest.CategoriesProvider--><g id="elem_rest.CategoriesProvider"><rect codeLine="2" fill="#F1F1F1" height="40" id="rest.CategoriesProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="157" x="2530.5" y="37.532"/><ellipse cx="2545.5" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2541.8594,60.032 L2548.6406,60.032 L2548.6406,57.9539 L2546.4844,57.9539 L2546.4844,49.5164 L2548.6406,49.5164 L2548.6406,47.407 L2541.8594,47.407 L2541.8594,49.5164 L2543.9531,49.5164 L2543.9531,57.9539 L2541.8594,57.9539 L2541.8594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="125" x="2559.5" y="59.636">CategoriesProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="2531.5" x2="2686.5" y1="69.532" y2="69.532"/></g><!--MD5=[2cb6989c021cb6154141403ff2f604f9]
+class rest.CollectionDeleter--><g id="elem_rest.CollectionDeleter"><rect codeLine="6" fill="#F1F1F1" height="40" id="rest.CollectionDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146" x="2077" y="158.032"/><ellipse cx="2092" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2088.3594,180.532 L2095.1406,180.532 L2095.1406,178.4539 L2092.9844,178.4539 L2092.9844,170.0164 L2095.1406,170.0164 L2095.1406,167.907 L2088.3594,167.907 L2088.3594,170.0164 L2090.4531,170.0164 L2090.4531,178.4539 L2088.3594,178.4539 L2088.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="114" x="2106" y="180.136">CollectionDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="2078" x2="2222" y1="190.032" y2="190.032"/></g><!--MD5=[263635709eeb88aa5229366ef05c1882]
+class rest.Connecter--><g id="elem_rest.Connecter"><rect codeLine="10" fill="#F1F1F1" height="40" id="rest.Connecter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="100" x="2723" y="37.532"/><ellipse cx="2738" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2734.3594,60.032 L2741.1406,60.032 L2741.1406,57.9539 L2738.9844,57.9539 L2738.9844,49.5164 L2741.1406,49.5164 L2741.1406,47.407 L2734.3594,47.407 L2734.3594,49.5164 L2736.4531,49.5164 L2736.4531,57.9539 L2734.3594,57.9539 L2734.3594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="2752" y="59.636">Connecter</text><line style="stroke:#181818;stroke-width:0.5;" x1="2724" x2="2822" y1="69.532" y2="69.532"/></g><!--MD5=[62b55bddde36a4e3a74c5467e3361790]
+class rest.CreateUpdateResetFieldsStrategy--><g id="elem_rest.CreateUpdateResetFieldsStrategy"><rect codeLine="16" fill="#F1F1F1" height="40" id="rest.CreateUpdateResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255" x="632.5" y="278.532"/><ellipse cx="647.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M643.8594,301.032 L650.6406,301.032 L650.6406,298.9539 L648.4844,298.9539 L648.4844,290.5164 L650.6406,290.5164 L650.6406,288.407 L643.8594,288.407 L643.8594,290.5164 L645.9531,290.5164 L645.9531,298.9539 L643.8594,298.9539 L643.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="223" x="661.5" y="300.636">CreateUpdateResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="633.5" x2="886.5" y1="310.532" y2="310.532"/></g><!--MD5=[7792a840c27d6a3a2c6dd3dbd0a08fa5]
+class rest.Creater--><g id="elem_rest.Creater"><rect codeLine="18" fill="#F1F1F1" height="40" id="rest.Creater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="80" x="1935" y="37.532"/><ellipse cx="1950" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1946.3594,60.032 L1953.1406,60.032 L1953.1406,57.9539 L1950.9844,57.9539 L1950.9844,49.5164 L1953.1406,49.5164 L1953.1406,47.407 L1946.3594,47.407 L1946.3594,49.5164 L1948.4531,49.5164 L1948.4531,57.9539 L1946.3594,57.9539 L1946.3594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="48" x="1964" y="59.636">Creater</text><line style="stroke:#181818;stroke-width:0.5;" x1="1936" x2="2014" y1="69.532" y2="69.532"/></g><!--MD5=[26161321eaa7ad05c281d1f2a88e9dc2]
+class rest.CreaterUpdater--><g id="elem_rest.CreaterUpdater"><rect codeLine="23" fill="#F1F1F1" height="40" id="rest.CreaterUpdater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134" x="1908" y="158.032"/><ellipse cx="1923" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1919.3594,180.532 L1926.1406,180.532 L1926.1406,178.4539 L1923.9844,178.4539 L1923.9844,170.0164 L1926.1406,170.0164 L1926.1406,167.907 L1919.3594,167.907 L1919.3594,170.0164 L1921.4531,170.0164 L1921.4531,178.4539 L1919.3594,178.4539 L1919.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="1937" y="180.136">CreaterUpdater</text><line style="stroke:#181818;stroke-width:0.5;" x1="1909" x2="2041" y1="190.032" y2="190.032"/></g><!--MD5=[7426ba33ab673457fcedd336e419ae62]
+class rest.GarbageCollectionDeleteStrategy--><g id="elem_rest.GarbageCollectionDeleteStrategy"><rect codeLine="27" fill="#F1F1F1" height="40" id="rest.GarbageCollectionDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="251" x="2858.5" y="37.532"/><ellipse cx="2873.5" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2869.8594,60.032 L2876.6406,60.032 L2876.6406,57.9539 L2874.4844,57.9539 L2874.4844,49.5164 L2876.6406,49.5164 L2876.6406,47.407 L2869.8594,47.407 L2869.8594,49.5164 L2871.9531,49.5164 L2871.9531,57.9539 L2869.8594,57.9539 L2869.8594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="219" x="2887.5" y="59.636">GarbageCollectionDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2859.5" x2="3108.5" y1="69.532" y2="69.532"/></g><!--MD5=[63b193ecefea6d61d7dc033fb0ee4424]
+class rest.Getter--><g id="elem_rest.Getter"><rect codeLine="31" fill="#F1F1F1" height="40" id="rest.Getter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="1695.5" y="158.032"/><ellipse cx="1710.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1706.8594,180.532 L1713.6406,180.532 L1713.6406,178.4539 L1711.4844,178.4539 L1711.4844,170.0164 L1713.6406,170.0164 L1713.6406,167.907 L1706.8594,167.907 L1706.8594,170.0164 L1708.9531,170.0164 L1708.9531,178.4539 L1706.8594,178.4539 L1706.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="41" x="1724.5" y="180.136">Getter</text><line style="stroke:#181818;stroke-width:0.5;" x1="1696.5" x2="1767.5" y1="190.032" y2="190.032"/></g><!--MD5=[b0abd7a2ed543f3d810dc57a6602edad]
+class rest.GetterWithOptions--><g id="elem_rest.GetterWithOptions"><rect codeLine="35" fill="#F1F1F1" height="40" id="rest.GetterWithOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="3144.5" y="37.532"/><ellipse cx="3159.5" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3155.8594,60.032 L3162.6406,60.032 L3162.6406,57.9539 L3160.4844,57.9539 L3160.4844,49.5164 L3162.6406,49.5164 L3162.6406,47.407 L3155.8594,47.407 L3155.8594,49.5164 L3157.9531,49.5164 L3157.9531,57.9539 L3155.8594,57.9539 L3155.8594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="123" x="3173.5" y="59.636">GetterWithOptions</text><line style="stroke:#181818;stroke-width:0.5;" x1="3145.5" x2="3298.5" y1="69.532" y2="69.532"/></g><!--MD5=[a6803ac4b1acd9c4feb67720b2e8e163]
+class rest.GracefulDeleter--><g id="elem_rest.GracefulDeleter"><rect codeLine="40" fill="#F1F1F1" height="40" id="rest.GracefulDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="2379" y="158.032"/><ellipse cx="2394" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2390.3594,180.532 L2397.1406,180.532 L2397.1406,178.4539 L2394.9844,178.4539 L2394.9844,170.0164 L2397.1406,170.0164 L2397.1406,167.907 L2390.3594,167.907 L2390.3594,170.0164 L2392.4531,170.0164 L2392.4531,178.4539 L2390.3594,178.4539 L2390.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="104" x="2408" y="180.136">GracefulDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="2380" x2="2514" y1="190.032" y2="190.032"/></g><!--MD5=[8c13db8252bb1d79188d2588e5d286de]
+class rest.GroupVersionAcceptor--><g id="elem_rest.GroupVersionAcceptor"><rect codeLine="44" fill="#F1F1F1" height="40" id="rest.GroupVersionAcceptor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180" x="3335" y="37.532"/><ellipse cx="3350" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3346.3594,60.032 L3353.1406,60.032 L3353.1406,57.9539 L3350.9844,57.9539 L3350.9844,49.5164 L3353.1406,49.5164 L3353.1406,47.407 L3346.3594,47.407 L3346.3594,49.5164 L3348.4531,49.5164 L3348.4531,57.9539 L3346.3594,57.9539 L3346.3594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="3364" y="59.636">GroupVersionAcceptor</text><line style="stroke:#181818;stroke-width:0.5;" x1="3336" x2="3514" y1="69.532" y2="69.532"/></g><!--MD5=[2a0e0fb51e141f9c2d043bd4cfb6d7ca]
+class rest.GroupVersionKindProvider--><g id="elem_rest.GroupVersionKindProvider"><rect codeLine="48" fill="#F1F1F1" height="40" id="rest.GroupVersionKindProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="3550" y="37.532"/><ellipse cx="3565" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3561.3594,60.032 L3568.1406,60.032 L3568.1406,57.9539 L3565.9844,57.9539 L3565.9844,49.5164 L3568.1406,49.5164 L3568.1406,47.407 L3561.3594,47.407 L3561.3594,49.5164 L3563.4531,49.5164 L3563.4531,57.9539 L3561.3594,57.9539 L3561.3594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="176" x="3579" y="59.636">GroupVersionKindProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="3551" x2="3757" y1="69.532" y2="69.532"/></g><!--MD5=[68c7328a3b6884d9ddc0ac6d29468825]
+class rest.KindProvider--><g id="elem_rest.KindProvider"><rect codeLine="52" fill="#F1F1F1" height="40" id="rest.KindProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="2550" y="158.032"/><ellipse cx="2565" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2561.3594,180.532 L2568.1406,180.532 L2568.1406,178.4539 L2565.9844,178.4539 L2565.9844,170.0164 L2568.1406,170.0164 L2568.1406,167.907 L2561.3594,167.907 L2561.3594,170.0164 L2563.4531,170.0164 L2563.4531,178.4539 L2561.3594,178.4539 L2561.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="86" x="2579" y="180.136">KindProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="2551" x2="2667" y1="190.032" y2="190.032"/></g><!--MD5=[d9132a44659dd74a55e19087e5c0fa2a]
+class rest.Lister--><g id="elem_rest.Lister"><rect codeLine="56" fill="#F1F1F1" height="40" id="rest.Lister" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="69" x="1803.5" y="158.032"/><ellipse cx="1818.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1814.8594,180.532 L1821.6406,180.532 L1821.6406,178.4539 L1819.4844,178.4539 L1819.4844,170.0164 L1821.6406,170.0164 L1821.6406,167.907 L1814.8594,167.907 L1814.8594,170.0164 L1816.9531,170.0164 L1816.9531,178.4539 L1814.8594,178.4539 L1814.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="37" x="1832.5" y="180.136">Lister</text><line style="stroke:#181818;stroke-width:0.5;" x1="1804.5" x2="1871.5" y1="190.032" y2="190.032"/></g><!--MD5=[1706a7e1e15f1cd2dc0c4534b3586869]
+class rest.MayReturnFullObjectDeleter--><g id="elem_rest.MayReturnFullObjectDeleter"><rect codeLine="61" fill="#F1F1F1" height="40" id="rest.MayReturnFullObjectDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="219" x="2703.5" y="158.032"/><ellipse cx="2718.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2714.8594,180.532 L2721.6406,180.532 L2721.6406,178.4539 L2719.4844,178.4539 L2719.4844,170.0164 L2721.6406,170.0164 L2721.6406,167.907 L2714.8594,167.907 L2714.8594,170.0164 L2716.9531,170.0164 L2716.9531,178.4539 L2714.8594,178.4539 L2714.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="187" x="2732.5" y="180.136">MayReturnFullObjectDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="2704.5" x2="2921.5" y1="190.032" y2="190.032"/></g><!--MD5=[7ef6d872b49fd8a9deda3f247fd8118e]
+class rest.NamedCreater--><g id="elem_rest.NamedCreater"><rect codeLine="65" fill="#F1F1F1" height="40" id="rest.NamedCreater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="128" x="2958" y="158.032"/><ellipse cx="2973" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2969.3594,180.532 L2976.1406,180.532 L2976.1406,178.4539 L2973.9844,178.4539 L2973.9844,170.0164 L2976.1406,170.0164 L2976.1406,167.907 L2969.3594,167.907 L2969.3594,170.0164 L2971.4531,170.0164 L2971.4531,178.4539 L2969.3594,178.4539 L2969.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="96" x="2987" y="180.136">NamedCreater</text><line style="stroke:#181818;stroke-width:0.5;" x1="2959" x2="3085" y1="190.032" y2="190.032"/></g><!--MD5=[7a21ae90c78e31ee4b51f836ad8cad6c]
+class rest.NamespaceScopedStrategy--><g id="elem_rest.NamespaceScopedStrategy"><rect codeLine="70" fill="#F1F1F1" height="40" id="rest.NamespaceScopedStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="213" x="3121.5" y="158.032"/><ellipse cx="3136.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3132.8594,180.532 L3139.6406,180.532 L3139.6406,178.4539 L3137.4844,178.4539 L3137.4844,170.0164 L3139.6406,170.0164 L3139.6406,167.907 L3132.8594,167.907 L3132.8594,170.0164 L3134.9531,170.0164 L3134.9531,178.4539 L3132.8594,178.4539 L3132.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="181" x="3150.5" y="180.136">NamespaceScopedStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="3122.5" x2="3333.5" y1="190.032" y2="190.032"/></g><!--MD5=[be862d1e5fd84b77e8d4929337bca59d]
+class rest.Patcher--><g id="elem_rest.Patcher"><rect codeLine="74" fill="#F1F1F1" height="40" id="rest.Patcher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="83" x="1632.5" y="278.532"/><ellipse cx="1647.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1643.8594,301.032 L1650.6406,301.032 L1650.6406,298.9539 L1648.4844,298.9539 L1648.4844,290.5164 L1650.6406,290.5164 L1650.6406,288.407 L1643.8594,288.407 L1643.8594,290.5164 L1645.9531,290.5164 L1645.9531,298.9539 L1643.8594,298.9539 L1643.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="51" x="1661.5" y="300.636">Patcher</text><line style="stroke:#181818;stroke-width:0.5;" x1="1633.5" x2="1714.5" y1="310.532" y2="310.532"/></g><!--MD5=[21d1dbb3fa7b9210fb6a4a08b2ce2057]
+class rest.RESTCreateStrategy--><g id="elem_rest.RESTCreateStrategy"><rect codeLine="76" fill="#F1F1F1" height="40" id="rest.RESTCreateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="960" y="37.532"/><ellipse cx="975" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M971.3594,60.032 L978.1406,60.032 L978.1406,57.9539 L975.9844,57.9539 L975.9844,49.5164 L978.1406,49.5164 L978.1406,47.407 L971.3594,47.407 L971.3594,49.5164 L973.4531,49.5164 L973.4531,57.9539 L971.3594,57.9539 L971.3594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="130" x="989" y="59.636">RESTCreateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="961" x2="1121" y1="69.532" y2="69.532"/></g><!--MD5=[820df05671cba0d688f2331d49825a86]
+class rest.RESTCreateUpdateStrategy--><g id="elem_rest.RESTCreateUpdateStrategy"><rect codeLine="84" fill="#F1F1F1" height="40" id="rest.RESTCreateUpdateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="935.5" y="158.032"/><ellipse cx="950.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M946.8594,180.532 L953.6406,180.532 L953.6406,178.4539 L951.4844,178.4539 L951.4844,170.0164 L953.6406,170.0164 L953.6406,167.907 L946.8594,167.907 L946.8594,170.0164 L948.9531,170.0164 L948.9531,178.4539 L946.8594,178.4539 L946.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="179" x="964.5" y="180.136">RESTCreateUpdateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="936.5" x2="1145.5" y1="190.032" y2="190.032"/></g><!--MD5=[2e7d0a841836431ef5fd8e0b276c4e11]
+class rest.RESTDeleteStrategy--><g id="elem_rest.RESTDeleteStrategy"><rect codeLine="92" fill="#F1F1F1" height="40" id="rest.RESTDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="3370" y="158.032"/><ellipse cx="3385" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3381.3594,180.532 L3388.1406,180.532 L3388.1406,178.4539 L3385.9844,178.4539 L3385.9844,170.0164 L3388.1406,170.0164 L3388.1406,167.907 L3381.3594,167.907 L3381.3594,170.0164 L3383.4531,170.0164 L3383.4531,178.4539 L3381.3594,178.4539 L3381.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="130" x="3399" y="180.136">RESTDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="3371" x2="3531" y1="190.032" y2="190.032"/></g><!--MD5=[64ab02641890595c008afa9e7cefd36a]
+class rest.RESTGracefulDeleteStrategy--><g id="elem_rest.RESTGracefulDeleteStrategy"><rect codeLine="94" fill="#F1F1F1" height="40" id="rest.RESTGracefulDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="218" x="3567" y="158.032"/><ellipse cx="3582" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3578.3594,180.532 L3585.1406,180.532 L3585.1406,178.4539 L3582.9844,178.4539 L3582.9844,170.0164 L3585.1406,170.0164 L3585.1406,167.907 L3578.3594,167.907 L3578.3594,170.0164 L3580.4531,170.0164 L3580.4531,178.4539 L3578.3594,178.4539 L3578.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="186" x="3596" y="180.136">RESTGracefulDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="3568" x2="3784" y1="190.032" y2="190.032"/></g><!--MD5=[18df6a87226cb78849e1eab494ca0d74]
+class rest.RESTUpdateStrategy--><g id="elem_rest.RESTUpdateStrategy"><rect codeLine="98" fill="#F1F1F1" height="40" id="rest.RESTUpdateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="14" y="158.032"/><ellipse cx="29" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.3594,180.532 L32.1406,180.532 L32.1406,178.4539 L29.9844,178.4539 L29.9844,170.0164 L32.1406,170.0164 L32.1406,167.907 L25.3594,167.907 L25.3594,170.0164 L27.4531,170.0164 L27.4531,178.4539 L25.3594,178.4539 L25.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="136" x="43" y="180.136">RESTUpdateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="15" x2="181" y1="190.032" y2="190.032"/></g><!--MD5=[a256d5bb0ecd7700d4dc9ecb00594e74]
+class rest.Redirector--><g id="elem_rest.Redirector"><rect codeLine="108" fill="#F1F1F1" height="40" id="rest.Redirector" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="100" x="2407" y="278.532"/><ellipse cx="2422" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2418.3594,301.032 L2425.1406,301.032 L2425.1406,298.9539 L2422.9844,298.9539 L2422.9844,290.5164 L2425.1406,290.5164 L2425.1406,288.407 L2418.3594,288.407 L2418.3594,290.5164 L2420.4531,290.5164 L2420.4531,298.9539 L2418.3594,298.9539 L2418.3594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="2436" y="300.636">Redirector</text><line style="stroke:#181818;stroke-width:0.5;" x1="2408" x2="2506" y1="310.532" y2="310.532"/></g><!--MD5=[c469dc5aa3b1f3991daad8132f072193]
+class rest.ResetFieldsStrategy--><g id="elem_rest.ResetFieldsStrategy"><rect codeLine="112" fill="#F1F1F1" height="40" id="rest.ResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="163" x="217.5" y="158.032"/><ellipse cx="232.5" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M228.8594,180.532 L235.6406,180.532 L235.6406,178.4539 L233.4844,178.4539 L233.4844,170.0164 L235.6406,170.0164 L235.6406,167.907 L228.8594,167.907 L228.8594,170.0164 L230.9531,170.0164 L230.9531,178.4539 L228.8594,178.4539 L228.8594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="131" x="246.5" y="180.136">ResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="218.5" x2="379.5" y1="190.032" y2="190.032"/></g><!--MD5=[eccab09a0e61c8ee05d6b21385706ae4]
+class rest.ResourceStreamer--><g id="elem_rest.ResourceStreamer"><rect codeLine="116" fill="#F1F1F1" height="40" id="rest.ResourceStreamer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153" x="2542.5" y="278.532"/><ellipse cx="2557.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2553.8594,301.032 L2560.6406,301.032 L2560.6406,298.9539 L2558.4844,298.9539 L2558.4844,290.5164 L2560.6406,290.5164 L2560.6406,288.407 L2553.8594,288.407 L2553.8594,290.5164 L2555.9531,290.5164 L2555.9531,298.9539 L2553.8594,298.9539 L2553.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="121" x="2571.5" y="300.636">ResourceStreamer</text><line style="stroke:#181818;stroke-width:0.5;" x1="2543.5" x2="2694.5" y1="310.532" y2="310.532"/></g><!--MD5=[1ca8b87959000ac0048c9b20cfc56745]
+class rest.Responder--><g id="elem_rest.Responder"><rect codeLine="120" fill="#F1F1F1" height="40" id="rest.Responder" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="104" x="2731" y="278.532"/><ellipse cx="2746" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2742.3594,301.032 L2749.1406,301.032 L2749.1406,298.9539 L2746.9844,298.9539 L2746.9844,290.5164 L2749.1406,290.5164 L2749.1406,288.407 L2742.3594,288.407 L2742.3594,290.5164 L2744.4531,290.5164 L2744.4531,298.9539 L2742.3594,298.9539 L2742.3594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="72" x="2760" y="300.636">Responder</text><line style="stroke:#181818;stroke-width:0.5;" x1="2732" x2="2834" y1="310.532" y2="310.532"/></g><!--MD5=[239af7201c9d4bea2648e035b42c5b3c]
+class rest.Scoper--><g id="elem_rest.Scoper"><rect codeLine="125" fill="#F1F1F1" height="40" id="rest.Scoper" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="77" x="2870.5" y="278.532"/><ellipse cx="2885.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2881.8594,301.032 L2888.6406,301.032 L2888.6406,298.9539 L2886.4844,298.9539 L2886.4844,290.5164 L2888.6406,290.5164 L2888.6406,288.407 L2881.8594,288.407 L2881.8594,290.5164 L2883.9531,290.5164 L2883.9531,298.9539 L2881.8594,298.9539 L2881.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="45" x="2899.5" y="300.636">Scoper</text><line style="stroke:#181818;stroke-width:0.5;" x1="2871.5" x2="2946.5" y1="310.532" y2="310.532"/></g><!--MD5=[b5c9136bc3e443dd36e65faed5a1be15]
+class rest.ShortNamesProvider--><g id="elem_rest.ShortNamesProvider"><rect codeLine="129" fill="#F1F1F1" height="40" id="rest.ShortNamesProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="2983" y="278.532"/><ellipse cx="2998" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2994.3594,301.032 L3001.1406,301.032 L3001.1406,298.9539 L2998.9844,298.9539 L2998.9844,290.5164 L3001.1406,290.5164 L3001.1406,288.407 L2994.3594,288.407 L2994.3594,290.5164 L2996.4531,290.5164 L2996.4531,298.9539 L2994.3594,298.9539 L2994.3594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="136" x="3012" y="300.636">ShortNamesProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="2984" x2="3150" y1="310.532" y2="310.532"/></g><!--MD5=[f462788d39806873fdeca1e1bf565d12]
+class rest.SingularNameProvider--><g id="elem_rest.SingularNameProvider"><rect codeLine="133" fill="#F1F1F1" height="40" id="rest.SingularNameProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="3186.5" y="278.532"/><ellipse cx="3201.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3197.8594,301.032 L3204.6406,301.032 L3204.6406,298.9539 L3202.4844,298.9539 L3202.4844,290.5164 L3204.6406,290.5164 L3204.6406,288.407 L3197.8594,288.407 L3197.8594,290.5164 L3199.9531,290.5164 L3199.9531,298.9539 L3197.8594,298.9539 L3197.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="149" x="3215.5" y="300.636">SingularNameProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="3187.5" x2="3366.5" y1="310.532" y2="310.532"/></g><!--MD5=[892d6c7db5ab5f7fcb6ec4f020470804]
+class rest.StandardStorage--><g id="elem_rest.StandardStorage"><rect codeLine="137" fill="#F1F1F1" height="40" id="rest.StandardStorage" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="143" x="1990.5" y="278.532"/><ellipse cx="2005.5" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2001.8594,301.032 L2008.6406,301.032 L2008.6406,298.9539 L2006.4844,298.9539 L2006.4844,290.5164 L2008.6406,290.5164 L2008.6406,288.407 L2001.8594,288.407 L2001.8594,290.5164 L2003.9531,290.5164 L2003.9531,298.9539 L2001.8594,298.9539 L2001.8594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="111" x="2019.5" y="300.636">StandardStorage</text><line style="stroke:#181818;stroke-width:0.5;" x1="1991.5" x2="2132.5" y1="310.532" y2="310.532"/></g><!--MD5=[f4001812f1d2b0eb18694cbfd9520a32]
+class rest.Storage--><g id="elem_rest.Storage"><rect codeLine="141" fill="#F1F1F1" height="40" id="rest.Storage" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="2178" y="388.532"/><ellipse cx="2193" cy="404.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2189.3594,411.032 L2196.1406,411.032 L2196.1406,408.9539 L2193.9844,408.9539 L2193.9844,400.5164 L2196.1406,400.5164 L2196.1406,398.407 L2189.3594,398.407 L2189.3594,400.5164 L2191.4531,400.5164 L2191.4531,408.9539 L2189.3594,408.9539 L2189.3594,411.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="50" x="2207" y="410.636">Storage</text><line style="stroke:#181818;stroke-width:0.5;" x1="2179" x2="2259" y1="420.532" y2="420.532"/></g><!--MD5=[464efac6b562c8bd25138ae5f90d1982]
+class rest.StorageMetadata--><g id="elem_rest.StorageMetadata"><rect codeLine="146" fill="#F1F1F1" height="40" id="rest.StorageMetadata" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="144" x="2295" y="388.532"/><ellipse cx="2310" cy="404.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2306.3594,411.032 L2313.1406,411.032 L2313.1406,408.9539 L2310.9844,408.9539 L2310.9844,400.5164 L2313.1406,400.5164 L2313.1406,398.407 L2306.3594,398.407 L2306.3594,400.5164 L2308.4531,400.5164 L2308.4531,408.9539 L2306.3594,408.9539 L2306.3594,411.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="2324" y="410.636">StorageMetadata</text><line style="stroke:#181818;stroke-width:0.5;" x1="2296" x2="2438" y1="420.532" y2="420.532"/></g><!--MD5=[17b894ce2adec5b1e210bd350027aed5]
+class rest.StorageVersionProvider--><g id="elem_rest.StorageVersionProvider"><rect codeLine="151" fill="#F1F1F1" height="40" id="rest.StorageVersionProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="186" x="2474" y="388.532"/><ellipse cx="2489" cy="404.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2485.3594,411.032 L2492.1406,411.032 L2492.1406,408.9539 L2489.9844,408.9539 L2489.9844,400.5164 L2492.1406,400.5164 L2492.1406,398.407 L2485.3594,398.407 L2485.3594,400.5164 L2487.4531,400.5164 L2487.4531,408.9539 L2485.3594,408.9539 L2485.3594,411.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="154" x="2503" y="410.636">StorageVersionProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="2475" x2="2659" y1="420.532" y2="420.532"/></g><!--MD5=[34c7871c7c20d1d0c0ca2ac41b6eed16]
+class rest.TableConvertor--><g id="elem_rest.TableConvertor"><rect codeLine="155" fill="#F1F1F1" height="40" id="rest.TableConvertor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="1529.5" y="37.532"/><ellipse cx="1544.5" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1540.8594,60.032 L1547.6406,60.032 L1547.6406,57.9539 L1545.4844,57.9539 L1545.4844,49.5164 L1547.6406,49.5164 L1547.6406,47.407 L1540.8594,47.407 L1540.8594,49.5164 L1542.9531,49.5164 L1542.9531,57.9539 L1540.8594,57.9539 L1540.8594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="101" x="1558.5" y="59.636">TableConvertor</text><line style="stroke:#181818;stroke-width:0.5;" x1="1530.5" x2="1661.5" y1="69.532" y2="69.532"/></g><!--MD5=[3260617e10df6013f12a5430a21d3678]
+class rest.UpdateResetFieldsStrategy--><g id="elem_rest.UpdateResetFieldsStrategy"><rect codeLine="159" fill="#F1F1F1" height="40" id="rest.UpdateResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="212" x="104" y="278.532"/><ellipse cx="119" cy="294.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M115.3594,301.032 L122.1406,301.032 L122.1406,298.9539 L119.9844,298.9539 L119.9844,290.5164 L122.1406,290.5164 L122.1406,288.407 L115.3594,288.407 L115.3594,290.5164 L117.4531,290.5164 L117.4531,298.9539 L115.3594,298.9539 L115.3594,301.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="180" x="133" y="300.636">UpdateResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="105" x2="315" y1="310.532" y2="310.532"/></g><!--MD5=[08a484aa3d6d31b861ce423f77711132]
+class rest.UpdatedObjectInfo--><g id="elem_rest.UpdatedObjectInfo"><rect codeLine="161" fill="#F1F1F1" height="40" id="rest.UpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="578.5" y="37.532"/><ellipse cx="593.5" cy="53.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M589.8594,60.032 L596.6406,60.032 L596.6406,57.9539 L594.4844,57.9539 L594.4844,49.5164 L596.6406,49.5164 L596.6406,47.407 L589.8594,47.407 L589.8594,49.5164 L591.9531,49.5164 L591.9531,57.9539 L589.8594,57.9539 L589.8594,60.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="127" x="607.5" y="59.636">UpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="579.5" x2="736.5" y1="69.532" y2="69.532"/></g><!--MD5=[7f423285d9e7bb04a6f78897f0670c01]
+class rest.Updater--><g id="elem_rest.Updater"><rect codeLine="166" fill="#F1F1F1" height="40" id="rest.Updater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="1574" y="158.032"/><ellipse cx="1589" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1585.3594,180.532 L1592.1406,180.532 L1592.1406,178.4539 L1589.9844,178.4539 L1589.9844,170.0164 L1592.1406,170.0164 L1592.1406,167.907 L1585.3594,167.907 L1585.3594,170.0164 L1587.4531,170.0164 L1587.4531,178.4539 L1585.3594,178.4539 L1585.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="1603" y="180.136">Updater</text><line style="stroke:#181818;stroke-width:0.5;" x1="1575" x2="1659" y1="190.032" y2="190.032"/></g><!--MD5=[58815629aa6ad5981c0d6aabd3714484]
+class rest.Watcher--><g id="elem_rest.Watcher"><rect codeLine="171" fill="#F1F1F1" height="40" id="rest.Watcher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="2258" y="158.032"/><ellipse cx="2273" cy="174.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2269.3594,180.532 L2276.1406,180.532 L2276.1406,178.4539 L2273.9844,178.4539 L2273.9844,170.0164 L2276.1406,170.0164 L2276.1406,167.907 L2269.3594,167.907 L2269.3594,170.0164 L2271.4531,170.0164 L2271.4531,178.4539 L2269.3594,178.4539 L2269.3594,180.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="2287" y="180.136">Watcher</text><line style="stroke:#181818;stroke-width:0.5;" x1="2259" x2="2343" y1="190.032" y2="190.032"/></g><!--MD5=[2fe3c6a0d2e97ad74ed11a71e9d19199]
+class rest.defaultTableConvertor--><g id="elem_rest.defaultTableConvertor"><rect codeLine="175" fill="#F1F1F1" height="60.2719" id="rest.defaultTableConvertor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="357" x="1181.5" y="148.032"/><ellipse cx="1281.25" cy="164.032" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1281.4375,170.7351 C1283.7344,170.7351 1285.1875,169.1101 1285.1875,167.1101 C1285.1875,165.282 1284.3594,164.4382 1283.2188,163.6414 L1282.2031,162.9226 C1281.0781,162.1101 1280.6563,161.8132 1280.6563,160.9539 C1280.6563,160.2664 1281.1406,159.8601 1281.7188,159.8601 C1282.4531,159.8601 1282.9375,160.2507 1283.6406,160.8914 L1284.9531,159.3132 C1283.9844,158.2976 1282.9688,157.7039 1281.7031,157.7039 C1279.5625,157.7039 1278.1094,159.2195 1278.1094,161.1414 C1278.1094,162.9382 1279.0313,163.8445 1280.125,164.5945 L1281.2188,165.3445 C1282.1563,165.9539 1282.6094,166.532 1282.6094,167.4695 C1282.6094,168.1414 1282.1406,168.5632 1281.4375,168.5632 C1280.7344,168.5632 1279.9844,168.0476 1279.3281,167.2195 L1277.7813,168.907 C1278.8125,170.0945 1280.1094,170.7351 1281.4375,170.7351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="1301.75" y="170.136">defaultTableConvertor</text><line style="stroke:#181818;stroke-width:0.5;" x1="1182.5" x2="1537.5" y1="180.032" y2="180.032"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1189.5" y="192.6679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="331" x="1201.5" y="200.2719">defaultQualifiedResource schema.GroupResource</text></g><!--MD5=[c24cd39c298e42e7c5145a005d49c9dc]
+class rest.defaultUpdatedObjectInfo--><g id="elem_rest.defaultUpdatedObjectInfo"><rect codeLine="181" fill="#F1F1F1" height="80.5438" id="rest.defaultUpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="225" x="415.5" y="137.532"/><ellipse cx="438.6" cy="153.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M438.7875,160.2351 C441.0844,160.2351 442.5375,158.6101 442.5375,156.6101 C442.5375,154.782 441.7094,153.9382 440.5688,153.1414 L439.5531,152.4226 C438.4281,151.6101 438.0063,151.3132 438.0063,150.4539 C438.0063,149.7664 438.4906,149.3601 439.0688,149.3601 C439.8031,149.3601 440.2875,149.7507 440.9906,150.3914 L442.3031,148.8132 C441.3344,147.7976 440.3188,147.2039 439.0531,147.2039 C436.9125,147.2039 435.4594,148.7195 435.4594,150.6414 C435.4594,152.4382 436.3813,153.3445 437.475,154.0945 L438.5688,154.8445 C439.5063,155.4539 439.9594,156.032 439.9594,156.9695 C439.9594,157.6414 439.4906,158.0632 438.7875,158.0632 C438.0844,158.0632 437.3344,157.5476 436.6781,156.7195 L435.1313,158.407 C436.1625,159.5945 437.4594,160.2351 438.7875,160.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="454.4" y="159.636">defaultUpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="416.5" x2="639.5" y1="169.532" y2="169.532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="423.5" y="182.1679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="435.5" y="189.7719">obj runtime.Object</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="423.5" y="202.4398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="435.5" y="210.0438">transformers []TransformFunc</text></g><!--MD5=[965eedf11e01ccb33a0daab5a4b4ab17]
+class rest.errNotAcceptable--><g id="elem_rest.errNotAcceptable"><rect codeLine="189" fill="#F1F1F1" height="60.2719" id="rest.errNotAcceptable" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="244" x="2695" y="378.532"/><ellipse cx="2755.25" cy="394.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2755.4375,401.2351 C2757.7344,401.2351 2759.1875,399.6101 2759.1875,397.6101 C2759.1875,395.782 2758.3594,394.9382 2757.2188,394.1414 L2756.2031,393.4226 C2755.0781,392.6101 2754.6563,392.3132 2754.6563,391.4539 C2754.6563,390.7664 2755.1406,390.3601 2755.7188,390.3601 C2756.4531,390.3601 2756.9375,390.7507 2757.6406,391.3914 L2758.9531,389.8132 C2757.9844,388.7976 2756.9688,388.2039 2755.7031,388.2039 C2753.5625,388.2039 2752.1094,389.7195 2752.1094,391.6414 C2752.1094,393.4382 2753.0313,394.3445 2754.125,395.0945 L2755.2188,395.8445 C2756.1563,396.4539 2756.6094,397.032 2756.6094,397.9695 C2756.6094,398.6414 2756.1406,399.0632 2755.4375,399.0632 C2754.7344,399.0632 2753.9844,398.5476 2753.3281,397.7195 L2751.7813,399.407 C2752.8125,400.5945 2754.1094,401.2351 2755.4375,401.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="2775.75" y="400.636">errNotAcceptable</text><line style="stroke:#181818;stroke-width:0.5;" x1="2696" x2="2938" y1="410.532" y2="410.532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2703" y="423.1679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="2715" y="430.7719">resource schema.GroupResource</text></g><!--MD5=[fdb268432cd6d8d1db45afaa59f8f95d]
+class rest.GarbageCollectionPolicy--><g id="elem_rest.GarbageCollectionPolicy"><rect codeLine="196" fill="#F1F1F1" height="40" id="rest.GarbageCollectionPolicy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="193" x="2974.5" y="388.532"/><ellipse cx="2989.5" cy="404.532" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2988.2344,411.532 L2990.7813,411.532 L2990.7813,401.0164 L2993.4063,401.0164 L2993.4063,398.907 L2985.5938,398.907 L2985.5938,401.0164 L2988.2344,401.0164 L2988.2344,411.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="3003.5" y="410.636">GarbageCollectionPolicy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2975.5" x2="3166.5" y1="420.532" y2="420.532"/></g><!--MD5=[88a430c7e21206602a6f89c6a5657dfb]
+class rest.TransformFunc--><g id="elem_rest.TransformFunc"><rect codeLine="198" fill="#F1F1F1" height="40" id="rest.TransformFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="3202.5" y="388.532"/><ellipse cx="3217.5" cy="404.532" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3216.2344,411.532 L3218.7813,411.532 L3218.7813,401.0164 L3221.4063,401.0164 L3221.4063,398.907 L3213.5938,398.907 L3213.5938,401.0164 L3216.2344,401.0164 L3216.2344,411.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3231.5" y="410.636">TransformFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="3203.5" x2="3334.5" y1="420.532" y2="420.532"/></g><!--MD5=[a8aa562421c70ac8a5a771d61d6f0f0a]
+class rest.ValidateObjectFunc--><g id="elem_rest.ValidateObjectFunc"><rect codeLine="200" fill="#F1F1F1" height="40" id="rest.ValidateObjectFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="1988" y="498.532"/><ellipse cx="2003" cy="514.532" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2001.7344,521.532 L2004.2813,521.532 L2004.2813,511.0164 L2006.9063,511.0164 L2006.9063,508.907 L1999.0938,508.907 L1999.0938,511.0164 L2001.7344,511.0164 L2001.7344,521.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="2017" y="520.636">ValidateObjectFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="1989" x2="2149" y1="530.532" y2="530.532"/></g><!--MD5=[87d55d0f02a8b5be5158031b558c957d]
+class rest.ValidateObjectUpdateFunc--><g id="elem_rest.ValidateObjectUpdateFunc"><rect codeLine="202" fill="#F1F1F1" height="40" id="rest.ValidateObjectUpdateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="2185.5" y="498.532"/><ellipse cx="2200.5" cy="514.532" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2199.2344,521.532 L2201.7813,521.532 L2201.7813,511.0164 L2204.4063,511.0164 L2204.4063,508.907 L2196.5938,508.907 L2196.5938,511.0164 L2199.2344,511.0164 L2199.2344,521.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179" x="2214.5" y="520.636">ValidateObjectUpdateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="2186.5" x2="2395.5" y1="530.532" y2="530.532"/></g><!--MD5=[861098c06576cfb31d5503ff2c42b4f8]
+class rest.wrappedUpdatedObjectInfo--><g id="elem_rest.wrappedUpdatedObjectInfo"><rect codeLine="204" fill="#F1F1F1" height="80.5438" id="rest.wrappedUpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="225" x="675.5" y="137.532"/><ellipse cx="693.65" cy="153.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M693.8375,160.2351 C696.1344,160.2351 697.5875,158.6101 697.5875,156.6101 C697.5875,154.782 696.7594,153.9382 695.6188,153.1414 L694.6031,152.4226 C693.4781,151.6101 693.0563,151.3132 693.0563,150.4539 C693.0563,149.7664 693.5406,149.3601 694.1188,149.3601 C694.8531,149.3601 695.3375,149.7507 696.0406,150.3914 L697.3531,148.8132 C696.3844,147.7976 695.3688,147.2039 694.1031,147.2039 C691.9625,147.2039 690.5094,148.7195 690.5094,150.6414 C690.5094,152.4382 691.4313,153.3445 692.525,154.0945 L693.6188,154.8445 C694.5563,155.4539 695.0094,156.032 695.0094,156.9695 C695.0094,157.6414 694.5406,158.0632 693.8375,158.0632 C693.1344,158.0632 692.3844,157.5476 691.7281,156.7195 L690.1813,158.407 C691.2125,159.5945 692.5094,160.2351 693.8375,160.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="708.35" y="159.636">wrappedUpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="676.5" x2="899.5" y1="169.532" y2="169.532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="683.5" y="182.1679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="177" x="695.5" y="189.7719">objInfo UpdatedObjectInfo</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="683.5" y="202.4398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="695.5" y="210.0438">transformers []TransformFunc</text></g><!--MD5=[aab57e7b85523271245ff44456b29718]
+class rest.fontcolorbluefuncfontcontextContextruntimeObjecterror--><g id="elem_rest.fontcolorbluefuncfontcontextContextruntimeObjecterror"><rect codeLine="212" fill="#F1F1F1" height="40" id="rest.fontcolorbluefuncfontcontextContextruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="317" x="2431.5" y="498.532"/><ellipse cx="2446.5" cy="514.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2446.7344,521.2351 C2447.8906,521.2351 2448.9844,520.7507 2449.8125,519.7195 L2448.3906,518.2039 C2448,518.7507 2447.5313,519.0632 2446.9688,519.0632 C2445.7813,519.0632 2444.7656,517.9226 2444.7656,514.6882 C2444.7656,511.532 2445.8281,510.3601 2446.8594,510.3601 C2447.4531,510.3601 2447.8281,510.657 2448.25,511.157 L2449.6719,509.5945 C2449,508.8445 2448.0313,508.2039 2446.75,508.2039 C2444.3281,508.2039 2442.1875,510.1726 2442.1875,514.7976 C2442.1875,519.4382 2444.3281,521.2351 2446.7344,521.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="2460.5" y="520.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="2490.5" y="520.636">(context.Context, runtime.Object) error</text><line style="stroke:#181818;stroke-width:0.5;" x1="2432.5" x2="2747.5" y1="530.532" y2="530.532"/></g><!--MD5=[801a24b3dac25ce1ed597fca0e846a4b]
+class rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror--><g id="elem_rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror"><rect codeLine="215" fill="#F1F1F1" height="40" id="rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="424" x="2784" y="498.532"/><ellipse cx="2799" cy="514.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2799.2344,521.2351 C2800.3906,521.2351 2801.4844,520.7507 2802.3125,519.7195 L2800.8906,518.2039 C2800.5,518.7507 2800.0313,519.0632 2799.4688,519.0632 C2798.2813,519.0632 2797.2656,517.9226 2797.2656,514.6882 C2797.2656,511.532 2798.3281,510.3601 2799.3594,510.3601 C2799.9531,510.3601 2800.3281,510.657 2800.75,511.157 L2802.1719,509.5945 C2801.5,508.8445 2800.5313,508.2039 2799.25,508.2039 C2796.8281,508.2039 2794.6875,510.1726 2794.6875,514.7976 C2794.6875,519.4382 2796.8281,521.2351 2799.2344,521.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="2813" y="520.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="362" x="2843" y="520.636">(context.Context, runtime.Object, runtime.Object) error</text><line style="stroke:#181818;stroke-width:0.5;" x1="2785" x2="3207" y1="530.532" y2="530.532"/></g><!--MD5=[7c117341b36e91497707715adc3a35d7]
+class rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror--><g id="elem_rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror"><rect codeLine="218" fill="#F1F1F1" height="40" id="rest.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="541" x="3243.5" y="498.532"/><ellipse cx="3258.5" cy="514.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3258.7344,521.2351 C3259.8906,521.2351 3260.9844,520.7507 3261.8125,519.7195 L3260.3906,518.2039 C3260,518.7507 3259.5313,519.0632 3258.9688,519.0632 C3257.7813,519.0632 3256.7656,517.9226 3256.7656,514.6882 C3256.7656,511.532 3257.8281,510.3601 3258.8594,510.3601 C3259.4531,510.3601 3259.8281,510.657 3260.25,511.157 L3261.6719,509.5945 C3261,508.8445 3260.0313,508.2039 3258.75,508.2039 C3256.3281,508.2039 3254.1875,510.1726 3254.1875,514.7976 C3254.1875,519.4382 3256.3281,521.2351 3258.7344,521.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="3272.5" y="520.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="479" x="3302.5" y="520.636">(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)</text><line style="stroke:#181818;stroke-width:0.5;" x1="3244.5" x2="3783.5" y1="530.532" y2="530.532"/></g><!--MD5=[7cfcb934d5e7239bbb45164bba09a297]
+reverse link rest.RESTCreateUpdateStrategy to rest.CreateUpdateResetFieldsStrategy--><g id="link_rest.RESTCreateUpdateStrategy_rest.CreateUpdateResetFieldsStrategy"><path codeLine="222" d="M982.2171,203.2396 C930.0975,225.5898 854.9818,257.8014 806.8286,278.4507 " fill="none" id="rest.RESTCreateUpdateStrategy-backto-rest.CreateUpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="994.2831,198.0654,987.1923,196.7539,983.2544,202.7948,990.3452,204.1063,994.2831,198.0654" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9f6d0f301252aa760d98da2f3f38f4dc]
+reverse link rest.ResetFieldsStrategy to rest.CreateUpdateResetFieldsStrategy--><g id="link_rest.ResetFieldsStrategy_rest.CreateUpdateResetFieldsStrategy"><path codeLine="223" d="M355.9278,203.2572 C369.5486,208.7506 384.1582,214.2061 398,218.532 C479.5527,244.0194 573.8678,264.5855 645.7798,278.4807 " fill="none" id="rest.ResetFieldsStrategy-backto-rest.CreateUpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="343.7473,198.233,347.7687,204.2187,354.8406,202.8088,350.8192,196.8231,343.7473,198.233" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9932aaf33fca23306d4cc1a280ab1954]
+reverse link rest.Creater to rest.CreaterUpdater--><g id="link_rest.Creater_rest.CreaterUpdater"><path codeLine="224" d="M1975,90.8291 C1975,112.3023 1975,139.5289 1975,157.7972 " fill="none" id="rest.Creater-backto-rest.CreaterUpdater" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1975,77.701,1971,83.701,1975,89.701,1979,83.701,1975,77.701" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0a0d10e743e7a8da02d9ab755e38834a]
+reverse link rest.TableConvertor to rest.Lister--><g id="link_rest.TableConvertor_rest.Lister"><path codeLine="225" d="M1667.0205,82.3138 C1703.6642,96.358 1748.4344,115.5158 1786,137.532 C1795.971,143.3758 1806.1684,150.9124 1814.8614,157.8966 " fill="none" id="rest.TableConvertor-backto-rest.Lister" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1654.4232,77.5632,1658.6258,83.4231,1665.6513,81.7976,1661.4487,75.9377,1654.4232,77.5632" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a4b787de9cf53e0e328d25cacb03173a]
+reverse link rest.Getter to rest.Patcher--><g id="link_rest.Getter_rest.Patcher"><path codeLine="226" d="M1716.5607,210.1085 C1706.1383,231.7619 1692.7001,259.681 1683.7396,278.2972 " fill="none" id="rest.Getter-backto-rest.Patcher" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1722.2921,198.201,1716.0857,201.8725,1717.0877,209.0136,1723.2941,205.3421,1722.2921,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6a1546732b3d926e2d722c152b60e710]
+reverse link rest.Updater to rest.Patcher--><g id="link_rest.Updater_rest.Patcher"><path codeLine="227" d="M1632.1731,210.1085 C1642.4158,231.7619 1655.6223,259.681 1664.4284,278.2972 " fill="none" id="rest.Updater-backto-rest.Patcher" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1626.5405,198.201,1625.4903,205.3352,1631.6717,209.0486,1632.722,201.9144,1626.5405,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[89b386e1c6b09b10130430f11e7c617f]
+reverse link rest.RESTCreateStrategy to rest.RESTCreateUpdateStrategy--><g id="link_rest.RESTCreateStrategy_rest.RESTCreateUpdateStrategy"><path codeLine="228" d="M1041,90.8291 C1041,112.3023 1041,139.5289 1041,157.7972 " fill="none" id="rest.RESTCreateStrategy-backto-rest.RESTCreateUpdateStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1041,77.701,1037,83.701,1041,89.701,1045,83.701,1041,77.701" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[25a86fc685ae976334709cc82cc1835d]
+reverse link rest.CollectionDeleter to rest.StandardStorage--><g id="link_rest.CollectionDeleter_rest.StandardStorage"><path codeLine="229" d="M2127.4567,208.9009 C2111.5262,230.7149 2090.6266,259.333 2076.7773,278.2972 " fill="none" id="rest.CollectionDeleter-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2135.2708,198.201,2128.5019,200.6874,2128.1936,207.8919,2134.9625,205.4055,2135.2708,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f420189f1d9535a2d6eab8f2955cadbd]
+reverse link rest.CreaterUpdater to rest.StandardStorage--><g id="link_rest.CreaterUpdater_rest.StandardStorage"><path codeLine="230" d="M1997.2871,208.9009 C2013.0366,230.7149 2033.6987,259.333 2047.3906,278.2972 " fill="none" id="rest.CreaterUpdater-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1989.5618,198.201,1989.8309,205.4071,1996.5862,207.9302,1996.3171,200.7242,1989.5618,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5ea642e82274b7d9f65b375a51f91ca1]
+reverse link rest.Getter to rest.StandardStorage--><g id="link_rest.Getter_rest.StandardStorage"><path codeLine="231" d="M1765.462,206.0078 C1772.0064,210.6316 1779.0137,215.0462 1786,218.532 C1851.7334,251.3301 1933.1622,272.8655 1990.4827,285.2435 " fill="none" id="rest.Getter-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1754.971,198.1557,1757.3777,204.9533,1764.5781,205.3462,1762.1714,198.5486,1754.971,198.1557" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e3f639ac662ab96d77d10a86eeb7cb44]
+reverse link rest.GracefulDeleter to rest.StandardStorage--><g id="link_rest.GracefulDeleter_rest.StandardStorage"><path codeLine="232" d="M2396.8242,203.8104 C2385.5349,209.0817 2373.4911,214.3032 2362,218.532 C2285.7406,246.5959 2195.2651,269.3492 2133.7604,283.3147 " fill="none" id="rest.GracefulDeleter-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2408.7162,198.1156,2401.5771,197.0994,2397.8932,203.2985,2405.0323,204.3147,2408.7162,198.1156" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7bf8cf0faa52f08ad27d96bc486e77f6]
+reverse link rest.Lister to rest.StandardStorage--><g id="link_rest.Lister_rest.StandardStorage"><path codeLine="233" d="M1872.4576,206.0372 C1878.4849,210.4454 1884.811,214.7796 1891,218.532 C1929.9571,242.1519 1977.0226,263.7072 2011.9062,278.4765 " fill="none" id="rest.Lister-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1862.0252,198.1322,1864.3917,204.9439,1871.5896,205.3794,1869.2231,198.5677,1862.0252,198.1322" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9f53da5e7ae49e72503b54868b5e2069]
+reverse link rest.Watcher to rest.StandardStorage--><g id="link_rest.Watcher_rest.StandardStorage"><path codeLine="234" d="M2262.304,205.5717 C2255.3414,210.1149 2248.0529,214.6144 2241,218.532 C2199.3408,241.6719 2149.7124,263.4283 2113.2903,278.3939 " fill="none" id="rest.Watcher-backto-rest.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2273.2517,198.2292,2266.0406,198.2492,2263.2856,204.9133,2270.4967,204.8933,2273.2517,198.2292" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[995794a0f9f62cb6677be0dce7b5ca95]
+reverse link rest.RESTUpdateStrategy to rest.UpdateResetFieldsStrategy--><g id="link_rest.RESTUpdateStrategy_rest.UpdateResetFieldsStrategy"><path codeLine="235" d="M125.858,208.0042 C146.2329,229.9254 173.3235,259.072 191.1926,278.2972 " fill="none" id="rest.RESTUpdateStrategy-backto-rest.UpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="116.7463,198.201,117.9012,205.319,124.9159,206.9906,123.761,199.8726,116.7463,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[31d879a508f50576b044547d84b5c884]
+reverse link rest.ResetFieldsStrategy to rest.UpdateResetFieldsStrategy--><g id="link_rest.ResetFieldsStrategy_rest.UpdateResetFieldsStrategy"><path codeLine="236" d="M276.2006,208.9009 C260.089,230.7149 238.9519,259.333 224.9452,278.2972 " fill="none" id="rest.ResetFieldsStrategy-backto-rest.UpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="284.1034,198.201,277.3212,200.6508,276.9741,207.8536,283.7563,205.4037,284.1034,198.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[788997d41777de72cb79285ec1bd8676]
+reverse link rest.TableConvertor to rest.defaultTableConvertor--><g id="link_rest.TableConvertor_rest.defaultTableConvertor"><path codeLine="238" d="M1538.8248,86.7253 C1502.4582,105.2938 1455.4834,129.2788 1418.8057,148.0062 " fill="none" id="rest.TableConvertor-backto-rest.defaultTableConvertor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1535.7688,80.426,1556.7645,77.5654,1542.1353,92.8947,1535.7688,80.426" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6b5a96ca8ff4689385222bcdb0d6a0a6]
+reverse link rest.UpdatedObjectInfo to rest.defaultUpdatedObjectInfo--><g id="link_rest.UpdatedObjectInfo_rest.defaultUpdatedObjectInfo"><path codeLine="239" d="M621.312,91.539 C605.8819,105.8415 587.8062,122.5962 571.6943,137.5307 " fill="none" id="rest.UpdatedObjectInfo-backto-rest.defaultUpdatedObjectInfo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="616.8144,86.1633,636.2409,77.701,626.3316,96.4308,616.8144,86.1633" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[16977474e1d806cbb1220ffe4bf8f4aa]
+reverse link rest.UpdatedObjectInfo to rest.wrappedUpdatedObjectInfo--><g id="link_rest.UpdatedObjectInfo_rest.wrappedUpdatedObjectInfo"><path codeLine="240" d="M694.688,91.539 C710.1181,105.8415 728.1938,122.5962 744.3057,137.5307 " fill="none" id="rest.UpdatedObjectInfo-backto-rest.wrappedUpdatedObjectInfo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="689.6684,96.4308,679.7591,77.701,699.1856,86.1633,689.6684,96.4308" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d9985c8ff706afeaf04699be91a68374]
+@startuml
+namespace rest {
+    interface CategoriesProvider  {
+        + Categories() []string
+
+    }
+    interface CollectionDeleter  {
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface Connecter  {
+        + Connect(ctx context.Context, id string, options runtime.Object, r Responder) (http.Handler, error)
+        + NewConnectOptions() (runtime.Object, bool, string)
+        + ConnectMethods() []string
+
+    }
+    interface CreateUpdateResetFieldsStrategy  {
+    }
+    interface Creater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface CreaterUpdater  {
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface GarbageCollectionDeleteStrategy  {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) GarbageCollectionPolicy
+
+    }
+    interface Getter  {
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+
+    }
+    interface GetterWithOptions  {
+        + Get(ctx context.Context, name string, options runtime.Object) (runtime.Object, error)
+        + NewGetOptions() (runtime.Object, bool, string)
+
+    }
+    interface GracefulDeleter  {
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+
+    }
+    interface GroupVersionAcceptor  {
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+
+    }
+    interface GroupVersionKindProvider  {
+        + GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
+
+    }
+    interface KindProvider  {
+        + Kind() string
+
+    }
+    interface Lister  {
+        + NewList() runtime.Object
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface MayReturnFullObjectDeleter  {
+        + DeleteReturnsDeletedObject() bool
+
+    }
+    interface NamedCreater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface NamespaceScopedStrategy  {
+        + NamespaceScoped() bool
+
+    }
+    interface Patcher  {
+    }
+    interface RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+    interface RESTCreateUpdateStrategy  {
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface RESTDeleteStrategy  {
+    }
+    interface RESTGracefulDeleteStrategy  {
+        + CheckGracefulDelete(ctx context.Context, obj runtime.Object, options *v1.DeleteOptions) bool
+
+    }
+    interface RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface Redirector  {
+        + ResourceLocation(ctx context.Context, id string) (*url.URL, http.RoundTripper, error)
+
+    }
+    interface ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+    interface ResourceStreamer  {
+        + InputStream(ctx context.Context, apiVersion string, acceptHeader string) (io.ReadCloser, bool, string, error)
+
+    }
+    interface Responder  {
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    interface Scoper  {
+        + NamespaceScoped() bool
+
+    }
+    interface ShortNamesProvider  {
+        + ShortNames() []string
+
+    }
+    interface SingularNameProvider  {
+        + GetSingularName() string
+
+    }
+    interface StandardStorage  {
+        + Destroy() 
+
+    }
+    interface Storage  {
+        + New() runtime.Object
+        + Destroy() 
+
+    }
+    interface StorageMetadata  {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface StorageVersionProvider  {
+        + StorageVersion() runtime.GroupVersioner
+
+    }
+    interface TableConvertor  {
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    interface UpdateResetFieldsStrategy  {
+    }
+    interface UpdatedObjectInfo  {
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    interface Updater  {
+        + New() runtime.Object
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface Watcher  {
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+
+    }
+    class defaultTableConvertor << (S,Aquamarine) >> {
+        - defaultQualifiedResource schema.GroupResource
+
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    class defaultUpdatedObjectInfo << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class errNotAcceptable << (S,Aquamarine) >> {
+        - resource schema.GroupResource
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    class rest.GarbageCollectionPolicy << (T, #FF7700) >>  {
+    }
+    class rest.TransformFunc << (T, #FF7700) >>  {
+    }
+    class rest.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class rest.ValidateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class wrappedUpdatedObjectInfo << (S,Aquamarine) >> {
+        - objInfo UpdatedObjectInfo
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"rest.RESTCreateUpdateStrategy" *- - "rest.CreateUpdateResetFieldsStrategy"
+"rest.ResetFieldsStrategy" *- - "rest.CreateUpdateResetFieldsStrategy"
+"rest.Creater" *- - "rest.CreaterUpdater"
+"rest.TableConvertor" *- - "rest.Lister"
+"rest.Getter" *- - "rest.Patcher"
+"rest.Updater" *- - "rest.Patcher"
+"rest.RESTCreateStrategy" *- - "rest.RESTCreateUpdateStrategy"
+"rest.CollectionDeleter" *- - "rest.StandardStorage"
+"rest.CreaterUpdater" *- - "rest.StandardStorage"
+"rest.Getter" *- - "rest.StandardStorage"
+"rest.GracefulDeleter" *- - "rest.StandardStorage"
+"rest.Lister" *- - "rest.StandardStorage"
+"rest.Watcher" *- - "rest.StandardStorage"
+"rest.RESTUpdateStrategy" *- - "rest.UpdateResetFieldsStrategy"
+"rest.ResetFieldsStrategy" *- - "rest.UpdateResetFieldsStrategy"
+
+"rest.TableConvertor" <|- - "rest.defaultTableConvertor"
+"rest.UpdatedObjectInfo" <|- - "rest.defaultUpdatedObjectInfo"
+"rest.UpdatedObjectInfo" <|- - "rest.wrappedUpdatedObjectInfo"
+
+hide methods
+@enduml
+
+@startuml
+namespace rest {
+    interface CategoriesProvider  {
+        + Categories() []string
+
+    }
+    interface CollectionDeleter  {
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface Connecter  {
+        + Connect(ctx context.Context, id string, options runtime.Object, r Responder) (http.Handler, error)
+        + NewConnectOptions() (runtime.Object, bool, string)
+        + ConnectMethods() []string
+
+    }
+    interface CreateUpdateResetFieldsStrategy  {
+    }
+    interface Creater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface CreaterUpdater  {
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface GarbageCollectionDeleteStrategy  {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) GarbageCollectionPolicy
+
+    }
+    interface Getter  {
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+
+    }
+    interface GetterWithOptions  {
+        + Get(ctx context.Context, name string, options runtime.Object) (runtime.Object, error)
+        + NewGetOptions() (runtime.Object, bool, string)
+
+    }
+    interface GracefulDeleter  {
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+
+    }
+    interface GroupVersionAcceptor  {
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+
+    }
+    interface GroupVersionKindProvider  {
+        + GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
+
+    }
+    interface KindProvider  {
+        + Kind() string
+
+    }
+    interface Lister  {
+        + NewList() runtime.Object
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface MayReturnFullObjectDeleter  {
+        + DeleteReturnsDeletedObject() bool
+
+    }
+    interface NamedCreater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface NamespaceScopedStrategy  {
+        + NamespaceScoped() bool
+
+    }
+    interface Patcher  {
+    }
+    interface RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+    interface RESTCreateUpdateStrategy  {
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface RESTDeleteStrategy  {
+    }
+    interface RESTGracefulDeleteStrategy  {
+        + CheckGracefulDelete(ctx context.Context, obj runtime.Object, options *v1.DeleteOptions) bool
+
+    }
+    interface RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface Redirector  {
+        + ResourceLocation(ctx context.Context, id string) (*url.URL, http.RoundTripper, error)
+
+    }
+    interface ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+    interface ResourceStreamer  {
+        + InputStream(ctx context.Context, apiVersion string, acceptHeader string) (io.ReadCloser, bool, string, error)
+
+    }
+    interface Responder  {
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    interface Scoper  {
+        + NamespaceScoped() bool
+
+    }
+    interface ShortNamesProvider  {
+        + ShortNames() []string
+
+    }
+    interface SingularNameProvider  {
+        + GetSingularName() string
+
+    }
+    interface StandardStorage  {
+        + Destroy() 
+
+    }
+    interface Storage  {
+        + New() runtime.Object
+        + Destroy() 
+
+    }
+    interface StorageMetadata  {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface StorageVersionProvider  {
+        + StorageVersion() runtime.GroupVersioner
+
+    }
+    interface TableConvertor  {
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    interface UpdateResetFieldsStrategy  {
+    }
+    interface UpdatedObjectInfo  {
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    interface Updater  {
+        + New() runtime.Object
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface Watcher  {
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+
+    }
+    class defaultTableConvertor << (S,Aquamarine) >> {
+        - defaultQualifiedResource schema.GroupResource
+
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    class defaultUpdatedObjectInfo << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class errNotAcceptable << (S,Aquamarine) >> {
+        - resource schema.GroupResource
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    class rest.GarbageCollectionPolicy << (T, #FF7700) >>  {
+    }
+    class rest.TransformFunc << (T, #FF7700) >>  {
+    }
+    class rest.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class rest.ValidateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class wrappedUpdatedObjectInfo << (S,Aquamarine) >> {
+        - objInfo UpdatedObjectInfo
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror {
+    }
+}
+"rest.RESTCreateUpdateStrategy" *- - "rest.CreateUpdateResetFieldsStrategy"
+"rest.ResetFieldsStrategy" *- - "rest.CreateUpdateResetFieldsStrategy"
+"rest.Creater" *- - "rest.CreaterUpdater"
+"rest.TableConvertor" *- - "rest.Lister"
+"rest.Getter" *- - "rest.Patcher"
+"rest.Updater" *- - "rest.Patcher"
+"rest.RESTCreateStrategy" *- - "rest.RESTCreateUpdateStrategy"
+"rest.CollectionDeleter" *- - "rest.StandardStorage"
+"rest.CreaterUpdater" *- - "rest.StandardStorage"
+"rest.Getter" *- - "rest.StandardStorage"
+"rest.GracefulDeleter" *- - "rest.StandardStorage"
+"rest.Lister" *- - "rest.StandardStorage"
+"rest.Watcher" *- - "rest.StandardStorage"
+"rest.RESTUpdateStrategy" *- - "rest.UpdateResetFieldsStrategy"
+"rest.ResetFieldsStrategy" *- - "rest.UpdateResetFieldsStrategy"
+
+"rest.TableConvertor" <|- - "rest.defaultTableConvertor"
+"rest.UpdatedObjectInfo" <|- - "rest.defaultUpdatedObjectInfo"
+"rest.UpdatedObjectInfo" <|- - "rest.wrappedUpdatedObjectInfo"
+
+hide methods
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: zh
+Country: CN
+--></g></svg>

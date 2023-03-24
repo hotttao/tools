@@ -1,0 +1,267 @@
+@startuml
+namespace schema {
+    interface CacheableObject  {
+        + CacheEncode(id Identifier, encode <font color=blue>func</font>(Object, io.Writer) error, w io.Writer) error
+        + GetObject() Object
+
+    }
+    interface ClientNegotiator  {
+        + Encoder(contentType string, params <font color=blue>map</font>[string]string) (Encoder, error)
+        + Decoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, error)
+        + StreamDecoder(contentType string, params <font color=blue>map</font>[string]string) (Decoder, Serializer, Framer, error)
+
+    }
+    interface Decoder  {
+        + Decode(data []byte, defaults *schema.GroupVersionKind, into Object) (Object, *schema.GroupVersionKind, error)
+
+    }
+    interface Encoder  {
+        + Encode(obj Object, w io.Writer) error
+        + Identifier() Identifier
+
+    }
+    interface EncoderWithAllocator  {
+        + EncodeWithAllocator(obj Object, w io.Writer, memAlloc MemoryAllocator) error
+
+    }
+    interface EquivalentResourceMapper  {
+        + EquivalentResourcesFor(resource schema.GroupVersionResource, subresource string) []schema.GroupVersionResource
+        + KindFor(resource schema.GroupVersionResource, subresource string) schema.GroupVersionKind
+
+    }
+    interface EquivalentResourceRegistry  {
+        + RegisterKindFor(resource schema.GroupVersionResource, subresource string, kind schema.GroupVersionKind) 
+
+    }
+    interface Framer  {
+        + NewFrameReader(r io.ReadCloser) io.ReadCloser
+        + NewFrameWriter(w io.Writer) io.Writer
+
+    }
+    interface GroupVersioner  {
+        + KindForGroupVersionKinds(kinds []schema.GroupVersionKind) (schema.GroupVersionKind, bool)
+        + Identifier() string
+
+    }
+    interface MemoryAllocator  {
+        + Allocate(n uint64) []byte
+
+    }
+    interface Namer  {
+        + Name(obj Object) (string, error)
+        + Namespace(obj Object) (string, error)
+
+    }
+    interface NegotiatedSerializer  {
+        + SupportedMediaTypes() []SerializerInfo
+        + EncoderForVersion(serializer Encoder, gv GroupVersioner) Encoder
+        + DecoderToVersion(serializer Decoder, gv GroupVersioner) Decoder
+
+    }
+    interface NestedObjectDecoder  {
+        + DecodeNestedObjects(d Decoder) error
+
+    }
+    interface NestedObjectEncoder  {
+        + EncodeNestedObjects(e Encoder) error
+
+    }
+    interface Object  {
+        + GetObjectKind() schema.ObjectKind
+        + DeepCopyObject() Object
+
+    }
+    interface ObjectConvertor  {
+        + Convert(in <font color=blue>interface</font>{}, out <font color=blue>interface</font>{}, context <font color=blue>interface</font>{}) error
+        + ConvertToVersion(in Object, gv GroupVersioner) (Object, error)
+        + ConvertFieldLabel(gvk schema.GroupVersionKind, label string, value string) (string, string, error)
+
+    }
+    interface ObjectCreater  {
+        + New(kind schema.GroupVersionKind) (Object, error)
+
+    }
+    interface ObjectDefaulter  {
+        + Default(in Object) 
+
+    }
+    interface ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+    interface ObjectVersioner  {
+        + ConvertToVersion(in Object, gv GroupVersioner) (Object, error)
+
+    }
+    interface ParameterCodec  {
+        + DecodeParameters(parameters url.Values, from schema.GroupVersion, into Object) error
+        + EncodeParameters(obj Object, to schema.GroupVersion) (url.Values, error)
+
+    }
+    interface ResourceVersioner  {
+        + SetResourceVersion(obj Object, version string) error
+        + ResourceVersion(obj Object) (string, error)
+
+    }
+    class Scheme << (S,Aquamarine) >> {
+        - gvkToType <font color=blue>map</font>[schema.GroupVersionKind]reflect.Type
+        - typeToGVK <font color=blue>map</font>[reflect.Type][]schema.GroupVersionKind
+        - unversionedTypes <font color=blue>map</font>[reflect.Type]schema.GroupVersionKind
+        - unversionedKinds <font color=blue>map</font>[string]reflect.Type
+        - fieldLabelConversionFuncs <font color=blue>map</font>[schema.GroupVersionKind]FieldLabelConversionFunc
+        - defaulterFuncs <font color=blue>map</font>[reflect.Type]<font color=blue>func</font>(<font color=blue>interface</font>{}) 
+        - converter *conversion.Converter
+        - versionPriority <font color=blue>map</font>[string][]string
+        - observedVersions []schema.GroupVersion
+        - schemeName string
+
+        - convertToVersion(copy bool, in Object, target GroupVersioner) (Object, error)
+        - unstructuredToTyped(in Unstructured) (Object, error)
+        - generateConvertMeta(in <font color=blue>interface</font>{}) *conversion.Meta
+        - addObservedVersion(version schema.GroupVersion) 
+
+        + Converter() *conversion.Converter
+        + AddUnversionedTypes(version schema.GroupVersion, types ...Object) 
+        + AddKnownTypes(gv schema.GroupVersion, types ...Object) 
+        + AddKnownTypeWithName(gvk schema.GroupVersionKind, obj Object) 
+        + KnownTypes(gv schema.GroupVersion) <font color=blue>map</font>[string]reflect.Type
+        + VersionsForGroupKind(gk schema.GroupKind) []schema.GroupVersion
+        + AllKnownTypes() <font color=blue>map</font>[schema.GroupVersionKind]reflect.Type
+        + ObjectKinds(obj Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+        + IsUnversioned(obj Object) (bool, bool)
+        + New(kind schema.GroupVersionKind) (Object, error)
+        + AddIgnoredConversionType(from <font color=blue>interface</font>{}, to <font color=blue>interface</font>{}) error
+        + AddConversionFunc(a <font color=blue>interface</font>{}, b <font color=blue>interface</font>{}, fn conversion.ConversionFunc) error
+        + AddGeneratedConversionFunc(a <font color=blue>interface</font>{}, b <font color=blue>interface</font>{}, fn conversion.ConversionFunc) error
+        + AddFieldLabelConversionFunc(gvk schema.GroupVersionKind, conversionFunc FieldLabelConversionFunc) error
+        + AddTypeDefaultingFunc(srcType Object, fn <font color=blue>func</font>(<font color=blue>interface</font>{}) ) 
+        + Default(src Object) 
+        + Convert(in <font color=blue>interface</font>{}, out <font color=blue>interface</font>{}, context <font color=blue>interface</font>{}) error
+        + ConvertFieldLabel(gvk schema.GroupVersionKind, label string, value string) (string, string, error)
+        + ConvertToVersion(in Object, target GroupVersioner) (Object, error)
+        + UnsafeConvertToVersion(in Object, target GroupVersioner) (Object, error)
+        + SetVersionPriority(versions ...schema.GroupVersion) error
+        + PrioritizedVersionsForGroup(group string) []schema.GroupVersion
+        + PrioritizedVersionsAllGroups() []schema.GroupVersion
+        + PreferredVersionAllGroups() []schema.GroupVersion
+        + IsGroupRegistered(group string) bool
+        + IsVersionRegistered(version schema.GroupVersion) bool
+        + Name() string
+
+    }
+    class SchemeBuilder << (S,Aquamarine) >> {
+        + AddToScheme(s *Scheme) error
+        + Register(funcs ...<font color=blue>func</font>(*Scheme) error) 
+
+    }
+    interface Serializer  {
+    }
+    class SerializerInfo << (S,Aquamarine) >> {
+        + MediaType string
+        + MediaTypeType string
+        + MediaTypeSubType string
+        + EncodesAsText bool
+        + Serializer Serializer
+        + PrettySerializer Serializer
+        + StrictSerializer Serializer
+        + StreamSerializer *StreamSerializerInfo
+
+    }
+    interface StorageSerializer  {
+        + SupportedMediaTypes() []SerializerInfo
+        + UniversalDeserializer() Decoder
+        + EncoderForVersion(serializer Encoder, gv GroupVersioner) Encoder
+        + DecoderToVersion(serializer Decoder, gv GroupVersioner) Decoder
+
+    }
+    class StreamSerializerInfo << (S,Aquamarine) >> {
+        + EncodesAsText bool
+
+    }
+    interface Unstructured  {
+        + NewEmptyInstance() Unstructured
+        + UnstructuredContent() <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        + SetUnstructuredContent( <font color=blue>map</font>[string]<font color=blue>interface</font>{}) 
+        + IsList() bool
+        + EachListItem( <font color=blue>func</font>(Object) error) error
+
+    }
+    interface UnstructuredConverter  {
+        + ToUnstructured(obj <font color=blue>interface</font>{}) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+        + FromUnstructured(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}) error
+
+    }
+    class fieldInfo << (S,Aquamarine) >> {
+        - name string
+        - nameValue reflect.Value
+        - omitempty bool
+
+    }
+    class fieldsCache << (S,Aquamarine) >> {
+        - value atomic.Value
+
+    }
+    class fromUnstructuredContext << (S,Aquamarine) >> {
+        - isInlined bool
+        - matchedKeys []<font color=blue>map</font>[string]<font color=blue>struct</font>{}
+        - parentPath []string
+        - returnUnknownFields bool
+        - unknownFieldErrors []error
+
+        - pushMatchedKeyTracker() 
+        - recordMatchedKey(key string) 
+        - popAndVerifyMatchedKeys(mapValue reflect.Value) 
+        - recordUnknownField(field string) 
+        - pushIndex(index int) 
+        - pushKey(key string) 
+
+    }
+    class schema.Codec << (T, #FF7700) >>  {
+    }
+    class schema.FieldLabelConversionFunc << (T, #FF7700) >>  {
+    }
+    class schema.Identifier << (T, #FF7700) >>  {
+    }
+    class schema.SchemeBuilder << (T, #FF7700) >>  {
+    }
+    class schema.fieldsCacheMap << (T, #FF7700) >>  {
+    }
+    class structField << (S,Aquamarine) >> {
+        - structType reflect.Type
+        - field int
+
+    }
+    class unstructuredConverter << (S,Aquamarine) >> {
+        - mismatchDetection bool
+        - comparison conversion.Equalities
+
+        + FromUnstructuredWithValidation(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}, returnUnknownFields bool) error
+        + FromUnstructured(u <font color=blue>map</font>[string]<font color=blue>interface</font>{}, obj <font color=blue>interface</font>{}) error
+        + ToUnstructured(obj <font color=blue>interface</font>{}) (<font color=blue>map</font>[string]<font color=blue>interface</font>{}, error)
+
+    }
+}
+"schema.Encoder" *-- "schema.EncoderWithAllocator"
+"schema.EquivalentResourceMapper" *-- "schema.EquivalentResourceRegistry"
+"schema.Decoder" *-- "schema.Serializer"
+"schema.Encoder" *-- "schema.Serializer"
+"schema.Framer" *-- "schema.StreamSerializerInfo"
+"schema.Serializer" *-- "schema.StreamSerializerInfo"
+"schema.Object" *-- "schema.Unstructured"
+"sync.Mutex" *-- "schema.fieldsCache"
+
+"schema.ObjectConvertor" <|-- "schema.Scheme"
+"schema.ObjectCreater" <|-- "schema.Scheme"
+"schema.ObjectDefaulter" <|-- "schema.Scheme"
+"schema.ObjectTyper" <|-- "schema.Scheme"
+"schema.ObjectVersioner" <|-- "schema.Scheme"
+"schema.UnstructuredConverter" <|-- "schema.unstructuredConverter"
+
+"__builtin__.string" #.. "schema.Identifier"
+"schema.<font color=blue>func</font>(string, string) (string, string, error)" #.. "schema.FieldLabelConversionFunc"
+"schema.<font color=blue>map</font>[structField]*{packageName}fieldInfo" #.. "schema.fieldsCacheMap"
+"schema.Serializer" #.. "schema.Codec"
+"schema.[]<font color=blue>func</font>(*Scheme) error" #.. "schema.SchemeBuilder"
+@enduml
