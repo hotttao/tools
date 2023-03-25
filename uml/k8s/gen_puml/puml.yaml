@@ -34,11 +34,16 @@ define:
         - 'apimachinery/pkg/runtime/scheme_builder.go'
     storage:
         options:
-        - -hide-methods
         includes:
         - 'apiserver/pkg/storage/interfaces.go'
         - 'apiserver/pkg/storage/etcd3/store.go'
+        - 'apiserver/pkg/registry/generic/registry/dryrun.go'
         # - 'apiserver/pkg/registry/generic/registry/dryrun.go'
+    reset_store:
+        options:
+        - -hide-methods
+        includes:
+        - 'apiserver/pkg/storage/interfaces.go'
         - 'apiserver/pkg/registry/generic/registry/store.go'
         - 'apiserver/pkg/registry/rest/rest.go'
         - 'apiserver/pkg/registry/rest/update.go'

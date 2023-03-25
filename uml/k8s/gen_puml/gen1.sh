@@ -5,4 +5,5 @@ goplantuml -recursive -hide-connections -show-implementations -show-compositions
 goplantuml -hide-connections -show-implementations -hide-methods -ignore "/home/tao/code/github/kubernetes/staging/src/k8s.io/apimachinery/pkg/runtime/serializer,/home/tao/code/github/kubernetes/staging/src/k8s.io/apimachinery/pkg/runtime/testing," /home/tao/code/github/kubernetes/staging/src/k8s.io/apimachinery/pkg/runtime /home/tao/code/github/kubernetes/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1 > /home/tao/code/github/tools/uml/k8s/staging/apimachinery/pkg/runtime_meta.puml
 goplantuml   -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/codec > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/codec.puml
 goplantuml   -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/schema > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/schema.puml
-goplantuml -hide-methods  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/storage > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/storage.puml
+goplantuml   -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/storage > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/storage.puml
+goplantuml -hide-methods  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/reset_store > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/reset_store.puml

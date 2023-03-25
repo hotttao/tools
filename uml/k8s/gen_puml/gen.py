@@ -184,7 +184,7 @@ class GenPuml:
                 'filter': '',
                 'module': ' '.join([temp_module]),
                 'path': path,
-                'options': ' '.join(ms.get('options', []))
+                'options': ' '.join(ms.get('options', []) or [])
             }
             c = DEFINE_COMMAND.format(**p)
             self.puml_handler_info[i] = {

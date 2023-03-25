@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1019px" preserveAspectRatio="none" style="width:6630px;height:1019px;background:#FFFFFF;" version="1.1" viewBox="0 0 6630 1019" width="6630px" zoomAndPan="magnify"><defs/><g><!--MD5=[343b2c773e3cfdd9813bbb56abdbaa4e]
+cluster reset_store--><g id="cluster_reset_store"><path d="M8.5,106.532 L88.5,106.532 A3.75,3.75 0 0 1 91,109.032 L98,132.8039 L6620.5,132.8039 A2.5,2.5 0 0 1 6623,135.3039 L6623,1010.032 A2.5,2.5 0 0 1 6620.5,1012.532 L8.5,1012.532 A2.5,2.5 0 0 1 6,1010.032 L6,109.032 A2.5,2.5 0 0 1 8.5,106.532 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="98" y1="132.8039" y2="132.8039"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="79" x="10" y="124.7719">reset_store</text></g><!--MD5=[857233cdc7018b1e8695fe78ce49561f]
+cluster __builtin__--><g id="cluster___builtin__"><path d="M2454.5,6.532 L2500.5,6.532 A3.75,3.75 0 0 1 2503,9.032 L2510,32.8039 L2535.5,32.8039 A2.5,2.5 0 0 1 2538,35.3039 L2538,83.032 A2.5,2.5 0 0 1 2535.5,85.532 L2454.5,85.532 A2.5,2.5 0 0 1 2452,83.032 L2452,9.032 A2.5,2.5 0 0 1 2454.5,6.532 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="2452" x2="2510" y1="32.8039" y2="32.8039"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" text-decoration="underline" textLength="45" x="2456" y="24.7719">builtin</text></g><!--MD5=[22d836f3bc808a5cfff8599ff4404853]
+class reset_store.GenericStore--><g id="elem_reset_store.GenericStore"><rect codeLine="2" fill="#F1F1F1" height="40" id="reset_store.GenericStore" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="117" x="3136.5" y="378.532"/><ellipse cx="3151.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3147.8594,401.032 L3154.6406,401.032 L3154.6406,398.9539 L3152.4844,398.9539 L3152.4844,390.5164 L3154.6406,390.5164 L3154.6406,388.407 L3147.8594,388.407 L3147.8594,390.5164 L3149.9531,390.5164 L3149.9531,398.9539 L3147.8594,398.9539 L3147.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="85" x="3165.5" y="400.636">GenericStore</text><line style="stroke:#181818;stroke-width:0.5;" x1="3137.5" x2="3252.5" y1="410.532" y2="410.532"/></g><!--MD5=[9cddbda7d8ade3c42cc1d4085c3d6c2c]
+class reset_store.Store--><g id="elem_reset_store.Store"><rect codeLine="8" fill="#F1F1F1" height="384.6225" id="reset_store.Store" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="369" x="3142.5" y="478.532"/><ellipse cx="3305.75" cy="494.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3305.9375,501.2351 C3308.2344,501.2351 3309.6875,499.6101 3309.6875,497.6101 C3309.6875,495.782 3308.8594,494.9382 3307.7188,494.1414 L3306.7031,493.4226 C3305.5781,492.6101 3305.1563,492.3132 3305.1563,491.4539 C3305.1563,490.7664 3305.6406,490.3601 3306.2188,490.3601 C3306.9531,490.3601 3307.4375,490.7507 3308.1406,491.3914 L3309.4531,489.8132 C3308.4844,488.7976 3307.4688,488.2039 3306.2031,488.2039 C3304.0625,488.2039 3302.6094,489.7195 3302.6094,491.6414 C3302.6094,493.4382 3303.5313,494.3445 3304.625,495.0945 L3305.7188,495.8445 C3306.6563,496.4539 3307.1094,497.032 3307.1094,497.9695 C3307.1094,498.6414 3306.6406,499.0632 3305.9375,499.0632 C3305.2344,499.0632 3304.4844,498.5476 3303.8281,497.7195 L3302.2813,499.407 C3303.3125,500.5945 3304.6094,501.2351 3305.9375,501.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="3326.25" y="500.636">Store</text><line style="stroke:#181818;stroke-width:0.5;" x1="3143.5" x2="3510.5" y1="510.532" y2="510.532"/><ellipse cx="3153.5" cy="526.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="332" x="3162.5" y="530.7719">DefaultQualifiedResource schema.GroupResource</text><ellipse cx="3153.5" cy="546.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="338" x="3162.5" y="551.0438">SingularQualifiedResource schema.GroupResource</text><ellipse cx="3153.5" cy="566.7118" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="3162.5" y="571.3157">EnableGarbageCollection bool</text><ellipse cx="3153.5" cy="586.9837" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="3162.5" y="591.5876">DeleteCollectionWorkers int</text><ellipse cx="3153.5" cy="607.2556" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="308" x="3162.5" y="611.8596">CreateStrategy reset_store.RESTCreateStrategy</text><ellipse cx="3153.5" cy="627.5275" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198" x="3162.5" y="632.1315">BeginCreate BeginCreateFunc</text><ellipse cx="3153.5" cy="647.7994" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="3162.5" y="652.4034">AfterCreate AfterCreateFunc</text><ellipse cx="3153.5" cy="668.0713" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="320" x="3162.5" y="672.6753">UpdateStrategy reset_store.RESTUpdateStrategy</text><ellipse cx="3153.5" cy="688.3432" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="3162.5" y="692.9472">BeginUpdate BeginUpdateFunc</text><ellipse cx="3153.5" cy="708.6151" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198" x="3162.5" y="713.2191">AfterUpdate AfterUpdateFunc</text><ellipse cx="3153.5" cy="728.8871" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="308" x="3162.5" y="733.491">DeleteStrategy reset_store.RESTDeleteStrategy</text><ellipse cx="3153.5" cy="749.159" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="3162.5" y="753.7629">AfterDelete AfterDeleteFunc</text><ellipse cx="3153.5" cy="769.4309" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="3162.5" y="774.0349">ReturnDeletedObject bool</text><ellipse cx="3153.5" cy="789.7028" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="3162.5" y="794.3068">TableConvertor reset_store.TableConvertor</text><ellipse cx="3153.5" cy="809.9747" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="343" x="3162.5" y="814.5787">ResetFieldsStrategy reset_store.ResetFieldsStrategy</text><ellipse cx="3153.5" cy="830.2466" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="3162.5" y="834.8506">Storage DryRunnableStorage</text><ellipse cx="3153.5" cy="850.5185" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="275" x="3162.5" y="855.1225">StorageVersioner runtime.GroupVersioner</text></g><!--MD5=[3b0802e0d760cdb8fe74903f136f854e]
+class reset_store.AfterCreateFunc--><g id="elem_reset_store.AfterCreateFunc"><rect codeLine="68" fill="#F1F1F1" height="40" id="reset_store.AfterCreateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="140" x="4069" y="258.032"/><ellipse cx="4084" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4082.7344,281.032 L4085.2813,281.032 L4085.2813,270.5164 L4087.9063,270.5164 L4087.9063,268.407 L4080.0938,268.407 L4080.0938,270.5164 L4082.7344,270.5164 L4082.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="4098" y="280.136">AfterCreateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="4070" x2="4208" y1="290.032" y2="290.032"/></g><!--MD5=[69471e0cab1b788aa750affc8a3650d4]
+class reset_store.AfterDeleteFunc--><g id="elem_reset_store.AfterDeleteFunc"><rect codeLine="70" fill="#F1F1F1" height="40" id="reset_store.AfterDeleteFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="140" x="3894" y="258.032"/><ellipse cx="3909" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3907.7344,281.032 L3910.2813,281.032 L3910.2813,270.5164 L3912.9063,270.5164 L3912.9063,268.407 L3905.0938,268.407 L3905.0938,270.5164 L3907.7344,270.5164 L3907.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3923" y="280.136">AfterDeleteFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="3895" x2="4033" y1="290.032" y2="290.032"/></g><!--MD5=[c16341a4a7e094eb125448c0c8e18571]
+class reset_store.AfterUpdateFunc--><g id="elem_reset_store.AfterUpdateFunc"><rect codeLine="72" fill="#F1F1F1" height="40" id="reset_store.AfterUpdateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146" x="3713" y="258.032"/><ellipse cx="3728" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3726.7344,281.032 L3729.2813,281.032 L3729.2813,270.5164 L3731.9063,270.5164 L3731.9063,268.407 L3724.0938,268.407 L3724.0938,270.5164 L3726.7344,270.5164 L3726.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="3742" y="280.136">AfterUpdateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="3714" x2="3858" y1="290.032" y2="290.032"/></g><!--MD5=[3147eacc2db867cfb997fcc46de80520]
+class reset_store.BeginCreateFunc--><g id="elem_reset_store.BeginCreateFunc"><rect codeLine="74" fill="#F1F1F1" height="40" id="reset_store.BeginCreateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146" x="4320" y="258.032"/><ellipse cx="4335" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4333.7344,281.032 L4336.2813,281.032 L4336.2813,270.5164 L4338.9063,270.5164 L4338.9063,268.407 L4331.0938,268.407 L4331.0938,270.5164 L4333.7344,270.5164 L4333.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="4349" y="280.136">BeginCreateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="4321" x2="4465" y1="290.032" y2="290.032"/></g><!--MD5=[2babfa179319779b97e76a02cb3d2034]
+class reset_store.BeginUpdateFunc--><g id="elem_reset_store.BeginUpdateFunc"><rect codeLine="76" fill="#F1F1F1" height="40" id="reset_store.BeginUpdateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="152" x="4945" y="258.032"/><ellipse cx="4960" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4958.7344,281.032 L4961.2813,281.032 L4961.2813,270.5164 L4963.9063,270.5164 L4963.9063,268.407 L4956.0938,268.407 L4956.0938,270.5164 L4958.7344,270.5164 L4958.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="4974" y="280.136">BeginUpdateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="4946" x2="5096" y1="290.032" y2="290.032"/></g><!--MD5=[a3e9e58cbc60ee65b5e3ee53473acaa3]
+class reset_store.FinishFunc--><g id="elem_reset_store.FinishFunc"><rect codeLine="78" fill="#F1F1F1" height="40" id="reset_store.FinishFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="5435" y="258.032"/><ellipse cx="5450" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5448.7344,281.032 L5451.2813,281.032 L5451.2813,270.5164 L5453.9063,270.5164 L5453.9063,268.407 L5446.0938,268.407 L5446.0938,270.5164 L5448.7344,270.5164 L5448.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="5464" y="280.136">FinishFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="5436" x2="5540" y1="290.032" y2="290.032"/></g><!--MD5=[00555de8717ddfde5db9073eaa87e85f]
+class reset_store.fontcolorbluefuncfontcontextContextbool--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextbool"><rect codeLine="80" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextbool" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="215" x="5380.5" y="137.532"/><ellipse cx="5395.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5395.7344,160.2351 C5396.8906,160.2351 5397.9844,159.7507 5398.8125,158.7195 L5397.3906,157.2039 C5397,157.7507 5396.5313,158.0632 5395.9688,158.0632 C5394.7813,158.0632 5393.7656,156.9226 5393.7656,153.6882 C5393.7656,150.532 5394.8281,149.3601 5395.8594,149.3601 C5396.4531,149.3601 5396.8281,149.657 5397.25,150.157 L5398.6719,148.5945 C5398,147.8445 5397.0313,147.2039 5395.75,147.2039 C5393.3281,147.2039 5391.1875,149.1726 5391.1875,153.7976 C5391.1875,158.4382 5393.3281,160.2351 5395.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="5409.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="5439.5" y="159.636">(context.Context, bool)</text><line style="stroke:#181818;stroke-width:0.5;" x1="5381.5" x2="5594.5" y1="169.532" y2="169.532"/></g><!--MD5=[a5f38dd3a805a9535749bdc4bb67c8a9]
+class reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror"><rect codeLine="83" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="649" x="4696.5" y="137.532"/><ellipse cx="4711.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4711.7344,160.2351 C4712.8906,160.2351 4713.9844,159.7507 4714.8125,158.7195 L4713.3906,157.2039 C4713,157.7507 4712.5313,158.0632 4711.9688,158.0632 C4710.7813,158.0632 4709.7656,156.9226 4709.7656,153.6882 C4709.7656,150.532 4710.8281,149.3601 4711.8594,149.3601 C4712.4531,149.3601 4712.8281,149.657 4713.25,150.157 L4714.6719,148.5945 C4714,147.8445 4713.0313,147.2039 4711.75,147.2039 C4709.3281,147.2039 4707.1875,149.1726 4707.1875,153.7976 C4707.1875,158.4382 4709.3281,160.2351 4711.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="4725.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="587" x="4755.5" y="159.636">(context.Context, runtime.Object, runtime.Object, *v1.UpdateOptions) (FinishFunc, error)</text><line style="stroke:#181818;stroke-width:0.5;" x1="4697.5" x2="5344.5" y1="169.532" y2="169.532"/></g><!--MD5=[9e85dc8f1bdfdb5768e0b250c5629776]
+class reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror"><rect codeLine="86" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="536" x="4125" y="137.532"/><ellipse cx="4140" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4140.2344,160.2351 C4141.3906,160.2351 4142.4844,159.7507 4143.3125,158.7195 L4141.8906,157.2039 C4141.5,157.7507 4141.0313,158.0632 4140.4688,158.0632 C4139.2813,158.0632 4138.2656,156.9226 4138.2656,153.6882 C4138.2656,150.532 4139.3281,149.3601 4140.3594,149.3601 C4140.9531,149.3601 4141.3281,149.657 4141.75,150.157 L4143.1719,148.5945 C4142.5,147.8445 4141.5313,147.2039 4140.25,147.2039 C4137.8281,147.2039 4135.6875,149.1726 4135.6875,153.7976 C4135.6875,158.4382 4137.8281,160.2351 4140.2344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="4154" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="474" x="4184" y="159.636">(context.Context, runtime.Object, *v1.CreateOptions) (FinishFunc, error)</text><line style="stroke:#181818;stroke-width:0.5;" x1="4126" x2="4660" y1="169.532" y2="169.532"/></g><!--MD5=[3e6469af047326eb79fecdd5d6c12007]
+class reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions--><g id="elem_reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions"><rect codeLine="89" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="303" x="3786.5" y="137.532"/><ellipse cx="3801.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3801.7344,160.2351 C3802.8906,160.2351 3803.9844,159.7507 3804.8125,158.7195 L3803.3906,157.2039 C3803,157.7507 3802.5313,158.0632 3801.9688,158.0632 C3800.7813,158.0632 3799.7656,156.9226 3799.7656,153.6882 C3799.7656,150.532 3800.8281,149.3601 3801.8594,149.3601 C3802.4531,149.3601 3802.8281,149.657 3803.25,150.157 L3804.6719,148.5945 C3804,147.8445 3803.0313,147.2039 3801.75,147.2039 C3799.3281,147.2039 3797.1875,149.1726 3797.1875,153.7976 C3797.1875,158.4382 3799.3281,160.2351 3801.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="3815.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="3845.5" y="159.636">(runtime.Object, *v1.CreateOptions)</text><line style="stroke:#181818;stroke-width:0.5;" x1="3787.5" x2="4088.5" y1="169.532" y2="169.532"/></g><!--MD5=[a9d4319e86be8a8571139d8bc3f5a09f]
+class reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions--><g id="elem_reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions"><rect codeLine="92" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="303" x="3448.5" y="137.532"/><ellipse cx="3463.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3463.7344,160.2351 C3464.8906,160.2351 3465.9844,159.7507 3466.8125,158.7195 L3465.3906,157.2039 C3465,157.7507 3464.5313,158.0632 3463.9688,158.0632 C3462.7813,158.0632 3461.7656,156.9226 3461.7656,153.6882 C3461.7656,150.532 3462.8281,149.3601 3463.8594,149.3601 C3464.4531,149.3601 3464.8281,149.657 3465.25,150.157 L3466.6719,148.5945 C3466,147.8445 3465.0313,147.2039 3463.75,147.2039 C3461.3281,147.2039 3459.1875,149.1726 3459.1875,153.7976 C3459.1875,158.4382 3461.3281,160.2351 3463.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="3477.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="3507.5" y="159.636">(runtime.Object, *v1.DeleteOptions)</text><line style="stroke:#181818;stroke-width:0.5;" x1="3449.5" x2="3750.5" y1="169.532" y2="169.532"/></g><!--MD5=[ffd35b0804eafc445082311564c32c72]
+class reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions--><g id="elem_reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions"><rect codeLine="95" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="309" x="3104.5" y="137.532"/><ellipse cx="3119.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3119.7344,160.2351 C3120.8906,160.2351 3121.9844,159.7507 3122.8125,158.7195 L3121.3906,157.2039 C3121,157.7507 3120.5313,158.0632 3119.9688,158.0632 C3118.7813,158.0632 3117.7656,156.9226 3117.7656,153.6882 C3117.7656,150.532 3118.8281,149.3601 3119.8594,149.3601 C3120.4531,149.3601 3120.8281,149.657 3121.25,150.157 L3122.6719,148.5945 C3122,147.8445 3121.0313,147.2039 3119.75,147.2039 C3117.3281,147.2039 3115.1875,149.1726 3115.1875,153.7976 C3115.1875,158.4382 3117.3281,160.2351 3119.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="3133.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="244" x="3163.5" y="159.636">(runtime.Object, *v1.UpdateOptions)</text><line style="stroke:#181818;stroke-width:0.5;" x1="3105.5" x2="3412.5" y1="169.532" y2="169.532"/></g><!--MD5=[043927f1a1808a2fdf10cdb1074b0eb1]
+class reset_store.CollectionDeleter--><g id="elem_reset_store.CollectionDeleter"><rect codeLine="123" fill="#F1F1F1" height="40" id="reset_store.CollectionDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146" x="2999" y="258.032"/><ellipse cx="3014" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3010.3594,280.532 L3017.1406,280.532 L3017.1406,278.4539 L3014.9844,278.4539 L3014.9844,270.0164 L3017.1406,270.0164 L3017.1406,267.907 L3010.3594,267.907 L3010.3594,270.0164 L3012.4531,270.0164 L3012.4531,278.4539 L3010.3594,278.4539 L3010.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="114" x="3028" y="280.136">CollectionDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="3000" x2="3144" y1="290.032" y2="290.032"/></g><!--MD5=[93ed586db7aec683699f0d79c81b4997]
+class reset_store.Creater--><g id="elem_reset_store.Creater"><rect codeLine="135" fill="#F1F1F1" height="40" id="reset_store.Creater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="80" x="2821" y="137.532"/><ellipse cx="2836" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2832.3594,160.032 L2839.1406,160.032 L2839.1406,157.9539 L2836.9844,157.9539 L2836.9844,149.5164 L2839.1406,149.5164 L2839.1406,147.407 L2832.3594,147.407 L2832.3594,149.5164 L2834.4531,149.5164 L2834.4531,157.9539 L2832.3594,157.9539 L2832.3594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="48" x="2850" y="159.636">Creater</text><line style="stroke:#181818;stroke-width:0.5;" x1="2822" x2="2900" y1="169.532" y2="169.532"/></g><!--MD5=[2881c9eb2c70e207ac0fd2c82138e13f]
+class reset_store.CreaterUpdater--><g id="elem_reset_store.CreaterUpdater"><rect codeLine="140" fill="#F1F1F1" height="40" id="reset_store.CreaterUpdater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134" x="2830" y="258.032"/><ellipse cx="2845" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2841.3594,280.532 L2848.1406,280.532 L2848.1406,278.4539 L2845.9844,278.4539 L2845.9844,270.0164 L2848.1406,270.0164 L2848.1406,267.907 L2841.3594,267.907 L2841.3594,270.0164 L2843.4531,270.0164 L2843.4531,278.4539 L2841.3594,278.4539 L2841.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="2859" y="280.136">CreaterUpdater</text><line style="stroke:#181818;stroke-width:0.5;" x1="2831" x2="2963" y1="290.032" y2="290.032"/></g><!--MD5=[a6be862986103704d854f5b24c0eeac5]
+class reset_store.Getter--><g id="elem_reset_store.Getter"><rect codeLine="148" fill="#F1F1F1" height="40" id="reset_store.Getter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="3405.5" y="258.032"/><ellipse cx="3420.5" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3416.8594,280.532 L3423.6406,280.532 L3423.6406,278.4539 L3421.4844,278.4539 L3421.4844,270.0164 L3423.6406,270.0164 L3423.6406,267.907 L3416.8594,267.907 L3416.8594,270.0164 L3418.9531,270.0164 L3418.9531,278.4539 L3416.8594,278.4539 L3416.8594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="41" x="3434.5" y="280.136">Getter</text><line style="stroke:#181818;stroke-width:0.5;" x1="3406.5" x2="3477.5" y1="290.032" y2="290.032"/></g><!--MD5=[a60ede421b4f6820ed323ce526f1b2c9]
+class reset_store.GracefulDeleter--><g id="elem_reset_store.GracefulDeleter"><rect codeLine="157" fill="#F1F1F1" height="40" id="reset_store.GracefulDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="2659" y="258.032"/><ellipse cx="2674" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2670.3594,280.532 L2677.1406,280.532 L2677.1406,278.4539 L2674.9844,278.4539 L2674.9844,270.0164 L2677.1406,270.0164 L2677.1406,267.907 L2670.3594,267.907 L2670.3594,270.0164 L2672.4531,270.0164 L2672.4531,278.4539 L2670.3594,278.4539 L2670.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="104" x="2688" y="280.136">GracefulDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="2660" x2="2794" y1="290.032" y2="290.032"/></g><!--MD5=[59bd937f144378454bf1685d766463f2]
+class reset_store.Lister--><g id="elem_reset_store.Lister"><rect codeLine="173" fill="#F1F1F1" height="40" id="reset_store.Lister" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="69" x="3301.5" y="258.032"/><ellipse cx="3316.5" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3312.8594,280.532 L3319.6406,280.532 L3319.6406,278.4539 L3317.4844,278.4539 L3317.4844,270.0164 L3319.6406,270.0164 L3319.6406,267.907 L3312.8594,267.907 L3312.8594,270.0164 L3314.9531,270.0164 L3314.9531,278.4539 L3312.8594,278.4539 L3312.8594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="37" x="3330.5" y="280.136">Lister</text><line style="stroke:#181818;stroke-width:0.5;" x1="3302.5" x2="3369.5" y1="290.032" y2="290.032"/></g><!--MD5=[ba060a06d4dd21400269d06cf431deb9]
+class reset_store.MayReturnFullObjectDeleter--><g id="elem_reset_store.MayReturnFullObjectDeleter"><rect codeLine="178" fill="#F1F1F1" height="40" id="reset_store.MayReturnFullObjectDeleter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="219" x="4222.5" y="378.532"/><ellipse cx="4237.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4233.8594,401.032 L4240.6406,401.032 L4240.6406,398.9539 L4238.4844,398.9539 L4238.4844,390.5164 L4240.6406,390.5164 L4240.6406,388.407 L4233.8594,388.407 L4233.8594,390.5164 L4235.9531,390.5164 L4235.9531,398.9539 L4233.8594,398.9539 L4233.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="187" x="4251.5" y="400.636">MayReturnFullObjectDeleter</text><line style="stroke:#181818;stroke-width:0.5;" x1="4223.5" x2="4440.5" y1="410.532" y2="410.532"/></g><!--MD5=[b7831c2689e968aee6cf5ba82af0d871]
+class reset_store.ResetFieldsStrategy--><g id="elem_reset_store.ResetFieldsStrategy"><rect codeLine="209" fill="#F1F1F1" height="40" id="reset_store.ResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="163" x="2423.5" y="378.532"/><ellipse cx="2438.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2434.8594,401.032 L2441.6406,401.032 L2441.6406,398.9539 L2439.4844,398.9539 L2439.4844,390.5164 L2441.6406,390.5164 L2441.6406,388.407 L2434.8594,388.407 L2434.8594,390.5164 L2436.9531,390.5164 L2436.9531,398.9539 L2434.8594,398.9539 L2434.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="131" x="2452.5" y="400.636">ResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2424.5" x2="2585.5" y1="410.532" y2="410.532"/></g><!--MD5=[8e31c239fdb848f3a5f191ffad0bb30e]
+class reset_store.Scoper--><g id="elem_reset_store.Scoper"><rect codeLine="222" fill="#F1F1F1" height="40" id="reset_store.Scoper" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="77" x="4110.5" y="378.532"/><ellipse cx="4125.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4121.8594,401.032 L4128.6406,401.032 L4128.6406,398.9539 L4126.4844,398.9539 L4126.4844,390.5164 L4128.6406,390.5164 L4128.6406,388.407 L4121.8594,388.407 L4121.8594,390.5164 L4123.9531,390.5164 L4123.9531,398.9539 L4121.8594,398.9539 L4121.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="45" x="4139.5" y="400.636">Scoper</text><line style="stroke:#181818;stroke-width:0.5;" x1="4111.5" x2="4186.5" y1="410.532" y2="410.532"/></g><!--MD5=[7eeb8bed4fff1bdb927b09134ec3d1af]
+class reset_store.SingularNameProvider--><g id="elem_reset_store.SingularNameProvider"><rect codeLine="230" fill="#F1F1F1" height="40" id="reset_store.SingularNameProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="3894.5" y="378.532"/><ellipse cx="3909.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3905.8594,401.032 L3912.6406,401.032 L3912.6406,398.9539 L3910.4844,398.9539 L3910.4844,390.5164 L3912.6406,390.5164 L3912.6406,388.407 L3905.8594,388.407 L3905.8594,390.5164 L3907.9531,390.5164 L3907.9531,398.9539 L3905.8594,398.9539 L3905.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="149" x="3923.5" y="400.636">SingularNameProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="3895.5" x2="4074.5" y1="410.532" y2="410.532"/></g><!--MD5=[f50e25e8ef84d2ae87143211a2ad3faf]
+class reset_store.StandardStorage--><g id="elem_reset_store.StandardStorage"><rect codeLine="234" fill="#F1F1F1" height="40" id="reset_store.StandardStorage" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="143" x="2958.5" y="378.532"/><ellipse cx="2973.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2969.8594,401.032 L2976.6406,401.032 L2976.6406,398.9539 L2974.4844,398.9539 L2974.4844,390.5164 L2976.6406,390.5164 L2976.6406,388.407 L2969.8594,388.407 L2969.8594,390.5164 L2971.9531,390.5164 L2971.9531,398.9539 L2969.8594,398.9539 L2969.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="111" x="2987.5" y="400.636">StandardStorage</text><line style="stroke:#181818;stroke-width:0.5;" x1="2959.5" x2="3100.5" y1="410.532" y2="410.532"/></g><!--MD5=[0472c8691b4eafbd075e4c039541b7bf]
+class reset_store.Storage--><g id="elem_reset_store.Storage"><rect codeLine="238" fill="#F1F1F1" height="40" id="reset_store.Storage" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="3777" y="378.532"/><ellipse cx="3792" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3788.3594,401.032 L3795.1406,401.032 L3795.1406,398.9539 L3792.9844,398.9539 L3792.9844,390.5164 L3795.1406,390.5164 L3795.1406,388.407 L3788.3594,388.407 L3788.3594,390.5164 L3790.4531,390.5164 L3790.4531,398.9539 L3788.3594,398.9539 L3788.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="50" x="3806" y="400.636">Storage</text><line style="stroke:#181818;stroke-width:0.5;" x1="3778" x2="3858" y1="410.532" y2="410.532"/></g><!--MD5=[4d8b04e0808cd352cd24adc0b72a4932]
+class reset_store.StorageVersionProvider--><g id="elem_reset_store.StorageVersionProvider"><rect codeLine="248" fill="#F1F1F1" height="40" id="reset_store.StorageVersionProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="186" x="3556" y="378.532"/><ellipse cx="3571" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3567.3594,401.032 L3574.1406,401.032 L3574.1406,398.9539 L3571.9844,398.9539 L3571.9844,390.5164 L3574.1406,390.5164 L3574.1406,388.407 L3567.3594,388.407 L3567.3594,390.5164 L3569.4531,390.5164 L3569.4531,398.9539 L3567.3594,398.9539 L3567.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="154" x="3585" y="400.636">StorageVersionProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="3557" x2="3741" y1="410.532" y2="410.532"/></g><!--MD5=[b9f74ce5ec1faa4f59e1fe9c84690e6a]
+class reset_store.TableConvertor--><g id="elem_reset_store.TableConvertor"><rect codeLine="252" fill="#F1F1F1" height="40" id="reset_store.TableConvertor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="2936.5" y="137.532"/><ellipse cx="2951.5" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2947.8594,160.032 L2954.6406,160.032 L2954.6406,157.9539 L2952.4844,157.9539 L2952.4844,149.5164 L2954.6406,149.5164 L2954.6406,147.407 L2947.8594,147.407 L2947.8594,149.5164 L2949.9531,149.5164 L2949.9531,157.9539 L2947.8594,157.9539 L2947.8594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="101" x="2965.5" y="159.636">TableConvertor</text><line style="stroke:#181818;stroke-width:0.5;" x1="2937.5" x2="3068.5" y1="169.532" y2="169.532"/></g><!--MD5=[746ab15d4626d4f13be2cc6569f9a7a9]
+class reset_store.Updater--><g id="elem_reset_store.Updater"><rect codeLine="263" fill="#F1F1F1" height="40" id="reset_store.Updater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="3514" y="258.032"/><ellipse cx="3529" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3525.3594,280.532 L3532.1406,280.532 L3532.1406,278.4539 L3529.9844,278.4539 L3529.9844,270.0164 L3532.1406,270.0164 L3532.1406,267.907 L3525.3594,267.907 L3525.3594,270.0164 L3527.4531,270.0164 L3527.4531,278.4539 L3525.3594,278.4539 L3525.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="3543" y="280.136">Updater</text><line style="stroke:#181818;stroke-width:0.5;" x1="3515" x2="3599" y1="290.032" y2="290.032"/></g><!--MD5=[337574d3d02ed5ac0418837ec7250f45]
+class reset_store.Watcher--><g id="elem_reset_store.Watcher"><rect codeLine="268" fill="#F1F1F1" height="40" id="reset_store.Watcher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="3180" y="258.032"/><ellipse cx="3195" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3191.3594,280.532 L3198.1406,280.532 L3198.1406,278.4539 L3195.9844,278.4539 L3195.9844,270.0164 L3198.1406,270.0164 L3198.1406,267.907 L3191.3594,267.907 L3191.3594,270.0164 L3193.4531,270.0164 L3193.4531,278.4539 L3191.3594,278.4539 L3191.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="3209" y="280.136">Watcher</text><line style="stroke:#181818;stroke-width:0.5;" x1="3181" x2="3265" y1="290.032" y2="290.032"/></g><!--MD5=[60f6f1c02f25a73a3f43ebf258501c2b]
+class reset_store.CategoriesProvider--><g id="elem_reset_store.CategoriesProvider"><rect codeLine="119" fill="#F1F1F1" height="40" id="reset_store.CategoriesProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="157" x="5630.5" y="137.532"/><ellipse cx="5645.5" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5641.8594,160.032 L5648.6406,160.032 L5648.6406,157.9539 L5646.4844,157.9539 L5646.4844,149.5164 L5648.6406,149.5164 L5648.6406,147.407 L5641.8594,147.407 L5641.8594,149.5164 L5643.9531,149.5164 L5643.9531,157.9539 L5641.8594,157.9539 L5641.8594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="125" x="5659.5" y="159.636">CategoriesProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="5631.5" x2="5786.5" y1="169.532" y2="169.532"/></g><!--MD5=[d7fa89d94aa863a988510ccd47a4d335]
+class reset_store.Connecter--><g id="elem_reset_store.Connecter"><rect codeLine="127" fill="#F1F1F1" height="40" id="reset_store.Connecter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="100" x="5823" y="137.532"/><ellipse cx="5838" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5834.3594,160.032 L5841.1406,160.032 L5841.1406,157.9539 L5838.9844,157.9539 L5838.9844,149.5164 L5841.1406,149.5164 L5841.1406,147.407 L5834.3594,147.407 L5834.3594,149.5164 L5836.4531,149.5164 L5836.4531,157.9539 L5834.3594,157.9539 L5834.3594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="5852" y="159.636">Connecter</text><line style="stroke:#181818;stroke-width:0.5;" x1="5824" x2="5922" y1="169.532" y2="169.532"/></g><!--MD5=[91f6d73e66d4e1575f9f5dfe7e67dca0]
+class reset_store.CreateUpdateResetFieldsStrategy--><g id="elem_reset_store.CreateUpdateResetFieldsStrategy"><rect codeLine="133" fill="#F1F1F1" height="40" id="reset_store.CreateUpdateResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255" x="1991.5" y="651.032"/><ellipse cx="2006.5" cy="667.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2002.8594,673.532 L2009.6406,673.532 L2009.6406,671.4539 L2007.4844,671.4539 L2007.4844,663.0164 L2009.6406,663.0164 L2009.6406,660.907 L2002.8594,660.907 L2002.8594,663.0164 L2004.9531,663.0164 L2004.9531,671.4539 L2002.8594,671.4539 L2002.8594,673.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="223" x="2020.5" y="673.136">CreateUpdateResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1992.5" x2="2245.5" y1="683.032" y2="683.032"/></g><!--MD5=[501dbdd798c54a53225e9900752c9d18]
+class reset_store.GarbageCollectionDeleteStrategy--><g id="elem_reset_store.GarbageCollectionDeleteStrategy"><rect codeLine="144" fill="#F1F1F1" height="40" id="reset_store.GarbageCollectionDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="251" x="5958.5" y="137.532"/><ellipse cx="5973.5" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5969.8594,160.032 L5976.6406,160.032 L5976.6406,157.9539 L5974.4844,157.9539 L5974.4844,149.5164 L5976.6406,149.5164 L5976.6406,147.407 L5969.8594,147.407 L5969.8594,149.5164 L5971.9531,149.5164 L5971.9531,157.9539 L5969.8594,157.9539 L5969.8594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="219" x="5987.5" y="159.636">GarbageCollectionDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="5959.5" x2="6208.5" y1="169.532" y2="169.532"/></g><!--MD5=[075a170670887697873ce74dc84fc2a5]
+class reset_store.GetterWithOptions--><g id="elem_reset_store.GetterWithOptions"><rect codeLine="152" fill="#F1F1F1" height="40" id="reset_store.GetterWithOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="6244.5" y="137.532"/><ellipse cx="6259.5" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6255.8594,160.032 L6262.6406,160.032 L6262.6406,157.9539 L6260.4844,157.9539 L6260.4844,149.5164 L6262.6406,149.5164 L6262.6406,147.407 L6255.8594,147.407 L6255.8594,149.5164 L6257.9531,149.5164 L6257.9531,157.9539 L6255.8594,157.9539 L6255.8594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="123" x="6273.5" y="159.636">GetterWithOptions</text><line style="stroke:#181818;stroke-width:0.5;" x1="6245.5" x2="6398.5" y1="169.532" y2="169.532"/></g><!--MD5=[7bcad0f68e3d92e96578bb206a956886]
+class reset_store.GroupVersionAcceptor--><g id="elem_reset_store.GroupVersionAcceptor"><rect codeLine="161" fill="#F1F1F1" height="40" id="reset_store.GroupVersionAcceptor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180" x="6435" y="137.532"/><ellipse cx="6450" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6446.3594,160.032 L6453.1406,160.032 L6453.1406,157.9539 L6450.9844,157.9539 L6450.9844,149.5164 L6453.1406,149.5164 L6453.1406,147.407 L6446.3594,147.407 L6446.3594,149.5164 L6448.4531,149.5164 L6448.4531,157.9539 L6446.3594,157.9539 L6446.3594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="6464" y="159.636">GroupVersionAcceptor</text><line style="stroke:#181818;stroke-width:0.5;" x1="6436" x2="6614" y1="169.532" y2="169.532"/></g><!--MD5=[306aca18a2c6cb5d07fb58434af432fd]
+class reset_store.GroupVersionKindProvider--><g id="elem_reset_store.GroupVersionKindProvider"><rect codeLine="165" fill="#F1F1F1" height="40" id="reset_store.GroupVersionKindProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="5590" y="258.032"/><ellipse cx="5605" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5601.3594,280.532 L5608.1406,280.532 L5608.1406,278.4539 L5605.9844,278.4539 L5605.9844,270.0164 L5608.1406,270.0164 L5608.1406,267.907 L5601.3594,267.907 L5601.3594,270.0164 L5603.4531,270.0164 L5603.4531,278.4539 L5601.3594,278.4539 L5601.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="176" x="5619" y="280.136">GroupVersionKindProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="5591" x2="5797" y1="290.032" y2="290.032"/></g><!--MD5=[d63cf8e55e2ce8e7a0e42c76f0aff08a]
+class reset_store.KindProvider--><g id="elem_reset_store.KindProvider"><rect codeLine="169" fill="#F1F1F1" height="40" id="reset_store.KindProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="5833" y="258.032"/><ellipse cx="5848" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5844.3594,280.532 L5851.1406,280.532 L5851.1406,278.4539 L5848.9844,278.4539 L5848.9844,270.0164 L5851.1406,270.0164 L5851.1406,267.907 L5844.3594,267.907 L5844.3594,270.0164 L5846.4531,270.0164 L5846.4531,278.4539 L5844.3594,278.4539 L5844.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="86" x="5862" y="280.136">KindProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="5834" x2="5950" y1="290.032" y2="290.032"/></g><!--MD5=[51695d267639222f76b5e26dbe3ba71d]
+class reset_store.NamedCreater--><g id="elem_reset_store.NamedCreater"><rect codeLine="182" fill="#F1F1F1" height="40" id="reset_store.NamedCreater" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="128" x="5986" y="258.032"/><ellipse cx="6001" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5997.3594,280.532 L6004.1406,280.532 L6004.1406,278.4539 L6001.9844,278.4539 L6001.9844,270.0164 L6004.1406,270.0164 L6004.1406,267.907 L5997.3594,267.907 L5997.3594,270.0164 L5999.4531,270.0164 L5999.4531,278.4539 L5997.3594,278.4539 L5997.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="96" x="6015" y="280.136">NamedCreater</text><line style="stroke:#181818;stroke-width:0.5;" x1="5987" x2="6113" y1="290.032" y2="290.032"/></g><!--MD5=[ae21dd0a90b308b7e8c0504db2d35744]
+class reset_store.Patcher--><g id="elem_reset_store.Patcher"><rect codeLine="187" fill="#F1F1F1" height="40" id="reset_store.Patcher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="83" x="3400.5" y="378.532"/><ellipse cx="3415.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3411.8594,401.032 L3418.6406,401.032 L3418.6406,398.9539 L3416.4844,398.9539 L3416.4844,390.5164 L3418.6406,390.5164 L3418.6406,388.407 L3411.8594,388.407 L3411.8594,390.5164 L3413.9531,390.5164 L3413.9531,398.9539 L3411.8594,398.9539 L3411.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="51" x="3429.5" y="400.636">Patcher</text><line style="stroke:#181818;stroke-width:0.5;" x1="3401.5" x2="3482.5" y1="410.532" y2="410.532"/></g><!--MD5=[86d5ea2f7b94c9c946bccdca351b3e82]
+class reset_store.RESTDeleteStrategy--><g id="elem_reset_store.RESTDeleteStrategy"><rect codeLine="189" fill="#F1F1F1" height="40" id="reset_store.RESTDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="6149" y="258.032"/><ellipse cx="6164" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6160.3594,280.532 L6167.1406,280.532 L6167.1406,278.4539 L6164.9844,278.4539 L6164.9844,270.0164 L6167.1406,270.0164 L6167.1406,267.907 L6160.3594,267.907 L6160.3594,270.0164 L6162.4531,270.0164 L6162.4531,278.4539 L6160.3594,278.4539 L6160.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="130" x="6178" y="280.136">RESTDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="6150" x2="6310" y1="290.032" y2="290.032"/></g><!--MD5=[5bf1d4084a3abb918d64c7454071ec69]
+class reset_store.RESTGracefulDeleteStrategy--><g id="elem_reset_store.RESTGracefulDeleteStrategy"><rect codeLine="191" fill="#F1F1F1" height="40" id="reset_store.RESTGracefulDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="218" x="6346" y="258.032"/><ellipse cx="6361" cy="274.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6357.3594,280.532 L6364.1406,280.532 L6364.1406,278.4539 L6361.9844,278.4539 L6361.9844,270.0164 L6364.1406,270.0164 L6364.1406,267.907 L6357.3594,267.907 L6357.3594,270.0164 L6359.4531,270.0164 L6359.4531,278.4539 L6357.3594,278.4539 L6357.3594,280.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="186" x="6375" y="280.136">RESTGracefulDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="6347" x2="6563" y1="290.032" y2="290.032"/></g><!--MD5=[ed2bdc47a20cca0c21732be86edfba28]
+class reset_store.RESTUpdateStrategy--><g id="elem_reset_store.RESTUpdateStrategy"><rect codeLine="195" fill="#F1F1F1" height="40" id="reset_store.RESTUpdateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="2220" y="378.532"/><ellipse cx="2235" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2231.3594,401.032 L2238.1406,401.032 L2238.1406,398.9539 L2235.9844,398.9539 L2235.9844,390.5164 L2238.1406,390.5164 L2238.1406,388.407 L2231.3594,388.407 L2231.3594,390.5164 L2233.4531,390.5164 L2233.4531,398.9539 L2231.3594,398.9539 L2231.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="136" x="2249" y="400.636">RESTUpdateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2221" x2="2387" y1="410.532" y2="410.532"/></g><!--MD5=[958b05bacb7d76eccb72ff5b4ef9942d]
+class reset_store.Redirector--><g id="elem_reset_store.Redirector"><rect codeLine="205" fill="#F1F1F1" height="40" id="reset_store.Redirector" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="100" x="5606" y="378.532"/><ellipse cx="5621" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5617.3594,401.032 L5624.1406,401.032 L5624.1406,398.9539 L5621.9844,398.9539 L5621.9844,390.5164 L5624.1406,390.5164 L5624.1406,388.407 L5617.3594,388.407 L5617.3594,390.5164 L5619.4531,390.5164 L5619.4531,398.9539 L5617.3594,398.9539 L5617.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="5635" y="400.636">Redirector</text><line style="stroke:#181818;stroke-width:0.5;" x1="5607" x2="5705" y1="410.532" y2="410.532"/></g><!--MD5=[c7b2c833e29d1d2c9efa3dc4c2d72195]
+class reset_store.ResourceStreamer--><g id="elem_reset_store.ResourceStreamer"><rect codeLine="213" fill="#F1F1F1" height="40" id="reset_store.ResourceStreamer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153" x="5741.5" y="378.532"/><ellipse cx="5756.5" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5752.8594,401.032 L5759.6406,401.032 L5759.6406,398.9539 L5757.4844,398.9539 L5757.4844,390.5164 L5759.6406,390.5164 L5759.6406,388.407 L5752.8594,388.407 L5752.8594,390.5164 L5754.9531,390.5164 L5754.9531,398.9539 L5752.8594,398.9539 L5752.8594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="121" x="5770.5" y="400.636">ResourceStreamer</text><line style="stroke:#181818;stroke-width:0.5;" x1="5742.5" x2="5893.5" y1="410.532" y2="410.532"/></g><!--MD5=[342e2759c23e2b8c9de4bd0bf37cf7ab]
+class reset_store.Responder--><g id="elem_reset_store.Responder"><rect codeLine="217" fill="#F1F1F1" height="40" id="reset_store.Responder" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="104" x="5930" y="378.532"/><ellipse cx="5945" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5941.3594,401.032 L5948.1406,401.032 L5948.1406,398.9539 L5945.9844,398.9539 L5945.9844,390.5164 L5948.1406,390.5164 L5948.1406,388.407 L5941.3594,388.407 L5941.3594,390.5164 L5943.4531,390.5164 L5943.4531,398.9539 L5941.3594,398.9539 L5941.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="72" x="5959" y="400.636">Responder</text><line style="stroke:#181818;stroke-width:0.5;" x1="5931" x2="6033" y1="410.532" y2="410.532"/></g><!--MD5=[51c6597343d1cd3bfb0dddea09b598d4]
+class reset_store.ShortNamesProvider--><g id="elem_reset_store.ShortNamesProvider"><rect codeLine="226" fill="#F1F1F1" height="40" id="reset_store.ShortNamesProvider" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="6069" y="378.532"/><ellipse cx="6084" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6080.3594,401.032 L6087.1406,401.032 L6087.1406,398.9539 L6084.9844,398.9539 L6084.9844,390.5164 L6087.1406,390.5164 L6087.1406,388.407 L6080.3594,388.407 L6080.3594,390.5164 L6082.4531,390.5164 L6082.4531,398.9539 L6080.3594,398.9539 L6080.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="136" x="6098" y="400.636">ShortNamesProvider</text><line style="stroke:#181818;stroke-width:0.5;" x1="6070" x2="6236" y1="410.532" y2="410.532"/></g><!--MD5=[e248c3f85742f1b518643fc720cca3b5]
+class reset_store.StorageMetadata--><g id="elem_reset_store.StorageMetadata"><rect codeLine="243" fill="#F1F1F1" height="40" id="reset_store.StorageMetadata" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="144" x="6272" y="378.532"/><ellipse cx="6287" cy="394.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6283.3594,401.032 L6290.1406,401.032 L6290.1406,398.9539 L6287.9844,398.9539 L6287.9844,390.5164 L6290.1406,390.5164 L6290.1406,388.407 L6283.3594,388.407 L6283.3594,390.5164 L6285.4531,390.5164 L6285.4531,398.9539 L6283.3594,398.9539 L6283.3594,401.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="6301" y="400.636">StorageMetadata</text><line style="stroke:#181818;stroke-width:0.5;" x1="6273" x2="6415" y1="410.532" y2="410.532"/></g><!--MD5=[45d91ef0c3b23c27571e846227ad7d2b]
+class reset_store.UpdateResetFieldsStrategy--><g id="elem_reset_store.UpdateResetFieldsStrategy"><rect codeLine="256" fill="#F1F1F1" height="40" id="reset_store.UpdateResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="212" x="2360" y="651.032"/><ellipse cx="2375" cy="667.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2371.3594,673.532 L2378.1406,673.532 L2378.1406,671.4539 L2375.9844,671.4539 L2375.9844,663.0164 L2378.1406,663.0164 L2378.1406,660.907 L2371.3594,660.907 L2371.3594,663.0164 L2373.4531,663.0164 L2373.4531,671.4539 L2371.3594,671.4539 L2371.3594,673.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="180" x="2389" y="673.136">UpdateResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2361" x2="2571" y1="683.032" y2="683.032"/></g><!--MD5=[3bbb0695087fc1c2e6da8db72a462d3f]
+class reset_store.UpdatedObjectInfo--><g id="elem_reset_store.UpdatedObjectInfo"><rect codeLine="258" fill="#F1F1F1" height="40" id="reset_store.UpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="2626.5" y="137.532"/><ellipse cx="2641.5" cy="153.532" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2637.8594,160.032 L2644.6406,160.032 L2644.6406,157.9539 L2642.4844,157.9539 L2642.4844,149.5164 L2644.6406,149.5164 L2644.6406,147.407 L2637.8594,147.407 L2637.8594,149.5164 L2639.9531,149.5164 L2639.9531,157.9539 L2637.8594,157.9539 L2637.8594,160.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="127" x="2655.5" y="159.636">UpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="2627.5" x2="2784.5" y1="169.532" y2="169.532"/></g><!--MD5=[b377fb448d65cd8c37eeba35d4ef96f8]
+class reset_store.defaultUpdatedObjectInfo--><g id="elem_reset_store.defaultUpdatedObjectInfo"><rect codeLine="272" fill="#F1F1F1" height="80.5438" id="reset_store.defaultUpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="225" x="2101.5" y="237.532"/><ellipse cx="2124.6" cy="253.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2124.7875,260.2351 C2127.0844,260.2351 2128.5375,258.6101 2128.5375,256.6101 C2128.5375,254.782 2127.7094,253.9382 2126.5688,253.1414 L2125.5531,252.4226 C2124.4281,251.6101 2124.0063,251.3132 2124.0063,250.4539 C2124.0063,249.7664 2124.4906,249.3601 2125.0688,249.3601 C2125.8031,249.3601 2126.2875,249.7507 2126.9906,250.3914 L2128.3031,248.8132 C2127.3344,247.7976 2126.3188,247.2039 2125.0531,247.2039 C2122.9125,247.2039 2121.4594,248.7195 2121.4594,250.6414 C2121.4594,252.4382 2122.3813,253.3445 2123.475,254.0945 L2124.5688,254.8445 C2125.5063,255.4539 2125.9594,256.032 2125.9594,256.9695 C2125.9594,257.6414 2125.4906,258.0632 2124.7875,258.0632 C2124.0844,258.0632 2123.3344,257.5476 2122.6781,256.7195 L2121.1313,258.407 C2122.1625,259.5945 2123.4594,260.2351 2124.7875,260.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="2140.4" y="259.636">defaultUpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="2102.5" x2="2325.5" y1="269.532" y2="269.532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2109.5" y="282.1679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="2121.5" y="289.7719">obj runtime.Object</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2109.5" y="302.4398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="2121.5" y="310.0438">transformers []TransformFunc</text></g><!--MD5=[a0a2a67ca53de1ece62f6d42d7ca313f]
+class reset_store.GarbageCollectionPolicy--><g id="elem_reset_store.GarbageCollectionPolicy"><rect codeLine="280" fill="#F1F1F1" height="40" id="reset_store.GarbageCollectionPolicy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="193" x="2398.5" y="137.532"/><ellipse cx="2413.5" cy="153.532" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2412.2344,160.532 L2414.7813,160.532 L2414.7813,150.0164 L2417.4063,150.0164 L2417.4063,147.907 L2409.5938,147.907 L2409.5938,150.0164 L2412.2344,150.0164 L2412.2344,160.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="2427.5" y="159.636">GarbageCollectionPolicy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2399.5" x2="2590.5" y1="169.532" y2="169.532"/></g><!--MD5=[e86b64258a8d9459fa7c2066d7895b28]
+class reset_store.TransformFunc--><g id="elem_reset_store.TransformFunc"><rect codeLine="282" fill="#F1F1F1" height="40" id="reset_store.TransformFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="1214.5" y="258.032"/><ellipse cx="1229.5" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1228.2344,281.032 L1230.7813,281.032 L1230.7813,270.5164 L1233.4063,270.5164 L1233.4063,268.407 L1225.5938,268.407 L1225.5938,270.5164 L1228.2344,270.5164 L1228.2344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="1243.5" y="280.136">TransformFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="1215.5" x2="1346.5" y1="290.032" y2="290.032"/></g><!--MD5=[db2abe95b92ed4b84a3c44021052cb1c]
+class reset_store.ValidateObjectFunc--><g id="elem_reset_store.ValidateObjectFunc"><rect codeLine="380" fill="#F1F1F1" height="40" id="reset_store.ValidateObjectFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="1904" y="258.032"/><ellipse cx="1919" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1917.7344,281.032 L1920.2813,281.032 L1920.2813,270.5164 L1922.9063,270.5164 L1922.9063,268.407 L1915.0938,268.407 L1915.0938,270.5164 L1917.7344,270.5164 L1917.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="1933" y="280.136">ValidateObjectFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="1905" x2="2065" y1="290.032" y2="290.032"/></g><!--MD5=[3274e481993f6b4b3af79cc7da4478ed]
+class reset_store.ValidateObjectUpdateFunc--><g id="elem_reset_store.ValidateObjectUpdateFunc"><rect codeLine="286" fill="#F1F1F1" height="40" id="reset_store.ValidateObjectUpdateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="1657.5" y="258.032"/><ellipse cx="1672.5" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1671.2344,281.032 L1673.7813,281.032 L1673.7813,270.5164 L1676.4063,270.5164 L1676.4063,268.407 L1668.5938,268.407 L1668.5938,270.5164 L1671.2344,270.5164 L1671.2344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179" x="1686.5" y="280.136">ValidateObjectUpdateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="1658.5" x2="1867.5" y1="290.032" y2="290.032"/></g><!--MD5=[c363de1db8626e434db5cbeff239494b]
+class reset_store.wrappedUpdatedObjectInfo--><g id="elem_reset_store.wrappedUpdatedObjectInfo"><rect codeLine="288" fill="#F1F1F1" height="80.5438" id="reset_store.wrappedUpdatedObjectInfo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="225" x="2361.5" y="237.532"/><ellipse cx="2379.65" cy="253.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2379.8375,260.2351 C2382.1344,260.2351 2383.5875,258.6101 2383.5875,256.6101 C2383.5875,254.782 2382.7594,253.9382 2381.6188,253.1414 L2380.6031,252.4226 C2379.4781,251.6101 2379.0563,251.3132 2379.0563,250.4539 C2379.0563,249.7664 2379.5406,249.3601 2380.1188,249.3601 C2380.8531,249.3601 2381.3375,249.7507 2382.0406,250.3914 L2383.3531,248.8132 C2382.3844,247.7976 2381.3688,247.2039 2380.1031,247.2039 C2377.9625,247.2039 2376.5094,248.7195 2376.5094,250.6414 C2376.5094,252.4382 2377.4313,253.3445 2378.525,254.0945 L2379.6188,254.8445 C2380.5563,255.4539 2381.0094,256.032 2381.0094,256.9695 C2381.0094,257.6414 2380.5406,258.0632 2379.8375,258.0632 C2379.1344,258.0632 2378.3844,257.5476 2377.7281,256.7195 L2376.1813,258.407 C2377.2125,259.5945 2378.5094,260.2351 2379.8375,260.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="2394.35" y="259.636">wrappedUpdatedObjectInfo</text><line style="stroke:#181818;stroke-width:0.5;" x1="2362.5" x2="2585.5" y1="269.532" y2="269.532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2369.5" y="282.1679"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="177" x="2381.5" y="289.7719">objInfo UpdatedObjectInfo</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2369.5" y="302.4398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="2381.5" y="310.0438">transformers []TransformFunc</text></g><!--MD5=[1d00ecbc67b5bb529af8402b64a16917]
+class reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror"><rect codeLine="382" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="317" x="2046.5" y="137.532"/><ellipse cx="2061.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2061.7344,160.2351 C2062.8906,160.2351 2063.9844,159.7507 2064.8125,158.7195 L2063.3906,157.2039 C2063,157.7507 2062.5313,158.0632 2061.9688,158.0632 C2060.7813,158.0632 2059.7656,156.9226 2059.7656,153.6882 C2059.7656,150.532 2060.8281,149.3601 2061.8594,149.3601 C2062.4531,149.3601 2062.8281,149.657 2063.25,150.157 L2064.6719,148.5945 C2064,147.8445 2063.0313,147.2039 2061.75,147.2039 C2059.3281,147.2039 2057.1875,149.1726 2057.1875,153.7976 C2057.1875,158.4382 2059.3281,160.2351 2061.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="2075.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="2105.5" y="159.636">(context.Context, runtime.Object) error</text><line style="stroke:#181818;stroke-width:0.5;" x1="2047.5" x2="2362.5" y1="169.532" y2="169.532"/></g><!--MD5=[06f2402bd372c7e30bb5ff6c68e6e4dd]
+class reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror"><rect codeLine="299" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="424" x="1587" y="137.532"/><ellipse cx="1602" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1602.2344,160.2351 C1603.3906,160.2351 1604.4844,159.7507 1605.3125,158.7195 L1603.8906,157.2039 C1603.5,157.7507 1603.0313,158.0632 1602.4688,158.0632 C1601.2813,158.0632 1600.2656,156.9226 1600.2656,153.6882 C1600.2656,150.532 1601.3281,149.3601 1602.3594,149.3601 C1602.9531,149.3601 1603.3281,149.657 1603.75,150.157 L1605.1719,148.5945 C1604.5,147.8445 1603.5313,147.2039 1602.25,147.2039 C1599.8281,147.2039 1597.6875,149.1726 1597.6875,153.7976 C1597.6875,158.4382 1599.8281,160.2351 1602.2344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="1616" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="362" x="1646" y="159.636">(context.Context, runtime.Object, runtime.Object) error</text><line style="stroke:#181818;stroke-width:0.5;" x1="1588" x2="2010" y1="169.532" y2="169.532"/></g><!--MD5=[107a006c93e93a527f2a6fadb7939f49]
+class reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror--><g id="elem_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror"><rect codeLine="302" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="541" x="1010.5" y="137.532"/><ellipse cx="1025.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1025.7344,160.2351 C1026.8906,160.2351 1027.9844,159.7507 1028.8125,158.7195 L1027.3906,157.2039 C1027,157.7507 1026.5313,158.0632 1025.9688,158.0632 C1024.7813,158.0632 1023.7656,156.9226 1023.7656,153.6882 C1023.7656,150.532 1024.8281,149.3601 1025.8594,149.3601 C1026.4531,149.3601 1026.8281,149.657 1027.25,150.157 L1028.6719,148.5945 C1028,147.8445 1027.0313,147.2039 1025.75,147.2039 C1023.3281,147.2039 1021.1875,149.1726 1021.1875,153.7976 C1021.1875,158.4382 1023.3281,160.2351 1025.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="1039.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="479" x="1069.5" y="159.636">(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)</text><line style="stroke:#181818;stroke-width:0.5;" x1="1011.5" x2="1550.5" y1="169.532" y2="169.532"/></g><!--MD5=[21d91670292322a9a8f47ab890a4bcf9]
+class reset_store.RESTCreateUpdateStrategy--><g id="elem_reset_store.RESTCreateUpdateStrategy"><rect fill="#F1F1F1" height="40" id="reset_store.RESTCreateUpdateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="1973.5" y="378.532"/><ellipse cx="1988.5" cy="394.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1988.7344,401.2351 C1989.8906,401.2351 1990.9844,400.7507 1991.8125,399.7195 L1990.3906,398.2039 C1990,398.7507 1989.5313,399.0632 1988.9688,399.0632 C1987.7813,399.0632 1986.7656,397.9226 1986.7656,394.6882 C1986.7656,391.532 1987.8281,390.3601 1988.8594,390.3601 C1989.4531,390.3601 1989.8281,390.657 1990.25,391.157 L1991.6719,389.5945 C1991,388.8445 1990.0313,388.2039 1988.75,388.2039 C1986.3281,388.2039 1984.1875,390.1726 1984.1875,394.7976 C1984.1875,399.4382 1986.3281,401.2351 1988.7344,401.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179" x="2002.5" y="400.636">RESTCreateUpdateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1974.5" x2="2183.5" y1="410.532" y2="410.532"/></g><!--MD5=[ec1041632fdd6558c5a146eacc1a99f9]
+class reset_store.GetOptions--><g id="elem_reset_store.GetOptions"><rect codeLine="325" fill="#F1F1F1" height="80.5438" id="reset_store.GetOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="177" x="5530.5" y="630.532"/><ellipse cx="5577.25" cy="646.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5577.4375,653.2351 C5579.7344,653.2351 5581.1875,651.6101 5581.1875,649.6101 C5581.1875,647.782 5580.3594,646.9382 5579.2188,646.1414 L5578.2031,645.4226 C5577.0781,644.6101 5576.6563,644.3132 5576.6563,643.4539 C5576.6563,642.7664 5577.1406,642.3601 5577.7188,642.3601 C5578.4531,642.3601 5578.9375,642.7507 5579.6406,643.3914 L5580.9531,641.8132 C5579.9844,640.7976 5578.9688,640.2039 5577.7031,640.2039 C5575.5625,640.2039 5574.1094,641.7195 5574.1094,643.6414 C5574.1094,645.4382 5575.0313,646.3445 5576.125,647.0945 L5577.2188,647.8445 C5578.1563,648.4539 5578.6094,649.032 5578.6094,649.9695 C5578.6094,650.6414 5578.1406,651.0632 5577.4375,651.0632 C5576.7344,651.0632 5575.9844,650.5476 5575.3281,649.7195 L5573.7813,651.407 C5574.8125,652.5945 5576.1094,653.2351 5577.4375,653.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="5597.75" y="652.636">GetOptions</text><line style="stroke:#181818;stroke-width:0.5;" x1="5531.5" x2="5706.5" y1="662.532" y2="662.532"/><ellipse cx="5541.5" cy="678.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="5550.5" y="682.7719">IgnoreNotFound bool</text><ellipse cx="5541.5" cy="698.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="151" x="5550.5" y="703.0438">ResourceVersion string</text></g><!--MD5=[769acc7f701ff1db663fc7ffdf765f77]
+class reset_store.Interface--><g id="elem_reset_store.Interface"><rect codeLine="330" fill="#F1F1F1" height="40" id="reset_store.Interface" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="5742.5" y="651.032"/><ellipse cx="5757.5" cy="667.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5753.8594,673.532 L5760.6406,673.532 L5760.6406,671.4539 L5758.4844,671.4539 L5758.4844,663.0164 L5760.6406,663.0164 L5760.6406,660.907 L5753.8594,660.907 L5753.8594,663.0164 L5755.9531,663.0164 L5755.9531,671.4539 L5753.8594,671.4539 L5753.8594,673.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="59" x="5771.5" y="673.136">Interface</text><line style="stroke:#181818;stroke-width:0.5;" x1="5743.5" x2="5832.5" y1="683.032" y2="683.032"/></g><!--MD5=[944405cfea28e462c7ccfac709f00a3d]
+class reset_store.ListOptions--><g id="elem_reset_store.ListOptions"><rect codeLine="341" fill="#F1F1F1" height="141.3596" id="reset_store.ListOptions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="348" x="5869" y="600.532"/><ellipse cx="6000.75" cy="616.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6000.9375,623.2351 C6003.2344,623.2351 6004.6875,621.6101 6004.6875,619.6101 C6004.6875,617.782 6003.8594,616.9382 6002.7188,616.1414 L6001.7031,615.4226 C6000.5781,614.6101 6000.1563,614.3132 6000.1563,613.4539 C6000.1563,612.7664 6000.6406,612.3601 6001.2188,612.3601 C6001.9531,612.3601 6002.4375,612.7507 6003.1406,613.3914 L6004.4531,611.8132 C6003.4844,610.7976 6002.4688,610.2039 6001.2031,610.2039 C5999.0625,610.2039 5997.6094,611.7195 5997.6094,613.6414 C5997.6094,615.4382 5998.5313,616.3445 5999.625,617.0945 L6000.7188,617.8445 C6001.6563,618.4539 6002.1094,619.032 6002.1094,619.9695 C6002.1094,620.6414 6001.6406,621.0632 6000.9375,621.0632 C6000.2344,621.0632 5999.4844,620.5476 5998.8281,619.7195 L5997.2813,621.407 C5998.3125,622.5945 5999.6094,623.2351 6000.9375,623.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="6021.25" y="622.636">ListOptions</text><line style="stroke:#181818;stroke-width:0.5;" x1="5870" x2="6216" y1="632.532" y2="632.532"/><ellipse cx="5880" cy="648.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="151" x="5889" y="652.7719">ResourceVersion string</text><ellipse cx="5880" cy="668.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="322" x="5889" y="673.0438">ResourceVersionMatch v1.ResourceVersionMatch</text><ellipse cx="5880" cy="688.7118" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="5889" y="693.3157">Predicate SelectionPredicate</text><ellipse cx="5880" cy="708.9837" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="5889" y="713.5876">Recursive bool</text><ellipse cx="5880" cy="729.2556" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="5889" y="733.8596">ProgressNotify bool</text></g><!--MD5=[fff1f9d71262c5f7d7083280ed15c539]
+class reset_store.MatchValue--><g id="elem_reset_store.MatchValue"><rect codeLine="349" fill="#F1F1F1" height="80.5438" id="reset_store.MatchValue" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="143" x="6252.5" y="630.532"/><ellipse cx="6282.8" cy="646.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6282.9875,653.2351 C6285.2844,653.2351 6286.7375,651.6101 6286.7375,649.6101 C6286.7375,647.782 6285.9094,646.9382 6284.7688,646.1414 L6283.7531,645.4226 C6282.6281,644.6101 6282.2063,644.3132 6282.2063,643.4539 C6282.2063,642.7664 6282.6906,642.3601 6283.2688,642.3601 C6284.0031,642.3601 6284.4875,642.7507 6285.1906,643.3914 L6286.5031,641.8132 C6285.5344,640.7976 6284.5188,640.2039 6283.2531,640.2039 C6281.1125,640.2039 6279.6594,641.7195 6279.6594,643.6414 C6279.6594,645.4382 6280.5813,646.3445 6281.675,647.0945 L6282.7688,647.8445 C6283.7063,648.4539 6284.1594,649.032 6284.1594,649.9695 C6284.1594,650.6414 6283.6906,651.0632 6282.9875,651.0632 C6282.2844,651.0632 6281.5344,650.5476 6280.8781,649.7195 L6279.3313,651.407 C6280.3625,652.5945 6281.6594,653.2351 6282.9875,653.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="6300.2" y="652.636">MatchValue</text><line style="stroke:#181818;stroke-width:0.5;" x1="6253.5" x2="6394.5" y1="662.532" y2="662.532"/><ellipse cx="6263.5" cy="678.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="6272.5" y="682.7719">IndexName string</text><ellipse cx="6263.5" cy="698.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="6272.5" y="703.0438">Value string</text></g><!--MD5=[13dc53ab771f85fee4392ecea9ea5563]
+class reset_store.Preconditions--><g id="elem_reset_store.Preconditions"><rect codeLine="354" fill="#F1F1F1" height="80.5438" id="reset_store.Preconditions" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="184" x="6431" y="630.532"/><ellipse cx="6473" cy="646.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6473.1875,653.2351 C6475.4844,653.2351 6476.9375,651.6101 6476.9375,649.6101 C6476.9375,647.782 6476.1094,646.9382 6474.9688,646.1414 L6473.9531,645.4226 C6472.8281,644.6101 6472.4063,644.3132 6472.4063,643.4539 C6472.4063,642.7664 6472.8906,642.3601 6473.4688,642.3601 C6474.2031,642.3601 6474.6875,642.7507 6475.3906,643.3914 L6476.7031,641.8132 C6475.7344,640.7976 6474.7188,640.2039 6473.4531,640.2039 C6471.3125,640.2039 6469.8594,641.7195 6469.8594,643.6414 C6469.8594,645.4382 6470.7813,646.3445 6471.875,647.0945 L6472.9688,647.8445 C6473.9063,648.4539 6474.3594,649.032 6474.3594,649.9695 C6474.3594,650.6414 6473.8906,651.0632 6473.1875,651.0632 C6472.4844,651.0632 6471.7344,650.5476 6471.0781,649.7195 L6469.5313,651.407 C6470.5625,652.5945 6471.8594,653.2351 6473.1875,653.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="6493" y="652.636">Preconditions</text><line style="stroke:#181818;stroke-width:0.5;" x1="6432" x2="6614" y1="662.532" y2="662.532"/><ellipse cx="6442" cy="678.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="6451" y="682.7719">UID *types.UID</text><ellipse cx="6442" cy="698.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="6451" y="703.0438">ResourceVersion *string</text></g><!--MD5=[cf3160d79cb733d881df0bf5af56050f]
+class reset_store.ResponseMeta--><g id="elem_reset_store.ResponseMeta"><rect codeLine="361" fill="#F1F1F1" height="80.5438" id="reset_store.ResponseMeta" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="182" x="5528" y="923.532"/><ellipse cx="5566.85" cy="939.532" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5567.0375,946.2351 C5569.3344,946.2351 5570.7875,944.6101 5570.7875,942.6101 C5570.7875,940.782 5569.9594,939.9382 5568.8188,939.1414 L5567.8031,938.4226 C5566.6781,937.6101 5566.2563,937.3132 5566.2563,936.4539 C5566.2563,935.7664 5566.7406,935.3601 5567.3188,935.3601 C5568.0531,935.3601 5568.5375,935.7507 5569.2406,936.3914 L5570.5531,934.8132 C5569.5844,933.7976 5568.5688,933.2039 5567.3031,933.2039 C5565.1625,933.2039 5563.7094,934.7195 5563.7094,936.6414 C5563.7094,938.4382 5564.6313,939.3445 5565.725,940.0945 L5566.8188,940.8445 C5567.7563,941.4539 5568.2094,942.032 5568.2094,942.9695 C5568.2094,943.6414 5567.7406,944.0632 5567.0375,944.0632 C5566.3344,944.0632 5565.5844,943.5476 5564.9281,942.7195 L5563.3813,944.407 C5564.4125,945.5945 5565.7094,946.2351 5567.0375,946.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="5586.15" y="945.636">ResponseMeta</text><line style="stroke:#181818;stroke-width:0.5;" x1="5529" x2="5709" y1="955.532" y2="955.532"/><ellipse cx="5539" cy="971.1679" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="5548" y="975.7719">TTL int64</text><ellipse cx="5539" cy="991.4398" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="5548" y="996.0438">ResourceVersion uint64</text></g><!--MD5=[eb5e9a3d28bb7436f45da3672032ec13]
+class reset_store.Versioner--><g id="elem_reset_store.Versioner"><rect codeLine="366" fill="#F1F1F1" height="40" id="reset_store.Versioner" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94" x="5745" y="944.032"/><ellipse cx="5760" cy="960.032" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5756.3594,966.532 L5763.1406,966.532 L5763.1406,964.4539 L5760.9844,964.4539 L5760.9844,956.0164 L5763.1406,956.0164 L5763.1406,953.907 L5756.3594,953.907 L5756.3594,956.0164 L5758.4531,956.0164 L5758.4531,964.4539 L5756.3594,964.4539 L5756.3594,966.532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="62" x="5774" y="966.136">Versioner</text><line style="stroke:#181818;stroke-width:0.5;" x1="5746" x2="5838" y1="976.032" y2="976.032"/></g><!--MD5=[428d8e514b74fb73ec5391b53acca1f4]
+class reset_store.IndexerFunc--><g id="elem_reset_store.IndexerFunc"><rect codeLine="374" fill="#F1F1F1" height="40" id="reset_store.IndexerFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="115" x="291.5" y="258.032"/><ellipse cx="306.5" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M305.2344,281.032 L307.7813,281.032 L307.7813,270.5164 L310.4063,270.5164 L310.4063,268.407 L302.5938,268.407 L302.5938,270.5164 L305.2344,270.5164 L305.2344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="320.5" y="280.136">IndexerFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="292.5" x2="405.5" y1="290.032" y2="290.032"/></g><!--MD5=[4258b51b79816156f637f49899804c01]
+class reset_store.IndexerFuncs--><g id="elem_reset_store.IndexerFuncs"><rect codeLine="376" fill="#F1F1F1" height="40" id="reset_store.IndexerFuncs" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="50" y="258.032"/><ellipse cx="65" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M63.7344,281.032 L66.2813,281.032 L66.2813,270.5164 L68.9063,270.5164 L68.9063,268.407 L61.0938,268.407 L61.0938,270.5164 L63.7344,270.5164 L63.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="79" y="280.136">IndexerFuncs</text><line style="stroke:#181818;stroke-width:0.5;" x1="51" x2="171" y1="290.032" y2="290.032"/></g><!--MD5=[9615daaa571e2f92e41ac1ddb9cdd687]
+class reset_store.UpdateFunc--><g id="elem_reset_store.UpdateFunc"><rect codeLine="378" fill="#F1F1F1" height="40" id="reset_store.UpdateFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="114" x="676" y="258.032"/><ellipse cx="691" cy="274.032" fill="#FF7700" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M689.7344,281.032 L692.2813,281.032 L692.2813,270.5164 L694.9063,270.5164 L694.9063,268.407 L687.0938,268.407 L687.0938,270.5164 L689.7344,270.5164 L689.7344,281.032 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="705" y="280.136">UpdateFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="677" x2="789" y1="290.032" y2="290.032"/></g><!--MD5=[82c04aec0001159598f73d8205733c76]
+class reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error--><g id="elem_reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error"><rect codeLine="385" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="484" x="491" y="137.532"/><ellipse cx="506" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M506.2344,160.2351 C507.3906,160.2351 508.4844,159.7507 509.3125,158.7195 L507.8906,157.2039 C507.5,157.7507 507.0313,158.0632 506.4688,158.0632 C505.2813,158.0632 504.2656,156.9226 504.2656,153.6882 C504.2656,150.532 505.3281,149.3601 506.3594,149.3601 C506.9531,149.3601 507.3281,149.657 507.75,150.157 L509.1719,148.5945 C508.5,147.8445 507.5313,147.2039 506.25,147.2039 C503.8281,147.2039 501.6875,149.1726 501.6875,153.7976 C501.6875,158.4382 503.8281,160.2351 506.2344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="520" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="422" x="550" y="159.636">(runtime.Object, ResponseMeta) (runtime.Object, *uint64, error)</text><line style="stroke:#181818;stroke-width:0.5;" x1="492" x2="974" y1="169.532" y2="169.532"/></g><!--MD5=[11bc7a81148dee29224eeb5658b9bed8]
+class reset_store.fontcolorbluefuncfontruntimeObjectstring--><g id="elem_reset_store.fontcolorbluefuncfontruntimeObjectstring"><rect codeLine="388" fill="#F1F1F1" height="40" id="reset_store.fontcolorbluefuncfontruntimeObjectstring" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="213" x="242.5" y="137.532"/><ellipse cx="257.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M257.7344,160.2351 C258.8906,160.2351 259.9844,159.7507 260.8125,158.7195 L259.3906,157.2039 C259,157.7507 258.5313,158.0632 257.9688,158.0632 C256.7813,158.0632 255.7656,156.9226 255.7656,153.6882 C255.7656,150.532 256.8281,149.3601 257.8594,149.3601 C258.4531,149.3601 258.8281,149.657 259.25,150.157 L260.6719,148.5945 C260,147.8445 259.0313,147.2039 257.75,147.2039 C255.3281,147.2039 253.1875,149.1726 253.1875,153.7976 C253.1875,158.4382 255.3281,160.2351 257.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="271.5" y="159.636">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="151" x="301.5" y="159.636">(runtime.Object) string</text><line style="stroke:#181818;stroke-width:0.5;" x1="243.5" x2="454.5" y1="169.532" y2="169.532"/></g><!--MD5=[d68b0957337c86b348933f1db53e4b4e]
+class reset_store.<font color=blue>map</font>[string]IndexerFunc--><g id="elem_reset_store.&lt;font color=blue&gt;map&lt;/font&gt;[string]IndexerFunc"><rect fill="#F1F1F1" height="40" id="reset_store.&lt;font color=blue&gt;map&lt;/font&gt;[string]IndexerFunc" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="193" x="14.5" y="137.532"/><ellipse cx="29.5" cy="153.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M29.7344,160.2351 C30.8906,160.2351 31.9844,159.7507 32.8125,158.7195 L31.3906,157.2039 C31,157.7507 30.5313,158.0632 29.9688,158.0632 C28.7813,158.0632 27.7656,156.9226 27.7656,153.6882 C27.7656,150.532 28.8281,149.3601 29.8594,149.3601 C30.4531,149.3601 30.8281,149.657 31.25,150.157 L32.6719,148.5945 C32,147.8445 31.0313,147.2039 29.75,147.2039 C27.3281,147.2039 25.1875,149.1726 25.1875,153.7976 C25.1875,158.4382 27.3281,160.2351 29.7344,160.2351 Z " fill="#000000"/><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="43.5" y="159.636">map</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="73.5" y="159.636">[string]IndexerFunc</text><line style="stroke:#181818;stroke-width:0.5;" x1="15.5" x2="206.5" y1="169.532" y2="169.532"/></g><!--MD5=[aaadaf5c3ad6e0e0dd8a1e035309d301]
+class __builtin__.string--><g id="elem___builtin__.string"><rect fill="#F1F1F1" height="40" id="__builtin__.string" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="2460" y="37.532"/><ellipse cx="2475" cy="53.532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2475.2344,60.2351 C2476.3906,60.2351 2477.4844,59.7507 2478.3125,58.7195 L2476.8906,57.2039 C2476.5,57.7507 2476.0313,58.0632 2475.4688,58.0632 C2474.2813,58.0632 2473.2656,56.9226 2473.2656,53.6882 C2473.2656,50.532 2474.3281,49.3601 2475.3594,49.3601 C2475.9531,49.3601 2476.3281,49.657 2476.75,50.157 L2478.1719,48.5945 C2477.5,47.8445 2476.5313,47.2039 2475.25,47.2039 C2472.8281,47.2039 2470.6875,49.1726 2470.6875,53.7976 C2470.6875,58.4382 2472.8281,60.2351 2475.2344,60.2351 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="2489" y="59.636">string</text><line style="stroke:#181818;stroke-width:0.5;" x1="2461" x2="2529" y1="69.532" y2="69.532"/></g><!--MD5=[c98f5b270655d808ad218ab58d29a2d6]
+reverse link reset_store.GenericStore to reset_store.Store--><g id="link_reset_store.GenericStore_reset_store.Store"><path codeLine="100" d="M3213.4558,436.632 C3219.3013,448.6994 3226.2071,462.9558 3233.6805,478.3838 " fill="none" id="reset_store.GenericStore-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3207.1255,439.6207,3204.7063,418.5696,3219.7251,433.5173,3207.1255,439.6207" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[da9b45689568c237a56cbdf80de73c89]
+reverse link reset_store.CollectionDeleter to reset_store.Store--><g id="link_reset_store.CollectionDeleter_reset_store.Store"><path codeLine="101" d="M3010.7536,307.8494 C2966.1026,333.9931 2917.2434,374.6038 2941,418.532 C2984.3784,498.7428 3065.5425,557.556 3142.2932,598.1367 " fill="none" id="reset_store.CollectionDeleter-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3007.5607,301.616,3028.4503,298.0627,3014.336,313.8674,3007.5607,301.616" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ba1b7c2eefa20f02b9beae225d9ceb7e]
+reverse link reset_store.Creater to reset_store.Store--><g id="link_reset_store.Creater_reset_store.Store"><path codeLine="102" d="M2801.7314,178.2595 C2737.7085,200.7847 2644.4321,234.0542 2642,237.532 C2621.3685,267.0336 2623.2518,287.7992 2642,318.532 C2750.136,495.7925 2979.0414,587.6964 3142.4662,632.5798 " fill="none" id="reset_store.Creater-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2799.7433,171.5386,2820.9329,171.5169,2804.3817,184.7479,2799.7433,171.5386" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[df17f73c4b13a2258323346b82adfe86]
+reverse link reset_store.CreaterUpdater to reset_store.Store--><g id="link_reset_store.CreaterUpdater_reset_store.Store"><path codeLine="103" d="M2897.0563,318.1657 C2898.9315,348.2067 2905.5459,389.0282 2926,418.532 C2979.2592,495.3553 3064.2378,553.7256 3142.2865,594.8893 " fill="none" id="reset_store.CreaterUpdater-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2890.0572,318.3059,2896.3966,298.0868,2904.0496,317.8461,2890.0572,318.3059" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4bb5b9d25c423e1cd3695fe263a37a15]
+reverse link reset_store.Getter to reset_store.Store--><g id="link_reset_store.Getter_reset_store.Store"><path codeLine="104" d="M3416.1232,315.085 C3404.4101,333.428 3391.3489,356.3517 3383,378.532 C3371.1152,410.1058 3361.6508,444.5868 3354.1451,478.4416 " fill="none" id="reset_store.Getter-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3410.4731,310.9399,3427.3744,298.1592,3422.1322,318.6902,3410.4731,310.9399" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c4a784973f7df83c826e4dc4117b9f64]
+reverse link reset_store.GracefulDeleter to reset_store.Store--><g id="link_reset_store.GracefulDeleter_reset_store.Store"><path codeLine="105" d="M2764.3605,311.3435 C2798.3546,340.9649 2850.4858,384.6989 2899,418.532 C2976.2214,472.385 3065.3786,526.2069 3142.2643,570.2389 " fill="none" id="reset_store.GracefulDeleter-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2759.6263,316.502,2749.2247,298.0409,2768.8684,305.9861,2759.6263,316.502" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[40392f6261369cca8326862944b1acde]
+reverse link reset_store.Lister to reset_store.Store--><g id="link_reset_store.Lister_reset_store.Store"><path codeLine="106" d="M3335.081,318.1601 C3334.2007,356.5999 3332.8049,417.5493 3331.4194,478.0534 " fill="none" id="reset_store.Lister-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3328.0852,317.8957,3335.5413,298.0612,3342.0815,318.2163,3328.0852,317.8957" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e4e5e24adad0a441206560a9ab583a95]
+reverse link reset_store.MayReturnFullObjectDeleter to reset_store.Store--><g id="link_reset_store.MayReturnFullObjectDeleter_reset_store.Store"><path codeLine="107" d="M4238.6304,423.8486 C4073.379,468.6556 3726.5988,562.6831 3511.5885,620.9819 " fill="none" id="reset_store.MayReturnFullObjectDeleter-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4236.965,417.0475,4258.1,418.5696,4240.6288,430.5596,4236.965,417.0475" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1265226908f76c2c1ce318323a2cc8c6]
+reverse link reset_store.ResetFieldsStrategy to reset_store.Store--><g id="link_reset_store.ResetFieldsStrategy_reset_store.Store"><path codeLine="108" d="M2584.4694,424.8768 C2712.3007,467.2539 2966.9661,551.6777 3142.105,609.7377 " fill="none" id="reset_store.ResetFieldsStrategy-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2582.225,431.5074,2565.4436,418.5696,2586.6304,418.2186,2582.225,431.5074" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6402d41c25f13c4027b80eca85fecab3]
+reverse link reset_store.Scoper to reset_store.Store--><g id="link_reset_store.Scoper_reset_store.Store"><path codeLine="109" d="M4091.5159,418.9399 C3881.7113,490.8648 3662.4755,562.6791 3511.6102,611.5861 " fill="none" id="reset_store.Scoper-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4089.2951,412.3014,4110.4844,412.428,4093.841,425.5428,4089.2951,412.3014" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[13c289643f7a6e56d13d91a4a81d838e]
+reverse link reset_store.SingularNameProvider to reset_store.Store--><g id="link_reset_store.SingularNameProvider_reset_store.Store"><path codeLine="110" d="M3918.0007,426.2787 C3823.459,465.4316 3647.3276,538.3735 3511.8473,594.4805 " fill="none" id="reset_store.SingularNameProvider-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3915.4592,419.7547,3936.6157,418.5696,3920.8159,432.6894,3915.4592,419.7547" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5e916c189162e424cb095cebfbb314dd]
+reverse link reset_store.StandardStorage to reset_store.Store--><g id="link_reset_store.StandardStorage_reset_store.Store"><path codeLine="111" d="M3066.825,432.3193 C3086.9713,450.8036 3113.6093,475.2442 3142.1565,501.4365 " fill="none" id="reset_store.StandardStorage-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3061.8436,437.2488,3051.8391,418.5696,3071.3085,426.9329,3061.8436,437.2488" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[26f73a4d5ffe85b1e66e3427430198a8]
+reverse link reset_store.Storage to reset_store.Store--><g id="link_reset_store.Storage_reset_store.Store"><path codeLine="112" d="M3764.0945,428.449 C3703.4764,462.0915 3601.7204,518.565 3511.6348,568.5616 " fill="none" id="reset_store.Storage-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3761.0114,422.1543,3781.8956,418.5696,3767.8051,434.3955,3761.0114,422.1543" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0dbc587cfde5ed5ddd6c39d6fe953bab]
+reverse link reset_store.StorageVersionProvider to reset_store.Store--><g id="link_reset_store.StorageVersionProvider_reset_store.Store"><path codeLine="113" d="M3610.0151,431.5239 C3584.4084,453.1942 3548.8448,483.2907 3511.5583,514.8453 " fill="none" id="reset_store.StorageVersionProvider-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3605.5337,426.1461,3625.3226,418.5696,3614.5777,436.8329,3605.5337,426.1461" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[52d53bfb1ddf623fe83765efd94d6985]
+reverse link reset_store.TableConvertor to reset_store.Store--><g id="link_reset_store.TableConvertor_reset_store.Store"><path codeLine="114" d="M3089.6689,177.4946 C3325.5594,213.9638 3410.7362,135.2586 3618,237.532 C3662.8184,259.6474 3650.8117,297.1826 3696,318.532 C3849.7799,391.186 4343.5462,253.6429 4459,378.532 C4593.3878,523.9025 3865.7536,617.561 3511.731,653.9124 " fill="none" id="reset_store.TableConvertor-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3088.3788,184.3764,3069.7895,174.2059,3090.6638,170.5641,3088.3788,184.3764" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a8b8104407691e40924479c71cdc5293]
+reverse link reset_store.Updater to reset_store.Store--><g id="link_reset_store.Updater_reset_store.Store"><path codeLine="115" d="M3543.9849,317.4034 C3533.8414,346.1689 3518.5595,385.7163 3501,418.532 C3490.388,438.364 3478.5393,458.5275 3466.1513,478.3728 " fill="none" id="reset_store.Updater-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3537.4565,314.8606,3550.5574,298.2062,3550.7018,319.3953,3537.4565,314.8606" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d9a23b14368ab6aa37839858d06845d3]
+reverse link reset_store.Watcher to reset_store.Store--><g id="link_reset_store.Watcher_reset_store.Store"><path codeLine="116" d="M3243.9274,315.9007 C3253.3711,334.3369 3263.9613,357.1035 3271,378.532 C3281.4475,410.3381 3290.1925,444.7671 3297.4279,478.4573 " fill="none" id="reset_store.Watcher-backto-reset_store.Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3237.7151,319.1273,3234.5255,298.1791,3250.0824,312.566,3237.7151,319.1273" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[de165d2f7d6ddbf6dd2df37dfcab1d6b]
+reverse link reset_store.RESTCreateUpdateStrategy to reset_store.CreateUpdateResetFieldsStrategy--><g id="link_reset_store.RESTCreateUpdateStrategy_reset_store.CreateUpdateResetFieldsStrategy"><path codeLine="306" d="M2083.8819,431.7897 C2092.2836,489.0267 2109.2308,604.4794 2116.0544,650.9651 " fill="none" id="reset_store.RESTCreateUpdateStrategy-backto-reset_store.CreateUpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2081.9413,418.5696,2078.8552,425.0869,2083.6842,430.4423,2086.7703,423.925,2081.9413,418.5696" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d18150fdabfd92f8f939b4a1a6c951ae]
+reverse link reset_store.ResetFieldsStrategy to reset_store.CreateUpdateResetFieldsStrategy--><g id="link_reset_store.ResetFieldsStrategy_reset_store.CreateUpdateResetFieldsStrategy"><path codeLine="307" d="M2444.4129,424.0516 C2413.0999,438.318 2374.8745,457.4522 2343,478.532 C2261.0968,532.6977 2176.3839,613.5444 2138.8957,650.8452 " fill="none" id="reset_store.ResetFieldsStrategy-backto-reset_store.CreateUpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2456.4862,418.6344,2449.3745,417.4411,2445.5378,423.5468,2452.6495,424.7401,2456.4862,418.6344" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[be187e76e474eb9892062a984d26ff86]
+reverse link reset_store.Creater to reset_store.CreaterUpdater--><g id="link_reset_store.Creater_reset_store.CreaterUpdater"><path codeLine="308" d="M2870.7649,190.2172 C2877.2077,211.7829 2885.445,239.355 2890.9548,257.7972 " fill="none" id="reset_store.Creater-backto-reset_store.CreaterUpdater" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2867.0256,177.701,2864.9106,184.5949,2870.4608,189.1988,2872.5758,182.3048,2867.0256,177.701" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5d3724ba418039c997da5725cbdeb7cb]
+reverse link reset_store.TableConvertor to reset_store.Lister--><g id="link_reset_store.TableConvertor_reset_store.Lister"><path codeLine="309" d="M3082.5666,176.5667 C3152.6251,193.9823 3248.8154,219.68 3284,237.532 C3294.6127,242.9167 3305.1846,250.6104 3313.9974,257.8483 " fill="none" id="reset_store.TableConvertor-backto-reset_store.Lister" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3069.8099,173.415,3074.6753,178.7374,3081.4596,176.2933,3076.5942,170.9709,3069.8099,173.415" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8d747cb8f7177bb84fd9aa76c0dfe1e4]
+reverse link reset_store.Getter to reset_store.Patcher--><g id="link_reset_store.Getter_reset_store.Patcher"><path codeLine="310" d="M3442,311.3291 C3442,332.8023 3442,360.0289 3442,378.2972 " fill="none" id="reset_store.Getter-backto-reset_store.Patcher" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3442,298.201,3438,304.201,3442,310.201,3446,304.201,3442,298.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7d0140ae1cbf7f7c8f0aac454041efee]
+reverse link reset_store.Updater to reset_store.Patcher--><g id="link_reset_store.Updater_reset_store.Patcher"><path codeLine="311" d="M3528.6794,307.7071 C3507.7271,329.6614 3479.7419,358.985 3461.3112,378.2972 " fill="none" id="reset_store.Updater-backto-reset_store.Patcher" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3537.7516,298.201,3530.7155,299.7799,3529.4668,306.8821,3536.5029,305.3031,3537.7516,298.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[32b4dcd7e093eecd4ee756edd56629b8]
+reverse link reset_store.CollectionDeleter to reset_store.StandardStorage--><g id="link_reset_store.CollectionDeleter_reset_store.StandardStorage"><path codeLine="312" d="M3060.6077,310.7172 C3053.091,332.2829 3043.4808,359.855 3037.0528,378.2972 " fill="none" id="reset_store.CollectionDeleter-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3064.9701,298.201,3059.2181,302.5501,3061.0204,309.5324,3066.7724,305.1832,3064.9701,298.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a789bdce50af29654925a3118cb8f703]
+reverse link reset_store.CreaterUpdater to reset_store.StandardStorage--><g id="link_reset_store.CreaterUpdater_reset_store.StandardStorage"><path codeLine="313" d="M2929.1005,307.1156 C2953.4011,329.1323 2986.1586,358.8111 3007.6662,378.2972 " fill="none" id="reset_store.CreaterUpdater-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2919.2612,298.201,2921.0219,305.1938,2928.1541,306.2581,2926.3933,299.2652,2919.2612,298.201" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b13c00a0dd1490cfda336447761fe242]
+reverse link reset_store.Getter to reset_store.StandardStorage--><g id="link_reset_store.Getter_reset_store.StandardStorage"><path codeLine="314" d="M3409.0896,306.1049 C3402.4216,310.7918 3395.2284,315.2039 3388,318.532 C3276.7333,369.7605 3238.5343,351.7702 3119,378.532 C3113.4365,379.7776 3107.6777,381.0683 3101.8886,382.367 " fill="none" id="reset_store.Getter-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3419.7291,298.1006,3412.5297,298.5113,3410.1398,305.3148,3417.3392,304.9041,3419.7291,298.1006" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[118069b97a2bb43c290d6f838aed5263]
+reverse link reset_store.GracefulDeleter to reset_store.StandardStorage--><g id="link_reset_store.GracefulDeleter_reset_store.StandardStorage"><path codeLine="315" d="M2779.7986,303.7786 C2790.6992,308.8446 2802.1615,313.9921 2813,318.532 C2865.9595,340.7149 2927.4632,363.0775 2971.4408,378.4974 " fill="none" id="reset_store.GracefulDeleter-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2767.7932,298.1303,2771.5195,304.304,2778.6515,303.2389,2774.9252,297.0651,2767.7932,298.1303" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6bf5d9ea682453b77aa104b60194c4f0]
+reverse link reset_store.Lister to reset_store.StandardStorage--><g id="link_reset_store.Lister_reset_store.StandardStorage"><path codeLine="316" d="M3303.3524,306.2516 C3297.1793,310.7623 3290.5856,315.0748 3284,318.532 C3252.1219,335.2668 3165.0152,361.2506 3101.6815,379.035 " fill="none" id="reset_store.Lister-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3313.9172,298.0604,3306.7245,298.5757,3304.4338,305.4132,3311.6264,304.898,3313.9172,298.0604" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b6fcd7b3246f6bc0ba507f59bff7ca2c]
+reverse link reset_store.Watcher to reset_store.StandardStorage--><g id="link_reset_store.Watcher_reset_store.StandardStorage"><path codeLine="317" d="M3183.0102,305.4468 C3176.3655,309.8803 3169.517,314.3765 3163,318.532 C3129.9427,339.6106 3091.499,362.5714 3064.4702,378.4657 " fill="none" id="reset_store.Watcher-backto-reset_store.StandardStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3193.9057,298.1161,3186.6947,298.1467,3183.9494,304.8148,3191.1605,304.7842,3193.9057,298.1161" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9cd92b4979a5d4b6dccadd103ab46f77]
+reverse link reset_store.RESTUpdateStrategy to reset_store.UpdateResetFieldsStrategy--><g id="link_reset_store.RESTUpdateStrategy_reset_store.UpdateResetFieldsStrategy"><path codeLine="318" d="M2322.7019,429.9904 C2356.3399,486.5729 2426.142,603.987 2454.0703,650.9651 " fill="none" id="reset_store.RESTUpdateStrategy-backto-reset_store.UpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2315.9122,418.5696,2315.54,425.7711,2322.0444,428.8844,2322.4166,421.6829,2315.9122,418.5696" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[705267260be8384c4f33548c90c11246]
+reverse link reset_store.ResetFieldsStrategy to reset_store.UpdateResetFieldsStrategy--><g id="link_reset_store.ResetFieldsStrategy_reset_store.UpdateResetFieldsStrategy"><path codeLine="319" d="M2500.2402,431.7897 C2492.0485,489.0267 2475.525,604.4794 2468.872,650.9651 " fill="none" id="reset_store.ResetFieldsStrategy-backto-reset_store.UpdateResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2502.1322,418.5696,2497.3225,423.9423,2500.432,430.4485,2505.2418,425.0758,2502.1322,418.5696" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[68bfb3da69ca744cf548f66518907ec6]
+reverse link reset_store.UpdatedObjectInfo to reset_store.defaultUpdatedObjectInfo--><g id="link_reset_store.UpdatedObjectInfo_reset_store.defaultUpdatedObjectInfo"><path codeLine="321" d="M2606.7725,178.4753 C2517.3669,197.5261 2392.7223,224.5837 2344,237.532 C2338.2884,239.0499 2332.4526,240.6576 2326.5713,242.323 " fill="none" id="reset_store.UpdatedObjectInfo-backto-reset_store.defaultUpdatedObjectInfo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2605.3863,171.6137,2626.405,174.2999,2608.2988,185.3074,2605.3863,171.6137" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c0b0986b0f448cf02f7cee28e19dd9f0]
+reverse link reset_store.UpdatedObjectInfo to reset_store.wrappedUpdatedObjectInfo--><g id="link_reset_store.UpdatedObjectInfo_reset_store.wrappedUpdatedObjectInfo"><path codeLine="322" d="M2649.327,186.9678 C2620.0948,202.1509 2583.9848,220.9063 2552.1473,237.4426 " fill="none" id="reset_store.UpdatedObjectInfo-backto-reset_store.wrappedUpdatedObjectInfo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2646.4542,180.572,2667.4295,177.5654,2652.9073,192.9961,2646.4542,180.572" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[40a3a5ea0e518bba030ca7e9d63350d3]
+reverse link __builtin__.string to reset_store.GarbageCollectionPolicy--><g id="link___builtin__.string_reset_store.GarbageCollectionPolicy"><path codeLine="394" d="M2495,82.8339 C2495,99.7144 2495,121.6105 2495,137.3256 " fill="none" id="__builtin__.string-backto-reset_store.GarbageCollectionPolicy" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="2490" y="72.7685"/></g><!--MD5=[fa60522ecc3c73f735dd8f107e34cb35]
+reverse link reset_store.fontcolorbluefuncfontcontextContextbool to reset_store.FinishFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextbool_reset_store.FinishFunc"><path codeLine="395" d="M5488,182.8632 C5488,205.1531 5488,237.1802 5488,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextbool-backto-reset_store.FinishFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="5483" y="172.701"/></g><!--MD5=[ace587b4a85f5ddaf06df6f9a770182c]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror to reset_store.BeginCreateFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror_reset_store.BeginCreateFunc"><path codeLine="396" d="M4393,182.8632 C4393,205.1531 4393,237.1802 4393,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror-backto-reset_store.BeginCreateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="4388" y="172.701"/></g><!--MD5=[d629869f1a36e4084d4801fe50e46acf]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror to reset_store.BeginUpdateFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror_reset_store.BeginUpdateFunc"><path codeLine="397" d="M5021,182.8632 C5021,205.1531 5021,237.1802 5021,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror-backto-reset_store.BeginUpdateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="5016" y="172.701"/></g><!--MD5=[3222d6b7972fa51487c65969811dcde7]
+reverse link reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions to reset_store.AfterCreateFunc--><g id="link_reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions_reset_store.AfterCreateFunc"><path codeLine="398" d="M3976.1038,180.3753 C4013.48,202.7825 4069.908,236.6112 4105.5824,257.9981 " fill="none" id="reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions-backto-reset_store.AfterCreateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="3966.6429" y="172.701"/></g><!--MD5=[552f56b8bb22bf65df41a74feba32628]
+reverse link reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions to reset_store.AfterDeleteFunc--><g id="link_reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions_reset_store.AfterDeleteFunc"><path codeLine="399" d="M3686.6272,178.8618 C3741.8128,193.3507 3814.4354,214.0953 3877,237.532 C3892.7578,243.4349 3909.6237,250.9841 3924.2706,257.9617 " fill="none" id="reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions-backto-reset_store.AfterDeleteFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="3676.6789" y="172.5672"/></g><!--MD5=[b5470e92b251301ccfde1702dd4f5e89]
+reverse link reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions to reset_store.AfterUpdateFunc--><g id="link_reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions_reset_store.AfterUpdateFunc"><path codeLine="400" d="M3410.8656,178.4244 C3493.2181,191.6368 3596.2303,211.2309 3686,237.532 C3704.6943,243.0091 3724.7034,250.7202 3741.8737,257.9461 " fill="none" id="reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions-backto-reset_store.AfterUpdateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="3400.4714" y="172.5633"/></g><!--MD5=[c5a7a28a6bde2e38831a8ad1eb89156e]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror to reset_store.ValidateObjectFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror_reset_store.ValidateObjectFunc"><path codeLine="401" d="M2154.1285,179.8289 C2109.6927,202.213 2047.4252,236.3865 2011.8718,257.9507 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror-backto-reset_store.ValidateObjectFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="2153.6418" y="172.5654"/></g><!--MD5=[c5a7a28a6bde2e38831a8ad1eb89156e]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror to reset_store.ValidateObjectFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror_reset_store.ValidateObjectFunc"><path codeLine="404" d="M2174.1467,180.3753 C2136.9253,202.7825 2074.9986,236.6112 2031.9347,257.9981 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror-backto-reset_store.ValidateObjectFunc-1" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="2173.5605" y="172.701"/></g><!--MD5=[7bf3b8ef9e534e205569d83a57ac41d5]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror to reset_store.TransformFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror_reset_store.TransformFunc"><path codeLine="402" d="M1281,182.8632 C1281,205.1531 1281,237.1802 1281,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror-backto-reset_store.TransformFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="1276" y="172.701"/></g><!--MD5=[cb85f058f3ffc76c5fa67ba7ce9347a1]
+reverse link reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror to reset_store.ValidateObjectUpdateFunc--><g id="link_reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror_reset_store.ValidateObjectUpdateFunc"><path codeLine="403" d="M1791.5163,182.5816 C1784.8538,204.8826 1775.2307,237.0932 1769.0452,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror-backto-reset_store.ValidateObjectUpdateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="1787.9744" y="172.701"/></g><!--MD5=[49333615b3202f7c01fb7792c2c6e02c]
+reverse link reset_store.fontcolorbluefuncfontruntimeObjectstring to reset_store.IndexerFunc--><g id="link_reset_store.fontcolorbluefuncfontruntimeObjectstring_reset_store.IndexerFunc"><path codeLine="405" d="M349,182.8632 C349,205.1531 349,237.1802 349,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontruntimeObjectstring-backto-reset_store.IndexerFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="344" y="172.701"/></g><!--MD5=[fe10474a4dedf75a8e3720e5affee5fb]
+reverse link reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error to reset_store.UpdateFunc--><g id="link_reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error_reset_store.UpdateFunc"><path codeLine="406" d="M733,182.8632 C733,205.1531 733,237.1802 733,257.7972 " fill="none" id="reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error-backto-reset_store.UpdateFunc" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="728" y="172.701"/></g><!--MD5=[10d462f77dd2f5ef3d3d2492b427d81d]
+reverse link reset_store.<font color=blue>map</font>[string]IndexerFunc to reset_store.IndexerFuncs--><g id="link_reset_store.&lt;font color=blue&gt;map&lt;/font&gt;[string]IndexerFunc_reset_store.IndexerFuncs"><path codeLine="407" d="M111,182.8632 C111,205.1531 111,237.1802 111,257.7972 " fill="none" id="reset_store.&lt;font color=blue&gt;map&lt;/font&gt;[string]IndexerFunc-backto-reset_store.IndexerFuncs" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="106" y="172.701"/></g><!--MD5=[3cb173c05be9b8bb85d99d7a04ce9cbe]
+@startuml
+namespace reset_store {
+    interface GenericStore  {
+        + GetCreateStrategy() reset_store.RESTCreateStrategy
+        + GetUpdateStrategy() reset_store.RESTUpdateStrategy
+        + GetDeleteStrategy() reset_store.RESTDeleteStrategy
+
+    }
+    class Store << (S,Aquamarine) >> {
+        + NewFunc <font color=blue>func</font>() runtime.Object
+        + NewListFunc <font color=blue>func</font>() runtime.Object
+        + DefaultQualifiedResource schema.GroupResource
+        + SingularQualifiedResource schema.GroupResource
+        + KeyRootFunc <font color=blue>func</font>(context.Context) string
+        + KeyFunc <font color=blue>func</font>(context.Context, string) (string, error)
+        + ObjectNameFunc <font color=blue>func</font>(runtime.Object) (string, error)
+        + TTLFunc <font color=blue>func</font>(runtime.Object, uint64, bool) (uint64, error)
+        + PredicateFunc <font color=blue>func</font>(labels.Selector, fields.Selector) reset_store.SelectionPredicate
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + Decorator <font color=blue>func</font>(runtime.Object) 
+        + CreateStrategy reset_store.RESTCreateStrategy
+        + BeginCreate BeginCreateFunc
+        + AfterCreate AfterCreateFunc
+        + UpdateStrategy reset_store.RESTUpdateStrategy
+        + BeginUpdate BeginUpdateFunc
+        + AfterUpdate AfterUpdateFunc
+        + DeleteStrategy reset_store.RESTDeleteStrategy
+        + AfterDelete AfterDeleteFunc
+        + ReturnDeletedObject bool
+        + ShouldDeleteDuringUpdate <font color=blue>func</font>(context.Context, string, runtime.Object, runtime.Object) bool
+        + TableConvertor reset_store.TableConvertor
+        + ResetFieldsStrategy reset_store.ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+        - deleteWithoutFinalizers(ctx context.Context, name string, key string, obj runtime.Object, preconditions *reset_store.Preconditions, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        - qualifiedResourceFromContext(ctx context.Context) schema.GroupResource
+        - updateForGracefulDeletionAndFinalizers(ctx context.Context, name string, key string, options *v1.DeleteOptions, preconditions reset_store.Preconditions, deleteValidation reset_store.ValidateObjectFunc, in runtime.Object) (error, bool, bool, runtime.Object, runtime.Object)
+        - finalizeDelete(ctx context.Context, obj runtime.Object, runHooks bool, options *v1.DeleteOptions) (runtime.Object, error)
+        - calculateTTL(obj runtime.Object, defaultTTL int64, update bool) (uint64, error)
+        - startObservingCount(period time.Duration, objectCountTracker request.StorageObjectCountTracker) <font color=blue>func</font>() 
+
+        + New() runtime.Object
+        + Destroy() 
+        + NewList() runtime.Object
+        + NamespaceScoped() bool
+        + GetCreateStrategy() reset_store.RESTCreateStrategy
+        + GetUpdateStrategy() reset_store.RESTUpdateStrategy
+        + GetDeleteStrategy() reset_store.RESTDeleteStrategy
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+        + ListPredicate(ctx context.Context, p reset_store.SelectionPredicate, options *internalversion.ListOptions) (runtime.Object, error)
+        + Create(ctx context.Context, obj runtime.Object, createValidation reset_store.ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+        + Update(ctx context.Context, name string, objInfo reset_store.UpdatedObjectInfo, createValidation reset_store.ValidateObjectFunc, updateValidation reset_store.ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+        + Delete(ctx context.Context, name string, deleteValidation reset_store.ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        + DeleteReturnsDeletedObject() bool
+        + DeleteCollection(ctx context.Context, deleteValidation reset_store.ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+        + WatchPredicate(ctx context.Context, p reset_store.SelectionPredicate, resourceVersion string) (watch.Interface, error)
+        + CompleteWithOptions(options *generic.StoreOptions) error
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+        + StorageVersion() runtime.GroupVersioner
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + GetSingularName() string
+
+    }
+    class reset_store.AfterCreateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.AfterDeleteFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.AfterUpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.BeginCreateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.BeginUpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.FinishFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, bool) " as fontcolorbluefuncfontcontextContextbool {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object, *v1.UpdateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, *v1.CreateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.CreateOptions) " as fontcolorbluefuncfontruntimeObjectv1CreateOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.DeleteOptions) " as fontcolorbluefuncfontruntimeObjectv1DeleteOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.UpdateOptions) " as fontcolorbluefuncfontruntimeObjectv1UpdateOptions {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"reset_store.GenericStore" <|- - "reset_store.Store"
+"reset_store.CollectionDeleter" <|- - "reset_store.Store"
+"reset_store.Creater" <|- - "reset_store.Store"
+"reset_store.CreaterUpdater" <|- - "reset_store.Store"
+"reset_store.Getter" <|- - "reset_store.Store"
+"reset_store.GracefulDeleter" <|- - "reset_store.Store"
+"reset_store.Lister" <|- - "reset_store.Store"
+"reset_store.MayReturnFullObjectDeleter" <|- - "reset_store.Store"
+"reset_store.ResetFieldsStrategy" <|- - "reset_store.Store"
+"reset_store.Scoper" <|- - "reset_store.Store"
+"reset_store.SingularNameProvider" <|- - "reset_store.Store"
+"reset_store.StandardStorage" <|- - "reset_store.Store"
+"reset_store.Storage" <|- - "reset_store.Store"
+"reset_store.StorageVersionProvider" <|- - "reset_store.Store"
+"reset_store.TableConvertor" <|- - "reset_store.Store"
+"reset_store.Updater" <|- - "reset_store.Store"
+"reset_store.Watcher" <|- - "reset_store.Store"
+
+namespace reset_store {
+    interface CategoriesProvider  {
+        + Categories() []string
+
+    }
+    interface CollectionDeleter  {
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface Connecter  {
+        + Connect(ctx context.Context, id string, options runtime.Object, r Responder) (http.Handler, error)
+        + NewConnectOptions() (runtime.Object, bool, string)
+        + ConnectMethods() []string
+
+    }
+    interface CreateUpdateResetFieldsStrategy  {
+    }
+    interface Creater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface CreaterUpdater  {
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface GarbageCollectionDeleteStrategy  {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) GarbageCollectionPolicy
+
+    }
+    interface Getter  {
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+
+    }
+    interface GetterWithOptions  {
+        + Get(ctx context.Context, name string, options runtime.Object) (runtime.Object, error)
+        + NewGetOptions() (runtime.Object, bool, string)
+
+    }
+    interface GracefulDeleter  {
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+
+    }
+    interface GroupVersionAcceptor  {
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+
+    }
+    interface GroupVersionKindProvider  {
+        + GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
+
+    }
+    interface KindProvider  {
+        + Kind() string
+
+    }
+    interface Lister  {
+        + NewList() runtime.Object
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface MayReturnFullObjectDeleter  {
+        + DeleteReturnsDeletedObject() bool
+
+    }
+    interface NamedCreater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface Patcher  {
+    }
+    interface RESTDeleteStrategy  {
+    }
+    interface RESTGracefulDeleteStrategy  {
+        + CheckGracefulDelete(ctx context.Context, obj runtime.Object, options *v1.DeleteOptions) bool
+
+    }
+    interface RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface Redirector  {
+        + ResourceLocation(ctx context.Context, id string) (*url.URL, http.RoundTripper, error)
+
+    }
+    interface ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+    interface ResourceStreamer  {
+        + InputStream(ctx context.Context, apiVersion string, acceptHeader string) (io.ReadCloser, bool, string, error)
+
+    }
+    interface Responder  {
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    interface Scoper  {
+        + NamespaceScoped() bool
+
+    }
+    interface ShortNamesProvider  {
+        + ShortNames() []string
+
+    }
+    interface SingularNameProvider  {
+        + GetSingularName() string
+
+    }
+    interface StandardStorage  {
+        + Destroy() 
+
+    }
+    interface Storage  {
+        + New() runtime.Object
+        + Destroy() 
+
+    }
+    interface StorageMetadata  {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface StorageVersionProvider  {
+        + StorageVersion() runtime.GroupVersioner
+
+    }
+    interface TableConvertor  {
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    interface UpdateResetFieldsStrategy  {
+    }
+    interface UpdatedObjectInfo  {
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    interface Updater  {
+        + New() runtime.Object
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface Watcher  {
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+
+    }
+    class defaultUpdatedObjectInfo << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class reset_store.GarbageCollectionPolicy << (T, #FF7700) >>  {
+    }
+    class reset_store.TransformFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class wrappedUpdatedObjectInfo << (S,Aquamarine) >> {
+        - objInfo UpdatedObjectInfo
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"reset_store.RESTCreateUpdateStrategy" *- - "reset_store.CreateUpdateResetFieldsStrategy"
+"reset_store.ResetFieldsStrategy" *- - "reset_store.CreateUpdateResetFieldsStrategy"
+"reset_store.Creater" *- - "reset_store.CreaterUpdater"
+"reset_store.TableConvertor" *- - "reset_store.Lister"
+"reset_store.Getter" *- - "reset_store.Patcher"
+"reset_store.Updater" *- - "reset_store.Patcher"
+"reset_store.CollectionDeleter" *- - "reset_store.StandardStorage"
+"reset_store.CreaterUpdater" *- - "reset_store.StandardStorage"
+"reset_store.Getter" *- - "reset_store.StandardStorage"
+"reset_store.GracefulDeleter" *- - "reset_store.StandardStorage"
+"reset_store.Lister" *- - "reset_store.StandardStorage"
+"reset_store.Watcher" *- - "reset_store.StandardStorage"
+"reset_store.RESTUpdateStrategy" *- - "reset_store.UpdateResetFieldsStrategy"
+"reset_store.ResetFieldsStrategy" *- - "reset_store.UpdateResetFieldsStrategy"
+
+"reset_store.UpdatedObjectInfo" <|- - "reset_store.defaultUpdatedObjectInfo"
+"reset_store.UpdatedObjectInfo" <|- - "reset_store.wrappedUpdatedObjectInfo"
+
+namespace reset_store {
+    class GetOptions << (S,Aquamarine) >> {
+        + IgnoreNotFound bool
+        + ResourceVersion string
+
+    }
+    interface Interface  {
+        + Versioner() Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *Preconditions, validateDeletion ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts ListOptions, listObj runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *Preconditions, tryUpdate UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+    class ListOptions << (S,Aquamarine) >> {
+        + ResourceVersion string
+        + ResourceVersionMatch v1.ResourceVersionMatch
+        + Predicate SelectionPredicate
+        + Recursive bool
+        + ProgressNotify bool
+
+    }
+    class MatchValue << (S,Aquamarine) >> {
+        + IndexName string
+        + Value string
+
+    }
+    class Preconditions << (S,Aquamarine) >> {
+        + UID *types.UID
+        + ResourceVersion *string
+
+        + Check(key string, obj runtime.Object) error
+
+    }
+    class ResponseMeta << (S,Aquamarine) >> {
+        + TTL int64
+        + ResourceVersion uint64
+
+    }
+    interface Versioner  {
+        + UpdateObject(obj runtime.Object, resourceVersion uint64) error
+        + UpdateList(obj runtime.Object, resourceVersion uint64, continueValue string, remainingItemCount *int64) error
+        + PrepareObjectForStorage(obj runtime.Object) error
+        + ObjectResourceVersion(obj runtime.Object) (uint64, error)
+        + ParseResourceVersion(resourceVersion string) (uint64, error)
+
+    }
+    class reset_store.IndexerFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.IndexerFuncs << (T, #FF7700) >>  {
+    }
+    class reset_store.UpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object, ResponseMeta) (runtime.Object, *uint64, error)" as fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(runtime.Object) string" as fontcolorbluefuncfontruntimeObjectstring {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+
+"__builtin__.string" #.. "reset_store.GarbageCollectionPolicy"
+"reset_store.fontcolorbluefuncfontcontextContextbool" #.. "reset_store.FinishFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror" #.. "reset_store.BeginCreateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror" #.. "reset_store.BeginUpdateFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions" #.. "reset_store.AfterCreateFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions" #.. "reset_store.AfterDeleteFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions" #.. "reset_store.AfterUpdateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "reset_store.ValidateObjectFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror" #.. "reset_store.TransformFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror" #.. "reset_store.ValidateObjectUpdateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "reset_store.ValidateObjectFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectstring" #.. "reset_store.IndexerFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error" #.. "reset_store.UpdateFunc"
+"reset_store.<font color=blue>map</font>[string]IndexerFunc" #.. "reset_store.IndexerFuncs"
+hide methods
+@enduml
+
+@startuml
+namespace reset_store {
+    interface GenericStore  {
+        + GetCreateStrategy() reset_store.RESTCreateStrategy
+        + GetUpdateStrategy() reset_store.RESTUpdateStrategy
+        + GetDeleteStrategy() reset_store.RESTDeleteStrategy
+
+    }
+    class Store << (S,Aquamarine) >> {
+        + NewFunc <font color=blue>func</font>() runtime.Object
+        + NewListFunc <font color=blue>func</font>() runtime.Object
+        + DefaultQualifiedResource schema.GroupResource
+        + SingularQualifiedResource schema.GroupResource
+        + KeyRootFunc <font color=blue>func</font>(context.Context) string
+        + KeyFunc <font color=blue>func</font>(context.Context, string) (string, error)
+        + ObjectNameFunc <font color=blue>func</font>(runtime.Object) (string, error)
+        + TTLFunc <font color=blue>func</font>(runtime.Object, uint64, bool) (uint64, error)
+        + PredicateFunc <font color=blue>func</font>(labels.Selector, fields.Selector) reset_store.SelectionPredicate
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + Decorator <font color=blue>func</font>(runtime.Object) 
+        + CreateStrategy reset_store.RESTCreateStrategy
+        + BeginCreate BeginCreateFunc
+        + AfterCreate AfterCreateFunc
+        + UpdateStrategy reset_store.RESTUpdateStrategy
+        + BeginUpdate BeginUpdateFunc
+        + AfterUpdate AfterUpdateFunc
+        + DeleteStrategy reset_store.RESTDeleteStrategy
+        + AfterDelete AfterDeleteFunc
+        + ReturnDeletedObject bool
+        + ShouldDeleteDuringUpdate <font color=blue>func</font>(context.Context, string, runtime.Object, runtime.Object) bool
+        + TableConvertor reset_store.TableConvertor
+        + ResetFieldsStrategy reset_store.ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+        - deleteWithoutFinalizers(ctx context.Context, name string, key string, obj runtime.Object, preconditions *reset_store.Preconditions, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        - qualifiedResourceFromContext(ctx context.Context) schema.GroupResource
+        - updateForGracefulDeletionAndFinalizers(ctx context.Context, name string, key string, options *v1.DeleteOptions, preconditions reset_store.Preconditions, deleteValidation reset_store.ValidateObjectFunc, in runtime.Object) (error, bool, bool, runtime.Object, runtime.Object)
+        - finalizeDelete(ctx context.Context, obj runtime.Object, runHooks bool, options *v1.DeleteOptions) (runtime.Object, error)
+        - calculateTTL(obj runtime.Object, defaultTTL int64, update bool) (uint64, error)
+        - startObservingCount(period time.Duration, objectCountTracker request.StorageObjectCountTracker) <font color=blue>func</font>() 
+
+        + New() runtime.Object
+        + Destroy() 
+        + NewList() runtime.Object
+        + NamespaceScoped() bool
+        + GetCreateStrategy() reset_store.RESTCreateStrategy
+        + GetUpdateStrategy() reset_store.RESTUpdateStrategy
+        + GetDeleteStrategy() reset_store.RESTDeleteStrategy
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+        + ListPredicate(ctx context.Context, p reset_store.SelectionPredicate, options *internalversion.ListOptions) (runtime.Object, error)
+        + Create(ctx context.Context, obj runtime.Object, createValidation reset_store.ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+        + Update(ctx context.Context, name string, objInfo reset_store.UpdatedObjectInfo, createValidation reset_store.ValidateObjectFunc, updateValidation reset_store.ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+        + Delete(ctx context.Context, name string, deleteValidation reset_store.ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        + DeleteReturnsDeletedObject() bool
+        + DeleteCollection(ctx context.Context, deleteValidation reset_store.ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+        + WatchPredicate(ctx context.Context, p reset_store.SelectionPredicate, resourceVersion string) (watch.Interface, error)
+        + CompleteWithOptions(options *generic.StoreOptions) error
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+        + StorageVersion() runtime.GroupVersioner
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + GetSingularName() string
+
+    }
+    class reset_store.AfterCreateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.AfterDeleteFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.AfterUpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.BeginCreateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.BeginUpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.FinishFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, bool) " as fontcolorbluefuncfontcontextContextbool {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object, *v1.UpdateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, *v1.CreateOptions) (FinishFunc, error)" as fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror {
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.CreateOptions) " as fontcolorbluefuncfontruntimeObjectv1CreateOptions {
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.DeleteOptions) " as fontcolorbluefuncfontruntimeObjectv1DeleteOptions {
+    }
+    class "<font color=blue>func</font>(runtime.Object, *v1.UpdateOptions) " as fontcolorbluefuncfontruntimeObjectv1UpdateOptions {
+    }
+}
+
+"reset_store.GenericStore" <|- - "reset_store.Store"
+"reset_store.CollectionDeleter" <|- - "reset_store.Store"
+"reset_store.Creater" <|- - "reset_store.Store"
+"reset_store.CreaterUpdater" <|- - "reset_store.Store"
+"reset_store.Getter" <|- - "reset_store.Store"
+"reset_store.GracefulDeleter" <|- - "reset_store.Store"
+"reset_store.Lister" <|- - "reset_store.Store"
+"reset_store.MayReturnFullObjectDeleter" <|- - "reset_store.Store"
+"reset_store.ResetFieldsStrategy" <|- - "reset_store.Store"
+"reset_store.Scoper" <|- - "reset_store.Store"
+"reset_store.SingularNameProvider" <|- - "reset_store.Store"
+"reset_store.StandardStorage" <|- - "reset_store.Store"
+"reset_store.Storage" <|- - "reset_store.Store"
+"reset_store.StorageVersionProvider" <|- - "reset_store.Store"
+"reset_store.TableConvertor" <|- - "reset_store.Store"
+"reset_store.Updater" <|- - "reset_store.Store"
+"reset_store.Watcher" <|- - "reset_store.Store"
+
+namespace reset_store {
+    interface CategoriesProvider  {
+        + Categories() []string
+
+    }
+    interface CollectionDeleter  {
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface Connecter  {
+        + Connect(ctx context.Context, id string, options runtime.Object, r Responder) (http.Handler, error)
+        + NewConnectOptions() (runtime.Object, bool, string)
+        + ConnectMethods() []string
+
+    }
+    interface CreateUpdateResetFieldsStrategy  {
+    }
+    interface Creater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface CreaterUpdater  {
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface GarbageCollectionDeleteStrategy  {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) GarbageCollectionPolicy
+
+    }
+    interface Getter  {
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+
+    }
+    interface GetterWithOptions  {
+        + Get(ctx context.Context, name string, options runtime.Object) (runtime.Object, error)
+        + NewGetOptions() (runtime.Object, bool, string)
+
+    }
+    interface GracefulDeleter  {
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+
+    }
+    interface GroupVersionAcceptor  {
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+
+    }
+    interface GroupVersionKindProvider  {
+        + GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
+
+    }
+    interface KindProvider  {
+        + Kind() string
+
+    }
+    interface Lister  {
+        + NewList() runtime.Object
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+
+    }
+    interface MayReturnFullObjectDeleter  {
+        + DeleteReturnsDeletedObject() bool
+
+    }
+    interface NamedCreater  {
+        + New() runtime.Object
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface Patcher  {
+    }
+    interface RESTDeleteStrategy  {
+    }
+    interface RESTGracefulDeleteStrategy  {
+        + CheckGracefulDelete(ctx context.Context, obj runtime.Object, options *v1.DeleteOptions) bool
+
+    }
+    interface RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+    interface Redirector  {
+        + ResourceLocation(ctx context.Context, id string) (*url.URL, http.RoundTripper, error)
+
+    }
+    interface ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+    interface ResourceStreamer  {
+        + InputStream(ctx context.Context, apiVersion string, acceptHeader string) (io.ReadCloser, bool, string, error)
+
+    }
+    interface Responder  {
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    interface Scoper  {
+        + NamespaceScoped() bool
+
+    }
+    interface ShortNamesProvider  {
+        + ShortNames() []string
+
+    }
+    interface SingularNameProvider  {
+        + GetSingularName() string
+
+    }
+    interface StandardStorage  {
+        + Destroy() 
+
+    }
+    interface Storage  {
+        + New() runtime.Object
+        + Destroy() 
+
+    }
+    interface StorageMetadata  {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface StorageVersionProvider  {
+        + StorageVersion() runtime.GroupVersioner
+
+    }
+    interface TableConvertor  {
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+
+    }
+    interface UpdateResetFieldsStrategy  {
+    }
+    interface UpdatedObjectInfo  {
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    interface Updater  {
+        + New() runtime.Object
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+
+    }
+    interface Watcher  {
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+
+    }
+    class defaultUpdatedObjectInfo << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class reset_store.GarbageCollectionPolicy << (T, #FF7700) >>  {
+    }
+    class reset_store.TransformFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class wrappedUpdatedObjectInfo << (S,Aquamarine) >> {
+        - objInfo UpdatedObjectInfo
+        - transformers []TransformFunc
+
+        + Preconditions() *v1.Preconditions
+        + UpdatedObject(ctx context.Context, oldObj runtime.Object) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror {
+    }
+}
+"reset_store.RESTCreateUpdateStrategy" *- - "reset_store.CreateUpdateResetFieldsStrategy"
+"reset_store.ResetFieldsStrategy" *- - "reset_store.CreateUpdateResetFieldsStrategy"
+"reset_store.Creater" *- - "reset_store.CreaterUpdater"
+"reset_store.TableConvertor" *- - "reset_store.Lister"
+"reset_store.Getter" *- - "reset_store.Patcher"
+"reset_store.Updater" *- - "reset_store.Patcher"
+"reset_store.CollectionDeleter" *- - "reset_store.StandardStorage"
+"reset_store.CreaterUpdater" *- - "reset_store.StandardStorage"
+"reset_store.Getter" *- - "reset_store.StandardStorage"
+"reset_store.GracefulDeleter" *- - "reset_store.StandardStorage"
+"reset_store.Lister" *- - "reset_store.StandardStorage"
+"reset_store.Watcher" *- - "reset_store.StandardStorage"
+"reset_store.RESTUpdateStrategy" *- - "reset_store.UpdateResetFieldsStrategy"
+"reset_store.ResetFieldsStrategy" *- - "reset_store.UpdateResetFieldsStrategy"
+
+"reset_store.UpdatedObjectInfo" <|- - "reset_store.defaultUpdatedObjectInfo"
+"reset_store.UpdatedObjectInfo" <|- - "reset_store.wrappedUpdatedObjectInfo"
+
+namespace reset_store {
+    class GetOptions << (S,Aquamarine) >> {
+        + IgnoreNotFound bool
+        + ResourceVersion string
+
+    }
+    interface Interface  {
+        + Versioner() Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *Preconditions, validateDeletion ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts ListOptions, listObj runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *Preconditions, tryUpdate UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+    class ListOptions << (S,Aquamarine) >> {
+        + ResourceVersion string
+        + ResourceVersionMatch v1.ResourceVersionMatch
+        + Predicate SelectionPredicate
+        + Recursive bool
+        + ProgressNotify bool
+
+    }
+    class MatchValue << (S,Aquamarine) >> {
+        + IndexName string
+        + Value string
+
+    }
+    class Preconditions << (S,Aquamarine) >> {
+        + UID *types.UID
+        + ResourceVersion *string
+
+        + Check(key string, obj runtime.Object) error
+
+    }
+    class ResponseMeta << (S,Aquamarine) >> {
+        + TTL int64
+        + ResourceVersion uint64
+
+    }
+    interface Versioner  {
+        + UpdateObject(obj runtime.Object, resourceVersion uint64) error
+        + UpdateList(obj runtime.Object, resourceVersion uint64, continueValue string, remainingItemCount *int64) error
+        + PrepareObjectForStorage(obj runtime.Object) error
+        + ObjectResourceVersion(obj runtime.Object) (uint64, error)
+        + ParseResourceVersion(resourceVersion string) (uint64, error)
+
+    }
+    class reset_store.IndexerFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.IndexerFuncs << (T, #FF7700) >>  {
+    }
+    class reset_store.UpdateFunc << (T, #FF7700) >>  {
+    }
+    class reset_store.ValidateObjectFunc << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjecterror {
+    }
+    class "<font color=blue>func</font>(runtime.Object, ResponseMeta) (runtime.Object, *uint64, error)" as fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error {
+    }
+    class "<font color=blue>func</font>(runtime.Object) string" as fontcolorbluefuncfontruntimeObjectstring {
+    }
+}
+
+
+"__builtin__.string" #.. "reset_store.GarbageCollectionPolicy"
+"reset_store.fontcolorbluefuncfontcontextContextbool" #.. "reset_store.FinishFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectv1CreateOptionsFinishFuncerror" #.. "reset_store.BeginCreateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectv1UpdateOptionsFinishFuncerror" #.. "reset_store.BeginUpdateFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1CreateOptions" #.. "reset_store.AfterCreateFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1DeleteOptions" #.. "reset_store.AfterDeleteFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectv1UpdateOptions" #.. "reset_store.AfterUpdateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "reset_store.ValidateObjectFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjectruntimeObjecterror" #.. "reset_store.TransformFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror" #.. "reset_store.ValidateObjectUpdateFunc"
+"reset_store.fontcolorbluefuncfontcontextContextruntimeObjecterror" #.. "reset_store.ValidateObjectFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectstring" #.. "reset_store.IndexerFunc"
+"reset_store.fontcolorbluefuncfontruntimeObjectResponseMetaruntimeObjectuint64error" #.. "reset_store.UpdateFunc"
+"reset_store.<font color=blue>map</font>[string]IndexerFunc" #.. "reset_store.IndexerFuncs"
+hide methods
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: zh
+Country: CN
+--></g></svg>
