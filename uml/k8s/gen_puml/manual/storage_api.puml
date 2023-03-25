@@ -1,0 +1,99 @@
+@startuml
+
+    interface rest_RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+
+    interface runtime_interface_ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+
+    interface rest_RESTDeleteStrategy  {
+    }
+
+    interface rest_RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+        interface rest_ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+
+    class generic_registry_Store << (S,Aquamarine) >> {
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + CreateStrategy RESTCreateStrategy
+        + UpdateStrategy RESTUpdateStrategy
+        + DeleteStrategy RESTDeleteStrategy
+        + TableConvertor TableConvertor
+        + ResetFieldsStrategy ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+    }
+
+
+    class daemonset_REST << (S,Aquamarine) >> {
+        + ShortNames() []string
+        + Categories() []string
+
+    }
+    class daemonset_StatusREST << (S,Aquamarine) >> {
+        - store *registry.Store
+
+        + New() Object
+        + Destroy() 
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (Object, error)
+        ' + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (Object, bool, error)
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + ConvertToTable(ctx context.Context, object Object, tableOptions Object) (*v1.Table, error)
+
+    }
+
+        class daemonset_daemonSetStrategy << (S,Aquamarine) >> {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) daemonset_GarbageCollectionPolicy
+        + NamespaceScoped() bool
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + PrepareForCreate(ctx context.Context, obj daemonset_Object) 
+        + PrepareForUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) 
+        + Validate(ctx context.Context, obj daemonset_Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj daemonset_Object) []string
+        + Canonicalize(obj daemonset_Object) 
+        + AllowCreateOnUpdate() bool
+        + ValidateUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+"runtime_interface_ObjectTyper" <|-- "rest_RESTDeleteStrategy"
+
+"generic_registry_Store" <|-- "daemonset_REST"
+"generic_registry_Store" <|-- "daemonset_StatusREST"
+
+"daemonset_REST" *-- "rest_RESTCreateStrategy"
+"daemonset_REST" *-- "rest_RESTUpdateStrategy"
+"daemonset_REST" *-- "rest_RESTDeleteStrategy"
+"daemonset_REST" *-- "rest_ResetFieldsStrategy"
+
+"rest_RESTCreateStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_RESTUpdateStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_RESTDeleteStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_ResetFieldsStrategy" <|-- "daemonset_daemonSetStrategy"
+@enduml

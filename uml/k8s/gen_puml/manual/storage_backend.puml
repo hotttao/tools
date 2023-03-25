@@ -1,0 +1,108 @@
+@startuml
+    class DryRunnableStorage << (S,Aquamarine) >> {
+        + Storage storage.Interface
+        + Codec runtime.Codec
+
+        - copyInto(in runtime.Object, out runtime.Object) error
+
+        + Versioner() storage.Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64, dryRun bool) error
+        + Watch(ctx context.Context, key string, opts storage.ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts storage.GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts storage.ListOptions, listObj runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+
+    class storage_etcd3_store << (S,Aquamarine) >> {
+
+        + Versioner() storage.Versioner
+        + Get(ctx context.Context, key string, opts storage.GetOptions, out runtime.Object) error
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Count(key string) (int64, error)
+        + GetList(ctx context.Context, key string, opts storage.ListOptions, listObj runtime.Object) error
+        + Watch(ctx context.Context, key string, opts storage.ListOptions) (watch.Interface, error)
+
+    }
+
+        interface storage_Interface  {
+        + Versioner() Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        ' + Delete(ctx context.Context, key string, out runtime.Object, preconditions *Preconditions, validateDeletion ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts ListOptions, listObj runtime.Object) error
+        ' + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *Preconditions, tryUpdate UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+
+    interface rest_RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+
+    interface runtime_interface_ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+
+    interface rest_RESTDeleteStrategy  {
+    }
+
+    interface rest_RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        ' + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        ' + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        ' + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+        interface rest_ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+
+    class generic_registry_Store << (S,Aquamarine) >> {
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + Decorator <font color=blue>func</font>(runtime.Object) 
+        + CreateStrategy RESTCreateStrategy
+        + UpdateStrategy RESTUpdateStrategy
+        + DeleteStrategy RESTDeleteStrategy
+        + AfterDelete AfterDeleteFunc
+        + ReturnDeletedObject bool
+        + TableConvertor TableConvertor
+        + ResetFieldsStrategy ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+        + New() runtime.Object
+        + Destroy() 
+        + NewList() runtime.Object
+        + NamespaceScoped() bool
+        + GetCreateStrategy() RESTCreateStrategy
+        + GetUpdateStrategy() RESTUpdateStrategy
+        + GetDeleteStrategy() RESTDeleteStrategy
+    }
+
+"storage_Interface" <|.. "storage_etcd3_store"
+"storage_etcd3_store" <|-- "DryRunnableStorage"
+"runtime_interface_ObjectTyper" <|-- "rest_RESTDeleteStrategy"
+
+"generic_registry_Store" *-- "DryRunnableStorage"
+"generic_registry_Store" *-- "rest_RESTCreateStrategy"
+"generic_registry_Store" *-- "rest_RESTUpdateStrategy"
+"generic_registry_Store" *-- "rest_RESTDeleteStrategy"
+"generic_registry_Store" *-- "rest_ResetFieldsStrategy"
+
+@enduml

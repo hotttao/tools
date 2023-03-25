@@ -1,0 +1,207 @@
+@startuml
+    class DryRunnableStorage << (S,Aquamarine) >> {
+        + Storage storage.Interface
+        + Codec runtime.Codec
+
+        - copyInto(in runtime.Object, out runtime.Object) error
+
+        + Versioner() storage.Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64, dryRun bool) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *storage.Preconditions, deleteValidation storage.ValidateObjectFunc, dryRun bool, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts storage.ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts storage.GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts storage.ListOptions, listObj runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *storage.Preconditions, tryUpdate storage.UpdateFunc, dryRun bool, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+
+    class storage_etcd3_store << (S,Aquamarine) >> {
+        - client *v3.Client
+        - codec runtime.Codec
+        - versioner storage.Versioner
+        - transformer value.Transformer
+        - pathPrefix string
+        - groupResource schema.GroupResource
+        - groupResourceString string
+        - watcher *watcher
+        - pagingEnabled bool
+        - leaseManager *leaseManager
+
+        - conditionalDelete(ctx context.Context, key string, out runtime.Object, v reflect.Value, preconditions *storage.Preconditions, validateDeletion storage.ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        - getState(ctx context.Context, getResp *v3.GetResponse, key string, v reflect.Value, ignoreNotFound bool) (*objState, error)
+        - getStateFromObject(obj runtime.Object) (*objState, error)
+        - updateState(st *objState, userUpdate storage.UpdateFunc) (runtime.Object, uint64, error)
+        - ttlOpts(ctx context.Context, ttl int64) ([]v3.OpOption, error)
+        - validateMinimumResourceVersion(minimumResourceVersion string, actualRevision uint64) error
+        - prepareKey(key string) (string, error)
+
+        + Versioner() storage.Versioner
+        + Get(ctx context.Context, key string, opts storage.GetOptions, out runtime.Object) error
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *storage.Preconditions, validateDeletion storage.ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *storage.Preconditions, tryUpdate storage.UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+        + GetList(ctx context.Context, key string, opts storage.ListOptions, listObj runtime.Object) error
+        + Watch(ctx context.Context, key string, opts storage.ListOptions) (watch.Interface, error)
+
+    }
+
+        interface storage_Interface  {
+        + Versioner() Versioner
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *Preconditions, validateDeletion ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + Watch(ctx context.Context, key string, opts ListOptions) (watch.Interface, error)
+        + Get(ctx context.Context, key string, opts GetOptions, objPtr runtime.Object) error
+        + GetList(ctx context.Context, key string, opts ListOptions, listObj runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *Preconditions, tryUpdate UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+
+    }
+
+    interface rest_RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+
+    interface runtime_interface_ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+
+    interface rest_RESTDeleteStrategy  {
+    }
+
+    interface rest_RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+        interface rest_ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+
+    class generic_registry_Store << (S,Aquamarine) >> {
+        + NewFunc <font color=blue>func</font>() runtime.Object
+        + NewListFunc <font color=blue>func</font>() runtime.Object
+        + DefaultQualifiedResource schema.GroupResource
+        + SingularQualifiedResource schema.GroupResource
+        + KeyRootFunc <font color=blue>func</font>(context.Context) string
+        + KeyFunc <font color=blue>func</font>(context.Context, string) (string, error)
+        + ObjectNameFunc <font color=blue>func</font>(runtime.Object) (string, error)
+        + TTLFunc <font color=blue>func</font>(runtime.Object, uint64, bool) (uint64, error)
+        + PredicateFunc <font color=blue>func</font>(labels.Selector, fields.Selector) SelectionPredicate
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + Decorator <font color=blue>func</font>(runtime.Object) 
+        + CreateStrategy RESTCreateStrategy
+        + BeginCreate BeginCreateFunc
+        + AfterCreate AfterCreateFunc
+        + UpdateStrategy RESTUpdateStrategy
+        + BeginUpdate BeginUpdateFunc
+        + AfterUpdate AfterUpdateFunc
+        + DeleteStrategy RESTDeleteStrategy
+        + AfterDelete AfterDeleteFunc
+        + ReturnDeletedObject bool
+        + ShouldDeleteDuringUpdate <font color=blue>func</font>(context.Context, string, runtime.Object, runtime.Object) bool
+        + TableConvertor TableConvertor
+        + ResetFieldsStrategy ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+        - deleteWithoutFinalizers(ctx context.Context, name string, key string, obj runtime.Object, preconditions *Preconditions, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        - qualifiedResourceFromContext(ctx context.Context) schema.GroupResource
+        - updateForGracefulDeletionAndFinalizers(ctx context.Context, name string, key string, options *v1.DeleteOptions, preconditions Preconditions, deleteValidation ValidateObjectFunc, in runtime.Object) (error, bool, bool, runtime.Object, runtime.Object)
+        - finalizeDelete(ctx context.Context, obj runtime.Object, runHooks bool, options *v1.DeleteOptions) (runtime.Object, error)
+        - calculateTTL(obj runtime.Object, defaultTTL int64, update bool) (uint64, error)
+        - startObservingCount(period time.Duration, objectCountTracker request.StorageObjectCountTracker) <font color=blue>func</font>() 
+
+        + New() runtime.Object
+        + Destroy() 
+        + NewList() runtime.Object
+        + NamespaceScoped() bool
+        + GetCreateStrategy() RESTCreateStrategy
+        + GetUpdateStrategy() RESTUpdateStrategy
+        + GetDeleteStrategy() RESTDeleteStrategy
+        + List(ctx context.Context, options *internalversion.ListOptions) (runtime.Object, error)
+        + ListPredicate(ctx context.Context, p SelectionPredicate, options *internalversion.ListOptions) (runtime.Object, error)
+        + Create(ctx context.Context, obj runtime.Object, createValidation ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (runtime.Object, bool, error)
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (runtime.Object, error)
+        + Delete(ctx context.Context, name string, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions) (runtime.Object, bool, error)
+        + DeleteReturnsDeletedObject() bool
+        + DeleteCollection(ctx context.Context, deleteValidation ValidateObjectFunc, options *v1.DeleteOptions, listOptions *internalversion.ListOptions) (runtime.Object, error)
+        + Watch(ctx context.Context, options *internalversion.ListOptions) (watch.Interface, error)
+        + WatchPredicate(ctx context.Context, p SelectionPredicate, resourceVersion string) (watch.Interface, error)
+        + CompleteWithOptions(options *generic.StoreOptions) error
+        + ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*v1.Table, error)
+        + StorageVersion() runtime.GroupVersioner
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + GetSingularName() string
+
+    }
+
+
+    class daemonset_REST << (S,Aquamarine) >> {
+        + ShortNames() []string
+        + Categories() []string
+
+    }
+    class daemonset_StatusREST << (S,Aquamarine) >> {
+        - store *registry.Store
+
+        + New() Object
+        + Destroy() 
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (Object, error)
+        + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (Object, bool, error)
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + ConvertToTable(ctx context.Context, object Object, tableOptions Object) (*v1.Table, error)
+
+    }
+
+        class daemonset_daemonSetStrategy << (S,Aquamarine) >> {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) daemonset_GarbageCollectionPolicy
+        + NamespaceScoped() bool
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + PrepareForCreate(ctx context.Context, obj daemonset_Object) 
+        + PrepareForUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) 
+        + Validate(ctx context.Context, obj daemonset_Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj daemonset_Object) []string
+        + Canonicalize(obj daemonset_Object) 
+        + AllowCreateOnUpdate() bool
+        + ValidateUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+"storage_Interface" <|.. "storage_etcd3_store"
+"storage_etcd3_store" <|-- "DryRunnableStorage"
+"runtime_interface_ObjectTyper" <|-- "rest_RESTDeleteStrategy"
+
+"generic_registry_Store" <|-- "daemonset_REST"
+"generic_registry_Store" <|-- "daemonset_StatusREST"
+"generic_registry_Store" *-- "DryRunnableStorage"
+"generic_registry_Store" *-- "rest_RESTCreateStrategy"
+"generic_registry_Store" *-- "rest_RESTUpdateStrategy"
+"generic_registry_Store" *-- "rest_RESTDeleteStrategy"
+"generic_registry_Store" *-- "rest_ResetFieldsStrategy"
+
+"rest_RESTCreateStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_RESTUpdateStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_RESTDeleteStrategy" <|-- "daemonset_daemonSetStrategy"
+"rest_ResetFieldsStrategy" <|-- "daemonset_daemonSetStrategy"
+@enduml

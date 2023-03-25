@@ -41,11 +41,25 @@ define:
         # - 'apiserver/pkg/registry/generic/registry/dryrun.go'
     reset_store:
         options:
-        - -hide-methods
+        # - -hide-methods
         includes:
         - 'apiserver/pkg/storage/interfaces.go'
         - 'apiserver/pkg/registry/generic/registry/store.go'
         - 'apiserver/pkg/registry/rest/rest.go'
         - 'apiserver/pkg/registry/rest/update.go'
-        - 'apiserver/pkg/registry/rest/update.go'
+        - 'apiserver/pkg/registry/rest/create.go'
         - 'apiserver/pkg/registry/rest/delete.go'
+        - 'apiserver/pkg/registry/rest/rest.go'
+        - 'apimachinery/pkg/runtime/interfaces.go'
+    daemonset:
+        options:
+        # - -hide-methods
+        includes:
+        - 'apiserver/pkg/registry/rest/rest.go'
+        - 'apiserver/pkg/registry/rest/update.go'
+        - 'apiserver/pkg/registry/rest/create.go'
+        - 'apiserver/pkg/registry/rest/delete.go'
+        - 'apiserver/pkg/registry/rest/rest.go'
+        - 'apimachinery/pkg/runtime/interfaces.go'
+        - 'kubernetes/pkg/registry/apps/daemonset/strategy.go'
+        - 'kubernetes/pkg/registry/apps/daemonset/storage/storage.go'

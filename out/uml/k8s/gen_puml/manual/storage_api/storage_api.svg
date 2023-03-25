@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1096px" preserveAspectRatio="none" style="width:1931px;height:1096px;background:#FFFFFF;" version="1.1" viewBox="0 0 1931 1096" width="1931px" zoomAndPan="magnify"><defs/><g><!--MD5=[5a1e4284dcd891c26b92791abd819d10]
+class rest_RESTCreateStrategy--><g id="elem_rest_RESTCreateStrategy"><rect codeLine="2" fill="#F1F1F1" height="149.3596" id="rest_RESTCreateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="468" x="358.5" y="568.5"/><ellipse cx="506.75" cy="584.5" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M503.1094,591 L509.8906,591 L509.8906,588.9219 L507.7344,588.9219 L507.7344,580.4844 L509.8906,580.4844 L509.8906,578.375 L503.1094,578.375 L503.1094,580.4844 L505.2031,580.4844 L505.2031,588.9219 L503.1094,588.9219 L503.1094,591 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="163" x="527.25" y="590.604">rest_RESTCreateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="359.5" x2="825.5" y1="600.5" y2="600.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="359.5" x2="825.5" y1="608.5" y2="608.5"/><ellipse cx="369.5" cy="624.136" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="378.5" y="628.7399">NamespaceScoped() bool</text><ellipse cx="369.5" cy="644.4079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="383" x="378.5" y="649.0118">PrepareForCreate(ctx context.Context, obj runtime.Object)</text><ellipse cx="369.5" cy="664.6798" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="413" x="378.5" y="669.2838">Validate(ctx context.Context, obj runtime.Object) field.ErrorList</text><ellipse cx="369.5" cy="684.9517" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="442" x="378.5" y="689.5557">WarningsOnCreate(ctx context.Context, obj runtime.Object) []string</text><ellipse cx="369.5" cy="705.2236" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="378.5" y="709.8276">Canonicalize(obj runtime.Object)</text></g><!--MD5=[4068b9f54a891d771aa05ae29b4c78ea]
+class runtime_interface_ObjectTyper--><g id="elem_runtime_interface_ObjectTyper"><rect codeLine="11" fill="#F1F1F1" height="88.5438" id="runtime_interface_ObjectTyper" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="437" x="7" y="358.5"/><ellipse cx="117.25" cy="374.5" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M113.6094,381 L120.3906,381 L120.3906,378.9219 L118.2344,378.9219 L118.2344,370.4844 L120.3906,370.4844 L120.3906,368.375 L113.6094,368.375 L113.6094,370.4844 L115.7031,370.4844 L115.7031,378.9219 L113.6094,378.9219 L113.6094,381 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="208" x="137.75" y="380.604">runtime_interface_ObjectTyper</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="443" y1="390.5" y2="390.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="443" y1="398.5" y2="398.5"/><ellipse cx="18" cy="414.136" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="411" x="27" y="418.7399">ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)</text><ellipse cx="18" cy="434.4079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="320" x="27" y="439.0118">Recognizes(gvk schema.GroupVersionKind) bool</text></g><!--MD5=[e6e318bcd8fe4e53a4f09ed656b00812]
+class rest_RESTDeleteStrategy--><g id="elem_rest_RESTDeleteStrategy"><rect codeLine="17" fill="#F1F1F1" height="48" id="rest_RESTDeleteStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="195" x="128" y="619"/><ellipse cx="143" cy="635" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M139.3594,641.5 L146.1406,641.5 L146.1406,639.4219 L143.9844,639.4219 L143.9844,630.9844 L146.1406,630.9844 L146.1406,628.875 L139.3594,628.875 L139.3594,630.9844 L141.4531,630.9844 L141.4531,639.4219 L139.3594,639.4219 L139.3594,641.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="163" x="157" y="641.104">rest_RESTDeleteStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="129" x2="322" y1="651" y2="651"/><line style="stroke:#181818;stroke-width:0.5;" x1="129" x2="322" y1="659" y2="659"/></g><!--MD5=[7a3e021ba9317f18debeb95487b3817b]
+class rest_RESTUpdateStrategy--><g id="elem_rest_RESTUpdateStrategy"><rect codeLine="20" fill="#F1F1F1" height="189.9034" id="rest_RESTUpdateStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="619" x="862" y="548"/><ellipse cx="1082.75" cy="564" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1079.1094,570.5 L1085.8906,570.5 L1085.8906,568.4219 L1083.7344,568.4219 L1083.7344,559.9844 L1085.8906,559.9844 L1085.8906,557.875 L1079.1094,557.875 L1079.1094,559.9844 L1081.2031,559.9844 L1081.2031,568.4219 L1079.1094,568.4219 L1079.1094,570.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="169" x="1103.25" y="570.104">rest_RESTUpdateStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="863" x2="1480" y1="580" y2="580"/><line style="stroke:#181818;stroke-width:0.5;" x1="863" x2="1480" y1="588" y2="588"/><ellipse cx="873" cy="603.636" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="882" y="608.2399">NamespaceScoped() bool</text><ellipse cx="873" cy="623.9079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="882" y="628.5118">AllowCreateOnUpdate() bool</text><ellipse cx="873" cy="644.1798" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="520" x="882" y="648.7838">PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object)</text><ellipse cx="873" cy="664.4517" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="593" x="882" y="669.0557">ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList</text><ellipse cx="873" cy="684.7236" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="579" x="882" y="689.3276">WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string</text><ellipse cx="873" cy="704.9955" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="882" y="709.5995">Canonicalize(obj runtime.Object)</text><ellipse cx="873" cy="725.2674" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="882" y="729.8714">AllowUnconditionalUpdate() bool</text></g><!--MD5=[25fddefe4faeafb058f08262e5556ee7]
+class rest_ResetFieldsStrategy--><g id="elem_rest_ResetFieldsStrategy"><rect codeLine="31" fill="#F1F1F1" height="68.2719" id="rest_ResetFieldsStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="408" x="1516.5" y="609"/><ellipse cx="1634.25" cy="625" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1630.6094,631.5 L1637.3906,631.5 L1637.3906,629.4219 L1635.2344,629.4219 L1635.2344,620.9844 L1637.3906,620.9844 L1637.3906,618.875 L1630.6094,618.875 L1630.6094,620.9844 L1632.7031,620.9844 L1632.7031,629.4219 L1630.6094,629.4219 L1630.6094,631.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="164" x="1654.75" y="631.104">rest_ResetFieldsStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1517.5" x2="1923.5" y1="641" y2="641"/><line style="stroke:#181818;stroke-width:0.5;" x1="1517.5" x2="1923.5" y1="649" y2="649"/><ellipse cx="1527.5" cy="664.636" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="1536.5" y="669.2399">GetResetFields()</text><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="1649.5" y="669.2399">map</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="1679.5" y="669.2399">[fieldpath.APIVersion]*fieldpath.Set</text></g><!--MD5=[4458db3fa17ea7d16377070e4d294bec]
+class generic_registry_Store--><g id="elem_generic_registry_Store"><rect codeLine="36" fill="#F1F1F1" height="250.7191" id="generic_registry_Store" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="301" x="944" y="7"/><ellipse cx="1016.25" cy="23" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1016.4375,29.7031 C1018.7344,29.7031 1020.1875,28.0781 1020.1875,26.0781 C1020.1875,24.25 1019.3594,23.4063 1018.2188,22.6094 L1017.2031,21.8906 C1016.0781,21.0781 1015.6563,20.7813 1015.6563,19.9219 C1015.6563,19.2344 1016.1406,18.8281 1016.7188,18.8281 C1017.4531,18.8281 1017.9375,19.2188 1018.6406,19.8594 L1019.9531,18.2813 C1018.9844,17.2656 1017.9688,16.6719 1016.7031,16.6719 C1014.5625,16.6719 1013.1094,18.1875 1013.1094,20.1094 C1013.1094,21.9063 1014.0313,22.8125 1015.125,23.5625 L1016.2188,24.3125 C1017.1563,24.9219 1017.6094,25.5 1017.6094,26.4375 C1017.6094,27.1094 1017.1406,27.5313 1016.4375,27.5313 C1015.7344,27.5313 1014.9844,27.0156 1014.3281,26.1875 L1012.7813,27.875 C1013.8125,29.0625 1015.1094,29.7031 1016.4375,29.7031 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="1036.75" y="29.104">generic_registry_Store</text><line style="stroke:#181818;stroke-width:0.5;" x1="945" x2="1244" y1="39" y2="39"/><ellipse cx="955" cy="54.636" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="964" y="59.2399">EnableGarbageCollection bool</text><ellipse cx="955" cy="74.9079" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="964" y="79.5118">DeleteCollectionWorkers int</text><ellipse cx="955" cy="95.1798" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="230" x="964" y="99.7838">CreateStrategy RESTCreateStrategy</text><ellipse cx="955" cy="115.4517" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="242" x="964" y="120.0557">UpdateStrategy RESTUpdateStrategy</text><ellipse cx="955" cy="135.7236" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="230" x="964" y="140.3276">DeleteStrategy RESTDeleteStrategy</text><ellipse cx="955" cy="155.9955" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="964" y="160.5995">TableConvertor TableConvertor</text><ellipse cx="955" cy="176.2674" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="964" y="180.8714">ResetFieldsStrategy ResetFieldsStrategy</text><ellipse cx="955" cy="196.5393" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="964" y="201.1433">Storage DryRunnableStorage</text><ellipse cx="955" cy="216.8112" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="275" x="964" y="221.4152">StorageVersioner runtime.GroupVersioner</text><line style="stroke:#181818;stroke-width:0.5;" x1="945" x2="1244" y1="229.4472" y2="229.4472"/><ellipse cx="955" cy="245.0832" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="964" y="249.6871">DestroyFunc</text><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="1050" y="249.6871">func</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="10" x="1080" y="249.6871">()</text></g><!--MD5=[a78f1469090c794c040f2d3095e334fb]
+class daemonset_REST--><g id="elem_daemonset_REST"><rect codeLine="51" fill="#F1F1F1" height="88.5438" id="daemonset_REST" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="797.5" y="358.5"/><ellipse cx="821.5" cy="374.5" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M821.6875,381.2031 C823.9844,381.2031 825.4375,379.5781 825.4375,377.5781 C825.4375,375.75 824.6094,374.9063 823.4688,374.1094 L822.4531,373.3906 C821.3281,372.5781 820.9063,372.2813 820.9063,371.4219 C820.9063,370.7344 821.3906,370.3281 821.9688,370.3281 C822.7031,370.3281 823.1875,370.7188 823.8906,371.3594 L825.2031,369.7813 C824.2344,368.7656 823.2188,368.1719 821.9531,368.1719 C819.8125,368.1719 818.3594,369.6875 818.3594,371.6094 C818.3594,373.4063 819.2813,374.3125 820.375,375.0625 L821.4688,375.8125 C822.4063,376.4219 822.8594,377 822.8594,377.9375 C822.8594,378.6094 822.3906,379.0313 821.6875,379.0313 C820.9844,379.0313 820.2344,378.5156 819.5781,377.6875 L818.0313,379.375 C819.0625,380.5625 820.3594,381.2031 821.6875,381.2031 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="837.5" y="380.604">daemonset_REST</text><line style="stroke:#181818;stroke-width:0.5;" x1="798.5" x2="964.5" y1="390.5" y2="390.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="798.5" x2="964.5" y1="398.5" y2="398.5"/><ellipse cx="808.5" cy="414.136" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="817.5" y="418.7399">ShortNames() []string</text><ellipse cx="808.5" cy="434.4079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="817.5" y="439.0118">Categories() []string</text></g><!--MD5=[68f7aa2bc6112398dae8d3a22312a5a4]
+class daemonset_StatusREST--><g id="elem_daemonset_StatusREST"><rect codeLine="56" fill="#F1F1F1" height="169.6315" id="daemonset_StatusREST" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="613" x="1001" y="318"/><ellipse cx="1224.25" cy="334" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1224.4375,340.7031 C1226.7344,340.7031 1228.1875,339.0781 1228.1875,337.0781 C1228.1875,335.25 1227.3594,334.4063 1226.2188,333.6094 L1225.2031,332.8906 C1224.0781,332.0781 1223.6563,331.7813 1223.6563,330.9219 C1223.6563,330.2344 1224.1406,329.8281 1224.7188,329.8281 C1225.4531,329.8281 1225.9375,330.2188 1226.6406,330.8594 L1227.9531,329.2813 C1226.9844,328.2656 1225.9688,327.6719 1224.7031,327.6719 C1222.5625,327.6719 1221.1094,329.1875 1221.1094,331.1094 C1221.1094,332.9063 1222.0313,333.8125 1223.125,334.5625 L1224.2188,335.3125 C1225.1563,335.9219 1225.6094,336.5 1225.6094,337.4375 C1225.6094,338.1094 1225.1406,338.5313 1224.4375,338.5313 C1223.7344,338.5313 1222.9844,338.0156 1222.3281,337.1875 L1220.7813,338.875 C1221.8125,340.0625 1223.1094,340.7031 1224.4375,340.7031 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="1244.75" y="340.104">daemonset_StatusREST</text><line style="stroke:#181818;stroke-width:0.5;" x1="1002" x2="1613" y1="350" y2="350"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1009" y="362.636"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="1021" y="370.2399">store *registry.Store</text><line style="stroke:#181818;stroke-width:0.5;" x1="1002" x2="1613" y1="378.2719" y2="378.2719"/><ellipse cx="1012" cy="393.9079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="1021" y="398.5118">New() Object</text><ellipse cx="1012" cy="414.1798" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="1021" y="418.7838">Destroy()</text><ellipse cx="1012" cy="434.4517" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="500" x="1021" y="439.0557">Get(ctx context.Context, name string, options *v1.GetOptions) (Object, error)</text><ellipse cx="1012" cy="454.7236" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="1021" y="459.3276">GetResetFields()</text><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="1134" y="459.3276">map</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="1164" y="459.3276">[fieldpath.APIVersion]*fieldpath.Set</text><ellipse cx="1012" cy="474.9955" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="587" x="1021" y="479.5995">ConvertToTable(ctx context.Context, object Object, tableOptions Object) (*v1.Table, error)</text></g><!--MD5=[a6d4fb30ee8f323ffe422bc87101a6fe]
+class daemonset_daemonSetStrategy--><g id="elem_daemonset_daemonSetStrategy"><rect codeLine="68" fill="#F1F1F1" height="291.2629" id="daemonset_daemonSetStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="671" x="546" y="798"/><ellipse cx="770.75" cy="814" fill="#7FFFD4" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M770.9375,820.7031 C773.2344,820.7031 774.6875,819.0781 774.6875,817.0781 C774.6875,815.25 773.8594,814.4063 772.7188,813.6094 L771.7031,812.8906 C770.5781,812.0781 770.1563,811.7813 770.1563,810.9219 C770.1563,810.2344 770.6406,809.8281 771.2188,809.8281 C771.9531,809.8281 772.4375,810.2188 773.1406,810.8594 L774.4531,809.2813 C773.4844,808.2656 772.4688,807.6719 771.2031,807.6719 C769.0625,807.6719 767.6094,809.1875 767.6094,811.1094 C767.6094,812.9063 768.5313,813.8125 769.625,814.5625 L770.7188,815.3125 C771.6563,815.9219 772.1094,816.5 772.1094,817.4375 C772.1094,818.1094 771.6406,818.5313 770.9375,818.5313 C770.2344,818.5313 769.4844,818.0156 768.8281,817.1875 L767.2813,818.875 C768.3125,820.0625 769.6094,820.7031 770.9375,820.7031 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="213" x="791.25" y="820.104">daemonset_daemonSetStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="547" x2="1216" y1="830" y2="830"/><line style="stroke:#181818;stroke-width:0.5;" x1="547" x2="1216" y1="838" y2="838"/><ellipse cx="557" cy="853.636" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="593" x="566" y="858.2399">DefaultGarbageCollectionPolicy(ctx context.Context) daemonset_GarbageCollectionPolicy</text><ellipse cx="557" cy="873.9079" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="566" y="878.5118">NamespaceScoped() bool</text><ellipse cx="557" cy="894.1798" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="566" y="898.7838">GetResetFields()</text><text fill="#0000FF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="679" y="898.7838">map</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="709" y="898.7838">[fieldpath.APIVersion]*fieldpath.Set</text><ellipse cx="557" cy="914.4517" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="409" x="566" y="919.0557">PrepareForCreate(ctx context.Context, obj daemonset_Object)</text><ellipse cx="557" cy="934.7236" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="572" x="566" y="939.3276">PrepareForUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object)</text><ellipse cx="557" cy="954.9955" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="439" x="566" y="959.5995">Validate(ctx context.Context, obj daemonset_Object) field.ErrorList</text><ellipse cx="557" cy="975.2674" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="468" x="566" y="979.8714">WarningsOnCreate(ctx context.Context, obj daemonset_Object) []string</text><ellipse cx="557" cy="995.5393" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="245" x="566" y="1000.1433">Canonicalize(obj daemonset_Object)</text><ellipse cx="557" cy="1015.8112" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="566" y="1020.4152">AllowCreateOnUpdate() bool</text><ellipse cx="557" cy="1036.0832" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="645" x="566" y="1040.6871">ValidateUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) field.ErrorList</text><ellipse cx="557" cy="1056.3551" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="631" x="566" y="1060.959">WarningsOnUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) []string</text><ellipse cx="557" cy="1076.627" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="566" y="1081.231">AllowUnconditionalUpdate() bool</text></g><!--MD5=[45d363aeef1e62575496ab1e818aaacd]
+reverse link runtime_interface_ObjectTyper to rest_RESTDeleteStrategy--><g id="link_runtime_interface_ObjectTyper_rest_RESTDeleteStrategy"><path codeLine="84" d="M225.5,467.8114 C225.5,517.6612 225.5,583.7556 225.5,618.791 " fill="none" id="runtime_interface_ObjectTyper-backto-rest_RESTDeleteStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="218.5001,467.5797,225.5,447.5797,232.5001,467.5797,218.5001,467.5797" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[14ce2760862380df8abe163e0123e7ae]
+reverse link generic_registry_Store to daemonset_REST--><g id="link_generic_registry_Store_daemonset_REST"><path codeLine="86" d="M982.8839,274.2472 C958.8021,304.83 935.07,334.9687 916.6279,358.3893 " fill="none" id="generic_registry_Store-backto-daemonset_REST" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="977.61,269.6299,995.4828,258.2472,988.6093,278.2911,977.61,269.6299" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[de5d43e81c38f083f1c0056f67ed17e7]
+reverse link generic_registry_Store to daemonset_StatusREST--><g id="link_generic_registry_Store_daemonset_StatusREST"><path codeLine="87" d="M1206.1773,274.3249 C1217.8389,289.1346 1229.4176,303.839 1240.3522,317.7254 " fill="none" id="generic_registry_Store-backto-daemonset_StatusREST" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1200.3907,278.2911,1193.5172,258.2472,1211.39,269.6299,1200.3907,278.2911" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d44f960401245bc465c85b2fa44495d1]
+reverse link daemonset_REST to rest_RESTCreateStrategy--><g id="link_daemonset_REST_rest_RESTCreateStrategy"><path codeLine="89" d="M817.7154,455.9699 C777.931,489.0088 726.1282,532.0285 682.2368,568.4781 " fill="none" id="daemonset_REST-backto-rest_RESTCreateStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="827.8186,447.5797,820.6472,448.3356,818.5868,455.2461,825.7582,454.4902,827.8186,447.5797" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[12ceb527ee06365552b4c9af44b9f034]
+reverse link daemonset_REST to rest_RESTUpdateStrategy--><g id="link_daemonset_REST_rest_RESTUpdateStrategy"><path codeLine="90" d="M944.9944,455.9994 C957.7358,466.6102 971.0369,477.6694 983.5,488 C1006.8676,507.3692 1031.9046,528.0568 1055.8395,547.8022 " fill="none" id="daemonset_REST-backto-rest_RESTUpdateStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="934.9227,447.6085,936.9722,454.5222,944.1423,455.2895,942.0929,448.3758,934.9227,447.6085" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[19c8fcd171863b271c945d2f28ac385f]
+reverse link daemonset_REST to rest_RESTDeleteStrategy--><g id="link_daemonset_REST_rest_RESTDeleteStrategy"><path codeLine="91" d="M784.3648,416.2023 C672.4438,434.2541 485.3552,473.293 340.5,548 C304.8253,566.3987 270.1923,597.344 248.4177,618.8979 " fill="none" id="daemonset_REST-backto-rest_RESTDeleteStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="797.2982,414.1559,790.7468,411.1428,785.4457,416.0313,791.9971,419.0445,797.2982,414.1559" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3cee2757f8034bc9ca5f7ff4be8ac1f4]
+reverse link daemonset_REST to rest_ResetFieldsStrategy--><g id="link_daemonset_REST_rest_ResetFieldsStrategy"><path codeLine="92" d="M933.8308,456.3483 C948.7349,468.6754 965.7724,480.3926 983.5,488 C1195.2625,578.8728 1275.8177,488.7224 1498.5,548 C1552.988,562.5046 1611.5009,587.9914 1654.7687,608.9167 " fill="none" id="daemonset_REST-backto-rest_ResetFieldsStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="923.8711,447.7598,925.8028,454.7074,932.9589,455.5964,931.0272,448.6488,923.8711,447.7598" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e94ed16f2470698b89e885034cfc1774]
+reverse link rest_RESTCreateStrategy to daemonset_daemonSetStrategy--><g id="link_rest_RESTCreateStrategy_daemonset_daemonSetStrategy"><path codeLine="94" d="M678.4408,732.3606 C698.3172,753.0279 719.9728,775.5452 741.4953,797.9242 " fill="none" id="rest_RESTCreateStrategy-backto-daemonset_daemonSetStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="673.1278,736.9346,664.3095,717.667,683.2185,727.23,673.1278,736.9346" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a2b3b744b7eb5ccb734d348374494ae6]
+reverse link rest_RESTUpdateStrategy to daemonset_daemonSetStrategy--><g id="link_rest_RESTUpdateStrategy_daemonset_daemonSetStrategy"><path codeLine="95" d="M1065.7007,752.63 C1051.4547,767.3917 1036.6629,782.7191 1021.934,797.9813 " fill="none" id="rest_RESTUpdateStrategy-backto-daemonset_daemonSetStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1060.8167,747.6105,1079.7422,738.0801,1070.8907,757.3324,1060.8167,747.6105" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a4eec727b56417d5d6cb8bbe66388664]
+reverse link rest_RESTDeleteStrategy to daemonset_daemonSetStrategy--><g id="link_rest_RESTDeleteStrategy_daemonset_daemonSetStrategy"><path codeLine="96" d="M264.6318,680.8191 C285.8256,699.8259 313.2061,722.1276 340.5,738 C404.2283,775.0603 475.869,807.7582 545.6508,835.5499 " fill="none" id="rest_RESTDeleteStrategy-backto-daemonset_daemonSetStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="259.6963,685.7899,249.7347,667.0878,269.1848,675.4957,259.6963,685.7899" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7e34eb4e58883ccf009b5ae6c0b49d1d]
+reverse link rest_ResetFieldsStrategy to daemonset_daemonSetStrategy--><g id="link_rest_ResetFieldsStrategy_daemonset_daemonSetStrategy"><path codeLine="97" d="M1626.7101,685.1754 C1587.4022,702.3172 1541.0336,721.8479 1498.5,738 C1407.9919,772.3704 1308.8904,806.7722 1217.1074,837.328 " fill="none" id="rest_ResetFieldsStrategy-backto-daemonset_daemonSetStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1623.9739,678.7318,1645.1011,677.1058,1629.5992,691.552,1623.9739,678.7318" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[11fe96220d04f3fdfd63946777b1e512]
+@startuml
+
+    interface rest_RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+
+    interface runtime_interface_ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+
+    interface rest_RESTDeleteStrategy  {
+    }
+
+    interface rest_RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+        interface rest_ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+
+    class generic_registry_Store << (S,Aquamarine) >> {
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + CreateStrategy RESTCreateStrategy
+        + UpdateStrategy RESTUpdateStrategy
+        + DeleteStrategy RESTDeleteStrategy
+        + TableConvertor TableConvertor
+        + ResetFieldsStrategy ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+    }
+
+
+    class daemonset_REST << (S,Aquamarine) >> {
+        + ShortNames() []string
+        + Categories() []string
+
+    }
+    class daemonset_StatusREST << (S,Aquamarine) >> {
+        - store *registry.Store
+
+        + New() Object
+        + Destroy() 
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (Object, error)
+        ' + Update(ctx context.Context, name string, objInfo UpdatedObjectInfo, createValidation ValidateObjectFunc, updateValidation ValidateObjectUpdateFunc, forceAllowCreate bool, options *v1.UpdateOptions) (Object, bool, error)
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + ConvertToTable(ctx context.Context, object Object, tableOptions Object) (*v1.Table, error)
+
+    }
+
+        class daemonset_daemonSetStrategy << (S,Aquamarine) >> {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) daemonset_GarbageCollectionPolicy
+        + NamespaceScoped() bool
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + PrepareForCreate(ctx context.Context, obj daemonset_Object) 
+        + PrepareForUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) 
+        + Validate(ctx context.Context, obj daemonset_Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj daemonset_Object) []string
+        + Canonicalize(obj daemonset_Object) 
+        + AllowCreateOnUpdate() bool
+        + ValidateUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+"runtime_interface_ObjectTyper" <|- - "rest_RESTDeleteStrategy"
+
+"generic_registry_Store" <|- - "daemonset_REST"
+"generic_registry_Store" <|- - "daemonset_StatusREST"
+
+"daemonset_REST" *- - "rest_RESTCreateStrategy"
+"daemonset_REST" *- - "rest_RESTUpdateStrategy"
+"daemonset_REST" *- - "rest_RESTDeleteStrategy"
+"daemonset_REST" *- - "rest_ResetFieldsStrategy"
+
+"rest_RESTCreateStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_RESTUpdateStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_RESTDeleteStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_ResetFieldsStrategy" <|- - "daemonset_daemonSetStrategy"
+@enduml
+
+@startuml
+
+    interface rest_RESTCreateStrategy  {
+        + NamespaceScoped() bool
+        + PrepareForCreate(ctx context.Context, obj runtime.Object) 
+        + Validate(ctx context.Context, obj runtime.Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+
+    }
+
+    interface runtime_interface_ObjectTyper  {
+        + ObjectKinds( Object) ([]schema.GroupVersionKind, bool, error)
+        + Recognizes(gvk schema.GroupVersionKind) bool
+
+    }
+
+    interface rest_RESTDeleteStrategy  {
+    }
+
+    interface rest_RESTUpdateStrategy  {
+        + NamespaceScoped() bool
+        + AllowCreateOnUpdate() bool
+        + PrepareForUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) 
+        + ValidateUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj runtime.Object, old runtime.Object) []string
+        + Canonicalize(obj runtime.Object) 
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+        interface rest_ResetFieldsStrategy  {
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+
+    }
+
+    class generic_registry_Store << (S,Aquamarine) >> {
+        + EnableGarbageCollection bool
+        + DeleteCollectionWorkers int
+        + CreateStrategy RESTCreateStrategy
+        + UpdateStrategy RESTUpdateStrategy
+        + DeleteStrategy RESTDeleteStrategy
+        + TableConvertor TableConvertor
+        + ResetFieldsStrategy ResetFieldsStrategy
+        + Storage DryRunnableStorage
+        + StorageVersioner runtime.GroupVersioner
+        + DestroyFunc <font color=blue>func</font>() 
+
+    }
+
+
+    class daemonset_REST << (S,Aquamarine) >> {
+        + ShortNames() []string
+        + Categories() []string
+
+    }
+    class daemonset_StatusREST << (S,Aquamarine) >> {
+        - store *registry.Store
+
+        + New() Object
+        + Destroy() 
+        + Get(ctx context.Context, name string, options *v1.GetOptions) (Object, error)
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + ConvertToTable(ctx context.Context, object Object, tableOptions Object) (*v1.Table, error)
+
+    }
+
+        class daemonset_daemonSetStrategy << (S,Aquamarine) >> {
+        + DefaultGarbageCollectionPolicy(ctx context.Context) daemonset_GarbageCollectionPolicy
+        + NamespaceScoped() bool
+        + GetResetFields() <font color=blue>map</font>[fieldpath.APIVersion]*fieldpath.Set
+        + PrepareForCreate(ctx context.Context, obj daemonset_Object) 
+        + PrepareForUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) 
+        + Validate(ctx context.Context, obj daemonset_Object) field.ErrorList
+        + WarningsOnCreate(ctx context.Context, obj daemonset_Object) []string
+        + Canonicalize(obj daemonset_Object) 
+        + AllowCreateOnUpdate() bool
+        + ValidateUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) field.ErrorList
+        + WarningsOnUpdate(ctx context.Context, obj daemonset_Object, old daemonset_Object) []string
+        + AllowUnconditionalUpdate() bool
+
+    }
+
+"runtime_interface_ObjectTyper" <|- - "rest_RESTDeleteStrategy"
+
+"generic_registry_Store" <|- - "daemonset_REST"
+"generic_registry_Store" <|- - "daemonset_StatusREST"
+
+"daemonset_REST" *- - "rest_RESTCreateStrategy"
+"daemonset_REST" *- - "rest_RESTUpdateStrategy"
+"daemonset_REST" *- - "rest_RESTDeleteStrategy"
+"daemonset_REST" *- - "rest_ResetFieldsStrategy"
+
+"rest_RESTCreateStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_RESTUpdateStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_RESTDeleteStrategy" <|- - "daemonset_daemonSetStrategy"
+"rest_ResetFieldsStrategy" <|- - "daemonset_daemonSetStrategy"
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: zh
+Country: CN
+--></g></svg>

@@ -10,7 +10,8 @@ PUML_COMMAND = ('goplantuml -recursive -hide-connections -show-implementations -
                 '{options}  -ignore "{filter}" {module} > {path}')
 PUML_COMBINE_COMMAND = ('goplantuml -hide-connections -show-implementations '
                         '-hide-methods -ignore "{filter}" {module} > {path}')
-DEFINE_COMMAND = ('goplantuml {options}  -ignore "{filter}" {module} > {path}')
+DEFINE_COMMAND = (
+    'goplantuml -show-implementations {options}  -ignore "{filter}" {module} > {path}')
 
 
 def run_command(command):
@@ -108,6 +109,11 @@ class GenPuml:
         self.puml_handler = PumlCodeHandler()
         self.puml_handler_info = {}
 
+    def get_code_path(self, sub):
+        if sub.startswith('kubernetes'):
+            return os.path.join(self.code_root, sub)
+        return os.path.join(self.staging_code_path, sub)
+
     def get_staging_puml_conf(self):
         def _iter_conf(root, sub_conf):
             for m, c in sub_conf.items():
@@ -174,7 +180,7 @@ class GenPuml:
             if not os.path.exists(temp_module):
                 dir_util.mkpath(temp_module)
             for f in ms['includes']:
-                t = os.path.join(self.staging_code_path, f)
+                t = self.get_code_path(f)
                 d = os.path.join(temp_module, os.path.basename(t))
                 file_util.copy_file(src=t, dst=d)
             # go_code_handler.rpl_pkg_dir(temp_module, i)
