@@ -1,0 +1,180 @@
+@startuml
+namespace etcd3 {
+    class LeaseManagerConfig << (S,Aquamarine) >> {
+        + ReuseDurationSeconds int64
+        + MaxObjectCount int64
+
+    }
+    class authenticatedDataString << (S,Aquamarine) >> {
+        + AuthenticatedData() []byte
+
+    }
+    class clientV3KVLatencyTracker << (S,Aquamarine) >> {
+        + Put(ctx context.Context, key string, val string, opts ...v3.OpOption) (*v3.PutResponse, error)
+        + Get(ctx context.Context, key string, opts ...v3.OpOption) (*v3.GetResponse, error)
+        + Delete(ctx context.Context, key string, opts ...v3.OpOption) (*v3.DeleteResponse, error)
+        + Do(ctx context.Context, op v3.Op) (v3.OpResponse, error)
+        + Txn(ctx context.Context) v3.Txn
+
+    }
+    class clientV3TxnTracker << (S,Aquamarine) >> {
+        - ctx context.Context
+
+        + Commit() (*v3.TxnResponse, error)
+
+    }
+    class etcd3.authenticatedDataString << (T, #FF7700) >>  {
+    }
+    class etcdHealth << (S,Aquamarine) >> {
+        + Health string
+
+    }
+    class event << (S,Aquamarine) >> {
+        - key string
+        - value []byte
+        - prevValue []byte
+        - rev int64
+        - isDeleted bool
+        - isCreated bool
+        - isProgressNotify bool
+
+    }
+    class klogWrapper << (S,Aquamarine) >> {
+        + Info(args ...<font color=blue>interface</font>{}) 
+        + Infoln(args ...<font color=blue>interface</font>{}) 
+        + Infof(format string, args ...<font color=blue>interface</font>{}) 
+        + Warning(args ...<font color=blue>interface</font>{}) 
+        + Warningln(args ...<font color=blue>interface</font>{}) 
+        + Warningf(format string, args ...<font color=blue>interface</font>{}) 
+        + Error(args ...<font color=blue>interface</font>{}) 
+        + Errorln(args ...<font color=blue>interface</font>{}) 
+        + Errorf(format string, args ...<font color=blue>interface</font>{}) 
+        + Fatal(args ...<font color=blue>interface</font>{}) 
+        + Fatalln(args ...<font color=blue>interface</font>{}) 
+        + Fatalf(format string, args ...<font color=blue>interface</font>{}) 
+        + V(l int) bool
+
+    }
+    class leaseManager << (S,Aquamarine) >> {
+        - client *v3.Client
+        - leaseMu sync.Mutex
+        - prevLeaseID v3.LeaseID
+        - prevLeaseExpirationTime time.Time
+        - leaseReuseDurationSeconds int64
+        - leaseReuseDurationPercent float64
+        - leaseMaxAttachedObjectCount int64
+        - leaseAttachedObjectCount int64
+
+        - getReuseDurationSecondsLocked(ttl int64) int64
+
+        + GetLease(ctx context.Context, ttl int64) (v3.LeaseID, error)
+
+    }
+    class objState << (S,Aquamarine) >> {
+        - obj runtime.Object
+        - meta *storage.ResponseMeta
+        - rev int64
+        - data []byte
+        - stale bool
+
+    }
+    class store << (S,Aquamarine) >> {
+        - client *v3.Client
+        - codec runtime.Codec
+        - versioner storage.Versioner
+        - transformer value.Transformer
+        - pathPrefix string
+        - groupResource schema.GroupResource
+        - groupResourceString string
+        - watcher *watcher
+        - pagingEnabled bool
+        - leaseManager *leaseManager
+
+        - conditionalDelete(ctx context.Context, key string, out runtime.Object, v reflect.Value, preconditions *storage.Preconditions, validateDeletion storage.ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        - getState(ctx context.Context, getResp *v3.GetResponse, key string, v reflect.Value, ignoreNotFound bool) (*objState, error)
+        - getStateFromObject(obj runtime.Object) (*objState, error)
+        - updateState(st *objState, userUpdate storage.UpdateFunc) (runtime.Object, uint64, error)
+        - ttlOpts(ctx context.Context, ttl int64) ([]v3.OpOption, error)
+        - validateMinimumResourceVersion(minimumResourceVersion string, actualRevision uint64) error
+        - prepareKey(key string) (string, error)
+
+        + Versioner() storage.Versioner
+        + Get(ctx context.Context, key string, opts storage.GetOptions, out runtime.Object) error
+        + Create(ctx context.Context, key string, obj runtime.Object, out runtime.Object, ttl uint64) error
+        + Delete(ctx context.Context, key string, out runtime.Object, preconditions *storage.Preconditions, validateDeletion storage.ValidateObjectFunc, cachedExistingObject runtime.Object) error
+        + GuaranteedUpdate(ctx context.Context, key string, destination runtime.Object, ignoreNotFound bool, preconditions *storage.Preconditions, tryUpdate storage.UpdateFunc, cachedExistingObject runtime.Object) error
+        + Count(key string) (int64, error)
+        + GetList(ctx context.Context, key string, opts storage.ListOptions, listObj runtime.Object) error
+        + Watch(ctx context.Context, key string, opts storage.ListOptions) (watch.Interface, error)
+
+    }
+    class watchChan << (S,Aquamarine) >> {
+        - watcher *watcher
+        - transformer value.Transformer
+        - key string
+        - initialRev int64
+        - recursive bool
+        - progressNotify bool
+        - internalPred storage.SelectionPredicate
+        - ctx context.Context
+        - cancel context.CancelFunc
+        - incomingEventChan <font color=blue>chan</font> *event
+        - resultChan <font color=blue>chan</font> watch.Event
+        - errChan <font color=blue>chan</font> error
+
+        - run() 
+        - sync() error
+        - startWatching(watchClosedCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        - processEvent(wg *sync.WaitGroup) 
+        - filter(obj runtime.Object) bool
+        - acceptAll() bool
+        - transform(e *event) *watch.Event
+        - sendError(err error) 
+        - sendEvent(e *event) 
+        - prepareObjs(e *event) (runtime.Object, runtime.Object, error)
+
+        + Stop() 
+        + ResultChan() <font color=blue>chan</font> watch.Event
+
+    }
+    class watcher << (S,Aquamarine) >> {
+        - client *v3.Client
+        - codec runtime.Codec
+        - newFunc <font color=blue>func</font>() runtime.Object
+        - objectType string
+        - groupResource schema.GroupResource
+        - versioner storage.Versioner
+
+        - createWatchChan(ctx context.Context, key string, rev int64, recursive bool, progressNotify bool, transformer value.Transformer, pred storage.SelectionPredicate) *watchChan
+
+        + Watch(ctx context.Context, key string, rev int64, recursive bool, progressNotify bool, transformer value.Transformer, pred storage.SelectionPredicate) (watch.Interface, error)
+
+    }
+}
+"v3.KV" *-- "etcd3.clientV3KVLatencyTracker"
+"v3.Txn" *-- "etcd3.clientV3TxnTracker"
+
+
+namespace preflight {
+    class EtcdConnection << (S,Aquamarine) >> {
+        + ServerList []string
+
+        - serverReachable(connURL *url.URL) bool
+
+        + CheckEtcdServers() (bool, error)
+
+    }
+}
+
+
+namespace testing {
+    class EtcdTestServer << (S,Aquamarine) >> {
+        + V3Client *v3.Client
+
+        + Terminate(t *testing.T) 
+
+    }
+}
+
+
+@enduml

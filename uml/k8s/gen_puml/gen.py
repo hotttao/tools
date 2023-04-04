@@ -6,7 +6,7 @@ from distutils import dir_util, file_util
 
 PWD = os.path.abspath(os.path.dirname(__file__))
 TEMP_MODULE = os.path.join(PWD, 'tmp')
-PUML_COMMAND = ('goplantuml -recursive -hide-connections -show-implementations -show-compositions '
+PUML_COMMAND = ('goplantuml -hide-connections -show-implementations -show-compositions '
                 '{options}  -ignore "{filter}" {module} > {path}')
 PUML_COMBINE_COMMAND = ('goplantuml -hide-connections -show-implementations '
                         '-hide-methods -ignore "{filter}" {module} > {path}')

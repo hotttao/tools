@@ -1,0 +1,140 @@
+@startuml
+namespace labels {
+    class ByKey << (S,Aquamarine) >> {
+        + Len() int
+        + Swap(i int, j int) 
+        + Less(i int, j int) bool
+
+    }
+    interface Labels  {
+        + Has(label string) bool
+        + Get(label string) string
+
+    }
+    class Lexer << (S,Aquamarine) >> {
+        - s string
+        - pos int
+
+        - read() byte
+        - unread() 
+        - scanIDOrKeyword() (Token, string)
+        - scanSpecialSymbol() (Token, string)
+        - skipWhiteSpaces(ch byte) byte
+
+        + Lex() (Token, string)
+
+    }
+    class Parser << (S,Aquamarine) >> {
+        - l *Lexer
+        - scannedItems []ScannedItem
+        - position int
+        - path *field.Path
+
+        - lookahead(context ParserContext) (Token, string)
+        - consume(context ParserContext) (Token, string)
+        - scan() 
+        - parse() (internalSelector, error)
+        - parseRequirement() (*Requirement, error)
+        - parseKeyAndInferOperator() (string, selection.Operator, error)
+        - parseOperator() (selection.Operator, error)
+        - parseValues() (sets.String, error)
+        - parseIdentifiersList() (sets.String, error)
+        - parseExactValue() (sets.String, error)
+
+    }
+    class Requirement << (S,Aquamarine) >> {
+        - key string
+        - operator selection.Operator
+        - strValues []string
+
+        - hasValue(value string) bool
+
+        + Matches(ls Labels) bool
+        + Key() string
+        + Operator() selection.Operator
+        + Values() sets.String
+        + Equal(x Requirement) bool
+        + String() string
+        + DeepCopyInto(out *Requirement) 
+        + DeepCopy() *Requirement
+
+    }
+    class ScannedItem << (S,Aquamarine) >> {
+        - tok Token
+        - literal string
+
+    }
+    interface Selector  {
+        + Matches( Labels) bool
+        + Empty() bool
+        + String() string
+        + Add(r ...Requirement) Selector
+        + Requirements() (Requirements, bool)
+        + DeepCopySelector() Selector
+        + RequiresExactMatch(label string) (string, bool)
+
+    }
+    class Set << (S,Aquamarine) >> {
+        + String() string
+        + Has(label string) bool
+        + Get(label string) string
+        + AsSelector() Selector
+        + AsValidatedSelector() (Selector, error)
+        + AsSelectorPreValidated() Selector
+
+    }
+    class ValidatedSetSelector << (S,Aquamarine) >> {
+        - toFullSelector() Selector
+
+        + Matches(labels Labels) bool
+        + Empty() bool
+        + String() string
+        + Add(r ...Requirement) Selector
+        + Requirements() (Requirements, bool)
+        + DeepCopySelector() Selector
+        + RequiresExactMatch(label string) (string, bool)
+
+    }
+    class internalSelector << (S,Aquamarine) >> {
+        + DeepCopy() internalSelector
+        + DeepCopySelector() Selector
+        + Empty() bool
+        + Add(reqs ...Requirement) Selector
+        + Matches(l Labels) bool
+        + Requirements() (Requirements, bool)
+        + String() string
+        + RequiresExactMatch(label string) (string, bool)
+
+    }
+    class labels.ByKey << (T, #FF7700) >>  {
+    }
+    class labels.ParserContext << (T, #FF7700) >>  {
+    }
+    class labels.Requirements << (T, #FF7700) >>  {
+    }
+    class labels.Set << (T, #FF7700) >>  {
+    }
+    class labels.Token << (T, #FF7700) >>  {
+    }
+    class labels.ValidatedSetSelector << (T, #FF7700) >>  {
+    }
+    class labels.internalSelector << (T, #FF7700) >>  {
+    }
+    class nothingSelector << (S,Aquamarine) >> {
+        + Matches(_ Labels) bool
+        + Empty() bool
+        + String() string
+        + Add(_ ...Requirement) Selector
+        + Requirements() (Requirements, bool)
+        + DeepCopySelector() Selector
+        + RequiresExactMatch(label string) (string, bool)
+
+    }
+}
+
+"labels.Labels" <|-- "labels.Set"
+"labels.Selector" <|-- "labels.ValidatedSetSelector"
+"labels.Selector" <|-- "labels.internalSelector"
+"labels.Selector" <|-- "labels.nothingSelector"
+
+@enduml

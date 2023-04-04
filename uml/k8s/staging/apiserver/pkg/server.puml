@@ -1,0 +1,1705 @@
+@startuml
+namespace controller {
+    class DynamicKMSEncryptionConfigContent << (S,Aquamarine) >> {
+        - name string
+        - filePath string
+        - lastLoadedEncryptionConfigHash string
+        - queue workqueue.RateLimitingInterface
+        - dynamicTransformers *encryptionconfig.DynamicTransformers
+
+        - watchEncryptionConfigFile(ctx context.Context) error
+        - handleWatchEvent(event fsnotify.Event, watcher *fsnotify.Watcher) error
+        - runWorker(ctx context.Context) 
+        - processNextWorkItem(serverCtx context.Context) bool
+        - processEncryptionConfig(ctx context.Context) (*encryptionconfig.EncryptionConfiguration, bool, error)
+        - validateNewTransformersHealth(ctx context.Context, kmsPluginHealthzCheck healthz.HealthChecker, kmsPluginCloseGracePeriod time.Duration) error
+
+        + Run(ctx context.Context) 
+
+    }
+}
+
+
+namespace dynamiccertificates {
+    interface CAContentProvider  {
+        + Name() string
+        + CurrentCABundleContent() []byte
+        + VerifyOptions() (x509.VerifyOptions, bool)
+
+    }
+    interface CertKeyContentProvider  {
+        + Name() string
+        + CurrentCertKeyContent() ([]byte, []byte)
+
+    }
+    class ConfigMapCAController << (S,Aquamarine) >> {
+        - name string
+        - configmapLister v1.ConfigMapLister
+        - configmapNamespace string
+        - configmapName string
+        - configmapKey string
+        - configMapInformer cache.SharedIndexInformer
+        - caBundle atomic.Value
+        - listeners []Listener
+        - queue workqueue.RateLimitingInterface
+        - preRunCaches []cache.InformerSynced
+
+        - keyFn() string
+        - loadCABundle() error
+        - hasCAChanged(caBundle []byte) bool
+        - runWorker() 
+        - processNextWorkItem() bool
+
+        + AddListener(listener Listener) 
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+        + Name() string
+        + CurrentCABundleContent() []byte
+        + VerifyOptions() (x509.VerifyOptions, bool)
+
+    }
+    interface ControllerRunner  {
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+
+    }
+    class DynamicCertKeyPairContent << (S,Aquamarine) >> {
+        - name string
+        - certFile string
+        - keyFile string
+        - certKeyPair atomic.Value
+        - listeners []Listener
+        - queue workqueue.RateLimitingInterface
+
+        - loadCertKeyPair() error
+        - watchCertKeyFile(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        - handleWatchEvent(e fsnotify.Event, w *fsnotify.Watcher) error
+        - runWorker() 
+        - processNextWorkItem() bool
+
+        + AddListener(listener Listener) 
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+        + Name() string
+        + CurrentCertKeyContent() ([]byte, []byte)
+
+    }
+    class DynamicFileCAContent << (S,Aquamarine) >> {
+        - name string
+        - filename string
+        - caBundle atomic.Value
+        - listeners []Listener
+        - queue workqueue.RateLimitingInterface
+
+        - loadCABundle() error
+        - hasCAChanged(caBundle []byte) bool
+        - watchCAFile(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        - handleWatchEvent(e fsnotify.Event, w *fsnotify.Watcher) error
+        - runWorker() 
+        - processNextWorkItem() bool
+
+        + AddListener(listener Listener) 
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+        + Name() string
+        + CurrentCABundleContent() []byte
+        + VerifyOptions() (x509.VerifyOptions, bool)
+
+    }
+    class DynamicFileSNIContent << (S,Aquamarine) >> {
+        - sniNames []string
+
+        + SNINames() []string
+
+    }
+    class DynamicServingCertificateController << (S,Aquamarine) >> {
+        - baseTLSConfig *tls.Config
+        - clientCA CAContentProvider
+        - servingCert CertKeyContentProvider
+        - sniCerts []SNICertKeyContentProvider
+        - currentlyServedContent *dynamicCertificateContent
+        - currentServingTLSConfig atomic.Value
+        - queue workqueue.RateLimitingInterface
+        - eventRecorder events.EventRecorder
+
+        - newTLSContent() (*dynamicCertificateContent, error)
+        - syncCerts() error
+        - runWorker() 
+        - processNextWorkItem() bool
+
+        + BuildNamedCertificates(sniCerts []sniCertKeyContent) (<font color=blue>map</font>[string]*tls.Certificate, error)
+        + GetConfigForClient(clientHello *tls.ClientHelloInfo) (*tls.Config, error)
+        + RunOnce() error
+        + Run(workers int, stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + Enqueue() 
+
+    }
+    interface Listener  {
+        + Enqueue() 
+
+    }
+    interface Notifier  {
+        + AddListener(listener Listener) 
+
+    }
+    interface SNICertKeyContentProvider  {
+        + SNINames() []string
+
+    }
+    class caBundleAndVerifier << (S,Aquamarine) >> {
+        - caBundle []byte
+        - verifyOptions x509.VerifyOptions
+
+    }
+    class caBundleContent << (S,Aquamarine) >> {
+        - caBundle []byte
+
+        + Equal(rhs *caBundleContent) bool
+
+    }
+    class certKeyContent << (S,Aquamarine) >> {
+        - cert []byte
+        - key []byte
+
+        + Equal(rhs *certKeyContent) bool
+
+    }
+    class dynamicCertificateContent << (S,Aquamarine) >> {
+        - clientCA caBundleContent
+        - servingCert certKeyContent
+        - sniCerts []sniCertKeyContent
+
+        + Equal(rhs *dynamicCertificateContent) bool
+
+    }
+    class dynamiccertificates.unionCAContent << (T, #FF7700) >>  {
+    }
+    class sniCertKeyContent << (S,Aquamarine) >> {
+        - sniNames []string
+
+        + Equal(rhs *sniCertKeyContent) bool
+
+    }
+    class staticCAContent << (S,Aquamarine) >> {
+        - name string
+        - caBundle *caBundleAndVerifier
+
+        + Name() string
+        + AddListener( Listener) 
+        + CurrentCABundleContent() []byte
+        + VerifyOptions() (x509.VerifyOptions, bool)
+
+    }
+    class staticCertKeyContent << (S,Aquamarine) >> {
+        - name string
+        - cert []byte
+        - key []byte
+
+        + Name() string
+        + AddListener( Listener) 
+        + CurrentCertKeyContent() ([]byte, []byte)
+
+    }
+    class staticSNICertKeyContent << (S,Aquamarine) >> {
+        - sniNames []string
+
+        + SNINames() []string
+        + AddListener( Listener) 
+
+    }
+    class unionCAContent << (S,Aquamarine) >> {
+        + Name() string
+        + CurrentCABundleContent() []byte
+        + VerifyOptions() (x509.VerifyOptions, bool)
+        + AddListener(listener Listener) 
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+
+    }
+}
+"dynamiccertificates.Notifier" *-- "dynamiccertificates.CAContentProvider"
+"dynamiccertificates.Notifier" *-- "dynamiccertificates.CertKeyContentProvider"
+"dynamiccertificates.DynamicCertKeyPairContent" *-- "dynamiccertificates.DynamicFileSNIContent"
+"dynamiccertificates.CertKeyContentProvider" *-- "dynamiccertificates.SNICertKeyContentProvider"
+"dynamiccertificates.Notifier" *-- "dynamiccertificates.SNICertKeyContentProvider"
+"dynamiccertificates.certKeyContent" *-- "dynamiccertificates.sniCertKeyContent"
+"dynamiccertificates.staticCertKeyContent" *-- "dynamiccertificates.staticSNICertKeyContent"
+
+"dynamiccertificates.CAContentProvider" <|-- "dynamiccertificates.ConfigMapCAController"
+"dynamiccertificates.ControllerRunner" <|-- "dynamiccertificates.ConfigMapCAController"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.ConfigMapCAController"
+"dynamiccertificates.CertKeyContentProvider" <|-- "dynamiccertificates.DynamicCertKeyPairContent"
+"dynamiccertificates.ControllerRunner" <|-- "dynamiccertificates.DynamicCertKeyPairContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.DynamicCertKeyPairContent"
+"dynamiccertificates.CAContentProvider" <|-- "dynamiccertificates.DynamicFileCAContent"
+"dynamiccertificates.ControllerRunner" <|-- "dynamiccertificates.DynamicFileCAContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.DynamicFileCAContent"
+"dynamiccertificates.SNICertKeyContentProvider" <|-- "dynamiccertificates.DynamicFileSNIContent"
+"dynamiccertificates.Listener" <|-- "dynamiccertificates.DynamicServingCertificateController"
+"dynamiccertificates.CAContentProvider" <|-- "dynamiccertificates.staticCAContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.staticCAContent"
+"dynamiccertificates.CertKeyContentProvider" <|-- "dynamiccertificates.staticCertKeyContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.staticCertKeyContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.staticSNICertKeyContent"
+"dynamiccertificates.SNICertKeyContentProvider" <|-- "dynamiccertificates.staticSNICertKeyContent"
+"dynamiccertificates.CAContentProvider" <|-- "dynamiccertificates.unionCAContent"
+"dynamiccertificates.ControllerRunner" <|-- "dynamiccertificates.unionCAContent"
+"dynamiccertificates.Notifier" <|-- "dynamiccertificates.unionCAContent"
+
+namespace egressselector {
+    class EgressSelector << (S,Aquamarine) >> {
+        - egressToDialer <font color=blue>map</font>[EgressType]net.DialFunc
+
+        + Lookup(networkContext NetworkContext) (net.DialFunc, error)
+
+    }
+    class EgressType << (S,Aquamarine) >> {
+        + String() string
+        + AsNetworkContext() NetworkContext
+
+    }
+    class NetworkContext << (S,Aquamarine) >> {
+        + EgressSelectionName EgressType
+
+    }
+    class dialerCreator << (S,Aquamarine) >> {
+        - connector proxyServerConnector
+        - direct bool
+        - options metricsOptions
+
+        - createDialer() net.DialFunc
+
+    }
+    class egressselector.EgressType << (T, #FF7700) >>  {
+    }
+    class egressselector.Lookup << (T, #FF7700) >>  {
+    }
+    class grpcProxier << (S,Aquamarine) >> {
+        - tunnel client.Tunnel
+
+        - proxy(ctx context.Context, addr string) (net.Conn, error)
+
+    }
+    class httpConnectProxier << (S,Aquamarine) >> {
+        - conn net.Conn
+        - proxyAddress string
+
+        - proxy(ctx context.Context, addr string) (net.Conn, error)
+
+    }
+    class metricsOptions << (S,Aquamarine) >> {
+        - transport string
+        - protocol string
+
+    }
+    interface proxier  {
+        - proxy(ctx context.Context, addr string) (net.Conn, error)
+
+    }
+    interface proxyServerConnector  {
+        - connect( context.Context) (proxier, error)
+
+    }
+    class tcpHTTPConnectConnector << (S,Aquamarine) >> {
+        - proxyAddress string
+        - tlsConfig *tls.Config
+
+        - connect(ctx context.Context) (proxier, error)
+
+    }
+    class udsGRPCConnector << (S,Aquamarine) >> {
+        - udsName string
+
+        - connect(_ context.Context) (proxier, error)
+
+    }
+    class udsHTTPConnectConnector << (S,Aquamarine) >> {
+        - udsName string
+
+        - connect(ctx context.Context) (proxier, error)
+
+    }
+    class "<font color=blue>func</font>(NetworkContext) (net.DialFunc, error)" as fontcolorbluefuncfontNetworkContextnetDialFuncerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"egressselector.proxier" <|-- "egressselector.grpcProxier"
+"egressselector.proxier" <|-- "egressselector.httpConnectProxier"
+"egressselector.proxyServerConnector" <|-- "egressselector.tcpHTTPConnectConnector"
+"egressselector.proxyServerConnector" <|-- "egressselector.udsGRPCConnector"
+"egressselector.proxyServerConnector" <|-- "egressselector.udsHTTPConnectConnector"
+
+namespace encryptionconfig {
+    class DynamicTransformers << (S,Aquamarine) >> {
+        - transformTracker *atomic.Value
+
+        + Check(req *http.Request) error
+        + Name() string
+        + TransformerForResource(resource schema.GroupResource) value.Transformer
+        + Set(transformerOverrides <font color=blue>map</font>[schema.GroupResource]value.Transformer, closeTransformers context.CancelFunc, kmsPluginHealthzCheck healthz.HealthChecker, kmsCloseGracePeriod time.Duration) 
+
+    }
+    class EncryptionConfiguration << (S,Aquamarine) >> {
+        + Transformers <font color=blue>map</font>[schema.GroupResource]value.Transformer
+        + HealthChecks []healthz.HealthChecker
+        + EncryptionFileContentHash string
+        + KMSCloseGracePeriod time.Duration
+
+    }
+    interface ResourceTransformers  {
+        + TransformerForResource(resource schema.GroupResource) value.Transformer
+
+    }
+    class StaticTransformers << (S,Aquamarine) >> {
+        + TransformerForResource(resource schema.GroupResource) value.Transformer
+
+    }
+    class encryptionconfig.StaticTransformers << (T, #FF7700) >>  {
+    }
+    class encryptionconfig.blockTransformerFunc << (T, #FF7700) >>  {
+    }
+    class encryptionconfig.kmsHealthChecker << (T, #FF7700) >>  {
+    }
+    class encryptionconfig.unionTransformers << (T, #FF7700) >>  {
+    }
+    interface healthChecker  {
+        - toHealthzCheck(idx int) healthz.HealthChecker
+
+    }
+    class kmsHealthChecker << (S,Aquamarine) >> {
+        + Name() string
+        + Check(req *http.Request) error
+
+    }
+    class kmsPluginHealthzResponse << (S,Aquamarine) >> {
+        - err error
+        - received time.Time
+
+    }
+    class kmsPluginProbe << (S,Aquamarine) >> {
+        - name string
+        - ttl time.Duration
+        - service envelope.Service
+        - lastResponse *kmsPluginHealthzResponse
+        - l *sync.Mutex
+
+        - toHealthzCheck(idx int) healthz.HealthChecker
+        - check() error
+
+    }
+    class kmsState << (S,Aquamarine) >> {
+        - v1Used bool
+        - kmsTimeoutSum time.Duration
+
+        - accumulate(other *kmsState) 
+
+    }
+    class kmsv2PluginProbe << (S,Aquamarine) >> {
+        - keyID 
+        - name string
+        - ttl time.Duration
+        - service service.Service
+        - lastResponse *kmsPluginHealthzResponse
+        - l *sync.Mutex
+
+        - toHealthzCheck(idx int) healthz.HealthChecker
+        - check(ctx context.Context) error
+        - getCurrentKeyID(ctx context.Context) (string, error)
+
+    }
+    class resourceTransformer << (S,Aquamarine) >> {
+        - resource schema.GroupResource
+        - transformTracker *atomic.Value
+
+        - transformer() value.Transformer
+
+        + TransformFromStorage(ctx context.Context, data []byte, dataCtx value.Context) ([]byte, bool, error)
+        + TransformToStorage(ctx context.Context, data []byte, dataCtx value.Context) ([]byte, error)
+
+    }
+    class transformTracker << (S,Aquamarine) >> {
+        - transformerOverrides <font color=blue>map</font>[schema.GroupResource]value.Transformer
+        - kmsPluginHealthzCheck healthz.HealthChecker
+        - closeTransformers context.CancelFunc
+        - kmsCloseGracePeriod time.Duration
+
+    }
+    class unionTransformers << (S,Aquamarine) >> {
+        + TransformFromStorage(ctx context.Context, data []byte, dataCtx value.Context) ([]byte, bool, error)
+        + TransformToStorage(ctx context.Context, data []byte, dataCtx value.Context) ([]byte, error)
+
+    }
+    class "<font color=blue>func</font>(cipher.Block) value.Transformer" as fontcolorbluefuncfontcipherBlockvalueTransformer {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>map</font>[schema.GroupResource]value.Transformer" as fontcolorbluemapfontschemaGroupResourcevalueTransformer {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "[]healthz.HealthChecker" as healthzHealthChecker {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "[]value.Transformer" as valueTransformer {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"encryptionconfig.ResourceTransformers" <|-- "encryptionconfig.DynamicTransformers"
+"healthz.HealthChecker" <|-- "encryptionconfig.DynamicTransformers"
+"encryptionconfig.ResourceTransformers" <|-- "encryptionconfig.StaticTransformers"
+"healthz.HealthChecker" <|-- "encryptionconfig.kmsHealthChecker"
+"encryptionconfig.healthChecker" <|-- "encryptionconfig.kmsPluginProbe"
+"encryptionconfig.healthChecker" <|-- "encryptionconfig.kmsv2PluginProbe"
+
+namespace filters {
+    interface GoawayDecider  {
+        + Goaway(r *http.Request) bool
+
+    }
+    class PriorityAndFairnessClassification << (S,Aquamarine) >> {
+        + FlowSchemaName string
+        + FlowSchemaUID types.UID
+        + PriorityLevelName string
+        + PriorityLevelUID types.UID
+
+    }
+    interface RequestWaitGroup  {
+        + Add(delta int) error
+        + Done() 
+
+    }
+    class baseTimeoutWriter << (S,Aquamarine) >> {
+        - w http.ResponseWriter
+        - handlerHeaders http.Header
+        - mu sync.Mutex
+        - timedOut bool
+        - wroteHeader bool
+        - hijacked bool
+
+        - timeout(err *errors.StatusError) 
+
+        + Unwrap() http.ResponseWriter
+        + Header() http.Header
+        + Write(p []byte) (int, error)
+        + Flush() 
+        + WriteHeader(code int) 
+        + CloseNotify() <font color=blue>chan</font> bool
+        + Hijack() (net.Conn, *bufio.ReadWriter, error)
+
+    }
+    class filters.isRequestExemptFunc << (T, #FF7700) >>  {
+    }
+    class filters.shouldRespondWithRetryAfterFunc << (T, #FF7700) >>  {
+    }
+    class filters.timeoutFunc << (T, #FF7700) >>  {
+    }
+    class goaway << (S,Aquamarine) >> {
+        - handler http.Handler
+        - decider GoawayDecider
+
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    class probabilisticGoawayDecider << (S,Aquamarine) >> {
+        - chance float64
+        - next <font color=blue>func</font>() float64
+
+        + Goaway(r *http.Request) bool
+
+    }
+    class requestWatermark << (S,Aquamarine) >> {
+        - phase string
+        - readOnlyObserver metrics.RatioedGauge
+        - lock sync.Mutex
+        - readOnlyWatermark int
+
+        - recordMutating(mutatingVal int) 
+        - recordReadOnly(readOnlyVal int) 
+
+    }
+    class retryAfterParams << (S,Aquamarine) >> {
+        + TearDownConnection bool
+        + Message string
+
+    }
+    class timeoutHandler << (S,Aquamarine) >> {
+        - handler http.Handler
+        - timeout timeoutFunc
+
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    interface timeoutWriter  {
+        - timeout( *errors.StatusError) 
+
+    }
+    class "<font color=blue>func</font>(*http.Request) bool" as fontcolorbluefuncfonthttpRequestbool {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(*http.Request) (*http.Request, bool, <font color=blue>func</font>() , *errors.StatusError)" as fontcolorbluefuncfonthttpRequesthttpRequestboolfontcolorbluefuncfonterrorsStatusError {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"filters.timeoutWriter" <|-- "filters.baseTimeoutWriter"
+"filters.GoawayDecider" <|-- "filters.probabilisticGoawayDecider"
+
+namespace healthz {
+    interface HealthChecker  {
+        + Name() string
+        + Check(req *http.Request) error
+
+    }
+    interface cacheSyncWaiter  {
+        + WaitForCacheSync(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) <font color=blue>map</font>[reflect.Type]bool
+
+    }
+    class healthzCheck << (S,Aquamarine) >> {
+        - name string
+        - check <font color=blue>func</font>(*http.Request) error
+
+        + Name() string
+        + Check(r *http.Request) error
+
+    }
+    class informerSync << (S,Aquamarine) >> {
+        - cacheSyncWaiter cacheSyncWaiter
+
+        + Name() string
+        + Check(_ *http.Request) error
+
+    }
+    class log << (S,Aquamarine) >> {
+        - startOnce sync.Once
+        - lastVerified atomic.Value
+
+        + Name() string
+        + Check(_ *http.Request) error
+
+    }
+    interface mux  {
+        + Handle(pattern string, handler http.Handler) 
+
+    }
+    class ping << (S,Aquamarine) >> {
+        + Name() string
+        + Check(_ *http.Request) error
+
+    }
+}
+
+"healthz.HealthChecker" <|-- "healthz.healthzCheck"
+"healthz.HealthChecker" <|-- "healthz.informerSync"
+"healthz.HealthChecker" <|-- "healthz.log"
+"healthz.HealthChecker" <|-- "healthz.ping"
+
+namespace httplog {
+    class httplog.ShouldLogRequestPred << (T, #FF7700) >>  {
+    }
+    class httplog.StacktracePred << (T, #FF7700) >>  {
+    }
+    class httplog.respLoggerContextKeyType << (T, #FF7700) >>  {
+    }
+    interface logger  {
+        + Addf(format string, data ...<font color=blue>interface</font>{}) 
+
+    }
+    class passthroughLogger << (S,Aquamarine) >> {
+        + Addf(format string, data ...<font color=blue>interface</font>{}) 
+
+    }
+    class respLogger << (S,Aquamarine) >> {
+        - hijacked bool
+        - statusRecorded bool
+        - status int
+        - statusStack string
+        - mutex sync.Mutex
+        - addedInfo strings.Builder
+        - addedKeyValuePairs []<font color=blue>interface</font>{}
+        - startTime time.Time
+        - captureErrorOutput bool
+        - req *http.Request
+        - userAgent string
+        - w http.ResponseWriter
+        - logStacktracePred StacktracePred
+
+        - recordStatus(status int) 
+
+        + Unwrap() http.ResponseWriter
+        + StacktraceWhen(pred StacktracePred) *respLogger
+        + Addf(format string, data ...<font color=blue>interface</font>{}) 
+        + AddKeyValue(key string, value <font color=blue>interface</font>{}) 
+        + Log() 
+        + Header() http.Header
+        + Write(b []byte) (int, error)
+        + WriteHeader(status int) 
+        + Hijack() (net.Conn, *bufio.ReadWriter, error)
+
+    }
+}
+
+"httplog.logger" <|-- "httplog.passthroughLogger"
+"httplog.logger" <|-- "httplog.respLogger"
+
+namespace metrics {
+    class DialMetrics << (S,Aquamarine) >> {
+        - clock clock.Clock
+        - starts *metrics.CounterVec
+        - latencies *metrics.HistogramVec
+        - failures *metrics.CounterVec
+
+        + Clock() clock.Clock
+        + SetClock(c clock.Clock) 
+        + Reset() 
+        + ObserveDialStart(protocol string, transport string) 
+        + ObserveDialLatency(elapsed time.Duration, protocol string, transport string) 
+        + ObserveDialFailure(protocol string, transport string, stage string) 
+
+    }
+}
+
+
+namespace mux {
+    class PathRecorderMux << (S,Aquamarine) >> {
+        - name string
+        - lock sync.Mutex
+        - notFoundHandler http.Handler
+        - pathToHandler <font color=blue>map</font>[string]http.Handler
+        - prefixToHandler <font color=blue>map</font>[string]http.Handler
+        - mux atomic.Value
+        - exposedPaths []string
+        - pathStacks <font color=blue>map</font>[string]string
+
+        - trackCallers(path string) 
+        - refreshMuxLocked() 
+
+        + ListedPaths() []string
+        + NotFoundHandler(notFoundHandler http.Handler) 
+        + Unregister(path string) 
+        + Handle(path string, handler http.Handler) 
+        + HandleFunc(path string, handler <font color=blue>func</font>(http.ResponseWriter, *http.Request) ) 
+        + UnlistedHandle(path string, handler http.Handler) 
+        + UnlistedHandleFunc(path string, handler <font color=blue>func</font>(http.ResponseWriter, *http.Request) ) 
+        + HandlePrefix(path string, handler http.Handler) 
+        + UnlistedHandlePrefix(path string, handler http.Handler) 
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    class byPrefixPriority << (S,Aquamarine) >> {
+        + Len() int
+        + Swap(i int, j int) 
+        + Less(i int, j int) bool
+
+    }
+    class mux.byPrefixPriority << (T, #FF7700) >>  {
+    }
+    class pathHandler << (S,Aquamarine) >> {
+        - muxName string
+        - pathToHandler <font color=blue>map</font>[string]http.Handler
+        - prefixHandlers []prefixHandler
+        - notFoundHandler http.Handler
+
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    class prefixHandler << (S,Aquamarine) >> {
+        - prefix string
+        - handler http.Handler
+
+    }
+}
+
+"healthz.mux" <|-- "mux.PathRecorderMux"
+"routes.ListedPathProvider" <|-- "mux.PathRecorderMux"
+
+namespace options {
+    class APIEnablementOptions << (S,Aquamarine) >> {
+        + RuntimeConfig flag.ConfigurationMap
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + Validate(registries ...GroupRegistry) []error
+        + ApplyTo(c *server.Config, defaultResourceConfig *storage.ResourceConfig, registry resourceconfig.GroupVersionRegistry) error
+
+    }
+    class AdmissionOptions << (S,Aquamarine) >> {
+        + RecommendedPluginOrder []string
+        + DefaultOffPlugins sets.String
+        + EnablePlugins []string
+        + DisablePlugins []string
+        + ConfigFile string
+        + Plugins *admission.Plugins
+        + Decorators admission.Decorators
+
+        - enabledPluginNames() []string
+        - defaultEnabledPluginNames() []string
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c *server.Config, informers informers.SharedInformerFactory, kubeAPIServerClientConfig *rest.Config, features featuregate.FeatureGate, pluginInitializers ...admission.PluginInitializer) error
+        + Validate() []error
+
+    }
+    class AuditBatchOptions << (S,Aquamarine) >> {
+        + Mode string
+        + BatchConfig buffered.BatchConfig
+
+        - wrapBackend(delegate audit.Backend) audit.Backend
+
+        + AddFlags(pluginName string, fs *pflag.FlagSet) 
+
+    }
+    class AuditDynamicOptions << (S,Aquamarine) >> {
+        + Enabled bool
+        + BatchConfig *buffered.BatchConfig
+
+    }
+    class AuditLogOptions << (S,Aquamarine) >> {
+        + Path string
+        + MaxAge int
+        + MaxBackups int
+        + MaxSize int
+        + Format string
+        + Compress bool
+        + BatchOptions AuditBatchOptions
+        + TruncateOptions AuditTruncateOptions
+        + GroupVersionString string
+
+        - enabled() bool
+        - getWriter() (io.Writer, error)
+        - ensureLogFile() error
+        - newBackend(w io.Writer) audit.Backend
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + Validate() []error
+
+    }
+    class AuditOptions << (S,Aquamarine) >> {
+        + PolicyFile string
+        + LogOptions AuditLogOptions
+        + WebhookOptions AuditWebhookOptions
+
+        - newPolicyRuleEvaluator() (audit.PolicyRuleEvaluator, error)
+
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c *server.Config) error
+
+    }
+    class AuditTruncateOptions << (S,Aquamarine) >> {
+        + Enabled bool
+        + TruncateConfig truncate.Config
+
+        - wrapBackend(delegate audit.Backend, gv schema.GroupVersion) audit.Backend
+
+        + Validate(pluginName string) error
+        + AddFlags(pluginName string, fs *pflag.FlagSet) 
+
+    }
+    class AuditWebhookOptions << (S,Aquamarine) >> {
+        + ConfigFile string
+        + InitialBackoff time.Duration
+        + BatchOptions AuditBatchOptions
+        + TruncateOptions AuditTruncateOptions
+        + GroupVersionString string
+
+        - enabled() bool
+        - newUntruncatedBackend(customDial net.DialFunc) (audit.Backend, error)
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + Validate() []error
+
+    }
+    class CertKey << (S,Aquamarine) >> {
+        + CertFile string
+        + KeyFile string
+
+    }
+    class ClientCertAuthenticationOptions << (S,Aquamarine) >> {
+        + ClientCA string
+        + CAContentProvider dynamiccertificates.CAContentProvider
+
+        + GetClientCAContentProvider() (dynamiccertificates.CAContentProvider, error)
+        + AddFlags(fs *pflag.FlagSet) 
+
+    }
+    class CoreAPIOptions << (S,Aquamarine) >> {
+        + CoreAPIKubeconfigPath string
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(config *server.RecommendedConfig) error
+        + Validate() []error
+
+    }
+    class DelegatingAuthenticationOptions << (S,Aquamarine) >> {
+        + RemoteKubeConfigFile string
+        + RemoteKubeConfigFileOptional bool
+        + CacheTTL time.Duration
+        + ClientCert ClientCertAuthenticationOptions
+        + RequestHeader RequestHeaderAuthenticationOptions
+        + SkipInClusterLookup bool
+        + TolerateInClusterLookupFailure bool
+        + WebhookRetryBackoff *wait.Backoff
+        + TokenRequestTimeout time.Duration
+        + CustomRoundTripperFn transport.WrapperFunc
+        + DisableAnonymous bool
+
+        - createRequestHeaderConfig(client kubernetes.Interface) (*authenticatorfactory.RequestHeaderConfig, error)
+        - getClient() (kubernetes.Interface, error)
+
+        + WithCustomRetryBackoff(backoff wait.Backoff) 
+        + WithRequestTimeout(timeout time.Duration) 
+        + WithCustomRoundTripper(rt transport.WrapperFunc) 
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(authenticationInfo *server.AuthenticationInfo, servingInfo *server.SecureServingInfo, openAPIConfig *common.Config) error
+
+    }
+    class DelegatingAuthorizationOptions << (S,Aquamarine) >> {
+        + RemoteKubeConfigFile string
+        + RemoteKubeConfigFileOptional bool
+        + AllowCacheTTL time.Duration
+        + DenyCacheTTL time.Duration
+        + AlwaysAllowPaths []string
+        + AlwaysAllowGroups []string
+        + ClientTimeout time.Duration
+        + WebhookRetryBackoff *wait.Backoff
+        + CustomRoundTripperFn transport.WrapperFunc
+
+        - toAuthorizer(client kubernetes.Interface) (authorizer.Authorizer, error)
+        - getClient() (kubernetes.Interface, error)
+
+        + WithAlwaysAllowGroups(groups ...string) *DelegatingAuthorizationOptions
+        + WithAlwaysAllowPaths(paths ...string) *DelegatingAuthorizationOptions
+        + WithClientTimeout(timeout time.Duration) 
+        + WithCustomRetryBackoff(backoff wait.Backoff) 
+        + WithCustomRoundTripper(rt transport.WrapperFunc) 
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c *server.AuthorizationInfo) error
+
+    }
+    class DeprecatedInsecureServingOptions << (S,Aquamarine) >> {
+        + BindAddress net.IP
+        + BindPort int
+        + BindNetwork string
+        + Listener net.Listener
+        + ListenFunc <font color=blue>func</font>(string, string, net.ListenConfig) (net.Listener, int, error)
+
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + AddUnqualifiedFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c **server.DeprecatedInsecureServingInfo) error
+
+    }
+    class DynamicRequestHeaderController << (S,Aquamarine) >> {
+        + RunOnce(ctx context.Context) error
+        + Run(ctx context.Context, workers int) 
+
+    }
+    class EgressSelectorOptions << (S,Aquamarine) >> {
+        + ConfigFile string
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c *server.Config) error
+        + Validate() []error
+
+    }
+    class EtcdOptions << (S,Aquamarine) >> {
+        - complete bool
+        - resourceTransformers encryptionconfig.ResourceTransformers
+        - kmsPluginHealthzChecks []healthz.HealthChecker
+
+        + StorageConfig storagebackend.Config
+        + EncryptionProviderConfigFilepath string
+        + EncryptionProviderConfigAutomaticReload bool
+        + EtcdServersOverrides []string
+        + DefaultStorageMediaType string
+        + DeleteCollectionWorkers int
+        + EnableGarbageCollection bool
+        + EnableWatchCache bool
+        + DefaultWatchCacheSize int
+        + WatchCacheSizes []string
+        + SkipHealthEndpoints bool
+
+        - addEtcdHealthEndpoint(c *server.Config) error
+
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + Complete(storageObjectCountTracker request.StorageObjectCountTracker, stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}, addPostStartHook <font color=blue>func</font>(string, server.PostStartHookFunc) error) error
+        + ApplyTo(c *server.Config) error
+        + ApplyWithStorageFactoryTo(factory storage.StorageFactory, c *server.Config) error
+
+    }
+    class FeatureOptions << (S,Aquamarine) >> {
+        + EnableProfiling bool
+        + DebugSocketPath string
+        + EnableContentionProfiling bool
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(c *server.Config) error
+        + Validate() []error
+
+    }
+    class GeneratableKeyCert << (S,Aquamarine) >> {
+        + CertKey CertKey
+        + CertDirectory string
+        + PairName string
+        + GeneratedCert dynamiccertificates.CertKeyContentProvider
+        + FixtureDirectory string
+
+    }
+    interface GroupRegistry  {
+        + IsGroupRegistered(group string) bool
+
+    }
+    class RecommendedOptions << (S,Aquamarine) >> {
+        + Etcd *EtcdOptions
+        + SecureServing *SecureServingOptionsWithLoopback
+        + Authentication *DelegatingAuthenticationOptions
+        + Authorization *DelegatingAuthorizationOptions
+        + Audit *AuditOptions
+        + Features *FeatureOptions
+        + CoreAPI *CoreAPIOptions
+        + FeatureGate featuregate.FeatureGate
+        + ExtraAdmissionInitializers <font color=blue>func</font>(*server.RecommendedConfig) ([]admission.PluginInitializer, error)
+        + Admission *AdmissionOptions
+        + EgressSelector *EgressSelectorOptions
+        + Traces *TracingOptions
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(config *server.RecommendedConfig) error
+        + Validate() []error
+
+    }
+    class RequestHeaderAuthenticationOptions << (S,Aquamarine) >> {
+        + ClientCAFile string
+        + UsernameHeaders []string
+        + GroupHeaders []string
+        + ExtraHeaderPrefixes []string
+        + AllowedNames []string
+
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + ToAuthenticationRequestHeaderConfig() (*authenticatorfactory.RequestHeaderConfig, error)
+
+    }
+    class SecureServingOptions << (S,Aquamarine) >> {
+        + BindAddress net.IP
+        + BindPort int
+        + BindNetwork string
+        + Required bool
+        + ExternalAddress net.IP
+        + Listener net.Listener
+        + ServerCert GeneratableKeyCert
+        + SNICertKeys []flag.NamedCertKey
+        + CipherSuites []string
+        + MinTLSVersion string
+        + HTTP2MaxStreamsPerConnection int
+        + PermitPortSharing bool
+        + PermitAddressSharing bool
+
+        + DefaultExternalAddress() (net.IP, error)
+        + Validate() []error
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(config **server.SecureServingInfo) error
+        + MaybeDefaultWithSelfSignedCerts(publicAddress string, alternateDNS []string, alternateIPs []net.IP) error
+        + WithLoopback() *SecureServingOptionsWithLoopback
+
+    }
+    class SecureServingOptionsWithLoopback << (S,Aquamarine) >> {
+        + ApplyTo(secureServingInfo **server.SecureServingInfo, loopbackClientConfig **rest.Config) error
+
+    }
+    class ServerRunOptions << (S,Aquamarine) >> {
+        + AdvertiseAddress net.IP
+        + CorsAllowedOriginList []string
+        + HSTSDirectives []string
+        + ExternalHost string
+        + MaxRequestsInFlight int
+        + MaxMutatingRequestsInFlight int
+        + RequestTimeout time.Duration
+        + GoawayChance float64
+        + LivezGracePeriod time.Duration
+        + MinRequestTimeout int
+        + ShutdownDelayDuration time.Duration
+        + JSONPatchMaxCopyBytes int64
+        + MaxRequestBodyBytes int64
+        + EnablePriorityAndFairness bool
+        + ShutdownSendRetryAfter bool
+        + ShutdownWatchTerminationGracePeriod time.Duration
+
+        + ApplyTo(c *server.Config) error
+        + DefaultAdvertiseAddress(secure *SecureServingOptions) error
+        + Validate() []error
+        + AddUniversalFlags(fs *pflag.FlagSet) 
+
+    }
+    class SimpleStorageFactory << (S,Aquamarine) >> {
+        + StorageConfig storagebackend.Config
+
+        + NewConfig(resource schema.GroupResource) (*storagebackend.ConfigForResource, error)
+        + ResourcePrefix(resource schema.GroupResource) string
+        + Backends() []storage.Backend
+
+    }
+    class StorageFactoryRestOptionsFactory << (S,Aquamarine) >> {
+        + Options EtcdOptions
+        + StorageFactory storage.StorageFactory
+
+        + GetRESTOptions(resource schema.GroupResource) (generic.RESTOptions, error)
+
+    }
+    class TracingOptions << (S,Aquamarine) >> {
+        + ConfigFile string
+
+        + AddFlags(fs *pflag.FlagSet) 
+        + ApplyTo(es *egressselector.EgressSelector, c *server.Config) error
+        + Validate() []error
+
+    }
+    class ignoreErrorsBackend << (S,Aquamarine) >> {
+        + ProcessEvents(ev ...*audit.Event) bool
+        + String() string
+
+    }
+    class multipleControls << (S,Aquamarine) >> {
+        + Control(network string, addr string, conn syscall.RawConn) error
+
+    }
+    class options.multipleControls << (T, #FF7700) >>  {
+    }
+    class transformerStorageFactory << (S,Aquamarine) >> {
+        - delegate storage.StorageFactory
+        - resourceTransformers encryptionconfig.ResourceTransformers
+
+        + NewConfig(resource schema.GroupResource) (*storagebackend.ConfigForResource, error)
+        + ResourcePrefix(resource schema.GroupResource) string
+        + Backends() []storage.Backend
+
+    }
+    class "[]<font color=blue>func</font>(string, string, syscall.RawConn) error" as fontcolorbluefuncfontstringstringsyscallRawConnerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"dynamiccertificates.ConfigMapCAController" *-- "options.DynamicRequestHeaderController"
+"headerrequest.RequestHeaderAuthRequestController" *-- "options.DynamicRequestHeaderController"
+"options.SecureServingOptions" *-- "options.SecureServingOptionsWithLoopback"
+"audit.Backend" *-- "options.ignoreErrorsBackend"
+
+"dynamiccertificates.ControllerRunner" <|-- "options.DynamicRequestHeaderController"
+"storage.StorageFactory" <|-- "options.SimpleStorageFactory"
+"storage.StorageFactory" <|-- "options.transformerStorageFactory"
+
+namespace resourceconfig {
+    interface GroupVersionRegistry  {
+        + IsGroupRegistered(group string) bool
+        + IsVersionRegistered(v schema.GroupVersion) bool
+        + PrioritizedVersionsAllGroups() []schema.GroupVersion
+
+    }
+}
+
+
+namespace routes {
+    class DebugFlags << (S,Aquamarine) >> {
+        - addFlag(flag string) 
+
+        + Install(c *mux.PathRecorderMux, flag string, handler <font color=blue>func</font>(http.ResponseWriter, *http.Request) ) 
+        + Index(w http.ResponseWriter, r *http.Request) 
+
+    }
+    class DebugSocket << (S,Aquamarine) >> {
+        - path string
+        - mux *http.ServeMux
+
+        + InstallProfiling() 
+        + InstallDebugFlag(flag string, handler <font color=blue>func</font>(http.ResponseWriter, *http.Request) ) 
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+
+    }
+    class DefaultMetrics << (S,Aquamarine) >> {
+        + Install(c *mux.PathRecorderMux) 
+
+    }
+    class Index << (S,Aquamarine) >> {
+        + Install(pathProvider ListedPathProvider, mux *mux.PathRecorderMux) 
+
+    }
+    class IndexLister << (S,Aquamarine) >> {
+        + StatusCode int
+        + PathProvider ListedPathProvider
+
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    interface ListedPathProvider  {
+        + ListedPaths() []string
+
+    }
+    class ListedPathProviders << (S,Aquamarine) >> {
+        + ListedPaths() []string
+
+    }
+    class MetricsWithReset << (S,Aquamarine) >> {
+        + Install(c *mux.PathRecorderMux) 
+
+    }
+    class OpenAPI << (S,Aquamarine) >> {
+        + Config *common.Config
+
+        + InstallV2(c *v3.Container, mux *mux.PathRecorderMux) (*handler.OpenAPIService, *spec.Swagger)
+        + InstallV3(c *v3.Container, mux *mux.PathRecorderMux) *handler3.OpenAPIService
+
+    }
+    class Profiling << (S,Aquamarine) >> {
+        + Install(c *mux.PathRecorderMux) 
+
+    }
+    class Version << (S,Aquamarine) >> {
+        + Version *version.Info
+
+        - handleVersion(req *v3.Request, resp *v3.Response) 
+
+        + Install(c *v3.Container) 
+
+    }
+    class debugFlag << (S,Aquamarine) >> {
+        + Flag string
+
+    }
+    class routes.ListedPathProviders << (T, #FF7700) >>  {
+    }
+    class routes.StringFlagSetterFunc << (T, #FF7700) >>  {
+    }
+}
+
+"routes.ListedPathProvider" <|-- "routes.ListedPathProviders"
+
+namespace server {
+    class APIGroupInfo << (S,Aquamarine) >> {
+        + PrioritizedVersions []schema.GroupVersion
+        + VersionedResourcesStorageMap <font color=blue>map</font>[string]<font color=blue>map</font>[string]rest.Storage
+        + OptionsExternalVersion *schema.GroupVersion
+        + MetaGroupVersion *schema.GroupVersion
+        + Scheme *runtime.Scheme
+        + NegotiatedSerializer runtime.NegotiatedSerializer
+        + ParameterCodec runtime.ParameterCodec
+        + StaticOpenAPISpec *spec.Swagger
+
+        - destroyStorage() 
+
+    }
+    class APIServerHandler << (S,Aquamarine) >> {
+        + FullHandlerChain http.Handler
+        + GoRestfulContainer *restful.Container
+        + NonGoRestfulMux *mux.PathRecorderMux
+        + Director http.Handler
+
+        + ListedPaths() []string
+        + ServeHTTP(w http.ResponseWriter, r *http.Request) 
+
+    }
+    class AuthenticationInfo << (S,Aquamarine) >> {
+        + APIAudiences authenticator.Audiences
+        + Authenticator authenticator.Request
+
+        + ApplyClientCert(clientCA dynamiccertificates.CAContentProvider, servingInfo *SecureServingInfo) error
+
+    }
+    class AuthorizationInfo << (S,Aquamarine) >> {
+        + Authorizer authorizer.Authorizer
+
+    }
+    class CompletedConfig << (S,Aquamarine) >> {
+    }
+    class Config << (S,Aquamarine) >> {
+        - lifecycleSignals lifecycleSignals
+
+        + SecureServing *SecureServingInfo
+        + Authentication AuthenticationInfo
+        + Authorization AuthorizationInfo
+        + LoopbackClientConfig *rest.Config
+        + EgressSelector *egressselector.EgressSelector
+        + RuleResolver authorizer.RuleResolver
+        + AdmissionControl admission.Interface
+        + CorsAllowedOriginList []string
+        + HSTSDirectives []string
+        + FlowControl flowcontrol.Interface
+        + EnableIndex bool
+        + EnableProfiling bool
+        + DebugSocketPath string
+        + EnableDiscovery bool
+        + EnableContentionProfiling bool
+        + EnableMetrics bool
+        + DisabledPostStartHooks sets.String
+        + PostStartHooks <font color=blue>map</font>[string]PostStartHookConfigEntry
+        + Version *version.Info
+        + AuditBackend audit.Backend
+        + AuditPolicyRuleEvaluator audit.PolicyRuleEvaluator
+        + ExternalAddress string
+        + TracerProvider tracing.TracerProvider
+        + BuildHandlerChainFunc <font color=blue>func</font>(http.Handler, *Config) http.Handler
+        + NonLongRunningRequestWaitGroup *waitgroup.SafeWaitGroup
+        + WatchRequestWaitGroup *waitgroup.RateLimitedSafeWaitGroup
+        + DiscoveryAddresses discovery.Addresses
+        + HealthzChecks []healthz.HealthChecker
+        + LivezChecks []healthz.HealthChecker
+        + ReadyzChecks []healthz.HealthChecker
+        + LegacyAPIGroupPrefixes sets.String
+        + RequestInfoResolver request.RequestInfoResolver
+        + Serializer runtime.NegotiatedSerializer
+        + OpenAPIConfig *common.Config
+        + OpenAPIV3Config *common.Config
+        + SkipOpenAPIInstallation bool
+        + RESTOptionsGetter generic.RESTOptionsGetter
+        + RequestTimeout time.Duration
+        + MinRequestTimeout int
+        + LivezGracePeriod time.Duration
+        + ShutdownDelayDuration time.Duration
+        + JSONPatchMaxCopyBytes int64
+        + MaxRequestBodyBytes int64
+        + MaxRequestsInFlight int
+        + MaxMutatingRequestsInFlight int
+        + LongRunningFunc request.LongRunningRequestCheck
+        + GoawayChance float64
+        + MergedResourceConfig *storage.ResourceConfig
+        + StorageObjectCountTracker request.StorageObjectCountTracker
+        + ShutdownSendRetryAfter bool
+        + PublicAddress net.IP
+        + EquivalentResourceRegistry runtime.EquivalentResourceRegistry
+        + APIServerID string
+        + StorageVersionManager storageversion.Manager
+        + AggregatedDiscoveryGroupManager aggregated.ResourceManager
+        + ShutdownWatchTerminationGracePeriod time.Duration
+
+        + AddHealthChecks(healthChecks ...healthz.HealthChecker) 
+        + AddReadyzChecks(healthChecks ...healthz.HealthChecker) 
+        + AddPostStartHook(name string, hook PostStartHookFunc) error
+        + AddPostStartHookOrDie(name string, hook PostStartHookFunc) 
+        + DrainedNotify() <font color=blue>chan</font> <font color=blue>struct</font>{}
+        + Complete(informers informers.SharedInformerFactory) CompletedConfig
+
+    }
+    interface DelegationTarget  {
+        + UnprotectedHandler() http.Handler
+        + PostStartHooks() <font color=blue>map</font>[string]postStartHookEntry
+        + PreShutdownHooks() <font color=blue>map</font>[string]preShutdownHookEntry
+        + HealthzChecks() []healthz.HealthChecker
+        + ListedPaths() []string
+        + NextDelegate() DelegationTarget
+        + PrepareRun() preparedGenericAPIServer
+        + MuxAndDiscoveryCompleteSignals() <font color=blue>map</font>[string]<font color=blue>chan</font> <font color=blue>struct</font>{}
+        + Destroy() 
+
+    }
+    class DeprecatedInsecureServingInfo << (S,Aquamarine) >> {
+        + Listener net.Listener
+        + Name string
+
+        + Serve(handler http.Handler, shutdownTimeout time.Duration, stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        + NewLoopbackClientConfig() (*rest.Config, error)
+
+    }
+    class GenericAPIServer << (S,Aquamarine) >> {
+        - discoveryAddresses discovery.Addresses
+        - minRequestTimeout time.Duration
+        - legacyAPIGroupPrefixes sets.String
+        - admissionControl admission.Interface
+        - listedPathProvider routes.ListedPathProvider
+        - openAPIConfig *common.Config
+        - openAPIV3Config *common.Config
+        - skipOpenAPIInstallation bool
+        - postStartHookLock sync.Mutex
+        - postStartHooks <font color=blue>map</font>[string]postStartHookEntry
+        - postStartHooksCalled bool
+        - disabledPostStartHooks sets.String
+        - preShutdownHookLock sync.Mutex
+        - preShutdownHooks <font color=blue>map</font>[string]preShutdownHookEntry
+        - preShutdownHooksCalled bool
+        - healthzLock sync.Mutex
+        - healthzChecks []healthz.HealthChecker
+        - healthzChecksInstalled bool
+        - livezLock sync.Mutex
+        - livezChecks []healthz.HealthChecker
+        - livezChecksInstalled bool
+        - readyzLock sync.Mutex
+        - readyzChecks []healthz.HealthChecker
+        - readyzChecksInstalled bool
+        - livezGracePeriod time.Duration
+        - livezClock clock.Clock
+        - delegationTarget DelegationTarget
+        - maxRequestBodyBytes int64
+        - lifecycleSignals lifecycleSignals
+        - destroyFns []<font color=blue>func</font>() 
+        - muxAndDiscoveryCompleteSignals <font color=blue>map</font>[string]<font color=blue>chan</font> <font color=blue>struct</font>{}
+
+        + LoopbackClientConfig *rest.Config
+        + ShutdownTimeout time.Duration
+        + SecureServingInfo *SecureServingInfo
+        + ExternalAddress string
+        + Serializer runtime.NegotiatedSerializer
+        + Handler *APIServerHandler
+        + UnprotectedDebugSocket *routes.DebugSocket
+        + DiscoveryGroupManager discovery.GroupManager
+        + AggregatedDiscoveryGroupManager aggregated.ResourceManager
+        + AggregatedLegacyDiscoveryGroupManager aggregated.ResourceManager
+        + OpenAPIVersionedService *handler.OpenAPIService
+        + OpenAPIV3VersionedService *handler3.OpenAPIService
+        + StaticOpenAPISpec *spec.Swagger
+        + AuditBackend audit.Backend
+        + Authorizer authorizer.Authorizer
+        + EquivalentResourceRegistry runtime.EquivalentResourceRegistry
+        + NonLongRunningRequestWaitGroup *waitgroup.SafeWaitGroup
+        + WatchRequestWaitGroup *waitgroup.RateLimitedSafeWaitGroup
+        + ShutdownDelayDuration time.Duration
+        + APIServerID string
+        + StorageVersionManager storageversion.Manager
+        + Version *version.Info
+        + ShutdownSendRetryAfter bool
+        + ShutdownWatchTerminationGracePeriod time.Duration
+
+        - installAPIResources(apiPrefix string, apiGroupInfo *APIGroupInfo, openAPIModels *spec.Swagger) error
+        - getAPIGroupVersion(apiGroupInfo *APIGroupInfo, groupVersion schema.GroupVersion, apiPrefix string) (*endpoints.APIGroupVersion, error)
+        - newAPIGroupVersion(apiGroupInfo *APIGroupInfo, groupVersion schema.GroupVersion) *endpoints.APIGroupVersion
+        - getOpenAPIModels(apiPrefix string, apiGroupInfos ...*APIGroupInfo) (*spec.Swagger, error)
+        - addHealthChecks(livezGracePeriod time.Duration, checks ...healthz.HealthChecker) error
+        - addReadyzShutdownCheck(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        - installHealthz() 
+        - installReadyz() 
+        - installLivez() 
+        - isPostStartHookRegistered(name string) bool
+
+        + UnprotectedHandler() http.Handler
+        + PostStartHooks() <font color=blue>map</font>[string]postStartHookEntry
+        + PreShutdownHooks() <font color=blue>map</font>[string]preShutdownHookEntry
+        + HealthzChecks() []healthz.HealthChecker
+        + ListedPaths() []string
+        + NextDelegate() DelegationTarget
+        + RegisterMuxAndDiscoveryCompleteSignal(signalName string, signal <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        + MuxAndDiscoveryCompleteSignals() <font color=blue>map</font>[string]<font color=blue>chan</font> <font color=blue>struct</font>{}
+        + RegisterDestroyFunc(destroyFn <font color=blue>func</font>() ) 
+        + Destroy() 
+        + PrepareRun() preparedGenericAPIServer
+        + InstallLegacyAPIGroup(apiPrefix string, apiGroupInfo *APIGroupInfo) error
+        + InstallAPIGroups(apiGroupInfos ...*APIGroupInfo) error
+        + InstallAPIGroup(apiGroupInfo *APIGroupInfo) error
+        + AddHealthChecks(checks ...healthz.HealthChecker) error
+        + AddBootSequenceHealthChecks(checks ...healthz.HealthChecker) error
+        + AddReadyzChecks(checks ...healthz.HealthChecker) error
+        + AddLivezChecks(delay time.Duration, checks ...healthz.HealthChecker) error
+        + AddPostStartHook(name string, hook PostStartHookFunc) error
+        + AddPostStartHookOrDie(name string, hook PostStartHookFunc) 
+        + AddPreShutdownHook(name string, hook PreShutdownHookFunc) error
+        + AddPreShutdownHookOrDie(name string, hook PreShutdownHookFunc) 
+        + RunPostStartHooks(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + RunPreShutdownHooks() error
+
+    }
+    class InsecureSuperuser << (S,Aquamarine) >> {
+        + AuthenticateRequest(req *http.Request) (*authenticator.Response, bool, error)
+
+    }
+    class PostStartHookConfigEntry << (S,Aquamarine) >> {
+        - hook PostStartHookFunc
+        - originatingStack string
+
+    }
+    class PostStartHookContext << (S,Aquamarine) >> {
+        + LoopbackClientConfig *rest.Config
+        + StopCh <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+    }
+    interface PostStartHookProvider  {
+        + PostStartHook() (string, PostStartHookFunc, error)
+
+    }
+    class RecommendedConfig << (S,Aquamarine) >> {
+        + SharedInformerFactory informers.SharedInformerFactory
+        + ClientConfig *rest.Config
+
+        + Complete() CompletedConfig
+
+    }
+    interface ResourceExpirationEvaluator  {
+        + RemoveDeletedKinds(groupName string, versioner runtime.ObjectVersioner, versionedResourcesStorageMap <font color=blue>map</font>[string]<font color=blue>map</font>[string]rest.Storage) 
+        + ShouldServeForVersion(majorRemoved int, minorRemoved int) bool
+
+    }
+    class SecureServingInfo << (S,Aquamarine) >> {
+        + Listener net.Listener
+        + Cert dynamiccertificates.CertKeyContentProvider
+        + SNICerts []dynamiccertificates.SNICertKeyContentProvider
+        + ClientCA dynamiccertificates.CAContentProvider
+        + MinTLSVersion uint16
+        + CipherSuites []uint16
+        + HTTP2MaxStreamsPerConnection int
+        + DisableHTTP2 bool
+
+        - tlsConfig(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) (*tls.Config, error)
+
+        + HostPort() (string, int, error)
+        + NewClientConfig(caCert []byte) (*rest.Config, error)
+        + NewLoopbackClientConfig(token string, loopbackCert []byte) (*rest.Config, error)
+        + Serve(handler http.Handler, shutdownTimeout time.Duration, stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) (<font color=blue>chan</font> <font color=blue>struct</font>{}, <font color=blue>chan</font> <font color=blue>struct</font>{}, error)
+
+    }
+    class completedConfig << (S,Aquamarine) >> {
+        + SharedInformerFactory informers.SharedInformerFactory
+
+        + New(name string, delegationTarget DelegationTarget) (*GenericAPIServer, error)
+
+    }
+    class delayedLivezCheck << (S,Aquamarine) >> {
+        - check healthz.HealthChecker
+        - startCheck time.Time
+        - clock clock.Clock
+
+        + Name() string
+        + Check(req *http.Request) error
+
+    }
+    class director << (S,Aquamarine) >> {
+        - name string
+        - goRestfulContainer *restful.Container
+        - nonGoRestfulMux *mux.PathRecorderMux
+
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    class emptyDelegate << (S,Aquamarine) >> {
+        - handler http.Handler
+
+        + UnprotectedHandler() http.Handler
+        + PostStartHooks() <font color=blue>map</font>[string]postStartHookEntry
+        + PreShutdownHooks() <font color=blue>map</font>[string]preShutdownHookEntry
+        + HealthzChecks() []healthz.HealthChecker
+        + ListedPaths() []string
+        + NextDelegate() DelegationTarget
+        + PrepareRun() preparedGenericAPIServer
+        + MuxAndDiscoveryCompleteSignals() <font color=blue>map</font>[string]<font color=blue>chan</font> <font color=blue>struct</font>{}
+        + Destroy() 
+
+    }
+    interface lifecycleSignal  {
+        + Signal() 
+        + Signaled() <font color=blue>chan</font> <font color=blue>struct</font>{}
+        + Name() string
+
+    }
+    class lifecycleSignals << (S,Aquamarine) >> {
+        + ShutdownInitiated lifecycleSignal
+        + AfterShutdownDelayDuration lifecycleSignal
+        + PreShutdownHooksStopped lifecycleSignal
+        + NotAcceptingNewRequest lifecycleSignal
+        + InFlightRequestsDrained lifecycleSignal
+        + HTTPServerStoppedListening lifecycleSignal
+        + HasBeenReady lifecycleSignal
+        + MuxAndDiscoveryComplete lifecycleSignal
+
+        + ShuttingDown() <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+    }
+    class namedChannelWrapper << (S,Aquamarine) >> {
+        - name string
+        - once sync.Once
+        - ch <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+        + Signal() 
+        + Signaled() <font color=blue>chan</font> <font color=blue>struct</font>{}
+        + Name() string
+
+    }
+    class postStartHookEntry << (S,Aquamarine) >> {
+        - hook PostStartHookFunc
+        - originatingStack string
+        - done <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+    }
+    class postStartHookHealthz << (S,Aquamarine) >> {
+        - name string
+        - done <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+        + Name() string
+        + Check(req *http.Request) error
+
+    }
+    class preShutdownHookEntry << (S,Aquamarine) >> {
+        - hook PreShutdownHookFunc
+
+    }
+    class preparedGenericAPIServer << (S,Aquamarine) >> {
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        + NonBlockingRun(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}, shutdownTimeout time.Duration) (<font color=blue>chan</font> <font color=blue>struct</font>{}, <font color=blue>chan</font> <font color=blue>struct</font>{}, error)
+
+    }
+    interface removedInterface  {
+        + APILifecycleRemoved() (int, int)
+
+    }
+    class resourceExpirationEvaluator << (S,Aquamarine) >> {
+        - currentMajor int
+        - currentMinor int
+        - isAlpha bool
+        - strictRemovedHandlingInAlpha bool
+        - serveRemovedAPIsOneMoreRelease bool
+
+        - shouldServe(gv schema.GroupVersion, versioner runtime.ObjectVersioner, resourceServingInfo rest.Storage) bool
+
+        + ShouldServeForVersion(majorRemoved int, minorRemoved int) bool
+        + RemoveDeletedKinds(groupName string, versioner runtime.ObjectVersioner, versionedResourcesStorageMap <font color=blue>map</font>[string]<font color=blue>map</font>[string]rest.Storage) 
+
+    }
+    class server.HandlerChainBuilderFn << (T, #FF7700) >>  {
+    }
+    class server.PostStartHookFunc << (T, #FF7700) >>  {
+    }
+    class server.PreShutdownHookFunc << (T, #FF7700) >>  {
+    }
+    class shutdownCheck << (S,Aquamarine) >> {
+        + StopCh <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+        + Name() string
+        + Check(req *http.Request) error
+
+    }
+    class tcpKeepAliveListener << (S,Aquamarine) >> {
+        + Accept() (net.Conn, error)
+
+    }
+    class tlsHandshakeErrorWriter << (S,Aquamarine) >> {
+        - out io.Writer
+
+        + Write(p []byte) (int, error)
+
+    }
+    class "<font color=blue>func</font>(http.Handler) http.Handler" as fontcolorbluefuncfonthttpHandlerhttpHandler {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"server.completedConfig" *-- "server.CompletedConfig"
+"server.Config" *-- "server.RecommendedConfig"
+"server.Config" *-- "server.completedConfig"
+"server.GenericAPIServer" *-- "server.preparedGenericAPIServer"
+"net.Listener" *-- "server.tcpKeepAliveListener"
+
+"routes.ListedPathProvider" <|-- "server.APIServerHandler"
+"routes.ListedPathProvider" <|-- "server.GenericAPIServer"
+"server.DelegationTarget" <|-- "server.GenericAPIServer"
+"healthz.HealthChecker" <|-- "server.delayedLivezCheck"
+"routes.ListedPathProvider" <|-- "server.emptyDelegate"
+"server.DelegationTarget" <|-- "server.emptyDelegate"
+"server.lifecycleSignal" <|-- "server.namedChannelWrapper"
+"healthz.HealthChecker" <|-- "server.postStartHookHealthz"
+"server.ResourceExpirationEvaluator" <|-- "server.resourceExpirationEvaluator"
+"healthz.HealthChecker" <|-- "server.shutdownCheck"
+
+namespace storage {
+    interface APIResourceConfigSource  {
+        + ResourceEnabled(resource schema.GroupVersionResource) bool
+        + AnyResourceForGroupEnabled(group string) bool
+
+    }
+    class Backend << (S,Aquamarine) >> {
+        + Server string
+        + TLSConfig *tls.Config
+
+    }
+    class DefaultResourceEncodingConfig << (S,Aquamarine) >> {
+        - resources <font color=blue>map</font>[schema.GroupResource]*OverridingResourceEncoding
+        - scheme *runtime.Scheme
+
+        + SetResourceEncoding(resourceBeingStored schema.GroupResource, externalEncodingVersion schema.GroupVersion, internalVersion schema.GroupVersion) 
+        + StorageEncodingFor(resource schema.GroupResource) (schema.GroupVersion, error)
+        + InMemoryEncodingFor(resource schema.GroupResource) (schema.GroupVersion, error)
+
+    }
+    class DefaultStorageFactory << (S,Aquamarine) >> {
+        - newStorageCodecFn <font color=blue>func</font>(StorageCodecConfig) (runtime.Codec, runtime.GroupVersioner, error)
+
+        + StorageConfig storagebackend.Config
+        + Overrides <font color=blue>map</font>[schema.GroupResource]groupResourceOverrides
+        + DefaultResourcePrefixes <font color=blue>map</font>[schema.GroupResource]string
+        + DefaultMediaType string
+        + DefaultSerializer runtime.StorageSerializer
+        + ResourceEncodingConfig ResourceEncodingConfig
+        + APIResourceConfigSource APIResourceConfigSource
+
+        - getStorageGroupResource(groupResource schema.GroupResource) schema.GroupResource
+
+        + SetEtcdLocation(groupResource schema.GroupResource, location []string) 
+        + SetEtcdPrefix(groupResource schema.GroupResource, prefix string) 
+        + SetDisableAPIListChunking(groupResource schema.GroupResource) 
+        + SetResourceEtcdPrefix(groupResource schema.GroupResource, prefix string) 
+        + SetSerializer(groupResource schema.GroupResource, mediaType string, serializer runtime.StorageSerializer) 
+        + AddCohabitatingResources(groupResources ...schema.GroupResource) 
+        + AddSerializationChains(encoderDecoratorFn <font color=blue>func</font>(runtime.Encoder) runtime.Encoder, decoderDecoratorFn <font color=blue>func</font>([]runtime.Decoder) []runtime.Decoder, groupResources ...schema.GroupResource) 
+        + NewConfig(groupResource schema.GroupResource) (*storagebackend.ConfigForResource, error)
+        + Backends() []Backend
+        + ResourcePrefix(groupResource schema.GroupResource) string
+
+    }
+    class OverridingResourceEncoding << (S,Aquamarine) >> {
+        + ExternalResourceEncoding schema.GroupVersion
+        + InternalResourceEncoding schema.GroupVersion
+
+    }
+    class ResourceConfig << (S,Aquamarine) >> {
+        + GroupVersionConfigs <font color=blue>map</font>[schema.GroupVersion]bool
+        + ResourceConfigs <font color=blue>map</font>[schema.GroupVersionResource]bool
+
+        - removeMatchingResourcePreferences(matcher <font color=blue>func</font>(schema.GroupVersionResource) bool) 
+        - versionEnabled(version schema.GroupVersion) bool
+
+        + DisableMatchingVersions(matcher <font color=blue>func</font>(schema.GroupVersion) bool) 
+        + EnableMatchingVersions(matcher <font color=blue>func</font>(schema.GroupVersion) bool) 
+        + DisableVersions(versions ...schema.GroupVersion) 
+        + EnableVersions(versions ...schema.GroupVersion) 
+        + DisableResources(resources ...schema.GroupVersionResource) 
+        + EnableResources(resources ...schema.GroupVersionResource) 
+        + ResourceEnabled(resource schema.GroupVersionResource) bool
+        + AnyResourceForGroupEnabled(group string) bool
+
+    }
+    interface ResourceEncodingConfig  {
+        + StorageEncodingFor( schema.GroupResource) (schema.GroupVersion, error)
+        + InMemoryEncodingFor( schema.GroupResource) (schema.GroupVersion, error)
+
+    }
+    class StorageCodecConfig << (S,Aquamarine) >> {
+        + StorageMediaType string
+        + StorageSerializer runtime.StorageSerializer
+        + StorageVersion schema.GroupVersion
+        + MemoryVersion schema.GroupVersion
+        + Config storagebackend.Config
+        + EncoderDecoratorFn <font color=blue>func</font>(runtime.Encoder) runtime.Encoder
+        + DecoderDecoratorFn <font color=blue>func</font>([]runtime.Decoder) []runtime.Decoder
+
+    }
+    interface StorageFactory  {
+        + NewConfig(groupResource schema.GroupResource) (*storagebackend.ConfigForResource, error)
+        + ResourcePrefix(groupResource schema.GroupResource) string
+        + Backends() []Backend
+
+    }
+    class groupResourceOverrides << (S,Aquamarine) >> {
+        - etcdLocation []string
+        - etcdPrefix string
+        - etcdResourcePrefix string
+        - mediaType string
+        - serializer runtime.StorageSerializer
+        - cohabitatingResources []schema.GroupResource
+        - encoderDecoratorFn <font color=blue>func</font>(runtime.Encoder) runtime.Encoder
+        - decoderDecoratorFn <font color=blue>func</font>([]runtime.Decoder) []runtime.Decoder
+        - disablePaging bool
+
+        + Apply(config *storagebackend.Config, options *StorageCodecConfig) 
+
+    }
+}
+
+"storage.ResourceEncodingConfig" <|-- "storage.DefaultResourceEncodingConfig"
+"storage.StorageFactory" <|-- "storage.DefaultStorageFactory"
+"storage.APIResourceConfigSource" <|-- "storage.ResourceConfig"
+
+hide fields
+hide methods
+@enduml

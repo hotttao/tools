@@ -1,0 +1,1202 @@
+@startuml
+namespace aggregated {
+    interface FakeResourceManager  {
+        + Expect() ResourceManager
+        + HasExpectedNumberActions() bool
+        + Validate() error
+        + WaitForActions(ctx context.Context, timeout time.Duration) error
+
+    }
+    interface ResourceManager  {
+        + AddGroupVersion(groupName string, value v2beta1.APIVersionDiscovery) 
+        + SetGroupVersionPriority(gv v1.GroupVersion, grouppriority int, versionpriority int) 
+        + RemoveGroup(groupName string) 
+        + RemoveGroupVersion(gv v1.GroupVersion) 
+        + SetGroups( []v2beta1.APIGroupDiscovery) 
+
+    }
+    class WrappedHandler << (S,Aquamarine) >> {
+        - s runtime.NegotiatedSerializer
+        - handler http.Handler
+        - aggHandler http.Handler
+
+        - restfulHandle(req *v3.Request, resp *v3.Response) 
+
+        + ServeHTTP(resp http.ResponseWriter, req *http.Request) 
+        + GenerateWebService(prefix string, returnType <font color=blue>interface</font>{}) *v3.WebService
+
+    }
+    class cachedGroupList << (S,Aquamarine) >> {
+        - cachedResponse v2beta1.APIGroupDiscoveryList
+        - cachedResponseETag string
+
+    }
+    class discoveryEndpointRestrictions << (S,Aquamarine) >> {
+        + AllowsMediaTypeTransform(mimeType string, mimeSubType string, gvk *schema.GroupVersionKind) bool
+        + AllowsServerVersion( string) bool
+        + AllowsStreamSchema(s string) bool
+
+    }
+    class fakeResourceManager << (S,Aquamarine) >> {
+        - expect recorderResourceManager
+
+        + Expect() ResourceManager
+        + HasExpectedNumberActions() bool
+        + Validate() error
+        + WaitForActions(ctx context.Context, timeout time.Duration) error
+
+    }
+    class priorityInfo << (S,Aquamarine) >> {
+        + GroupPriorityMinimum int
+        + VersionPriority int
+
+    }
+    class recorderResourceManager << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+
+        + Actions []recorderResourceManagerAction
+
+        + SetGroupVersionPriority(gv v1.GroupVersion, grouppriority int, versionpriority int) 
+        + AddGroupVersion(groupName string, value v2beta1.APIVersionDiscovery) 
+        + RemoveGroup(groupName string) 
+        + RemoveGroupVersion(gv v1.GroupVersion) 
+        + SetGroups(values []v2beta1.APIGroupDiscovery) 
+        + WebService() *v3.WebService
+        + ServeHTTP( http.ResponseWriter,  *http.Request) 
+
+    }
+    class recorderResourceManagerAction << (S,Aquamarine) >> {
+        + Type string
+        + Group string
+        + Version string
+        + Value <font color=blue>interface</font>{}
+
+    }
+    class resourceDiscoveryManager << (S,Aquamarine) >> {
+        - serializer runtime.NegotiatedSerializer
+        - cache 
+        - lock sync.RWMutex
+        - apiGroups <font color=blue>map</font>[string]*v2beta1.APIGroupDiscovery
+        - versionPriorities <font color=blue>map</font>[v1.GroupVersion]priorityInfo
+
+        - addGroupVersionLocked(groupName string, value v2beta1.APIVersionDiscovery) 
+        - calculateAPIGroupsLocked() []v2beta1.APIGroupDiscovery
+        - fetchFromCache() *cachedGroupList
+
+        + SetGroupVersionPriority(gv v1.GroupVersion, groupPriorityMinimum int, versionPriority int) 
+        + SetGroups(groups []v2beta1.APIGroupDiscovery) 
+        + AddGroupVersion(groupName string, value v2beta1.APIVersionDiscovery) 
+        + RemoveGroupVersion(apiGroup v1.GroupVersion) 
+        + RemoveGroup(groupName string) 
+        + ServeHTTP(resp http.ResponseWriter, req *http.Request) 
+
+    }
+}
+"aggregated.ResourceManager" *-- "aggregated.FakeResourceManager"
+"aggregated.recorderResourceManager" *-- "aggregated.fakeResourceManager"
+
+"negotiation.EndpointRestrictions" <|-- "aggregated.discoveryEndpointRestrictions"
+"aggregated.FakeResourceManager" <|-- "aggregated.fakeResourceManager"
+"aggregated.ResourceManager" <|-- "aggregated.recorderResourceManager"
+"aggregated.ResourceManager" <|-- "aggregated.resourceDiscoveryManager"
+
+namespace deprecation {
+    interface apiLifecycleDeprecated  {
+        + APILifecycleDeprecated() (int, int)
+
+    }
+    interface apiLifecycleRemoved  {
+        + APILifecycleRemoved() (int, int)
+
+    }
+    interface apiLifecycleReplacement  {
+        + APILifecycleReplacement() schema.GroupVersionKind
+
+    }
+}
+
+
+namespace discovery {
+    class APIGroupHandler << (S,Aquamarine) >> {
+        - serializer runtime.NegotiatedSerializer
+        - group v1.APIGroup
+
+        - handle(req *v3.Request, resp *v3.Response) 
+
+        + WebService() *v3.WebService
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    interface APIResourceLister  {
+        + ListAPIResources() []v1.APIResource
+
+    }
+    class APIResourceListerFunc << (S,Aquamarine) >> {
+        + ListAPIResources() []v1.APIResource
+
+    }
+    class APIVersionHandler << (S,Aquamarine) >> {
+        - serializer runtime.NegotiatedSerializer
+        - groupVersion schema.GroupVersion
+        - apiResourceLister APIResourceLister
+
+        - handle(req *v3.Request, resp *v3.Response) 
+
+        + AddToWebService(ws *v3.WebService) 
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    interface Addresses  {
+        + ServerAddressByClientCIDRs( net.IP) []v1.ServerAddressByClientCIDR
+
+    }
+    class CIDRRule << (S,Aquamarine) >> {
+        + IPRange net.IPNet
+        + Address string
+
+        + ServerAddressByClientCIDRs(clientIP net.IP) []v1.ServerAddressByClientCIDR
+
+    }
+    class DefaultAddresses << (S,Aquamarine) >> {
+        + CIDRRules []CIDRRule
+        + DefaultAddress string
+
+        + ServerAddressByClientCIDRs(clientIP net.IP) []v1.ServerAddressByClientCIDR
+
+    }
+    interface GroupManager  {
+        + AddGroup(apiGroup v1.APIGroup) 
+        + RemoveGroup(groupName string) 
+        + ServeHTTP(resp http.ResponseWriter, req *http.Request) 
+        + WebService() *v3.WebService
+
+    }
+    class discovery.APIResourceListerFunc << (T, #FF7700) >>  {
+    }
+    class legacyRootAPIHandler << (S,Aquamarine) >> {
+        - addresses Addresses
+        - apiPrefix string
+        - serializer runtime.NegotiatedSerializer
+
+        - restfulHandle(req *v3.Request, resp *v3.Response) 
+
+        + WebService() *v3.WebService
+        + ServeHTTP(resp http.ResponseWriter, req *http.Request) 
+
+    }
+    class rootAPIsHandler << (S,Aquamarine) >> {
+        - addresses Addresses
+        - serializer runtime.NegotiatedSerializer
+        - lock sync.RWMutex
+        - apiGroups <font color=blue>map</font>[string]v1.APIGroup
+        - apiGroupNames []string
+
+        - restfulHandle(req *v3.Request, resp *v3.Response) 
+
+        + AddGroup(apiGroup v1.APIGroup) 
+        + RemoveGroup(groupName string) 
+        + ServeHTTP(resp http.ResponseWriter, req *http.Request) 
+        + WebService() *v3.WebService
+
+    }
+    class stripVersionEncoder << (S,Aquamarine) >> {
+        - encoder runtime.Encoder
+        - serializer runtime.Serializer
+        - identifier runtime.Identifier
+
+        - doEncode(obj runtime.Object, w io.Writer) error
+
+        + Encode(obj runtime.Object, w io.Writer) error
+        + Identifier() runtime.Identifier
+
+    }
+    class stripVersionNegotiatedSerializer << (S,Aquamarine) >> {
+        + EncoderForVersion(encoder runtime.Encoder, gv runtime.GroupVersioner) runtime.Encoder
+
+    }
+    class "<font color=blue>func</font>() []v1.APIResource" as fontcolorbluefuncfontv1APIResource {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"runtime.NegotiatedSerializer" *-- "discovery.stripVersionNegotiatedSerializer"
+
+"discovery.APIResourceLister" <|-- "discovery.APIResourceListerFunc"
+"discovery.Addresses" <|-- "discovery.CIDRRule"
+"discovery.Addresses" <|-- "discovery.DefaultAddresses"
+"discovery.GroupManager" <|-- "discovery.rootAPIsHandler"
+
+namespace endpoints {
+    class APIGroupVersion << (S,Aquamarine) >> {
+        + Storage <font color=blue>map</font>[string]rest.Storage
+        + Root string
+        + GroupVersion schema.GroupVersion
+        + OptionsExternalVersion *schema.GroupVersion
+        + MetaGroupVersion *schema.GroupVersion
+        + RootScopedKinds sets.String
+        + Serializer runtime.NegotiatedSerializer
+        + ParameterCodec runtime.ParameterCodec
+        + Typer runtime.ObjectTyper
+        + Creater runtime.ObjectCreater
+        + Convertor runtime.ObjectConvertor
+        + ConvertabilityChecker ConvertabilityChecker
+        + Defaulter runtime.ObjectDefaulter
+        + Namer runtime.Namer
+        + UnsafeConvertor runtime.ObjectConvertor
+        + TypeConverter fieldmanager.TypeConverter
+        + EquivalentResourceRegistry runtime.EquivalentResourceRegistry
+        + Authorizer authorizer.Authorizer
+        + Admit admission.Interface
+        + MinRequestTimeout time.Duration
+        + OpenAPIModels *spec.Swagger
+        + MaxRequestBodyBytes int64
+
+        + InstallREST(container *v3.Container) ([]v2beta1.APIResourceDiscovery, []*storageversion.ResourceInfo, error)
+
+    }
+    class APIInstaller << (S,Aquamarine) >> {
+        - group *APIGroupVersion
+        - prefix string
+        - minRequestTimeout time.Duration
+
+        - newWebService() *v3.WebService
+        - registerResourceHandlers(path string, storage rest.Storage, ws *v3.WebService) (*v1.APIResource, *storageversion.ResourceInfo, error)
+
+        + Install() ([]v1.APIResource, []*storageversion.ResourceInfo, *v3.WebService, []error)
+
+    }
+    interface ConvertabilityChecker  {
+        + VersionsForGroupKind(gk schema.GroupKind) []schema.GroupVersion
+
+    }
+    interface StorageMetricsOverride  {
+        + OverrideMetricsVerb(oldVerb string) string
+
+    }
+    class action << (S,Aquamarine) >> {
+        + Verb string
+        + Path string
+        + Params []*v3.Parameter
+        + Namer handlers.ScopeNamer
+        + AllNamespaces bool
+
+    }
+    class defaultStorageMetadata << (S,Aquamarine) >> {
+        + ProducesMIMETypes(verb string) []string
+        + ProducesObject(verb string) <font color=blue>interface</font>{}
+
+    }
+    interface documentable  {
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+
+    }
+    class staticLister << (S,Aquamarine) >> {
+        - list []v1.APIResource
+
+        + ListAPIResources() []v1.APIResource
+
+    }
+}
+
+"discovery.APIResourceLister" <|-- "endpoints.staticLister"
+
+namespace fieldmanager {
+    class ScaleHandler << (S,Aquamarine) >> {
+        - parentEntries []v1.ManagedFieldsEntry
+        - groupVersion schema.GroupVersion
+        - mappings ResourcePathMappings
+
+        + ToSubresource() ([]v1.ManagedFieldsEntry, error)
+        + ToParent(scaleEntries []v1.ManagedFieldsEntry) ([]v1.ManagedFieldsEntry, error)
+
+    }
+    class fieldmanager.FieldManager << (T, #FF7700) >>  {
+    }
+    class fieldmanager.ResourcePathMappings << (T, #FF7700) >>  {
+    }
+    class fieldmanager.TypeConverter << (T, #FF7700) >>  {
+    }
+    class managedFieldsValidatingAdmissionController << (S,Aquamarine) >> {
+        - wrap admission.Interface
+
+        + Handles(operation admission.Operation) bool
+        + Admit(ctx context.Context, a admission.Attributes, o admission.ObjectInterfaces) error
+        + Validate(ctx context.Context, a admission.Attributes, o admission.ObjectInterfaces) error
+
+    }
+    class "<font color=blue>map</font>[string]fieldpath.Path" as fontcolorbluemapfontstringfieldpathPath {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "internal.FieldManager" as internalFieldManager {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "internal.TypeConverter" as internalTypeConverter {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+
+namespace fieldmanagertest {
+    interface TestFieldManager  {
+        + APIVersion() string
+        + Reset() 
+        + Live() runtime.Object
+        + Apply(obj runtime.Object, manager string, force bool) error
+        + Update(obj runtime.Object, manager string) error
+        + ManagedFields() []v1.ManagedFieldsEntry
+
+    }
+}
+
+
+namespace filterlatency {
+    class filterlatency.requestFilterRecordKeyType << (T, #FF7700) >>  {
+    }
+    class requestFilterRecord << (S,Aquamarine) >> {
+        - name string
+        - startedTimestamp time.Time
+
+    }
+}
+
+
+namespace filters {
+    class auditResponseWriter << (S,Aquamarine) >> {
+        - ctx context.Context
+        - event *audit.Event
+        - once sync.Once
+        - sink audit.Sink
+        - omitStages []audit.Stage
+
+        - processCode(code int) 
+
+        + Unwrap() http.ResponseWriter
+        + Write(bs []byte) (int, error)
+        + WriteHeader(code int) 
+        + Hijack() (net.Conn, *bufio.ReadWriter, error)
+
+    }
+    class filters.muxAndDiscoveryIncompleteKeyType << (T, #FF7700) >>  {
+    }
+    class filters.recordMetrics << (T, #FF7700) >>  {
+    }
+    class recordedWarning << (S,Aquamarine) >> {
+        - agent string
+        - text string
+
+    }
+    class recorder << (S,Aquamarine) >> {
+        - lock sync.Mutex
+        - recorded <font color=blue>map</font>[string]bool
+        - ordered []recordedWarning
+        - written int
+        - truncating bool
+        - writer http.ResponseWriter
+
+        + AddWarning(agent string, text string) 
+
+    }
+    class writeLatencyTracker << (S,Aquamarine) >> {
+        - ctx context.Context
+
+        + Unwrap() http.ResponseWriter
+        + Write(bs []byte) (int, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, *authenticator.Response, bool, error, authenticator.Audiences, time.Time, time.Time) " as fontcolorbluefuncfontcontextContextauthenticatorResponseboolerrorauthenticatorAudiencestimeTimetimeTime {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"http.ResponseWriter" *-- "filters.auditResponseWriter"
+"http.ResponseWriter" *-- "filters.writeLatencyTracker"
+
+"responsewriter.UserProvidedDecorator" <|-- "filters.auditResponseWriter"
+"responsewriter.UserProvidedDecorator" <|-- "filters.writeLatencyTracker"
+
+namespace finisher {
+    class finisher.PostTimeoutLoggerFunc << (T, #FF7700) >>  {
+    }
+    class finisher.ResultFunc << (T, #FF7700) >>  {
+    }
+    class result << (S,Aquamarine) >> {
+        - object runtime.Object
+        - err error
+        - reason <font color=blue>interface</font>{}
+
+        + Return() (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>() (runtime.Object, error)" as fontcolorbluefuncfontruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(time.Time, *result) " as fontcolorbluefuncfonttimeTimeresult {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+
+namespace handlers {
+    class ContextBasedNaming << (S,Aquamarine) >> {
+        + Namer runtime.Namer
+        + ClusterScoped bool
+
+        + Namespace(req *http.Request) (string, error)
+        + Name(req *http.Request) (string, string, error)
+        + ObjectName(obj runtime.Object) (string, string, error)
+
+    }
+    class RequestScope << (S,Aquamarine) >> {
+        + Namer ScopeNamer
+        + Serializer runtime.NegotiatedSerializer
+        + StandardSerializers []runtime.SerializerInfo
+        + Creater runtime.ObjectCreater
+        + Convertor runtime.ObjectConvertor
+        + Defaulter runtime.ObjectDefaulter
+        + Typer runtime.ObjectTyper
+        + UnsafeConvertor runtime.ObjectConvertor
+        + Authorizer authorizer.Authorizer
+        + EquivalentResourceMapper runtime.EquivalentResourceMapper
+        + TableConvertor rest.TableConvertor
+        + FieldManager *fieldmanager.FieldManager
+        + Resource schema.GroupVersionResource
+        + Kind schema.GroupVersionKind
+        + AcceptsGroupVersionDelegate rest.GroupVersionAcceptor
+        + Subresource string
+        + MetaGroupVersion schema.GroupVersion
+        + HubGroupVersion schema.GroupVersion
+        + MaxRequestBodyBytes int64
+
+        - err(err error, w http.ResponseWriter, req *http.Request) 
+
+        + AcceptsGroupVersion(gv schema.GroupVersion) bool
+        + AllowsMediaTypeTransform(mimeType string, mimeSubType string, gvk *schema.GroupVersionKind) bool
+        + AllowsServerVersion(version string) bool
+        + AllowsStreamSchema(s string) bool
+        + GetObjectCreater() runtime.ObjectCreater
+        + GetObjectTyper() runtime.ObjectTyper
+        + GetObjectDefaulter() runtime.ObjectDefaulter
+        + GetObjectConvertor() runtime.ObjectConvertor
+        + GetEquivalentResourceMapper() runtime.EquivalentResourceMapper
+
+    }
+    interface ScopeNamer  {
+        + Namespace(req *http.Request) (string, error)
+        + Name(req *http.Request) (string, string, error)
+        + ObjectName(obj runtime.Object) (string, string, error)
+
+    }
+    interface TimeoutFactory  {
+        + TimeoutCh() (<font color=blue>chan</font> time.Time, <font color=blue>func</font>() bool)
+
+    }
+    class WatchServer << (S,Aquamarine) >> {
+        + Watching watch.Interface
+        + Scope *RequestScope
+        + UseTextFraming bool
+        + MediaType string
+        + Framer runtime.Framer
+        + Encoder runtime.Encoder
+        + EmbeddedEncoder runtime.Encoder
+        + Fixup <font color=blue>func</font>(runtime.Object) runtime.Object
+        + TimeoutFactory TimeoutFactory
+        + ServerShuttingDownCh <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+        + HandleWS(ws *websocket.Conn) 
+
+    }
+    class applyPatcher << (S,Aquamarine) >> {
+        - patch []byte
+        - options *v1.PatchOptions
+        - creater runtime.ObjectCreater
+        - kind schema.GroupVersionKind
+        - fieldManager *fieldmanager.FieldManager
+        - userAgent string
+        - validationDirective string
+
+        - applyPatchToCurrentObject(requestContext context.Context, obj runtime.Object) (runtime.Object, error)
+        - createNewObject(requestContext context.Context) (runtime.Object, error)
+
+    }
+    class errNotAcceptable << (S,Aquamarine) >> {
+        - message string
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    interface etcdError  {
+        + Code() codes.Code
+        + Error() string
+
+    }
+    interface grpcError  {
+        + GRPCStatus() *status.Status
+
+    }
+    class handlers.getterFunc << (T, #FF7700) >>  {
+    }
+    class handlers.mutateObjectUpdateFunc << (T, #FF7700) >>  {
+    }
+    class jsonPatchOp << (S,Aquamarine) >> {
+        + Op string
+        + Path string
+        + From string
+        + Value <font color=blue>interface</font>{}
+
+    }
+    class jsonPatcher << (S,Aquamarine) >> {
+        - fieldManager *fieldmanager.FieldManager
+
+        - applyPatchToCurrentObject(requestContext context.Context, currentObject runtime.Object) (runtime.Object, error)
+        - createNewObject(_ context.Context) (runtime.Object, error)
+        - applyJSPatch(versionedJS []byte) ([]byte, []error, error)
+
+    }
+    class lazyAccept << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyAuditID << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyClientIP << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyResource << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyScope << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyTruncatedUserAgent << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class lazyVerb << (S,Aquamarine) >> {
+        - req *http.Request
+
+        + String() string
+
+    }
+    class namedCreaterAdapter << (S,Aquamarine) >> {
+        + Create(ctx context.Context, name string, obj runtime.Object, createValidatingAdmission rest.ValidateObjectFunc, options *v1.CreateOptions) (runtime.Object, error)
+
+    }
+    interface patchMechanism  {
+        - applyPatchToCurrentObject(requextContext context.Context, currentObject runtime.Object) (runtime.Object, error)
+        - createNewObject(requestContext context.Context) (runtime.Object, error)
+
+    }
+    class patcher << (S,Aquamarine) >> {
+        - namer ScopeNamer
+        - creater runtime.ObjectCreater
+        - defaulter runtime.ObjectDefaulter
+        - typer runtime.ObjectTyper
+        - unsafeConvertor runtime.ObjectConvertor
+        - resource schema.GroupVersionResource
+        - kind schema.GroupVersionKind
+        - subresource string
+        - dryRun bool
+        - validationDirective string
+        - objectInterfaces admission.ObjectInterfaces
+        - hubGroupVersion schema.GroupVersion
+        - createValidation rest.ValidateObjectFunc
+        - updateValidation rest.ValidateObjectUpdateFunc
+        - admissionCheck admission.MutationInterface
+        - codec runtime.Codec
+        - options *v1.PatchOptions
+        - restPatcher rest.Patcher
+        - name string
+        - patchType types.PatchType
+        - patchBytes []byte
+        - userAgent string
+        - namespace string
+        - updatedObjectInfo rest.UpdatedObjectInfo
+        - mechanism patchMechanism
+        - forceAllowCreate bool
+
+        - applyPatch(ctx context.Context, _ runtime.Object, currentObject runtime.Object) (runtime.Object, error)
+        - admissionAttributes(ctx context.Context, updatedObject runtime.Object, currentObject runtime.Object, operation admission.Operation, operationOptions runtime.Object) admission.Attributes
+        - applyAdmission(ctx context.Context, patchedObject runtime.Object, currentObject runtime.Object) (runtime.Object, error)
+        - patchResource(ctx context.Context, scope *RequestScope) (runtime.Object, bool, error)
+
+    }
+    class realTimeoutFactory << (S,Aquamarine) >> {
+        - timeout time.Duration
+
+        + TimeoutCh() (<font color=blue>chan</font> time.Time, <font color=blue>func</font>() bool)
+
+    }
+    class responder << (S,Aquamarine) >> {
+        - scope *RequestScope
+        - req *http.Request
+        - w http.ResponseWriter
+
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(err error) 
+
+    }
+    class smpPatcher << (S,Aquamarine) >> {
+        - schemaReferenceObj runtime.Object
+        - fieldManager *fieldmanager.FieldManager
+
+        - applyPatchToCurrentObject(requestContext context.Context, currentObject runtime.Object) (runtime.Object, error)
+        - createNewObject(_ context.Context) (runtime.Object, error)
+
+    }
+    class "<font color=blue>func</font>(context.Context, runtime.Object, runtime.Object) error" as fontcolorbluefuncfontcontextContextruntimeObjectruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(context.Context, string, *http.Request) (runtime.Object, error)" as fontcolorbluefuncfontcontextContextstringhttpRequestruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"runtime.ParameterCodec" *-- "handlers.RequestScope"
+"handlers.patcher" *-- "handlers.jsonPatcher"
+"rest.Creater" *-- "handlers.namedCreaterAdapter"
+"handlers.patcher" *-- "handlers.smpPatcher"
+
+"handlers.ScopeNamer" <|-- "handlers.ContextBasedNaming"
+"negotiation.EndpointRestrictions" <|-- "handlers.RequestScope"
+"handlers.patchMechanism" <|-- "handlers.applyPatcher"
+"responsewriters.statusError" <|-- "handlers.errNotAcceptable"
+"handlers.patchMechanism" <|-- "handlers.jsonPatcher"
+"handlers.TimeoutFactory" <|-- "handlers.realTimeoutFactory"
+"handlers.patchMechanism" <|-- "handlers.smpPatcher"
+
+namespace internal {
+    class AtMostEvery << (S,Aquamarine) >> {
+        - delay time.Duration
+        - lastCall time.Time
+        - mutex sync.Mutex
+
+        - updateLastCall() bool
+
+        + Do(fn <font color=blue>func</font>() ) bool
+
+    }
+    class FieldManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - subresource string
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, manager string) (runtime.Object, error)
+        + UpdateNoErrors(liveObj runtime.Object, newObj runtime.Object, manager string) runtime.Object
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, manager string, force bool) (runtime.Object, error)
+
+    }
+    interface Managed  {
+        + Fields() fieldpath.ManagedFields
+        + Times() <font color=blue>map</font>[string]*v1.Time
+
+    }
+    interface ManagedInterface  {
+        + Fields() fieldpath.ManagedFields
+        + Times() <font color=blue>map</font>[string]*v1.Time
+
+    }
+    interface Manager  {
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, fieldManager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    interface TypeConverter  {
+        + ObjectToTyped( runtime.Object) (*typed.TypedValue, error)
+        + TypedToObject( *typed.TypedValue) (runtime.Object, error)
+
+    }
+    class buildManagerInfoManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - groupVersion schema.GroupVersion
+        - subresource string
+
+        - buildManagerInfo(prefix string, operation v1.ManagedFieldsOperationType) (string, error)
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, manager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class capManagersManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - maxUpdateManagers int
+        - oldUpdatesManagerName string
+
+        - capUpdateManagers(managed Managed) (Managed, error)
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, fieldManager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class deducedTypeConverter << (S,Aquamarine) >> {
+        + ObjectToTyped(obj runtime.Object) (*typed.TypedValue, error)
+        + TypedToObject(value *typed.TypedValue) (runtime.Object, error)
+
+    }
+    class lastAppliedManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - typeConverter TypeConverter
+        - objectConverter runtime.ObjectConvertor
+        - groupVersion schema.GroupVersion
+
+        - allowedConflictsFromLastApplied(liveObj runtime.Object) (*fieldpath.Set, error)
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class lastAppliedUpdater << (S,Aquamarine) >> {
+        - fieldManager Manager
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class managedFieldsUpdater << (S,Aquamarine) >> {
+        - fieldManager Manager
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, fieldManager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class managedStruct << (S,Aquamarine) >> {
+        - fields fieldpath.ManagedFields
+        - times <font color=blue>map</font>[string]*v1.Time
+
+        + Fields() fieldpath.ManagedFields
+        + Times() <font color=blue>map</font>[string]*v1.Time
+
+    }
+    class noCorrespondingTypeErr << (S,Aquamarine) >> {
+        - gvk schema.GroupVersionKind
+
+        + Error() string
+
+    }
+    class skipNonAppliedManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - objectCreater runtime.ObjectCreater
+        - gvk schema.GroupVersionKind
+        - beforeApplyManagerName string
+        - probability float32
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, fieldManager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class stripMetaManager << (S,Aquamarine) >> {
+        - fieldManager Manager
+        - stripSet *fieldpath.Set
+
+        - stripFields(managed fieldpath.ManagedFields, manager string) 
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, appliedObj runtime.Object, managed Managed, manager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class structuredMergeManager << (S,Aquamarine) >> {
+        - typeConverter TypeConverter
+        - objectConverter runtime.ObjectConvertor
+        - objectDefaulter runtime.ObjectDefaulter
+        - groupVersion schema.GroupVersion
+        - hubVersion schema.GroupVersion
+        - updater merge.Updater
+
+        - toVersioned(obj runtime.Object) (runtime.Object, error)
+        - toUnversioned(obj runtime.Object) (runtime.Object, error)
+
+        + Update(liveObj runtime.Object, newObj runtime.Object, managed Managed, manager string) (runtime.Object, Managed, error)
+        + Apply(liveObj runtime.Object, patchObj runtime.Object, managed Managed, manager string, force bool) (runtime.Object, Managed, error)
+
+    }
+    class typeConverter << (S,Aquamarine) >> {
+        - parser <font color=blue>map</font>[schema.GroupVersionKind]*typed.ParseableType
+
+        + ObjectToTyped(obj runtime.Object) (*typed.TypedValue, error)
+        + TypedToObject(value *typed.TypedValue) (runtime.Object, error)
+
+    }
+    class versionConverter << (S,Aquamarine) >> {
+        - typeConverter TypeConverter
+        - objectConvertor runtime.ObjectConvertor
+        - hubGetter <font color=blue>func</font>(schema.GroupVersion) schema.GroupVersion
+
+        + Convert(object *typed.TypedValue, version fieldpath.APIVersion) (*typed.TypedValue, error)
+        + IsMissingVersionError(err error) bool
+
+    }
+}
+
+"internal.Manager" <|-- "internal.buildManagerInfoManager"
+"internal.Manager" <|-- "internal.capManagersManager"
+"internal.TypeConverter" <|-- "internal.deducedTypeConverter"
+"internal.Manager" <|-- "internal.lastAppliedManager"
+"internal.Manager" <|-- "internal.lastAppliedUpdater"
+"internal.Manager" <|-- "internal.managedFieldsUpdater"
+"internal.Managed" <|-- "internal.managedStruct"
+"internal.ManagedInterface" <|-- "internal.managedStruct"
+"internal.Manager" <|-- "internal.skipNonAppliedManager"
+"internal.Manager" <|-- "internal.stripMetaManager"
+"internal.Manager" <|-- "internal.structuredMergeManager"
+"internal.TypeConverter" <|-- "internal.typeConverter"
+
+namespace metrics {
+    class ResponseWriterDelegator << (S,Aquamarine) >> {
+        - status int
+        - written int64
+        - wroteHeader bool
+
+        + Unwrap() http.ResponseWriter
+        + WriteHeader(code int) 
+        + Write(b []byte) (int, error)
+        + Status() int
+        + ContentLength() int
+
+    }
+    class metrics.RequestBodyVerb << (T, #FF7700) >>  {
+    }
+    interface resettableCollector  {
+        + Reset() 
+
+    }
+}
+"http.ResponseWriter" *-- "metrics.ResponseWriterDelegator"
+
+"responsewriter.UserProvidedDecorator" <|-- "metrics.ResponseWriterDelegator"
+
+namespace negotiation {
+    interface EndpointRestrictions  {
+        + AllowsMediaTypeTransform(mimeType string, mimeSubType string, target *schema.GroupVersionKind) bool
+        + AllowsServerVersion(version string) bool
+        + AllowsStreamSchema(schema string) bool
+
+    }
+    class MediaTypeOptions << (S,Aquamarine) >> {
+        + Pretty bool
+        + Stream string
+        + Convert *schema.GroupVersionKind
+        + UseServerVersion string
+        + Export bool
+        + Unrecognized []string
+        + Accepted runtime.SerializerInfo
+
+    }
+    class emptyEndpointRestrictions << (S,Aquamarine) >> {
+        + AllowsMediaTypeTransform(mimeType string, mimeSubType string, gvk *schema.GroupVersionKind) bool
+        + AllowsServerVersion( string) bool
+        + AllowsStreamSchema(s string) bool
+
+    }
+    class errNotAcceptable << (S,Aquamarine) >> {
+        - accepted []string
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    class errNotAcceptableConversion << (S,Aquamarine) >> {
+        - target string
+        - accepted []string
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+    class errUnsupportedMediaType << (S,Aquamarine) >> {
+        - accepted []string
+
+        + Error() string
+        + Status() v1.Status
+
+    }
+}
+
+"negotiation.EndpointRestrictions" <|-- "negotiation.emptyEndpointRestrictions"
+"responsewriters.statusError" <|-- "negotiation.errNotAcceptable"
+"responsewriters.statusError" <|-- "negotiation.errNotAcceptableConversion"
+"responsewriters.statusError" <|-- "negotiation.errUnsupportedMediaType"
+
+namespace openapi {
+    class DefinitionNamer << (S,Aquamarine) >> {
+        - typeGroupVersionKinds <font color=blue>map</font>[string]groupVersionKinds
+
+        + GetDefinitionName(name string) (string, spec.Extensions)
+
+    }
+    class groupVersionKinds << (S,Aquamarine) >> {
+        + Len() int
+        + Swap(i int, j int) 
+        + Less(i int, j int) bool
+        + JSON() []<font color=blue>interface</font>{}
+
+    }
+    class openapi.groupVersionKinds << (T, #FF7700) >>  {
+    }
+    class "[]v1.GroupVersionKind" as v1GroupVersionKind {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+
+namespace request {
+    interface DurationTracker  {
+        + Track(f <font color=blue>func</font>() ) 
+        + TrackDuration( time.Duration) 
+        + GetLatency() time.Duration
+
+    }
+    class LatencyTrackers << (S,Aquamarine) >> {
+        + MutatingWebhookTracker DurationTracker
+        + ValidatingWebhookTracker DurationTracker
+        + StorageTracker DurationTracker
+        + TransformTracker DurationTracker
+        + SerializationTracker DurationTracker
+        + ResponseWriteTracker DurationTracker
+
+    }
+    class RequestInfo << (S,Aquamarine) >> {
+        + IsResourceRequest bool
+        + Path string
+        + Verb string
+        + APIPrefix string
+        + APIGroup string
+        + APIVersion string
+        + Namespace string
+        + Resource string
+        + Subresource string
+        + Name string
+        + Parts []string
+
+    }
+    class RequestInfoFactory << (S,Aquamarine) >> {
+        + APIPrefixes sets.String
+        + GrouplessAPIPrefixes sets.String
+
+        + NewRequestInfo(req *http.Request) (*RequestInfo, error)
+
+    }
+    interface RequestInfoResolver  {
+        + NewRequestInfo(req *http.Request) (*RequestInfo, error)
+
+    }
+    interface ServerShutdownSignal  {
+        + ShuttingDown() <font color=blue>chan</font> <font color=blue>struct</font>{}
+
+    }
+    class durationTracker << (S,Aquamarine) >> {
+        - clock clock.Clock
+        - latency time.Duration
+        - mu sync.Mutex
+        - aggregateFunction <font color=blue>func</font>(time.Duration, time.Duration) time.Duration
+
+        + Track(f <font color=blue>func</font>() ) 
+        + TrackDuration(d time.Duration) 
+        + GetLatency() time.Duration
+
+    }
+    class request.LongRunningRequestCheck << (T, #FF7700) >>  {
+    }
+    class request.key << (T, #FF7700) >>  {
+    }
+    class request.latencyTrackersKeyType << (T, #FF7700) >>  {
+    }
+    class request.requestInfoKeyType << (T, #FF7700) >>  {
+    }
+    class request.requestReceivedTimestampKeyType << (T, #FF7700) >>  {
+    }
+    class request.serverShutdownSignalKeyType << (T, #FF7700) >>  {
+    }
+    class "<font color=blue>func</font>(*http.Request, *RequestInfo) bool" as fontcolorbluefuncfonthttpRequestRequestInfobool {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+
+"request.RequestInfoResolver" <|-- "request.RequestInfoFactory"
+"request.DurationTracker" <|-- "request.durationTracker"
+
+namespace responsewriter {
+    interface CloseNotifierFlusher  {
+    }
+    class FakeResponseWriter << (S,Aquamarine) >> {
+        + Header() http.Header
+        + WriteHeader(code int) 
+        + Write(bs []byte) (int, error)
+
+    }
+    class FakeResponseWriterFlusherCloseNotifier << (S,Aquamarine) >> {
+        + Flush() 
+        + CloseNotify() <font color=blue>chan</font> bool
+
+    }
+    class FakeResponseWriterFlusherCloseNotifierHijacker << (S,Aquamarine) >> {
+        + Hijack() (net.Conn, *bufio.ReadWriter, error)
+
+    }
+    interface UserProvidedDecorator  {
+        + Unwrap() http.ResponseWriter
+
+    }
+    class outerWithCloseNotifyAndFlush << (S,Aquamarine) >> {
+        + InnerCloseNotifierFlusher CloseNotifierFlusher
+
+        + CloseNotify() <font color=blue>chan</font> bool
+        + Flush() 
+
+    }
+    class outerWithCloseNotifyFlushAndHijack << (S,Aquamarine) >> {
+        + InnerHijacker http.Hijacker
+
+        + Hijack() (net.Conn, *bufio.ReadWriter, error)
+
+    }
+}
+"responsewriter.FakeResponseWriter" *-- "responsewriter.FakeResponseWriterFlusherCloseNotifier"
+"responsewriter.FakeResponseWriterFlusherCloseNotifier" *-- "responsewriter.FakeResponseWriterFlusherCloseNotifierHijacker"
+"responsewriter.UserProvidedDecorator" *-- "responsewriter.outerWithCloseNotifyAndFlush"
+"responsewriter.outerWithCloseNotifyAndFlush" *-- "responsewriter.outerWithCloseNotifyFlushAndHijack"
+
+
+namespace responsewriters {
+    class deferredResponseWriter << (S,Aquamarine) >> {
+        - mediaType string
+        - statusCode int
+        - contentEncoding string
+        - hasWritten bool
+        - hw http.ResponseWriter
+        - w io.Writer
+        - ctx context.Context
+
+        + Write(p []byte) (int, error)
+        + Close() error
+
+    }
+    interface statusError  {
+        + Status() v1.Status
+
+    }
+}
+
+
+namespace testing {
+    class Simple << (S,Aquamarine) >> {
+        + Other string
+        + Labels <font color=blue>map</font>[string]string
+
+        + DeepCopyInto(out *Simple) 
+        + DeepCopy() *Simple
+        + DeepCopyObject() runtime.Object
+
+    }
+    class SimpleGetOptions << (S,Aquamarine) >> {
+        + Param1 string
+        + Param2 string
+        + Path string
+
+        + SwaggerDoc() <font color=blue>map</font>[string]string
+        + DeepCopyInto(out *SimpleGetOptions) 
+        + DeepCopy() *SimpleGetOptions
+        + DeepCopyObject() runtime.Object
+
+    }
+    class SimpleList << (S,Aquamarine) >> {
+        + Items []Simple
+
+        + DeepCopyInto(out *SimpleList) 
+        + DeepCopy() *SimpleList
+        + DeepCopyObject() runtime.Object
+
+    }
+    class SimpleRoot << (S,Aquamarine) >> {
+        + Other string
+        + Labels <font color=blue>map</font>[string]string
+
+        + DeepCopyInto(out *SimpleRoot) 
+        + DeepCopy() *SimpleRoot
+        + DeepCopyObject() runtime.Object
+
+    }
+    class SimpleXGSubresource << (S,Aquamarine) >> {
+        + SubresourceInfo string
+        + Labels <font color=blue>map</font>[string]string
+
+        + DeepCopyInto(out *SimpleXGSubresource) 
+        + DeepCopy() *SimpleXGSubresource
+        + DeepCopyObject() runtime.Object
+
+    }
+    class TestFieldManagerImpl << (S,Aquamarine) >> {
+        - fieldManager *internal.FieldManager
+        - apiVersion string
+        - emptyObj runtime.Object
+        - liveObj runtime.Object
+
+        + APIVersion() string
+        + Reset() 
+        + Live() runtime.Object
+        + Apply(obj runtime.Object, manager string, force bool) error
+        + Update(obj runtime.Object, manager string) error
+        + ManagedFields() []v1.ManagedFieldsEntry
+
+    }
+    class TestType << (S,Aquamarine) >> {
+        + GetObjectKind() schema.ObjectKind
+        + SetGroupVersionKind(kind schema.GroupVersionKind) 
+        + GroupVersionKind() schema.GroupVersionKind
+        + DeepCopyInto(out *TestType) 
+        + DeepCopy() *TestType
+        + DeepCopyObject() runtime.Object
+
+    }
+    class fakeObjectConvertor << (S,Aquamarine) >> {
+        - converter merge.Converter
+        - apiVersion fieldpath.APIVersion
+
+        + Convert(in <font color=blue>interface</font>{}, out <font color=blue>interface</font>{}, context <font color=blue>interface</font>{}) error
+        + ConvertToVersion(in runtime.Object, _ runtime.GroupVersioner) (runtime.Object, error)
+        + ConvertFieldLabel(_ schema.GroupVersionKind, _ string, _ string) (string, string, error)
+
+    }
+    class fakeObjectCreater << (S,Aquamarine) >> {
+        + New(gvk schema.GroupVersionKind) (runtime.Object, error)
+
+    }
+    class fakeObjectDefaulter << (S,Aquamarine) >> {
+        + Default(in runtime.Object) 
+
+    }
+    class sameVersionConverter << (S,Aquamarine) >> {
+        + Convert(object *typed.TypedValue, version fieldpath.APIVersion) (*typed.TypedValue, error)
+        + IsMissingVersionError( error) bool
+
+    }
+}
+"v1.ObjectMeta" *-- "testing.Simple"
+"v1.TypeMeta" *-- "testing.Simple"
+"v1.TypeMeta" *-- "testing.SimpleGetOptions"
+"v1.ListMeta" *-- "testing.SimpleList"
+"v1.TypeMeta" *-- "testing.SimpleList"
+"v1.ObjectMeta" *-- "testing.SimpleRoot"
+"v1.TypeMeta" *-- "testing.SimpleRoot"
+"v1.ObjectMeta" *-- "testing.SimpleXGSubresource"
+"v1.TypeMeta" *-- "testing.SimpleXGSubresource"
+
+"endpoints.documentable" <|-- "testing.SimpleGetOptions"
+"fieldmanagertest.TestFieldManager" <|-- "testing.TestFieldManagerImpl"
+"metrics.resettableCollector" <|-- "testing.TestFieldManagerImpl"
+
+hide methods
+@enduml

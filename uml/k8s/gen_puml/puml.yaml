@@ -3,19 +3,34 @@ staging:
         pkg:
             runtime:
                 filter: ['serializer', 'testing']
-                options: ['-hide-methods']
+                options: ['-hide-methods', '-recursive']
                 serializer:
                     filter: []
+                    options: ['-recursive']
             apis:
                 meta:
                     v1:
                         filter: []
+                        options: ['-recursive']
+            labels:
+                filter: []
+                options: ['-recursive']
     apiserver:
         pkg:
             registry:
                 rest:
                     filter: ['resttest']
-                    options: ['-hide-methods']
+                    options: ['-hide-methods', '-recursive']
+            storage:
+                etcd3:
+                    filter: []
+                    options: ['-recursive']
+            server:
+                filter: []
+                options: ['-hide-methods', '-hide-fields', '-recursive']
+            endpoints:
+                filter: []
+                options: ['-hide-methods', '-recursive']
 
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
