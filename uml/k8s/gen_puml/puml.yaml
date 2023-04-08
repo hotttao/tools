@@ -31,11 +31,20 @@ staging:
             endpoints:
                 filter: []
                 options: ['-hide-methods', '-recursive']
+    kube-aggregator:
+        pkg:
+            apiserver:
+                options: ['-recursive']
 
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
 
 define:
+    apiserver:
+        includes:
+        - 'apiserver/pkg/server/genericapiserver.go'
+        - 'kube-aggregator/pkg/apiserver/apiserver.go'
+        - 'apiextensions-apiserver/pkg/apiserver/apiserver.go'
     codec: 
         includes:
         - 'apimachinery/pkg/runtime/serializer/versioning/versioning.go'

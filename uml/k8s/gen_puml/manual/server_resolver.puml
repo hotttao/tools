@@ -1,0 +1,35 @@
+@startuml
+namespace apiserver {
+    interface ServiceResolver  {
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class aggregatorClusterRouting << (S,Aquamarine) >> {
+        - services v1.ServiceLister
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class aggregatorEndpointRouting << (S,Aquamarine) >> {
+        - services v1.ServiceLister
+        - endpoints v1.EndpointsLister
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+
+
+    class loopbackResolver << (S,Aquamarine) >> {
+        - delegate ServiceResolver
+        - host *url.URL
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+}
+
+"apiserver.ServiceResolver" <|-- "apiserver.aggregatorClusterRouting"
+"apiserver.ServiceResolver" <|-- "apiserver.aggregatorEndpointRouting"
+"apiserver.ServiceResolver" <|-- "apiserver.loopbackResolver"
+
+@enduml

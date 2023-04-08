@@ -246,6 +246,7 @@ class GenPuml:
                 raise ValueError(command)
             self.puml_handler.handler_puml(
                 puml_info['path'], puml_info['packages'], name)
+            print(puml_info['path'])
         f.close()
 
 

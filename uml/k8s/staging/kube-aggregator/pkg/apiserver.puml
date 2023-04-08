@@ -1,0 +1,233 @@
+@startuml
+namespace apiserver {
+    class APIAggregator << (S,Aquamarine) >> {
+        - delegateHandler http.Handler
+        - proxyCurrentCertKeyContent certKeyFunc
+        - proxyTransport *http.Transport
+        - proxyHandlers <font color=blue>map</font>[string]*proxyHandler
+        - handledGroups sets.String
+        - lister v1.APIServiceLister
+        - serviceResolver ServiceResolver
+        - openAPIConfig *common.Config
+        - openAPIV3Config *common.Config
+        - openAPIAggregationController *openapi.AggregationController
+        - openAPIV3AggregationController *openapiv3.AggregationController
+        - discoveryAggregationController DiscoveryAggregationController
+        - egressSelector *egressselector.EgressSelector
+        - rejectForwardingRedirects bool
+
+        + GenericAPIServer *server.GenericAPIServer
+        + APIRegistrationInformers externalversions.SharedInformerFactory
+
+        + PrepareRun() (preparedAPIAggregator, error)
+        + AddAPIService(apiService *v1.APIService) error
+        + RemoveAPIService(apiServiceName string) 
+
+    }
+    interface APIHandlerManager  {
+        + AddAPIService(apiService *v1.APIService) error
+        + RemoveAPIService(apiServiceName string) 
+
+    }
+    class APIServiceRegistrationController << (S,Aquamarine) >> {
+        - apiHandlerManager APIHandlerManager
+        - apiServiceLister v1.APIServiceLister
+        - apiServiceSynced cache.InformerSynced
+        - syncFn <font color=blue>func</font>(string) error
+        - queue workqueue.RateLimitingInterface
+
+        - sync(key string) error
+        - runWorker() 
+        - processNextWorkItem() bool
+        - enqueueInternal(obj *v1.APIService) 
+        - addAPIService(obj <font color=blue>interface</font>{}) 
+        - updateAPIService(obj <font color=blue>interface</font>{}, _ <font color=blue>interface</font>{}) 
+        - deleteAPIService(obj <font color=blue>interface</font>{}) 
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}, handlerSyncedCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + Enqueue() 
+
+    }
+    class CompletedConfig << (S,Aquamarine) >> {
+    }
+    class Config << (S,Aquamarine) >> {
+        + GenericConfig *server.RecommendedConfig
+        + ExtraConfig ExtraConfig
+
+        + Complete() CompletedConfig
+
+    }
+    interface DiscoveryAggregationController  {
+        + AddAPIService(apiService *v1.APIService, handler http.Handler) 
+        + RemoveAPIService(apiServiceName string) 
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+
+    }
+    class ExtraConfig << (S,Aquamarine) >> {
+        + ProxyClientCertFile string
+        + ProxyClientKeyFile string
+        + ProxyTransport *http.Transport
+        + ServiceResolver ServiceResolver
+        + RejectForwardingRedirects bool
+
+    }
+    interface ServiceResolver  {
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class aggregatorClusterRouting << (S,Aquamarine) >> {
+        - services v1.ServiceLister
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class aggregatorEndpointRouting << (S,Aquamarine) >> {
+        - services v1.ServiceLister
+        - endpoints v1.EndpointsLister
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class apiGroupHandler << (S,Aquamarine) >> {
+        - codecs serializer.CodecFactory
+        - groupName string
+        - lister v1.APIServiceLister
+        - delegate http.Handler
+
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    class apisHandler << (S,Aquamarine) >> {
+        - codecs serializer.CodecFactory
+        - lister v1.APIServiceLister
+        - discoveryGroup v1.APIGroup
+
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    class apiserver.certKeyFunc << (T, #FF7700) >>  {
+    }
+    class cachedResult << (S,Aquamarine) >> {
+        - discovery <font color=blue>map</font>[v1.GroupVersion]v2beta1.APIVersionDiscovery
+        - etag string
+        - lastUpdated time.Time
+
+    }
+    class completedConfig << (S,Aquamarine) >> {
+        + GenericConfig server.CompletedConfig
+        + ExtraConfig *ExtraConfig
+
+        + NewWithDelegate(delegationTarget server.DelegationTarget) (*APIAggregator, error)
+
+    }
+    class discoveryManager << (S,Aquamarine) >> {
+        - servicesLock sync.RWMutex
+        - apiServices <font color=blue>map</font>[string]groupVersionInfo
+        - resultsLock sync.RWMutex
+        - cachedResults <font color=blue>map</font>[serviceKey]cachedResult
+        - dirtyAPIServiceQueue workqueue.RateLimitingInterface
+        - mergedDiscoveryHandler aggregated.ResourceManager
+
+        - fetchFreshDiscoveryForService(gv v1.GroupVersion, info groupVersionInfo) (*cachedResult, error)
+        - syncAPIService(apiServiceName string) error
+        - getCacheEntryForService(key serviceKey) (cachedResult, bool)
+        - setCacheEntryForService(key serviceKey, result cachedResult) 
+        - getInfoForAPIService(name string) (groupVersionInfo, bool)
+        - setInfoForAPIService(name string, result *groupVersionInfo) *groupVersionInfo
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + AddAPIService(apiService *v1.APIService, handler http.Handler) 
+        + RemoveAPIService(apiServiceName string) 
+
+    }
+    class groupVersionInfo << (S,Aquamarine) >> {
+        - lastMarkedDirty time.Time
+        - service serviceKey
+        - groupPriority int
+        - versionPriority int
+        - handler http.Handler
+
+    }
+    class inMemoryResponseWriter << (S,Aquamarine) >> {
+        - writeHeaderCalled bool
+        - header http.Header
+        - respCode int
+        - data []byte
+
+        + Header() http.Header
+        + WriteHeader(code int) 
+        + Write(in []byte) (int, error)
+        + String() string
+
+    }
+    class loopbackResolver << (S,Aquamarine) >> {
+        - delegate ServiceResolver
+        - host *url.URL
+
+        + ResolveEndpoint(namespace string, name string, port int32) (*url.URL, error)
+
+    }
+    class preparedAPIAggregator << (S,Aquamarine) >> {
+        - runnable runnable
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+
+    }
+    class proxyHandler << (S,Aquamarine) >> {
+        - localDelegate http.Handler
+        - proxyCurrentCertKeyContent certKeyFunc
+        - proxyTransport *http.Transport
+        - serviceResolver ServiceResolver
+        - handlingInfo atomic.Value
+        - egressSelector *egressselector.EgressSelector
+        - rejectForwardingRedirects bool
+
+        - setServiceAvailable(value bool) 
+        - updateAPIService(apiService *v1.APIService) 
+
+        + ServeHTTP(w http.ResponseWriter, req *http.Request) 
+
+    }
+    class proxyHandlingInfo << (S,Aquamarine) >> {
+        - local bool
+        - name string
+        - restConfig *rest.Config
+        - transportBuildingError error
+        - proxyRoundTripper http.RoundTripper
+        - serviceName string
+        - serviceNamespace string
+        - serviceAvailable bool
+        - servicePort int32
+
+    }
+    class responder << (S,Aquamarine) >> {
+        - w http.ResponseWriter
+
+        + Object(statusCode int, obj runtime.Object) 
+        + Error(_ http.ResponseWriter, _ *http.Request, err error) 
+
+    }
+    interface runnable  {
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+
+    }
+    class serviceKey << (S,Aquamarine) >> {
+        + Namespace string
+        + Name string
+        + Port int32
+
+        + String() string
+
+    }
+}
+"apiserver.completedConfig" *-- "apiserver.CompletedConfig"
+"apiserver.APIAggregator" *-- "apiserver.preparedAPIAggregator"
+
+"apiserver.APIHandlerManager" <|-- "apiserver.APIAggregator"
+"apiserver.ServiceResolver" <|-- "apiserver.aggregatorClusterRouting"
+"apiserver.ServiceResolver" <|-- "apiserver.aggregatorEndpointRouting"
+"apiserver.DiscoveryAggregationController" <|-- "apiserver.discoveryManager"
+"apiserver.ServiceResolver" <|-- "apiserver.loopbackResolver"
+"apiserver.runnable" <|-- "apiserver.preparedAPIAggregator"
+
+@enduml
