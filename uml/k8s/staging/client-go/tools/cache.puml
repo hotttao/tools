@@ -1,0 +1,865 @@
+@startuml
+namespace cache {
+    class Config << (S,Aquamarine) >> {
+        + Process ProcessFunc
+        + ObjectType runtime.Object
+        + ObjectDescription string
+        + FullResyncPeriod time.Duration
+        + ShouldResync ShouldResyncFunc
+        + RetryOnError bool
+        + WatchErrorHandler WatchErrorHandler
+        + WatchListPageSize int64
+
+    }
+    interface Controller  {
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+    interface CounterMetric  {
+        + Inc() 
+
+    }
+    class DeletedFinalStateUnknown << (S,Aquamarine) >> {
+        + Key string
+        + Obj <font color=blue>interface</font>{}
+
+    }
+    class Delta << (S,Aquamarine) >> {
+        + Type DeltaType
+        + Object <font color=blue>interface</font>{}
+
+    }
+    class DeltaFIFO << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - cond sync.Cond
+        - items <font color=blue>map</font>[string]Deltas
+        - queue []string
+        - populated bool
+        - initialPopulationCount int
+        - keyFunc KeyFunc
+        - knownObjects KeyListerGetter
+        - closed bool
+        - emitDeltaTypeReplaced bool
+
+        - hasSynced_locked() bool
+        - addIfNotPresent(id string, deltas Deltas) 
+        - queueActionLocked(actionType DeltaType, obj <font color=blue>interface</font>{}) error
+        - listLocked() []<font color=blue>interface</font>{}
+        - syncKeyLocked(key string) error
+
+        + Close() 
+        + KeyOf(obj <font color=blue>interface</font>{}) (string, error)
+        + HasSynced() bool
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + AddIfNotPresent(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + IsClosed() bool
+        + Pop(process PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + Replace(list []<font color=blue>interface</font>{}, _ string) error
+        + Resync() error
+
+    }
+    class DeltaFIFOOptions << (S,Aquamarine) >> {
+        + KeyFunction KeyFunc
+        + KnownObjects KeyListerGetter
+        + EmitDeltaTypeReplaced bool
+
+    }
+    class Deltas << (S,Aquamarine) >> {
+        + Oldest() *Delta
+        + Newest() *Delta
+
+    }
+    class ErrRequeue << (S,Aquamarine) >> {
+        + Err error
+
+        + Error() string
+
+    }
+    class ExpirationCache << (S,Aquamarine) >> {
+        - cacheStorage ThreadSafeStore
+        - keyFunc KeyFunc
+        - clock clock.Clock
+        - expirationPolicy ExpirationPolicy
+        - expirationLock sync.Mutex
+
+        - getTimestampedEntry(key string) (*TimestampedEntry, bool)
+        - getOrExpire(key string) (<font color=blue>interface</font>{}, bool)
+
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    interface ExpirationPolicy  {
+        + IsExpired(obj *TimestampedEntry) bool
+
+    }
+    class FIFO << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - cond sync.Cond
+        - items <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - queue []string
+        - populated bool
+        - initialPopulationCount int
+        - keyFunc KeyFunc
+        - closed bool
+
+        - hasSynced_locked() bool
+        - addIfNotPresent(id string, obj <font color=blue>interface</font>{}) 
+
+        + Close() 
+        + HasSynced() bool
+        + Add(obj <font color=blue>interface</font>{}) error
+        + AddIfNotPresent(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + IsClosed() bool
+        + Pop(process PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    class FakeCustomStore << (S,Aquamarine) >> {
+        + AddFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) error
+        + UpdateFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) error
+        + DeleteFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) error
+        + ListFunc <font color=blue>func</font>() []<font color=blue>interface</font>{}
+        + ListKeysFunc <font color=blue>func</font>() []string
+        + GetFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKeyFunc <font color=blue>func</font>(string) (<font color=blue>interface</font>{}, bool, error)
+        + ReplaceFunc <font color=blue>func</font>([]<font color=blue>interface</font>{}, string) error
+        + ResyncFunc <font color=blue>func</font>() error
+
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    class FakeExpirationPolicy << (S,Aquamarine) >> {
+        + NeverExpire sets.String
+        + RetrieveKeyFunc KeyFunc
+
+        + IsExpired(obj *TimestampedEntry) bool
+
+    }
+    class FilteringResourceEventHandler << (S,Aquamarine) >> {
+        + FilterFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) bool
+        + Handler ResourceEventHandler
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    interface GaugeMetric  {
+        + Set( float64) 
+
+    }
+    interface GenericLister  {
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+        + ByNamespace(namespace string) GenericNamespaceLister
+
+    }
+    interface GenericNamespaceLister  {
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+
+    }
+    interface Getter  {
+        + Get() *rest.Request
+
+    }
+    class Heap << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - cond sync.Cond
+        - data *heapData
+        - closed bool
+
+        - addIfNotPresentLocked(key string, obj <font color=blue>interface</font>{}) 
+
+        + Close() 
+        + Add(obj <font color=blue>interface</font>{}) error
+        + BulkAdd(list []<font color=blue>interface</font>{}) error
+        + AddIfNotPresent(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + Pop() (<font color=blue>interface</font>{}, error)
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + IsClosed() bool
+
+    }
+    interface Indexer  {
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(indexName string) []string
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + GetIndexers() Indexers
+        + AddIndexers(newIndexers Indexers) error
+
+    }
+    class KeyError << (S,Aquamarine) >> {
+        + Obj <font color=blue>interface</font>{}
+        + Err error
+
+        + Error() string
+        + Unwrap() error
+
+    }
+    interface KeyGetter  {
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+
+    }
+    interface KeyLister  {
+        + ListKeys() []string
+
+    }
+    interface KeyListerGetter  {
+    }
+    class ListWatch << (S,Aquamarine) >> {
+        + ListFunc ListFunc
+        + WatchFunc WatchFunc
+        + DisableChunking bool
+
+        + List(options v1.ListOptions) (runtime.Object, error)
+        + Watch(options v1.ListOptions) (watch.Interface, error)
+
+    }
+    interface Lister  {
+        + List(options v1.ListOptions) (runtime.Object, error)
+
+    }
+    interface ListerWatcher  {
+    }
+    interface MetricsProvider  {
+        + NewListsMetric(name string) CounterMetric
+        + NewListDurationMetric(name string) SummaryMetric
+        + NewItemsInListMetric(name string) SummaryMetric
+        + NewWatchesMetric(name string) CounterMetric
+        + NewShortWatchesMetric(name string) CounterMetric
+        + NewWatchDurationMetric(name string) SummaryMetric
+        + NewItemsInWatchMetric(name string) SummaryMetric
+        + NewLastResourceVersionMetric(name string) GaugeMetric
+
+    }
+    interface MutationCache  {
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + ByIndex(indexName string, indexKey string) ([]<font color=blue>interface</font>{}, error)
+        + Mutation( <font color=blue>interface</font>{}) 
+
+    }
+    interface MutationDetector  {
+        + AddObject(obj <font color=blue>interface</font>{}) 
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+
+    }
+    interface Queue  {
+        + Pop( PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + AddIfNotPresent( <font color=blue>interface</font>{}) error
+        + HasSynced() bool
+        + Close() 
+
+    }
+    class Reflector << (S,Aquamarine) >> {
+        - name string
+        - typeDescription string
+        - expectedType reflect.Type
+        - expectedGVK *schema.GroupVersionKind
+        - store Store
+        - listerWatcher ListerWatcher
+        - backoffManager wait.BackoffManager
+        - initConnBackoffManager wait.BackoffManager
+        - resyncPeriod time.Duration
+        - clock clock.Clock
+        - paginatedResult bool
+        - lastSyncResourceVersion string
+        - isLastSyncResourceVersionUnavailable bool
+        - lastSyncResourceVersionMutex sync.RWMutex
+        - watchErrorHandler WatchErrorHandler
+
+        + MaxInternalErrorRetryDuration time.Duration
+        + ShouldResync <font color=blue>func</font>() bool
+        + WatchListPageSize int64
+
+        - resyncChan() (<font color=blue>chan</font> time.Time, <font color=blue>func</font>() bool)
+        - list(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        - syncWith(items []runtime.Object, resourceVersion string) error
+        - setLastSyncResourceVersion(v string) 
+        - relistResourceVersion() string
+        - setIsLastSyncResourceVersionUnavailable(isUnavailable bool) 
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + ListAndWatch(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) error
+        + LastSyncResourceVersion() string
+
+    }
+    class ReflectorOptions << (S,Aquamarine) >> {
+        + Name string
+        + TypeDescription string
+        + ResyncPeriod time.Duration
+        + Clock clock.Clock
+
+    }
+    interface ResourceEventHandler  {
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    class ResourceEventHandlerDetailedFuncs << (S,Aquamarine) >> {
+        + AddFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, bool) 
+        + UpdateFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, <font color=blue>interface</font>{}) 
+        + DeleteFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    class ResourceEventHandlerFuncs << (S,Aquamarine) >> {
+        + AddFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+        + UpdateFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, <font color=blue>interface</font>{}) 
+        + DeleteFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    interface ResourceEventHandlerRegistration  {
+        + HasSynced() bool
+
+    }
+    interface ResourceVersionComparator  {
+        + CompareResourceVersion(lhs runtime.Object, rhs runtime.Object) int
+
+    }
+    interface ResourceVersionUpdater  {
+        + UpdateResourceVersion(resourceVersion string) 
+
+    }
+    interface RetryWithDeadline  {
+        + After( error) 
+        + ShouldRetry() bool
+
+    }
+    interface SharedIndexInformer  {
+        + AddIndexers(indexers Indexers) error
+        + GetIndexer() Indexer
+
+    }
+    class SharedIndexInformerOptions << (S,Aquamarine) >> {
+        + ResyncPeriod time.Duration
+        + Indexers Indexers
+        + ObjectDescription string
+
+    }
+    interface SharedInformer  {
+        + AddEventHandler(handler ResourceEventHandler) (ResourceEventHandlerRegistration, error)
+        + AddEventHandlerWithResyncPeriod(handler ResourceEventHandler, resyncPeriod time.Duration) (ResourceEventHandlerRegistration, error)
+        + RemoveEventHandler(handle ResourceEventHandlerRegistration) error
+        + GetStore() Store
+        + GetController() Controller
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+        + SetWatchErrorHandler(handler WatchErrorHandler) error
+        + SetTransform(handler TransformFunc) error
+        + IsStopped() bool
+
+    }
+    interface Store  {
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Replace( []<font color=blue>interface</font>{},  string) error
+        + Resync() error
+
+    }
+    interface SummaryMetric  {
+        + Observe( float64) 
+
+    }
+    class TTLPolicy << (S,Aquamarine) >> {
+        + TTL time.Duration
+        + Clock clock.Clock
+
+        + IsExpired(obj *TimestampedEntry) bool
+
+    }
+    interface ThreadSafeStore  {
+        + Add(key string, obj <font color=blue>interface</font>{}) 
+        + Update(key string, obj <font color=blue>interface</font>{}) 
+        + Delete(key string) 
+        + Get(key string) (<font color=blue>interface</font>{}, bool)
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Replace( <font color=blue>map</font>[string]<font color=blue>interface</font>{},  string) 
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(name string) []string
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + GetIndexers() Indexers
+        + AddIndexers(newIndexers Indexers) error
+        + Resync() error
+
+    }
+    class TimestampedEntry << (S,Aquamarine) >> {
+        - key string
+
+        + Obj <font color=blue>interface</font>{}
+        + Timestamp time.Time
+
+    }
+    class UndeltaStore << (S,Aquamarine) >> {
+        + PushFunc <font color=blue>func</font>([]<font color=blue>interface</font>{}) 
+
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+
+    }
+    interface Watcher  {
+        + Watch(options v1.ListOptions) (watch.Interface, error)
+
+    }
+    class addNotification << (S,Aquamarine) >> {
+        - newObj <font color=blue>interface</font>{}
+        - isInInitialList bool
+
+    }
+    class cache << (S,Aquamarine) >> {
+        - cacheStorage ThreadSafeStore
+        - keyFunc KeyFunc
+
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + GetIndexers() Indexers
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(indexName string) []string
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + AddIndexers(newIndexers Indexers) error
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    class cache.AppendFunc << (T, #FF7700) >>  {
+    }
+    class cache.DeltaType << (T, #FF7700) >>  {
+    }
+    class cache.Deltas << (T, #FF7700) >>  {
+    }
+    class cache.ExplicitKey << (T, #FF7700) >>  {
+    }
+    class cache.Index << (T, #FF7700) >>  {
+    }
+    class cache.IndexFunc << (T, #FF7700) >>  {
+    }
+    class cache.Indexers << (T, #FF7700) >>  {
+    }
+    class cache.Indices << (T, #FF7700) >>  {
+    }
+    class cache.InformerSynced << (T, #FF7700) >>  {
+    }
+    class cache.KeyFunc << (T, #FF7700) >>  {
+    }
+    class cache.LessFunc << (T, #FF7700) >>  {
+    }
+    class cache.ListFunc << (T, #FF7700) >>  {
+    }
+    class cache.PopProcessFunc << (T, #FF7700) >>  {
+    }
+    class cache.ProcessFunc << (T, #FF7700) >>  {
+    }
+    class cache.ShouldResyncFunc << (T, #FF7700) >>  {
+    }
+    class cache.TransformFunc << (T, #FF7700) >>  {
+    }
+    class cache.WatchErrorHandler << (T, #FF7700) >>  {
+    }
+    class cache.WatchFunc << (T, #FF7700) >>  {
+    }
+    class cacheObj << (S,Aquamarine) >> {
+        - cached <font color=blue>interface</font>{}
+        - copied <font color=blue>interface</font>{}
+
+    }
+    class controller << (S,Aquamarine) >> {
+        - config Config
+        - reflector *Reflector
+        - reflectorMutex sync.RWMutex
+        - clock clock.Clock
+
+        - processLoop() 
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+    class defaultCacheMutationDetector << (S,Aquamarine) >> {
+        - name string
+        - period time.Duration
+        - compareObjectsLock sync.Mutex
+        - addedObjsLock sync.Mutex
+        - addedObjs []cacheObj
+        - cachedObjs []cacheObj
+        - retainDuration time.Duration
+        - lastRotated time.Time
+        - retainedCachedObjs []cacheObj
+        - failureFunc <font color=blue>func</font>(string) 
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + AddObject(obj <font color=blue>interface</font>{}) 
+        + CompareObjects() 
+
+    }
+    class deleteNotification << (S,Aquamarine) >> {
+        - oldObj <font color=blue>interface</font>{}
+
+    }
+    class dummyController << (S,Aquamarine) >> {
+        - informer *sharedIndexInformer
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+    class dummyMutationDetector << (S,Aquamarine) >> {
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + AddObject(obj <font color=blue>interface</font>{}) 
+
+    }
+    class etcdObjectVersioner << (S,Aquamarine) >> {
+        + ObjectResourceVersion(obj runtime.Object) (uint64, error)
+        + CompareResourceVersion(lhs runtime.Object, rhs runtime.Object) int
+
+    }
+    class fakeThreadSafeMap << (S,Aquamarine) >> {
+        - deletedKeys <font color=blue>chan</font> string
+
+        + Delete(key string) 
+
+    }
+    class genericLister << (S,Aquamarine) >> {
+        - indexer Indexer
+        - resource schema.GroupResource
+
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + ByNamespace(namespace string) GenericNamespaceLister
+        + Get(name string) (runtime.Object, error)
+
+    }
+    class genericNamespaceLister << (S,Aquamarine) >> {
+        - indexer Indexer
+        - namespace string
+        - resource schema.GroupResource
+
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+
+    }
+    class heapData << (S,Aquamarine) >> {
+        - items <font color=blue>map</font>[string]*heapItem
+        - queue []string
+        - keyFunc KeyFunc
+        - lessFunc LessFunc
+
+        + Less(i int, j int) bool
+        + Len() int
+        + Swap(i int, j int) 
+        + Push(kv <font color=blue>interface</font>{}) 
+        + Pop() <font color=blue>interface</font>{}
+
+    }
+    class heapItem << (S,Aquamarine) >> {
+        - obj <font color=blue>interface</font>{}
+        - index int
+
+    }
+    class itemKeyValue << (S,Aquamarine) >> {
+        - key string
+        - obj <font color=blue>interface</font>{}
+
+    }
+    class mutationCache << (S,Aquamarine) >> {
+        - lock sync.Mutex
+        - backingCache Store
+        - indexer Indexer
+        - mutationCache *cache.LRUExpireCache
+        - includeAdds bool
+        - ttl time.Duration
+        - comparator ResourceVersionComparator
+
+        - newerObject(key string, backing runtime.Object) runtime.Object
+
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + ByIndex(name string, indexKey string) ([]<font color=blue>interface</font>{}, error)
+        + Mutation(obj <font color=blue>interface</font>{}) 
+
+    }
+    class noopMetric << (S,Aquamarine) >> {
+        + Inc() 
+        + Dec() 
+        + Observe( float64) 
+        + Set( float64) 
+
+    }
+    class noopMetricsProvider << (S,Aquamarine) >> {
+        + NewListsMetric(name string) CounterMetric
+        + NewListDurationMetric(name string) SummaryMetric
+        + NewItemsInListMetric(name string) SummaryMetric
+        + NewWatchesMetric(name string) CounterMetric
+        + NewShortWatchesMetric(name string) CounterMetric
+        + NewWatchDurationMetric(name string) SummaryMetric
+        + NewItemsInWatchMetric(name string) SummaryMetric
+        + NewLastResourceVersionMetric(name string) GaugeMetric
+
+    }
+    class processorListener << (S,Aquamarine) >> {
+        - nextCh <font color=blue>chan</font> <font color=blue>interface</font>{}
+        - addCh <font color=blue>chan</font> <font color=blue>interface</font>{}
+        - handler ResourceEventHandler
+        - syncTracker *synctrack.SingleFileTracker
+        - pendingNotifications buffer.RingGrowing
+        - requestedResyncPeriod time.Duration
+        - resyncPeriod time.Duration
+        - nextResync time.Time
+        - resyncLock sync.Mutex
+
+        - add(notification <font color=blue>interface</font>{}) 
+        - pop() 
+        - run() 
+        - shouldResync(now time.Time) bool
+        - determineNextResync(now time.Time) 
+        - setResyncPeriod(resyncPeriod time.Duration) 
+
+        + HasSynced() bool
+
+    }
+    class retryWithDeadlineImpl << (S,Aquamarine) >> {
+        - firstErrorTime time.Time
+        - lastErrorTime time.Time
+        - maxRetryDuration time.Duration
+        - minResetPeriod time.Duration
+        - isRetryable <font color=blue>func</font>(error) bool
+        - clock clock.Clock
+
+        - reset() 
+
+        + After(err error) 
+        + ShouldRetry() bool
+
+    }
+    class sharedIndexInformer << (S,Aquamarine) >> {
+        - indexer Indexer
+        - controller Controller
+        - processor *sharedProcessor
+        - cacheMutationDetector MutationDetector
+        - listerWatcher ListerWatcher
+        - objectType runtime.Object
+        - objectDescription string
+        - resyncCheckPeriod time.Duration
+        - defaultEventHandlerResyncPeriod time.Duration
+        - clock clock.Clock
+        - started bool
+        - startedLock sync.Mutex
+        - blockDeltas sync.Mutex
+        - watchErrorHandler WatchErrorHandler
+        - transform TransformFunc
+
+        + SetWatchErrorHandler(handler WatchErrorHandler) error
+        + SetTransform(handler TransformFunc) error
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasStarted() bool
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+        + GetStore() Store
+        + GetIndexer() Indexer
+        + AddIndexers(indexers Indexers) error
+        + GetController() Controller
+        + AddEventHandler(handler ResourceEventHandler) (ResourceEventHandlerRegistration, error)
+        + AddEventHandlerWithResyncPeriod(handler ResourceEventHandler, resyncPeriod time.Duration) (ResourceEventHandlerRegistration, error)
+        + HandleDeltas(obj <font color=blue>interface</font>{}, isInInitialList bool) error
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(old <font color=blue>interface</font>{}, new <font color=blue>interface</font>{}) 
+        + OnDelete(old <font color=blue>interface</font>{}) 
+        + IsStopped() bool
+        + RemoveEventHandler(handle ResourceEventHandlerRegistration) error
+
+    }
+    class sharedProcessor << (S,Aquamarine) >> {
+        - listenersStarted bool
+        - listenersLock sync.RWMutex
+        - listeners <font color=blue>map</font>[*processorListener]bool
+        - clock clock.Clock
+        - wg wait.Group
+
+        - getListener(registration ResourceEventHandlerRegistration) *processorListener
+        - addListener(listener *processorListener) ResourceEventHandlerRegistration
+        - removeListener(handle ResourceEventHandlerRegistration) error
+        - distribute(obj <font color=blue>interface</font>{}, sync bool) 
+        - run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        - shouldResync() bool
+        - resyncCheckPeriodChanged(resyncCheckPeriod time.Duration) 
+
+    }
+    class storeIndex << (S,Aquamarine) >> {
+        - indexers Indexers
+        - indices Indices
+
+        - reset() 
+        - getKeysFromIndex(indexName string, obj <font color=blue>interface</font>{}) (sets.String, error)
+        - getKeysByIndex(indexName string, indexedValue string) (sets.String, error)
+        - getIndexValues(indexName string) []string
+        - addIndexers(newIndexers Indexers) error
+        - updateIndices(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}, key string) 
+        - addKeyToIndex(key string, indexValue string, index Index) 
+        - deleteKeyFromIndex(key string, indexValue string, index Index) 
+
+    }
+    class threadSafeMap << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - items <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - index *storeIndex
+
+        + Add(key string, obj <font color=blue>interface</font>{}) 
+        + Update(key string, obj <font color=blue>interface</font>{}) 
+        + Delete(key string) 
+        + Get(key string) (<font color=blue>interface</font>{}, bool)
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Replace(items <font color=blue>map</font>[string]<font color=blue>interface</font>{}, resourceVersion string) 
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(indexName string) []string
+        + GetIndexers() Indexers
+        + AddIndexers(newIndexers Indexers) error
+        + Resync() error
+
+    }
+    class updateNotification << (S,Aquamarine) >> {
+        - oldObj <font color=blue>interface</font>{}
+        - newObj <font color=blue>interface</font>{}
+
+    }
+    class "<font color=blue>func</font>(v1.ListOptions) (runtime.Object, error)" as fontcolorbluefuncfontv1ListOptionsruntimeObjecterror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>func</font>(v1.ListOptions) (watch.Interface, error)" as fontcolorbluefuncfontv1ListOptionswatchInterfaceerror {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+    class "<font color=blue>map</font>[string]sets.String" as fontcolorbluemapfontstringsetsString {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"cache.ListerWatcher" *-- "cache.Config"
+"cache.Queue" *-- "cache.Config"
+"cache.Store" *-- "cache.Indexer"
+"cache.KeyGetter" *-- "cache.KeyListerGetter"
+"cache.KeyLister" *-- "cache.KeyListerGetter"
+"cache.Lister" *-- "cache.ListerWatcher"
+"cache.Watcher" *-- "cache.ListerWatcher"
+"cache.Store" *-- "cache.Queue"
+"cache.SharedInformer" *-- "cache.SharedIndexInformer"
+"cache.Store" *-- "cache.UndeltaStore"
+"cache.ThreadSafeStore" *-- "cache.fakeThreadSafeMap"
+
+"cache.KeyGetter" <|-- "cache.DeltaFIFO"
+"cache.KeyLister" <|-- "cache.DeltaFIFO"
+"cache.Queue" <|-- "cache.DeltaFIFO"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.DeltaFIFO"
+"cache.Store" <|-- "cache.DeltaFIFO"
+"cache.KeyGetter" <|-- "cache.ExpirationCache"
+"cache.KeyLister" <|-- "cache.ExpirationCache"
+"cache.Store" <|-- "cache.ExpirationCache"
+"cache.KeyGetter" <|-- "cache.FIFO"
+"cache.KeyLister" <|-- "cache.FIFO"
+"cache.Queue" <|-- "cache.FIFO"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.FIFO"
+"cache.Store" <|-- "cache.FIFO"
+"cache.KeyGetter" <|-- "cache.FakeCustomStore"
+"cache.KeyLister" <|-- "cache.FakeCustomStore"
+"cache.Store" <|-- "cache.FakeCustomStore"
+"cache.ExpirationPolicy" <|-- "cache.FakeExpirationPolicy"
+"cache.ResourceEventHandler" <|-- "cache.FilteringResourceEventHandler"
+"cache.KeyGetter" <|-- "cache.Heap"
+"cache.KeyLister" <|-- "cache.Heap"
+"cache.Lister" <|-- "cache.ListWatch"
+"cache.Watcher" <|-- "cache.ListWatch"
+"cache.ResourceEventHandler" <|-- "cache.ResourceEventHandlerDetailedFuncs"
+"cache.ResourceEventHandler" <|-- "cache.ResourceEventHandlerFuncs"
+"cache.ExpirationPolicy" <|-- "cache.TTLPolicy"
+"cache.Indexer" <|-- "cache.cache"
+"cache.KeyGetter" <|-- "cache.cache"
+"cache.KeyLister" <|-- "cache.cache"
+"cache.Store" <|-- "cache.cache"
+"cache.Controller" <|-- "cache.controller"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.controller"
+"cache.MutationDetector" <|-- "cache.defaultCacheMutationDetector"
+"cache.Controller" <|-- "cache.dummyController"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.dummyController"
+"cache.MutationDetector" <|-- "cache.dummyMutationDetector"
+"cache.ResourceVersionComparator" <|-- "cache.etcdObjectVersioner"
+"cache.GenericLister" <|-- "cache.genericLister"
+"cache.GenericNamespaceLister" <|-- "cache.genericLister"
+"cache.GenericNamespaceLister" <|-- "cache.genericNamespaceLister"
+"cache.KeyGetter" <|-- "cache.mutationCache"
+"cache.MutationCache" <|-- "cache.mutationCache"
+"cache.CounterMetric" <|-- "cache.noopMetric"
+"cache.GaugeMetric" <|-- "cache.noopMetric"
+"cache.SummaryMetric" <|-- "cache.noopMetric"
+"cache.MetricsProvider" <|-- "cache.noopMetricsProvider"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.processorListener"
+"cache.RetryWithDeadline" <|-- "cache.retryWithDeadlineImpl"
+"cache.Controller" <|-- "cache.sharedIndexInformer"
+"cache.ResourceEventHandler" <|-- "cache.sharedIndexInformer"
+"cache.ResourceEventHandlerRegistration" <|-- "cache.sharedIndexInformer"
+"cache.SharedIndexInformer" <|-- "cache.sharedIndexInformer"
+"cache.SharedInformer" <|-- "cache.sharedIndexInformer"
+"cache.Indexer" <|-- "cache.threadSafeMap"
+"cache.KeyLister" <|-- "cache.threadSafeMap"
+"cache.ThreadSafeStore" <|-- "cache.threadSafeMap"
+
+hide methods
+@enduml

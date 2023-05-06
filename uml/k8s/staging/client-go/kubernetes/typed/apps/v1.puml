@@ -1,0 +1,242 @@
+@startuml
+namespace v1 {
+    class AppsV1Client << (S,Aquamarine) >> {
+        - restClient rest.Interface
+
+        + ControllerRevisions(namespace string) ControllerRevisionInterface
+        + DaemonSets(namespace string) DaemonSetInterface
+        + Deployments(namespace string) DeploymentInterface
+        + ReplicaSets(namespace string) ReplicaSetInterface
+        + StatefulSets(namespace string) StatefulSetInterface
+        + RESTClient() rest.Interface
+
+    }
+    interface AppsV1Interface  {
+        + RESTClient() rest.Interface
+
+    }
+    interface ControllerRevisionExpansion  {
+    }
+    interface ControllerRevisionInterface  {
+        + Create(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.CreateOptions) (*v1.ControllerRevision, error)
+        + Update(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.UpdateOptions) (*v1.ControllerRevision, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Get(ctx context.Context, name string, opts v1.GetOptions) (*v1.ControllerRevision, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ControllerRevisionList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ControllerRevision, error)
+        + Apply(ctx context.Context, controllerRevision *v1.ControllerRevisionApplyConfiguration, opts v1.ApplyOptions) (*v1.ControllerRevision, error)
+
+    }
+    interface ControllerRevisionsGetter  {
+        + ControllerRevisions(namespace string) ControllerRevisionInterface
+
+    }
+    interface DaemonSetExpansion  {
+    }
+    interface DaemonSetInterface  {
+        + Create(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.CreateOptions) (*v1.DaemonSet, error)
+        + Update(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + UpdateStatus(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Get(ctx context.Context, name string, opts v1.GetOptions) (*v1.DaemonSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DaemonSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.DaemonSet, error)
+        + Apply(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+        + ApplyStatus(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+
+    }
+    interface DaemonSetsGetter  {
+        + DaemonSets(namespace string) DaemonSetInterface
+
+    }
+    interface DeploymentExpansion  {
+    }
+    interface DeploymentInterface  {
+        + Create(ctx context.Context, deployment *v1.Deployment, opts v1.CreateOptions) (*v1.Deployment, error)
+        + Update(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + UpdateStatus(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Get(ctx context.Context, name string, opts v1.GetOptions) (*v1.Deployment, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DeploymentList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.Deployment, error)
+        + Apply(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + ApplyStatus(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + GetScale(ctx context.Context, deploymentName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, deploymentName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, deploymentName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    interface DeploymentsGetter  {
+        + Deployments(namespace string) DeploymentInterface
+
+    }
+    interface ReplicaSetExpansion  {
+    }
+    interface ReplicaSetInterface  {
+        + Create(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.CreateOptions) (*v1.ReplicaSet, error)
+        + Update(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + UpdateStatus(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Get(ctx context.Context, name string, opts v1.GetOptions) (*v1.ReplicaSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ReplicaSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ReplicaSet, error)
+        + Apply(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + ApplyStatus(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + GetScale(ctx context.Context, replicaSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, replicaSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, replicaSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    interface ReplicaSetsGetter  {
+        + ReplicaSets(namespace string) ReplicaSetInterface
+
+    }
+    interface StatefulSetExpansion  {
+    }
+    interface StatefulSetInterface  {
+        + Create(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.CreateOptions) (*v1.StatefulSet, error)
+        + Update(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + UpdateStatus(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Get(ctx context.Context, name string, opts v1.GetOptions) (*v1.StatefulSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.StatefulSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.StatefulSet, error)
+        + Apply(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + ApplyStatus(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + GetScale(ctx context.Context, statefulSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, statefulSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, statefulSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    interface StatefulSetsGetter  {
+        + StatefulSets(namespace string) StatefulSetInterface
+
+    }
+    class controllerRevisions << (S,Aquamarine) >> {
+        - client rest.Interface
+        - ns string
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.ControllerRevision, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ControllerRevisionList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.CreateOptions) (*v1.ControllerRevision, error)
+        + Update(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.UpdateOptions) (*v1.ControllerRevision, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ControllerRevision, error)
+        + Apply(ctx context.Context, controllerRevision *v1.ControllerRevisionApplyConfiguration, opts v1.ApplyOptions) (*v1.ControllerRevision, error)
+
+    }
+    class daemonSets << (S,Aquamarine) >> {
+        - client rest.Interface
+        - ns string
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.DaemonSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DaemonSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.CreateOptions) (*v1.DaemonSet, error)
+        + Update(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + UpdateStatus(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.DaemonSet, error)
+        + Apply(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+        + ApplyStatus(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+
+    }
+    class deployments << (S,Aquamarine) >> {
+        - client rest.Interface
+        - ns string
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.Deployment, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DeploymentList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, deployment *v1.Deployment, opts v1.CreateOptions) (*v1.Deployment, error)
+        + Update(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + UpdateStatus(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.Deployment, error)
+        + Apply(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + ApplyStatus(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + GetScale(ctx context.Context, deploymentName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, deploymentName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, deploymentName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    class replicaSets << (S,Aquamarine) >> {
+        - client rest.Interface
+        - ns string
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.ReplicaSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ReplicaSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.CreateOptions) (*v1.ReplicaSet, error)
+        + Update(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + UpdateStatus(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ReplicaSet, error)
+        + Apply(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + ApplyStatus(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + GetScale(ctx context.Context, replicaSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, replicaSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, replicaSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    class statefulSets << (S,Aquamarine) >> {
+        - client rest.Interface
+        - ns string
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.StatefulSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.StatefulSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.CreateOptions) (*v1.StatefulSet, error)
+        + Update(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + UpdateStatus(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.StatefulSet, error)
+        + Apply(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + ApplyStatus(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + GetScale(ctx context.Context, statefulSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, statefulSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, statefulSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+}
+"v1.ControllerRevisionsGetter" *-- "v1.AppsV1Interface"
+"v1.DaemonSetsGetter" *-- "v1.AppsV1Interface"
+"v1.DeploymentsGetter" *-- "v1.AppsV1Interface"
+"v1.ReplicaSetsGetter" *-- "v1.AppsV1Interface"
+"v1.StatefulSetsGetter" *-- "v1.AppsV1Interface"
+"v1.ControllerRevisionExpansion" *-- "v1.ControllerRevisionInterface"
+"v1.DaemonSetExpansion" *-- "v1.DaemonSetInterface"
+"v1.DeploymentExpansion" *-- "v1.DeploymentInterface"
+"v1.ReplicaSetExpansion" *-- "v1.ReplicaSetInterface"
+"v1.StatefulSetExpansion" *-- "v1.StatefulSetInterface"
+
+"v1.AppsV1Interface" <|-- "v1.AppsV1Client"
+"v1.ControllerRevisionsGetter" <|-- "v1.AppsV1Client"
+"v1.DaemonSetsGetter" <|-- "v1.AppsV1Client"
+"v1.DeploymentsGetter" <|-- "v1.AppsV1Client"
+"v1.ReplicaSetsGetter" <|-- "v1.AppsV1Client"
+"v1.StatefulSetsGetter" <|-- "v1.AppsV1Client"
+"v1.ControllerRevisionInterface" <|-- "v1.controllerRevisions"
+"v1.DaemonSetInterface" <|-- "v1.daemonSets"
+"v1.DeploymentInterface" <|-- "v1.deployments"
+"v1.ReplicaSetInterface" <|-- "v1.replicaSets"
+"v1.StatefulSetInterface" <|-- "v1.statefulSets"
+
+hide methods
+@enduml

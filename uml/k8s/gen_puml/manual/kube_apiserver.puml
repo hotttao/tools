@@ -127,19 +127,26 @@ namespace apiserver {
     }
 
 }
-"apiserver.APIAggregator" *-- "apiserver.preparedAPIAggregator"
 
-"apiserver.APIHandlerManager" <|-- "apiserver.APIAggregator"
+' <|--: 继承
+' <|..: 实现
+' *--: 组合
+' o--: 聚合
+"apiserver.APIAggregator" <|-- "apiserver.preparedAPIAggregator"
 
-"apiserver.runnable" <|-- "apiserver.preparedAPIAggregator"
+"apiserver.APIHandlerManager" <|.. "apiserver.APIAggregator"
+
+"apiserver.runnable" <|.. "apiserver.preparedAPIAggregator"
 
 "apiserver.GenericAPIServer" *-- "apiserver.preparedGenericAPIServer"
+"apiserver.GenericAPIServer" *-- "apiserver.APIAggregator"
+"apiserver.GenericAPIServer" *-- "apiserver.CustomResourceDefinitions"
 
-"apiserver.DelegationTarget" <|-- "apiserver.GenericAPIServer"
-"apiserver.DelegationTarget" <|-- "apiserver.emptyDelegate"
+"apiserver.DelegationTarget" <|.. "apiserver.GenericAPIServer"
+"apiserver.DelegationTarget" <|.. "apiserver.emptyDelegate"
 "apiserver.runnable" <|-- "apiserver.preparedGenericAPIServer"
 
 "apiserver.preparedAPIAggregator" o-- "apiserver.preparedGenericAPIServer"
 
-"apiserver.GenericAPIServer" *-- "apiserver.CustomResourceDefinitions"
+
 @enduml

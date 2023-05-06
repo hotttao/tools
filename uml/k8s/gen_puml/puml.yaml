@@ -35,6 +35,17 @@ staging:
         pkg:
             apiserver:
                 options: ['-recursive']
+    client-go:
+        kubernetes:
+            typed:
+                apps:
+                    v1:
+                        filter: ['testdata', 'fake']
+                        options: ['-hide-methods', '-recursive']
+        tools:
+            cache:
+                filter: ['testing', 'synctrack']
+                options: ['-hide-methods', '-recursive']
 
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
@@ -87,3 +98,14 @@ define:
         - 'apimachinery/pkg/runtime/interfaces.go'
         - 'kubernetes/pkg/registry/apps/daemonset/strategy.go'
         - 'kubernetes/pkg/registry/apps/daemonset/storage/storage.go'
+    client-go:
+        options: ['-recursive']
+        includes:
+        - 'client-go/rest/client.go'
+        - 'client-go/rest/config.go'
+        - 'client-go/rest/request.go'
+    store:
+        options: ['-recursive']
+        includes:
+        - 'client-go/tools/cache/store.go'
+        - 'client-go/tools/cache/thread_safe_store.go'

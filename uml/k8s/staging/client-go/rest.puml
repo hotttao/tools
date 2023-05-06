@@ -1,0 +1,373 @@
+@startuml
+namespace rest {
+    interface AuthProvider  {
+        + WrapTransport( http.RoundTripper) http.RoundTripper
+        + Login() error
+
+    }
+    interface AuthProviderConfigPersister  {
+        + Persist( <font color=blue>map</font>[string]string) error
+
+    }
+    interface BackoffManager  {
+        + UpdateBackoff(actualUrl *url.URL, err error, responseCode int) 
+        + CalculateBackoff(actualUrl *url.URL) time.Duration
+        + Sleep(d time.Duration) 
+
+    }
+    class ClientContentConfig << (S,Aquamarine) >> {
+        + AcceptContentTypes string
+        + ContentType string
+        + GroupVersion schema.GroupVersion
+        + Negotiator runtime.ClientNegotiator
+
+    }
+    class Config << (S,Aquamarine) >> {
+        + Host string
+        + APIPath string
+        + Username string
+        + Password string
+        + BearerToken string
+        + BearerTokenFile string
+        + Impersonate ImpersonationConfig
+        + AuthProvider *api.AuthProviderConfig
+        + AuthConfigPersister AuthProviderConfigPersister
+        + ExecProvider *api.ExecConfig
+        + UserAgent string
+        + DisableCompression bool
+        + Transport http.RoundTripper
+        + WrapTransport transport.WrapperFunc
+        + QPS float32
+        + Burst int
+        + RateLimiter flowcontrol.RateLimiter
+        + WarningHandler WarningHandler
+        + Timeout time.Duration
+        + Dial <font color=blue>func</font>(context.Context, string, string) (net.Conn, error)
+        + Proxy <font color=blue>func</font>(*http.Request) (*url.URL, error)
+
+        + GoString() string
+        + String() string
+        + TransportConfig() (*transport.Config, error)
+        + Wrap(fn transport.WrapperFunc) 
+
+    }
+    class ContentConfig << (S,Aquamarine) >> {
+        + AcceptContentTypes string
+        + ContentType string
+        + GroupVersion *schema.GroupVersion
+        + NegotiatedSerializer runtime.NegotiatedSerializer
+
+    }
+    interface HTTPClient  {
+        + Do(req *http.Request) (*http.Response, error)
+
+    }
+    class ImpersonationConfig << (S,Aquamarine) >> {
+        + UserName string
+        + UID string
+        + Groups []string
+        + Extra <font color=blue>map</font>[string][]string
+
+    }
+    interface Interface  {
+        + GetRateLimiter() flowcontrol.RateLimiter
+        + Verb(verb string) *Request
+        + Post() *Request
+        + Put() *Request
+        + Patch(pt types.PatchType) *Request
+        + Get() *Request
+        + Delete() *Request
+        + APIVersion() schema.GroupVersion
+
+    }
+    class IsRetryableErrorFunc << (S,Aquamarine) >> {
+        + IsErrorRetryable(request *http.Request, err error) bool
+
+    }
+    class NoBackoff << (S,Aquamarine) >> {
+        + UpdateBackoff(actualUrl *url.URL, err error, responseCode int) 
+        + CalculateBackoff(actualUrl *url.URL) time.Duration
+        + Sleep(d time.Duration) 
+
+    }
+    class NoWarnings << (S,Aquamarine) >> {
+        + HandleWarningHeader(code int, agent string, message string) 
+
+    }
+    class RESTClient << (S,Aquamarine) >> {
+        - base *url.URL
+        - versionedAPIPath string
+        - content ClientContentConfig
+        - createBackoffMgr <font color=blue>func</font>() BackoffManager
+        - rateLimiter flowcontrol.RateLimiter
+        - warningHandler WarningHandler
+
+        + Client *http.Client
+
+        + GetRateLimiter() flowcontrol.RateLimiter
+        + Verb(verb string) *Request
+        + Post() *Request
+        + Put() *Request
+        + Patch(pt types.PatchType) *Request
+        + Get() *Request
+        + Delete() *Request
+        + APIVersion() schema.GroupVersion
+
+    }
+    class Request << (S,Aquamarine) >> {
+        - c *RESTClient
+        - warningHandler WarningHandler
+        - rateLimiter flowcontrol.RateLimiter
+        - backoff BackoffManager
+        - timeout time.Duration
+        - maxRetries int
+        - verb string
+        - pathPrefix string
+        - subpath string
+        - params url.Values
+        - headers http.Header
+        - namespace string
+        - namespaceSet bool
+        - resource string
+        - resourceName string
+        - subresource string
+        - err error
+        - body io.Reader
+        - bodyBytes []byte
+        - retryFn requestRetryFunc
+
+        - setParam(paramName string, value string) *Request
+        - finalURLTemplate() url.URL
+        - tryThrottleWithInfo(ctx context.Context, retryInfo string) error
+        - tryThrottle(ctx context.Context) error
+        - newStreamWatcher(resp *http.Response) (watch.Interface, error)
+        - requestPreflightCheck() error
+        - newHTTPRequest(ctx context.Context) (*http.Request, error)
+        - request(ctx context.Context, fn <font color=blue>func</font>(*http.Request, *http.Response) ) error
+        - transformResponse(resp *http.Response, req *http.Request) Result
+        - transformUnstructuredResponseError(resp *http.Response, req *http.Request, body []byte) error
+        - newUnstructuredResponseError(body []byte, isTextResponse bool, statusCode int, method string, retryAfter int) error
+
+        + Verb(verb string) *Request
+        + Prefix(segments ...string) *Request
+        + Suffix(segments ...string) *Request
+        + Resource(resource string) *Request
+        + BackOff(manager BackoffManager) *Request
+        + WarningHandler(handler WarningHandler) *Request
+        + Throttle(limiter flowcontrol.RateLimiter) *Request
+        + SubResource(subresources ...string) *Request
+        + Name(resourceName string) *Request
+        + Namespace(namespace string) *Request
+        + NamespaceIfScoped(namespace string, scoped bool) *Request
+        + AbsPath(segments ...string) *Request
+        + RequestURI(uri string) *Request
+        + Param(paramName string, s string) *Request
+        + VersionedParams(obj runtime.Object, codec runtime.ParameterCodec) *Request
+        + SpecificallyVersionedParams(obj runtime.Object, codec runtime.ParameterCodec, version schema.GroupVersion) *Request
+        + SetHeader(key string, values ...string) *Request
+        + Timeout(d time.Duration) *Request
+        + MaxRetries(maxRetries int) *Request
+        + Body(obj <font color=blue>interface</font>{}) *Request
+        + Error() error
+        + URL() *url.URL
+        + Watch(ctx context.Context) (watch.Interface, error)
+        + Stream(ctx context.Context) (io.ReadCloser, error)
+        + Do(ctx context.Context) Result
+        + DoRaw(ctx context.Context) ([]byte, error)
+
+    }
+    class RequestConstructionError << (S,Aquamarine) >> {
+        + Err error
+
+        + Error() string
+
+    }
+    interface ResponseWrapper  {
+        + DoRaw( context.Context) ([]byte, error)
+        + Stream( context.Context) (io.ReadCloser, error)
+
+    }
+    class Result << (S,Aquamarine) >> {
+        - body []byte
+        - warnings []net.WarningHeader
+        - contentType string
+        - err error
+        - statusCode int
+        - decoder runtime.Decoder
+
+        + Raw() ([]byte, error)
+        + Get() (runtime.Object, error)
+        + StatusCode(statusCode *int) Result
+        + ContentType(contentType *string) Result
+        + Into(obj runtime.Object) error
+        + WasCreated(wasCreated *bool) Result
+        + Error() error
+        + Warnings() []net.WarningHeader
+
+    }
+    class RetryAfter << (S,Aquamarine) >> {
+        + Wait time.Duration
+        + Attempt int
+        + Reason string
+
+    }
+    class TLSClientConfig << (S,Aquamarine) >> {
+        + Insecure bool
+        + ServerName string
+        + CertFile string
+        + KeyFile string
+        + CAFile string
+        + CertData []byte
+        + KeyData []byte
+        + CAData []byte
+        + NextProtos []string
+
+        + GoString() string
+        + String() string
+        + DeepCopyInto(out *TLSClientConfig) 
+        + DeepCopy() *TLSClientConfig
+
+    }
+    class URLBackoff << (S,Aquamarine) >> {
+        + Backoff *flowcontrol.Backoff
+
+        - baseUrlKey(rawurl *url.URL) string
+
+        + Disable() 
+        + UpdateBackoff(actualUrl *url.URL, err error, responseCode int) 
+        + CalculateBackoff(actualUrl *url.URL) time.Duration
+        + Sleep(d time.Duration) 
+
+    }
+    interface WarningHandler  {
+        + HandleWarningHeader(code int, agent string, text string) 
+
+    }
+    class WarningLogger << (S,Aquamarine) >> {
+        + HandleWarningHeader(code int, agent string, message string) 
+
+    }
+    class WarningWriterOptions << (S,Aquamarine) >> {
+        + Deduplicate bool
+        + Color bool
+
+    }
+    interface WithRetry  {
+        + IsNextRetry(ctx context.Context, restReq *Request, httpReq *http.Request, resp *http.Response, err error, f IsRetryableErrorFunc) bool
+        + Before(ctx context.Context, r *Request) error
+        + After(ctx context.Context, r *Request, resp *http.Response, err error) 
+        + WrapPreviousError(finalErr error) error
+
+    }
+    class noopPersister << (S,Aquamarine) >> {
+        + Persist(_ <font color=blue>map</font>[string]string) error
+
+    }
+    class rest.Factory << (T, #FF7700) >>  {
+    }
+    class rest.IsRetryableErrorFunc << (T, #FF7700) >>  {
+    }
+    class rest.requestRetryFunc << (T, #FF7700) >>  {
+    }
+    class rest.sanitizedConfig << (T, #FF7700) >>  {
+    }
+    class rest.sanitizedTLSClientConfig << (T, #FF7700) >>  {
+    }
+    class sanitizedAuthConfigPersister << (S,Aquamarine) >> {
+        + GoString() string
+        + String() string
+
+    }
+    class sanitizedObject << (S,Aquamarine) >> {
+        + GoString() string
+        + String() string
+
+    }
+    class throttleSettings << (S,Aquamarine) >> {
+        - logLevel klog.Level
+        - minLogInterval time.Duration
+        - lastLogTime time.Time
+        - lock sync.RWMutex
+
+    }
+    class throttledLogger << (S,Aquamarine) >> {
+        - clock clock.PassiveClock
+        - settings []*throttleSettings
+
+        - attemptToLog() (klog.Level, bool)
+
+        + Infof(message string, args ...<font color=blue>interface</font>{}) 
+
+    }
+    class warningWriter << (S,Aquamarine) >> {
+        - out io.Writer
+        - opts WarningWriterOptions
+        - writtenLock sync.Mutex
+        - writtenCount int
+        - written <font color=blue>map</font>[string]<font color=blue>struct</font>{}
+
+        + HandleWarningHeader(code int, agent string, message string) 
+        + WarningCount() int
+
+    }
+    class withRetry << (S,Aquamarine) >> {
+        - maxRetries int
+        - attempts int
+        - retryAfter *RetryAfter
+        - previousErr error
+
+        - trackPreviousError(err error) 
+
+        + IsNextRetry(ctx context.Context, restReq *Request, httpReq *http.Request, resp *http.Response, err error, f IsRetryableErrorFunc) bool
+        + Before(ctx context.Context, request *Request) error
+        + After(ctx context.Context, request *Request, resp *http.Response, err error) 
+        + WrapPreviousError(currentErr error) error
+
+    }
+    class wrapPreviousError << (S,Aquamarine) >> {
+        - currentErr error
+
+        + Unwrap() error
+        + Error() string
+
+    }
+    class "<font color=blue>func</font>(*http.Request, error) bool" as fontcolorbluefuncfonthttpRequesterrorbool {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"rest.ContentConfig" *-- "rest.Config"
+"rest.TLSClientConfig" *-- "rest.Config"
+"rest.AuthProviderConfigPersister" *-- "rest.sanitizedAuthConfigPersister"
+"runtime.Object" *-- "rest.sanitizedObject"
+
+"rest.BackoffManager" <|-- "rest.NoBackoff"
+"rest.WarningHandler" <|-- "rest.NoWarnings"
+"rest.Interface" <|-- "rest.RESTClient"
+"rest.ResponseWrapper" <|-- "rest.Request"
+"rest.BackoffManager" <|-- "rest.URLBackoff"
+"rest.WarningHandler" <|-- "rest.WarningLogger"
+"rest.AuthProviderConfigPersister" <|-- "rest.noopPersister"
+"rest.WarningHandler" <|-- "rest.warningWriter"
+"rest.WithRetry" <|-- "rest.withRetry"
+
+namespace versioned {
+    class Decoder << (S,Aquamarine) >> {
+        - decoder streaming.Decoder
+        - embeddedDecoder runtime.Decoder
+
+        + Decode() (watch.EventType, runtime.Object, error)
+        + Close() 
+
+    }
+    class Encoder << (S,Aquamarine) >> {
+        - encoder streaming.Encoder
+        - embeddedEncoder runtime.Encoder
+
+        + Encode(event *watch.Event) error
+
+    }
+}
+
+
+hide methods
+@enduml

@@ -1,0 +1,114 @@
+@startuml
+namespace fake {
+    class FakeAppsV1 << (S,Aquamarine) >> {
+        + ControllerRevisions(namespace string) v1.ControllerRevisionInterface
+        + DaemonSets(namespace string) v1.DaemonSetInterface
+        + Deployments(namespace string) v1.DeploymentInterface
+        + ReplicaSets(namespace string) v1.ReplicaSetInterface
+        + StatefulSets(namespace string) v1.StatefulSetInterface
+        + RESTClient() rest.Interface
+
+    }
+    class FakeControllerRevisions << (S,Aquamarine) >> {
+        - ns string
+
+        + Fake *FakeAppsV1
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.ControllerRevision, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ControllerRevisionList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.CreateOptions) (*v1.ControllerRevision, error)
+        + Update(ctx context.Context, controllerRevision *v1.ControllerRevision, opts v1.UpdateOptions) (*v1.ControllerRevision, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ControllerRevision, error)
+        + Apply(ctx context.Context, controllerRevision *v1.ControllerRevisionApplyConfiguration, opts v1.ApplyOptions) (*v1.ControllerRevision, error)
+
+    }
+    class FakeDaemonSets << (S,Aquamarine) >> {
+        - ns string
+
+        + Fake *FakeAppsV1
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.DaemonSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DaemonSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.CreateOptions) (*v1.DaemonSet, error)
+        + Update(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + UpdateStatus(ctx context.Context, daemonSet *v1.DaemonSet, opts v1.UpdateOptions) (*v1.DaemonSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.DaemonSet, error)
+        + Apply(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+        + ApplyStatus(ctx context.Context, daemonSet *v1.DaemonSetApplyConfiguration, opts v1.ApplyOptions) (*v1.DaemonSet, error)
+
+    }
+    class FakeDeployments << (S,Aquamarine) >> {
+        - ns string
+
+        + Fake *FakeAppsV1
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.Deployment, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.DeploymentList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, deployment *v1.Deployment, opts v1.CreateOptions) (*v1.Deployment, error)
+        + Update(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + UpdateStatus(ctx context.Context, deployment *v1.Deployment, opts v1.UpdateOptions) (*v1.Deployment, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.Deployment, error)
+        + Apply(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + ApplyStatus(ctx context.Context, deployment *v1.DeploymentApplyConfiguration, opts v1.ApplyOptions) (*v1.Deployment, error)
+        + GetScale(ctx context.Context, deploymentName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, deploymentName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, deploymentName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    class FakeReplicaSets << (S,Aquamarine) >> {
+        - ns string
+
+        + Fake *FakeAppsV1
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.ReplicaSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.ReplicaSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.CreateOptions) (*v1.ReplicaSet, error)
+        + Update(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + UpdateStatus(ctx context.Context, replicaSet *v1.ReplicaSet, opts v1.UpdateOptions) (*v1.ReplicaSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.ReplicaSet, error)
+        + Apply(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + ApplyStatus(ctx context.Context, replicaSet *v1.ReplicaSetApplyConfiguration, opts v1.ApplyOptions) (*v1.ReplicaSet, error)
+        + GetScale(ctx context.Context, replicaSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, replicaSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, replicaSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+    class FakeStatefulSets << (S,Aquamarine) >> {
+        - ns string
+
+        + Fake *FakeAppsV1
+
+        + Get(ctx context.Context, name string, options v1.GetOptions) (*v1.StatefulSet, error)
+        + List(ctx context.Context, opts v1.ListOptions) (*v1.StatefulSetList, error)
+        + Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+        + Create(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.CreateOptions) (*v1.StatefulSet, error)
+        + Update(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + UpdateStatus(ctx context.Context, statefulSet *v1.StatefulSet, opts v1.UpdateOptions) (*v1.StatefulSet, error)
+        + Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+        + DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+        + Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (*v1.StatefulSet, error)
+        + Apply(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + ApplyStatus(ctx context.Context, statefulSet *v1.StatefulSetApplyConfiguration, opts v1.ApplyOptions) (*v1.StatefulSet, error)
+        + GetScale(ctx context.Context, statefulSetName string, options v1.GetOptions) (*v1.Scale, error)
+        + UpdateScale(ctx context.Context, statefulSetName string, scale *v1.Scale, opts v1.UpdateOptions) (*v1.Scale, error)
+        + ApplyScale(ctx context.Context, statefulSetName string, scale *v1.ScaleApplyConfiguration, opts v1.ApplyOptions) (*v1.Scale, error)
+
+    }
+}
+"testing.Fake" *-- "fake.FakeAppsV1"
+
+
+hide methods
+@enduml
