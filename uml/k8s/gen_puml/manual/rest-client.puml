@@ -1,0 +1,306 @@
+@startuml
+namespace client-go {
+    interface GenericLister  {
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+        + ByNamespace(namespace string) GenericNamespaceLister
+
+    }
+    interface GenericNamespaceLister  {
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+
+    }
+    interface Getter  {
+        + Get() *client-go.Request
+
+    }
+    class ListWatch << (S,Aquamarine) >> {
+        + ListFunc ListFunc
+        + WatchFunc WatchFunc
+        + DisableChunking bool
+
+        + List(options v1.ListOptions) (runtime.Object, error)
+        + Watch(options v1.ListOptions) (watch.Interface, error)
+
+    }
+    interface Lister  {
+        + List(options v1.ListOptions) (runtime.Object, error)
+
+    }
+    interface ListerWatcher  {
+    }
+    interface Watcher  {
+        + Watch(options v1.ListOptions) (watch.Interface, error)
+
+    }
+    ' class client-go.AppendFunc << (T, #FF7700) >>  {
+    ' }
+    ' class client-go.ListFunc << (T, #FF7700) >>  {
+    ' }
+    ' class client-go.WatchFunc << (T, #FF7700) >>  {
+    ' }
+    class genericLister << (S,Aquamarine) >> {
+        - indexer Indexer
+        - resource schema.GroupResource
+
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + ByNamespace(namespace string) GenericNamespaceLister
+        + Get(name string) (runtime.Object, error)
+
+    }
+    class genericNamespaceLister << (S,Aquamarine) >> {
+        - indexer Indexer
+        - namespace string
+        - resource schema.GroupResource
+
+        + List(selector labels.Selector) ([]runtime.Object, error)
+        + Get(name string) (runtime.Object, error)
+
+    }
+    ' class "<font color=blue>func</font>(v1.ListOptions) (runtime.Object, error)" as fontcolorbluefuncfontv1ListOptionsruntimeObjecterror {
+    '     'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    ' }
+    ' class "<font color=blue>func</font>(v1.ListOptions) (watch.Interface, error)" as fontcolorbluefuncfontv1ListOptionswatchInterfaceerror {
+    '     'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    ' }
+}
+"client-go.Lister" *-- "client-go.ListerWatcher"
+"client-go.Watcher" *-- "client-go.ListerWatcher"
+
+' "client-go.Lister" <|-- "client-go.ListWatch"
+"client-go.ListerWatcher" <|-- "client-go.ListWatch"
+"client-go.GenericLister" <|-- "client-go.genericLister"
+"client-go.GenericNamespaceLister" <|-- "client-go.genericLister"
+"client-go.GenericNamespaceLister" <|-- "client-go.genericNamespaceLister"
+
+namespace client-go {
+    class ClientContentConfig << (S,Aquamarine) >> {
+        + AcceptContentTypes string
+        + ContentType string
+        + GroupVersion schema.GroupVersion
+        + Negotiator runtime.ClientNegotiator
+
+    }
+    class Config << (S,Aquamarine) >> {
+        + Host string
+        + APIPath string
+        + Username string
+        + Password string
+        + BearerToken string
+        + BearerTokenFile string
+        + Impersonate ImpersonationConfig
+        + AuthProvider *api.AuthProviderConfig
+        + AuthConfigPersister AuthProviderConfigPersister
+        + ExecProvider *api.ExecConfig
+        + UserAgent string
+        + DisableCompression bool
+        + Transport http.RoundTripper
+        + WrapTransport transport.WrapperFunc
+        + QPS float32
+        + Burst int
+        + RateLimiter flowcontrol.RateLimiter
+        + WarningHandler WarningHandler
+        + Timeout time.Duration
+        + Dial <font color=blue>func</font>(context.Context, string, string) (net.Conn, error)
+        + Proxy <font color=blue>func</font>(*http.Request) (*url.URL, error)
+
+        + GoString() string
+        + String() string
+
+    }
+    class ContentConfig << (S,Aquamarine) >> {
+        + AcceptContentTypes string
+        + ContentType string
+        + GroupVersion *schema.GroupVersion
+        + NegotiatedSerializer runtime.NegotiatedSerializer
+
+    }
+    ' interface HTTPClient  {
+    '     + Do(req *http.Request) (*http.Response, error)
+
+    ' }
+    class ImpersonationConfig << (S,Aquamarine) >> {
+        + UserName string
+        + UID string
+        + Groups []string
+        + Extra <font color=blue>map</font>[string][]string
+
+    }
+    interface Interface  {
+        + GetRateLimiter() flowcontrol.RateLimiter
+        + Verb(verb string) *Request
+        + Post() *Request
+        + Put() *Request
+        + Patch(pt types.PatchType) *Request
+        + Get() *Request
+        + Delete() *Request
+        + APIVersion() schema.GroupVersion
+
+    }
+    class RESTClient << (S,Aquamarine) >> {
+        - base *url.URL
+        - versionedAPIPath string
+        - content ClientContentConfig
+        - createBackoffMgr <font color=blue>func</font>() BackoffManager
+        - rateLimiter flowcontrol.RateLimiter
+        - warningHandler WarningHandler
+
+        + Client *http.Client
+
+        + GetRateLimiter() flowcontrol.RateLimiter
+        + Verb(verb string) *Request
+        + Post() *Request
+        + Put() *Request
+        + Patch(pt types.PatchType) *Request
+        + Get() *Request
+        + Delete() *Request
+        + APIVersion() schema.GroupVersion
+
+    }
+    class Request << (S,Aquamarine) >> {
+        - c *RESTClient
+        - warningHandler WarningHandler
+        - rateLimiter flowcontrol.RateLimiter
+        - backoff BackoffManager
+        - timeout time.Duration
+        - maxRetries int
+        - verb string
+        - pathPrefix string
+        - subpath string
+        - params url.Values
+        - headers http.Header
+        - namespace string
+        - namespaceSet bool
+        - resource string
+        - resourceName string
+        - subresource string
+        - err error
+        - body io.Reader
+        - bodyBytes []byte
+        - retryFn requestRetryFunc
+
+        - setParam(paramName string, value string) *Request
+        - finalURLTemplate() url.URL
+        - tryThrottleWithInfo(ctx context.Context, retryInfo string) error
+        - tryThrottle(ctx context.Context) error
+        - newStreamWatcher(resp *http.Response) (watch.Interface, error)
+        - requestPreflightCheck() error
+        - newHTTPRequest(ctx context.Context) (*http.Request, error)
+        - request(ctx context.Context, fn <font color=blue>func</font>(*http.Request, *http.Response) ) error
+        - transformResponse(resp *http.Response, req *http.Request) Result
+        - transformUnstructuredResponseError(resp *http.Response, req *http.Request, body []byte) error
+        - newUnstructuredResponseError(body []byte, isTextResponse bool, statusCode int, method string, retryAfter int) error
+
+        + Verb(verb string) *Request
+        + Prefix(segments ...string) *Request
+        + Suffix(segments ...string) *Request
+        + Resource(resource string) *Request
+        + BackOff(manager BackoffManager) *Request
+        + WarningHandler(handler WarningHandler) *Request
+        + Throttle(limiter flowcontrol.RateLimiter) *Request
+        + SubResource(subresources ...string) *Request
+        + Name(resourceName string) *Request
+        + Namespace(namespace string) *Request
+        + NamespaceIfScoped(namespace string, scoped bool) *Request
+        + AbsPath(segments ...string) *Request
+        + RequestURI(uri string) *Request
+        + Param(paramName string, s string) *Request
+        + VersionedParams(obj runtime.Object, codec runtime.ParameterCodec) *Request
+        + SpecificallyVersionedParams(obj runtime.Object, codec runtime.ParameterCodec, version schema.GroupVersion) *Request
+        + SetHeader(key string, values ...string) *Request
+        + Timeout(d time.Duration) *Request
+        + MaxRetries(maxRetries int) *Request
+        + Body(obj <font color=blue>interface</font>{}) *Request
+        + Error() error
+        + URL() *url.URL
+        + Watch(ctx context.Context) (watch.Interface, error)
+        + Stream(ctx context.Context) (io.ReadCloser, error)
+        + Do(ctx context.Context) Result
+        + DoRaw(ctx context.Context) ([]byte, error)
+
+    }
+    ' class RequestConstructionError << (S,Aquamarine) >> {
+    '     + Err error
+
+    '     + Error() string
+
+    ' }
+    interface ResponseWrapper  {
+        + DoRaw( context.Context) ([]byte, error)
+        + Stream( context.Context) (io.ReadCloser, error)
+
+    }
+    class Result << (S,Aquamarine) >> {
+        - body []byte
+        - warnings []net.WarningHeader
+        - contentType string
+        - err error
+        - statusCode int
+        - decoder runtime.Decoder
+
+        + Raw() ([]byte, error)
+        + Get() (runtime.Object, error)
+        + StatusCode(statusCode *int) Result
+        + ContentType(contentType *string) Result
+        + Into(obj runtime.Object) error
+        + WasCreated(wasCreated *bool) Result
+        + Error() error
+        + Warnings() []net.WarningHeader
+
+    }
+    class TLSClientConfig << (S,Aquamarine) >> {
+        + Insecure bool
+        + ServerName string
+        + CertFile string
+        + KeyFile string
+        + CAFile string
+        + CertData []byte
+        + KeyData []byte
+        + CAData []byte
+        + NextProtos []string
+
+        + GoString() string
+        + String() string
+
+    }
+    
+    ' class sanitizedAuthConfigPersister << (S,Aquamarine) >> {
+    '     + GoString() string
+    '     + String() string
+
+    ' }
+    ' class sanitizedObject << (S,Aquamarine) >> {
+    '     + GoString() string
+    '     + String() string
+
+    ' }
+    ' class throttleSettings << (S,Aquamarine) >> {
+    '     - logLevel klog.Level
+    '     - minLogInterval time.Duration
+    '     - lastLogTime time.Time
+    '     - lock sync.RWMutex
+
+    ' }
+    ' class throttledLogger << (S,Aquamarine) >> {
+    '     - clock clock.PassiveClock
+    '     - settings []*throttleSettings
+
+    '     - attemptToLog() (klog.Level, bool)
+
+    '     + Infof(message string, args ...<font color=blue>interface</font>{}) 
+
+    ' }
+}
+"client-go.ContentConfig" *-- "client-go.Config"
+"client-go.TLSClientConfig" *-- "client-go.Config"
+"runtime.Object" *-- "client-go.sanitizedObject"
+
+"client-go.Getter" <|-- "client-go.RESTClient"
+"client-go.Interface" <|-- "client-go.RESTClient"
+"client-go.ResponseWrapper" <|-- "client-go.Request"
+"client-go.Request" <-- "client-go.Getter"
+"client-go.Getter" <.. "client-go.ListerWatcher"
+' "client-go.fontcolorbluefuncfontv1ListOptionsruntimeObjecterror" #.. "client-go.ListFunc"
+' "client-go.fontcolorbluefuncfontv1ListOptionswatchInterfaceerror" #.. "client-go.WatchFunc"
+@enduml

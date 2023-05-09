@@ -18,3 +18,4 @@ goplantuml -show-implementations   -ignore "" /home/tao/code/github/tools/uml/k8
 goplantuml -show-implementations   -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/daemonset > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/daemonset.puml
 goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/client-go > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/client-go.puml
 goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/store > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/store.puml
+goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/queue > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/queue.puml

@@ -1,0 +1,175 @@
+@startuml
+namespace queue {
+    class DeletedFinalStateUnknown << (S,Aquamarine) >> {
+        + Key string
+        + Obj <font color=blue>interface</font>{}
+
+    }
+    class Delta << (S,Aquamarine) >> {
+        + Type DeltaType
+        + Object <font color=blue>interface</font>{}
+
+    }
+    class DeltaFIFO << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - cond sync.Cond
+        - items <font color=blue>map</font>[string]Deltas
+        - queue []string
+        - populated bool
+        - initialPopulationCount int
+        - keyFunc KeyFunc
+        - knownObjects KeyListerGetter
+        - closed bool
+        - emitDeltaTypeReplaced bool
+
+        - hasSynced_locked() bool
+        - addIfNotPresent(id string, deltas Deltas) 
+        - queueActionLocked(actionType DeltaType, obj <font color=blue>interface</font>{}) error
+        - listLocked() []<font color=blue>interface</font>{}
+        - syncKeyLocked(key string) error
+
+        + Close() 
+        + KeyOf(obj <font color=blue>interface</font>{}) (string, error)
+        + HasSynced() bool
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + AddIfNotPresent(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + IsClosed() bool
+        + Pop(process PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + Replace(list []<font color=blue>interface</font>{}, _ string) error
+        + Resync() error
+
+    }
+    class DeltaFIFOOptions << (S,Aquamarine) >> {
+        + KeyFunction KeyFunc
+        + KnownObjects KeyListerGetter
+        + EmitDeltaTypeReplaced bool
+
+    }
+    class Deltas << (S,Aquamarine) >> {
+        + Oldest() *Delta
+        + Newest() *Delta
+
+    }
+    class ErrRequeue << (S,Aquamarine) >> {
+        + Err error
+
+        + Error() string
+
+    }
+    class FIFO << (S,Aquamarine) >> {
+        - lock sync.RWMutex
+        - cond sync.Cond
+        - items <font color=blue>map</font>[string]<font color=blue>interface</font>{}
+        - queue []string
+        - populated bool
+        - initialPopulationCount int
+        - keyFunc KeyFunc
+        - closed bool
+
+        - hasSynced_locked() bool
+        - addIfNotPresent(id string, obj <font color=blue>interface</font>{}) 
+
+        + Close() 
+        + HasSynced() bool
+        + Add(obj <font color=blue>interface</font>{}) error
+        + AddIfNotPresent(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + IsClosed() bool
+        + Pop(process PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    interface Indexer  {
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(indexName string) []string
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + GetIndexers() Indexers
+        + AddIndexers(newIndexers Indexers) error
+
+    }
+    class KeyError << (S,Aquamarine) >> {
+        + Obj <font color=blue>interface</font>{}
+        + Err error
+
+        + Error() string
+        + Unwrap() error
+
+    }
+    
+    interface Queue  {
+        + Pop( PopProcessFunc) (<font color=blue>interface</font>{}, error)
+        + AddIfNotPresent( <font color=blue>interface</font>{}) error
+        + HasSynced() bool
+        + Close() 
+
+    }
+    interface Store  {
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Replace( []<font color=blue>interface</font>{},  string) error
+        + Resync() error
+
+    }
+    class cache << (S,Aquamarine) >> {
+        - cacheStorage ThreadSafeStore
+        - keyFunc KeyFunc
+
+        + Add(obj <font color=blue>interface</font>{}) error
+        + Update(obj <font color=blue>interface</font>{}) error
+        + Delete(obj <font color=blue>interface</font>{}) error
+        + List() []<font color=blue>interface</font>{}
+        + ListKeys() []string
+        + GetIndexers() Indexers
+        + Index(indexName string, obj <font color=blue>interface</font>{}) ([]<font color=blue>interface</font>{}, error)
+        + IndexKeys(indexName string, indexedValue string) ([]string, error)
+        + ListIndexFuncValues(indexName string) []string
+        + ByIndex(indexName string, indexedValue string) ([]<font color=blue>interface</font>{}, error)
+        + AddIndexers(newIndexers Indexers) error
+        + Get(obj <font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, bool, error)
+        + GetByKey(key string) (<font color=blue>interface</font>{}, bool, error)
+        + Replace(list []<font color=blue>interface</font>{}, resourceVersion string) error
+        + Resync() error
+
+    }
+    
+    class "<font color=blue>map</font>[string]sets.String" as fontcolorbluemapfontstringsetsString {
+        'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    }
+}
+"queue.Store" *-- "queue.Indexer"
+' "queue.KeyGetter" *-- "queue.KeyListerGetter"
+"queue.KeyLister" *-- "queue.KeyListerGetter"
+"queue.Store" *-- "queue.Queue"
+
+' "queue.KeyGetter" <|-- "queue.DeltaFIFO"
+' "queue.KeyLister" <|-- "queue.DeltaFIFO"
+"queue.Queue" <|-- "queue.DeltaFIFO"
+"queue.Store" <|-- "queue.DeltaFIFO"
+' "queue.KeyGetter" <|-- "queue.FIFO"
+' "queue.KeyLister" <|-- "queue.FIFO"
+"queue.Queue" <|-- "queue.FIFO"
+"queue.Store" <|-- "queue.FIFO"
+"queue.Indexer" <|-- "queue.cache"
+' "queue.KeyGetter" <|-- "queue.cache"
+' "queue.KeyLister" <|-- "queue.cache"
+"queue.Store" <|-- "queue.cache"
+
+@enduml

@@ -104,8 +104,18 @@ define:
         - 'client-go/rest/client.go'
         - 'client-go/rest/config.go'
         - 'client-go/rest/request.go'
+        - 'client-go/tools/cache/listers.go'
+        - 'client-go/tools/cache/listwatch.go'
     store:
         options: ['-recursive']
         includes:
         - 'client-go/tools/cache/store.go'
         - 'client-go/tools/cache/thread_safe_store.go'
+        - 'client-go/tools/cache/index.go'
+    queue:
+        options: ['-recursive']
+        includes:
+        - 'client-go/tools/cache/index.go'
+        - 'client-go/tools/cache/store.go'
+        - 'client-go/tools/cache/fifo.go'
+        - 'client-go/tools/cache/delta_fifo.go'
