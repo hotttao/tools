@@ -46,6 +46,9 @@ staging:
             cache:
                 filter: ['testing', 'synctrack']
                 options: ['-hide-methods', '-recursive']
+            record:
+                filter: ['event_test', 'events_cache_test', 'main_test']
+                options: ['-recursive']
 
 combine:
     runtime_meta: ['apimachinery/pkg/runtime', 'apimachinery/pkg/apis/meta/v1']
@@ -119,3 +122,10 @@ define:
         - 'client-go/tools/cache/store.go'
         - 'client-go/tools/cache/fifo.go'
         - 'client-go/tools/cache/delta_fifo.go'
+    event:
+        options: ['-recursive']
+        includes:
+        - 'client-go/tools/record/event.go'
+        - 'client-go/tools/record/events_cache.go'
+        - 'client-go/tools/record/fake.go'
+        - 'apimachinery/pkg/watch/mux.go'

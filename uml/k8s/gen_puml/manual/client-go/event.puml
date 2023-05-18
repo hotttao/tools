@@ -1,0 +1,248 @@
+@startuml
+namespace event {
+    class CorrelatorOptions << (S,Aquamarine) >> {
+        + LRUCacheSize int
+        + BurstSize int
+        + QPS float32
+        + KeyFunc EventAggregatorKeyFunc
+        + MessageFunc EventAggregatorMessageFunc
+        + MaxEvents int
+        + MaxIntervalInSeconds int
+        + Clock clock.PassiveClock
+        + SpamKeyFunc EventSpamKeyFunc
+
+    }
+    class EventAggregator << (S,Aquamarine) >> {
+        - cache *lru.Cache
+        - keyFunc EventAggregatorKeyFunc
+        - messageFunc EventAggregatorMessageFunc
+        - maxEvents uint
+        - maxIntervalInSeconds uint
+        - clock clock.PassiveClock
+
+        + EventAggregate(newEvent *v1.Event) (*v1.Event, string)
+
+    }
+    interface EventBroadcaster  {
+        + StartEventWatcher(eventHandler <font color=blue>func</font>(*v1.Event) ) event.Interface
+        + StartRecordingToSink(sink EventSink) event.Interface
+        + StartLogging(logf <font color=blue>func</font>(string, ...<font color=blue>interface</font>{}) ) event.Interface
+        + StartStructuredLogging(verbosity klog.Level) event.Interface
+        + NewRecorder(scheme *runtime.Scheme, source v1.EventSource) EventRecorder
+        + Shutdown() 
+
+    }
+    class EventCorrelateResult << (S,Aquamarine) >> {
+        + Event *v1.Event
+        + Patch []byte
+        + Skip bool
+
+    }
+    class EventCorrelator << (S,Aquamarine) >> {
+        - filterFunc EventFilterFunc
+        - aggregator *EventAggregator
+        - logger *eventLogger
+
+        + EventCorrelate(newEvent *v1.Event) (*EventCorrelateResult, error)
+        + UpdateState(event *v1.Event) 
+
+    }
+    interface EventRecorder  {
+        + Event(object runtime.Object, eventtype string, reason string, message string) 
+        + Eventf(object runtime.Object, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+        ' + AnnotatedEventf(object runtime.Object, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+
+    }
+    ' class EventRecorderAdapter << (S,Aquamarine) >> {
+    '     - recorder EventRecorder
+
+    '     + Eventf(regarding runtime.Object, _ runtime.Object, eventtype string, reason string, action string, note string, args ...<font color=blue>interface</font>{}) 
+
+    ' }
+    interface EventSink  {
+        + Create(event *v1.Event) (*v1.Event, error)
+        + Update(event *v1.Event) (*v1.Event, error)
+        + Patch(oldEvent *v1.Event, data []byte) (*v1.Event, error)
+
+    }
+    class EventSourceObjectSpamFilter << (S,Aquamarine) >> {
+        - cache *lru.Cache
+        - burst int
+        - qps float32
+        - clock clock.PassiveClock
+        - spamKeyFunc EventSpamKeyFunc
+
+        + Filter(event *v1.Event) bool
+
+    }
+    ' class FakeRecorder << (S,Aquamarine) >> {
+    '     + Events <font color=blue>chan</font> string
+    '     + IncludeObject bool
+
+    '     - writeEvent(object runtime.Object, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+
+    '     + Event(object runtime.Object, eventtype string, reason string, message string) 
+    '     + Eventf(object runtime.Object, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+    '     + AnnotatedEventf(object runtime.Object, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+
+    ' }
+    ' class aggregateRecord << (S,Aquamarine) >> {
+    '     - localKeys sets.String
+    '     - lastTimestamp v1.Time
+
+    ' }
+    class eventBroadcasterImpl << (S,Aquamarine) >> {
+        - sleepDuration time.Duration
+        - options CorrelatorOptions
+        - cancelationCtx context.Context
+        - cancel <font color=blue>func</font>() 
+
+        - recordToSink(sink EventSink, event *v1.Event, eventCorrelator *EventCorrelator) 
+
+        + StartRecordingToSink(sink EventSink) event.Interface
+        + Shutdown() 
+        + StartLogging(logf <font color=blue>func</font>(string, ...<font color=blue>interface</font>{}) ) event.Interface
+        + StartStructuredLogging(verbosity klog.Level) event.Interface
+        + StartEventWatcher(eventHandler <font color=blue>func</font>(*v1.Event) ) event.Interface
+        + NewRecorder(scheme *runtime.Scheme, source v1.EventSource) EventRecorder
+
+    }
+    class eventLog << (S,Aquamarine) >> {
+        - count uint
+        - firstTimestamp v1.Time
+        - name string
+        - resourceVersion string
+
+    }
+    class eventLogger << (S,Aquamarine) >> {
+        - cache *lru.Cache
+        - clock clock.PassiveClock
+
+        - eventObserve(newEvent *v1.Event, key string) (*v1.Event, []byte, error)
+        - updateState(event *v1.Event) 
+        - lastEventObservationFromCache(key string) eventLog
+
+    }
+    class event.EventAggregatorKeyFunc << (T, #FF7700) >>  {
+    }
+    class event.EventAggregatorMessageFunc << (T, #FF7700) >>  {
+    }
+    class event.EventFilterFunc << (T, #FF7700) >>  {
+    }
+    class event.EventSpamKeyFunc << (T, #FF7700) >>  {
+    }
+    class recorderImpl << (S,Aquamarine) >> {
+        - scheme *runtime.Scheme
+        - source v1.EventSource
+        - clock clock.PassiveClock
+
+        ' - generateEvent(object runtime.Object, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, message string) 
+        ' - makeEvent(ref *v1.ObjectReference, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, message string) *v1.Event
+
+        ' + Event(object runtime.Object, eventtype string, reason string, message string) 
+        ' + Eventf(object runtime.Object, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+        ' + AnnotatedEventf(object runtime.Object, annotations <font color=blue>map</font>[string]string, eventtype string, reason string, messageFmt string, args ...<font color=blue>interface</font>{}) 
+
+    }
+    class spamRecord << (S,Aquamarine) >> {
+        - rateLimiter flowcontrol.PassiveRateLimiter
+
+    }
+    ' class "<font color=blue>func</font>(*v1.Event) bool" as fontcolorbluefuncfontv1Eventbool {
+    '     'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    ' }
+    ' class "<font color=blue>func</font>(*v1.Event) string" as fontcolorbluefuncfontv1Eventstring {
+    '     'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    ' }
+    ' class "<font color=blue>func</font>(*v1.Event) (string, string)" as fontcolorbluefuncfontv1Eventstringstring {
+    '     'This class was created so that we can correctly have an alias pointing to this name. Since it contains dots that can break namespaces
+    ' }
+}
+' "sync.RWMutex" *-- "event.EventAggregator"
+' "sync.RWMutex" *-- "event.EventSourceObjectSpamFilter"
+' "sync.RWMutex" *-- "event.eventLogger"
+
+
+"event.EventRecorder" <|-- "event.FakeRecorder"
+"event.EventRecorder" <|-- "event.recorderImpl"
+"event.EventBroadcaster" <|-- "event.eventBroadcasterImpl"
+"event.Broadcaster" *-- "event.eventBroadcasterImpl"
+"event.Broadcaster" *-- "event.recorderImpl"
+"event.EventRecorder" <.. "event.EventBroadcaster"
+"event.EventBroadcaster" <.. "event.EventSink"
+"event.Broadcaster" <.. "event.broadcasterWatcher"
+
+"event.EventCorrelator" <.. "event.eventLogger"
+"event.EventCorrelator" <.. "event.EventFilterFunc"
+"event.EventFilterFunc" <.. "event.EventSourceObjectSpamFilter"
+"event.EventCorrelator" <.. "event.EventAggregator"
+"event.EventCorrelator" <.. "event.EventCorrelateResult"
+"event.EventCorrelator" <.. "event.CorrelatorOptions"
+
+"event.EventSourceObjectSpamFilter" <.. "event.EventSpamKeyFunc"
+"event.EventSourceObjectSpamFilter" <.. "event.spamRecord"
+"event.EventSpamKeyFunc" <.. "event.getSpamKey"
+
+
+"event.EventAggregator" <.. "event.EventAggregatorKeyFunc"
+"event.EventAggregator" <.. "event.EventAggregatorMessageFunc"
+
+"event.EventAggregatorKeyFunc" <|-- "event.EventAggregatorByReasonFunc"
+"event.EventAggregatorMessageFunc" <|-- "event.EventAggregatorByReasonMessageFunc"
+
+"event.eventLogger" <.. "event.eventLog"
+
+namespace event {
+    class Broadcaster << (S,Aquamarine) >> {
+        - watchers <font color=blue>map</font>[int64]*broadcasterWatcher
+        - nextWatcher int64
+        - distributing sync.WaitGroup
+        - incomingBlock sync.Mutex
+        - incoming <font color=blue>chan</font> Event
+        - stopped <font color=blue>chan</font> <font color=blue>struct</font>{}
+        - watchQueueLength int
+        - fullChannelBehavior FullChannelBehavior
+
+        - blockQueue(f <font color=blue>func</font>() ) 
+        - stopWatching(id int64) 
+        - closeAll() 
+        - loop() 
+        - distribute(event Event) 
+
+        + Watch() (Interface, error)
+        + WatchWithPrefix(queuedEvents []Event) (Interface, error)
+        + Action(action EventType, obj runtime.Object) error
+        + ActionOrDrop(action EventType, obj runtime.Object) (bool, error)
+        + Shutdown() 
+
+    }
+    class broadcasterWatcher << (S,Aquamarine) >> {
+        - result <font color=blue>chan</font> Event
+        - stopped <font color=blue>chan</font> <font color=blue>struct</font>{}
+        - stop sync.Once
+        - id int64
+        - m *Broadcaster
+
+        + ResultChan() <font color=blue>chan</font> Event
+        + Stop() 
+
+    }
+    ' class functionFakeRuntimeObject << (S,Aquamarine) >> {
+    '     + GetObjectKind() schema.ObjectKind
+    '     + DeepCopyObject() runtime.Object
+
+    ' }
+    ' class event.FullChannelBehavior << (T, #FF7700) >>  {
+    ' }
+    ' class event.functionFakeRuntimeObject << (T, #FF7700) >>  {
+    ' }
+}
+
+
+' "__builtin__.int" #.. "event.FullChannelBehavior"
+' "event.fontcolorbluefuncfontv1Eventstringstring" #.. "event.EventAggregatorKeyFunc"
+' "event.fontcolorbluefuncfontv1Eventbool" #.. "event.EventFilterFunc"
+' "event.fontcolorbluefuncfontv1Eventstring" #.. "event.EventAggregatorMessageFunc"
+' "event.fontcolorbluefuncfontv1Eventstring" #.. "event.EventSpamKeyFunc"
+' "event.<font color=blue>func</font>() " #.. "event.functionFakeRuntimeObject"
+@enduml
