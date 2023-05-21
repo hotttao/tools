@@ -21,3 +21,6 @@ goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/to
 goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/store > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/store.puml
 goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/queue > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/queue.puml
 goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/event > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/event.puml
+goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/reflector > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/reflector.puml
+goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/informer > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/informer.puml
+goplantuml -show-implementations -recursive  -ignore "" /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/informer-factory > /home/tao/code/github/tools/uml/k8s/gen_puml/tmp/informer-factory.puml

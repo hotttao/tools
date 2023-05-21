@@ -1,0 +1,230 @@
+@startuml
+namespace informer {
+    class Config << (S,Aquamarine) >> {
+        + Process ProcessFunc
+        + ObjectType runtime.Object
+        + ObjectDescription string
+        + FullResyncPeriod time.Duration
+        + ShouldResync ShouldResyncFunc
+        + RetryOnError bool
+        + WatchErrorHandler WatchErrorHandler
+        + WatchListPageSize int64
+
+    }
+    interface Controller  {
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+    class FilteringResourceEventHandler << (S,Aquamarine) >> {
+        + FilterFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) bool
+        + Handler ResourceEventHandler
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    interface ResourceEventHandler  {
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    class ResourceEventHandlerDetailedFuncs << (S,Aquamarine) >> {
+        + AddFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, bool) 
+        + UpdateFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, <font color=blue>interface</font>{}) 
+        + DeleteFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    class ResourceEventHandlerFuncs << (S,Aquamarine) >> {
+        + AddFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+        + UpdateFunc <font color=blue>func</font>(<font color=blue>interface</font>{}, <font color=blue>interface</font>{}) 
+        + DeleteFunc <font color=blue>func</font>(<font color=blue>interface</font>{}) 
+
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(oldObj <font color=blue>interface</font>{}, newObj <font color=blue>interface</font>{}) 
+        + OnDelete(obj <font color=blue>interface</font>{}) 
+
+    }
+    ' interface ResourceEventHandlerRegistration  {
+    '     + HasSynced() bool
+
+    ' }
+    interface SharedIndexInformer  {
+        + AddIndexers(indexers Indexers) error
+        + GetIndexer() Indexer
+
+    }
+    class SharedIndexInformerOptions << (S,Aquamarine) >> {
+        + ResyncPeriod time.Duration
+        + Indexers Indexers
+        + ObjectDescription string
+
+    }
+    interface SharedInformer  {
+        + AddEventHandler(handler ResourceEventHandler) (ResourceEventHandlerRegistration, error)
+        ' + AddEventHandlerWithResyncPeriod(handler ResourceEventHandler, resyncPeriod time.Duration) (ResourceEventHandlerRegistration, error)
+        + RemoveEventHandler(handle ResourceEventHandlerRegistration) error
+        + GetStore() Store
+        + GetController() Controller
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+        + SetWatchErrorHandler(handler WatchErrorHandler) error
+        + SetTransform(handler TransformFunc) error
+        + IsStopped() bool
+
+    }
+    ' class addNotification << (S,Aquamarine) >> {
+    '     - newObj <font color=blue>interface</font>{}
+    '     - isInInitialList bool
+
+    ' }
+    ' class deleteNotification << (S,Aquamarine) >> {
+    '     - oldObj <font color=blue>interface</font>{}
+
+    ' }
+    ' class updateNotification << (S,Aquamarine) >> {
+    '     - oldObj <font color=blue>interface</font>{}
+    '     - newObj <font color=blue>interface</font>{}
+
+    ' }
+    class informer.InformerSynced << (T, #FF7700) >>  {
+    }
+    class informer.ProcessFunc << (T, #FF7700) >>  {
+    }
+    class informer.ShouldResyncFunc << (T, #FF7700) >>  {
+    }
+    class informer.TransformFunc << (T, #FF7700) >>  {
+    }
+    class controller << (S,Aquamarine) >> {
+        - config Config
+        - reflector *Reflector
+        - reflectorMutex sync.RWMutex
+        - clock clock.Clock
+
+        - processLoop() 
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+
+    class dummyController << (S,Aquamarine) >> {
+        - informer *sharedIndexInformer
+
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+
+    }
+    class processorListener << (S,Aquamarine) >> {
+        - nextCh <font color=blue>chan</font> <font color=blue>interface</font>{}
+        - addCh <font color=blue>chan</font> <font color=blue>interface</font>{}
+        - handler ResourceEventHandler
+        - syncTracker *synctrack.SingleFileTracker
+        - pendingNotifications buffer.RingGrowing
+        - requestedResyncPeriod time.Duration
+        - resyncPeriod time.Duration
+        - nextResync time.Time
+        - resyncLock sync.Mutex
+
+        - add(notification <font color=blue>interface</font>{}) 
+        - pop() 
+        - run() 
+        - shouldResync(now time.Time) bool
+        - determineNextResync(now time.Time) 
+        - setResyncPeriod(resyncPeriod time.Duration) 
+
+        + HasSynced() bool
+
+    }
+    class sharedIndexInformer << (S,Aquamarine) >> {
+        - indexer Indexer
+        - controller Controller
+        - processor *sharedProcessor
+        - cacheMutationDetector MutationDetector
+        - listerWatcher ListerWatcher
+        - objectType runtime.Object
+        - objectDescription string
+        - resyncCheckPeriod time.Duration
+        - defaultEventHandlerResyncPeriod time.Duration
+        - clock clock.Clock
+        - started bool
+        - startedLock sync.Mutex
+        - blockDeltas sync.Mutex
+        - watchErrorHandler WatchErrorHandler
+        - transform TransformFunc
+
+        + SetWatchErrorHandler(handler WatchErrorHandler) error
+        + SetTransform(handler TransformFunc) error
+        + Run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + HasStarted() bool
+        + HasSynced() bool
+        + LastSyncResourceVersion() string
+        + GetStore() Store
+        + GetIndexer() Indexer
+        + AddIndexers(indexers Indexers) error
+        + GetController() Controller
+        + AddEventHandler(handler ResourceEventHandler) (ResourceEventHandlerRegistration, error)
+        ' + AddEventHandlerWithResyncPeriod(handler ResourceEventHandler, resyncPeriod time.Duration) (ResourceEventHandlerRegistration, error)
+        + HandleDeltas(obj <font color=blue>interface</font>{}, isInInitialList bool) error
+        + OnAdd(obj <font color=blue>interface</font>{}, isInInitialList bool) 
+        + OnUpdate(old <font color=blue>interface</font>{}, new <font color=blue>interface</font>{}) 
+        + OnDelete(old <font color=blue>interface</font>{}) 
+        + IsStopped() bool
+        + RemoveEventHandler(handle ResourceEventHandlerRegistration) error
+
+    }
+    class sharedProcessor << (S,Aquamarine) >> {
+        - listenersStarted bool
+        - listenersLock sync.RWMutex
+        - listeners <font color=blue>map</font>[*processorListener]bool
+        - clock clock.Clock
+        - wg wait.Group
+
+        - getListener(registration ResourceEventHandlerRegistration) *processorListener
+        - addListener(listener *processorListener) ResourceEventHandlerRegistration
+        - removeListener(handle ResourceEventHandlerRegistration) error
+        - distribute(obj <font color=blue>interface</font>{}, sync bool) 
+        - run(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        - shouldResync() bool
+        - resyncCheckPeriodChanged(resyncCheckPeriod time.Duration) 
+
+    }
+
+}
+"informer.ListerWatcher" *-- "informer.Config"
+"informer.Queue" *-- "informer.Config"
+"informer.SharedInformer" *-- "informer.SharedIndexInformer"
+
+"informer.ResourceEventHandler" <|-- "informer.FilteringResourceEventHandler"
+"informer.ResourceEventHandler" <|-- "informer.ResourceEventHandlerDetailedFuncs"
+"informer.ResourceEventHandler" <|-- "informer.ResourceEventHandlerFuncs"
+' "informer.controller" <.. "informer.Config"
+"informer.Controller" <|-- "informer.controller"
+"informer.Controller" <|-- "informer.dummyController"
+' "informer.ResourceEventHandlerRegistration" <|-- "informer.controller"
+' "informer.ResourceEventHandlerRegistration" <|-- "informer.dummyController"
+' "informer.ResourceEventHandlerRegistration" <|-- "informer.processorListener"
+' "informer.ResourceEventHandlerRegistration" <|-- "informer.sharedIndexInformer"
+"informer.Controller" <|-- "informer.sharedIndexInformer"
+"informer.ResourceEventHandler" <|-- "informer.sharedIndexInformer"
+"informer.SharedIndexInformer" <|-- "informer.sharedIndexInformer"
+"informer.SharedInformer" <|-- "informer.sharedIndexInformer"
+
+"informer.sharedIndexInformer" <.. "informer.sharedProcessor"
+"informer.sharedProcessor" <.. "informer.processorListener"
+
+"informer.<font color=blue>func</font>() bool" #.. "informer.InformerSynced"
+"informer.<font color=blue>func</font>() bool" #.. "informer.ShouldResyncFunc"
+"informer.<font color=blue>func</font>(<font color=blue>interface</font>{}) (<font color=blue>interface</font>{}, error)" #.. "informer.TransformFunc"
+"informer.<font color=blue>func</font>(<font color=blue>interface</font>{}, bool) error" #.. "informer.ProcessFunc"
+@enduml

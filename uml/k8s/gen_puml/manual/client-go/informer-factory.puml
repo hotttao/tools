@@ -1,0 +1,115 @@
+@startuml
+namespace informer-factory {
+    interface SharedInformerFactory  {
+        + Start(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + Shutdown() 
+        + WaitForCacheSync(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) <font color=blue>map</font>[reflect.Type]bool
+        + ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
+        + InformerFor(obj runtime.Object, newFunc internalinterfaces.NewInformerFunc) cache.SharedIndexInformer
+        + Admissionregistration() admissionregistration.Interface
+        + Internal() apiserverinternal.Interface
+        + Apps() apps.Interface
+        + Autoscaling() autoscaling.Interface
+        + Batch() batch.Interface
+        + Certificates() certificates.Interface
+        + Coordination() coordination.Interface
+        + Core() core.Interface
+        + Discovery() discovery.Interface
+        + Events() events.Interface
+        + Extensions() extensions.Interface
+        + Flowcontrol() flowcontrol.Interface
+        + Networking() networking.Interface
+        + Node() node.Interface
+        + Policy() policy.Interface
+        + Rbac() rbac.Interface
+        + Resource() resource.Interface
+        + Scheduling() scheduling.Interface
+        + Storage() storage.Interface
+
+    }
+    class informer-factory.SharedInformerOption << (T, #FF7700) >>  {
+    }
+    class sharedInformerFactory << (S,Aquamarine) >> {
+        - client kubernetes.Interface
+        - namespace string
+        - tweakListOptions internalinterfaces.TweakListOptionsFunc
+        - lock sync.Mutex
+        - defaultResync time.Duration
+        - customResync <font color=blue>map</font>[reflect.Type]time.Duration
+        - informers <font color=blue>map</font>[reflect.Type]cache.SharedIndexInformer
+        - startedInformers <font color=blue>map</font>[reflect.Type]bool
+        - wg sync.WaitGroup
+        - shuttingDown bool
+
+        + Start(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) 
+        + Shutdown() 
+        + WaitForCacheSync(stopCh <font color=blue>chan</font> <font color=blue>struct</font>{}) <font color=blue>map</font>[reflect.Type]bool
+        + InformerFor(obj runtime.Object, newFunc internalinterfaces.NewInformerFunc) cache.SharedIndexInformer
+        + Admissionregistration() admissionregistration.Interface
+        + Internal() apiserverinternal.Interface
+        + Apps() apps.Interface
+        + Autoscaling() autoscaling.Interface
+        + Batch() batch.Interface
+        + Certificates() certificates.Interface
+        + Coordination() coordination.Interface
+        + Core() core.Interface
+        + Discovery() discovery.Interface
+        + Events() events.Interface
+        + Extensions() extensions.Interface
+        + Flowcontrol() flowcontrol.Interface
+        + Networking() networking.Interface
+        + Node() node.Interface
+        + Policy() policy.Interface
+        + Rbac() rbac.Interface
+        + Resource() resource.Interface
+        + Scheduling() scheduling.Interface
+        + Storage() storage.Interface
+
+    }
+}
+
+
+namespace informer-factory {
+    interface DeploymentInformer  {
+        + Informer() cache.SharedIndexInformer
+        + Lister() informer-factory.DeploymentLister
+
+    }
+    interface Interface  {
+        + ControllerRevisions() ControllerRevisionInformer
+        + DaemonSets() DaemonSetInformer
+        + Deployments() DeploymentInformer
+        + ReplicaSets() ReplicaSetInformer
+        + StatefulSets() StatefulSetInformer
+
+    }
+    class deploymentInformer << (S,Aquamarine) >> {
+        - factory internalinterfaces.SharedInformerFactory
+        - tweakListOptions internalinterfaces.TweakListOptionsFunc
+        - namespace string
+
+        - defaultInformer(client kubernetes.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer
+
+        + Informer() cache.SharedIndexInformer
+        + Lister() informer-factory.DeploymentLister
+
+    }
+    class version << (S,Aquamarine) >> {
+        - factory internalinterfaces.SharedInformerFactory
+        - namespace string
+        - tweakListOptions internalinterfaces.TweakListOptionsFunc
+
+        + ControllerRevisions() ControllerRevisionInformer
+        + DaemonSets() DaemonSetInformer
+        + Deployments() DeploymentInformer
+        + ReplicaSets() ReplicaSetInformer
+        + StatefulSets() StatefulSetInformer
+
+    }
+}
+
+"informer-factory.DeploymentInformer" <|-- "informer-factory.deploymentInformer"
+"informer-factory.Interface" <|-- "informer-factory.version"
+
+"informer-factory.<font color=blue>func</font>(*sharedInformerFactory) *sharedInformerFactory" #.. "informer-factory.SharedInformerOption"
+@enduml

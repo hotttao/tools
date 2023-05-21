@@ -129,3 +129,26 @@ define:
         - 'client-go/tools/record/events_cache.go'
         - 'client-go/tools/record/fake.go'
         - 'apimachinery/pkg/watch/mux.go'
+    reflector:
+        options: ['-recursive']
+        includes:
+        # - 'client-go/tools/cache/listers.go'
+        - 'client-go/tools/cache/reflector.go'
+    informer:
+        options: ['-recursive']
+        includes:
+        - 'client-go/tools/cache/controller.go'
+        - 'client-go/tools/cache/shared_informer.go'
+        # - 'client-go/informers/factory.go'
+        # - 'client-go/informers/apps/interface.go'
+        # - 'client-go/informers/apps/v1/interface.go'
+        # - 'client-go/informers/apps/v1/deployment.go'
+    informer-factory:
+        options: ['-recursive']
+        includes:
+        # - 'client-go/tools/cache/controller.go'
+        # - 'client-go/tools/cache/shared_informer.go'
+        - 'client-go/informers/factory.go'
+        - 'client-go/informers/apps/interface.go'
+        - 'client-go/informers/apps/v1/interface.go'
+        - 'client-go/informers/apps/v1/deployment.go'
